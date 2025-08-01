@@ -1,0 +1,18 @@
+# SaveCategory
+
+## Example Usage
+
+```typescript
+import { SaveCategory } from "ynab-ts/models";
+
+let value: SaveCategory = {};
+```
+
+## Fields
+
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`                                                                                                                                           | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `note`                                                                                                                                           | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `categoryGroupId`                                                                                                                                | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `goalTarget`                                                                                                                                     | *number*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | The goal target amount in milliunits format.  This amount can only be changed if the category already has a configured goal (goal_type != null). |

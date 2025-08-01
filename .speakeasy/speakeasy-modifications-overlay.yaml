@@ -1,0 +1,474 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.15
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["put"]
+    update:
+      x-speakeasy-name-override: modify
+    x-speakeasy-metadata:
+      after: sdk.transactions.modify()
+      before: sdk.Transactions.updateTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: listByMonth
+    x-speakeasy-metadata:
+      after: sdk.transactions.listByMonth()
+      before: sdk.Transactions.getTransactionsByMonth()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/months"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.months.get()
+      before: sdk.Months.getBudgetMonths()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payees"]["get"]
+    update:
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      after: sdk.payees.getAll()
+      before: sdk.Payees.getPayees()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.transactions.delete()
+      before: sdk.Transactions.deleteTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payee_locations"]["get"]
+    update:
+      x-speakeasy-group: payeeLocations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.payeeLocations.list()
+      before: sdk.Payee Locations.getPayeeLocations()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}"]["delete"]
+    update:
+      x-speakeasy-group: scheduledTransactions
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.scheduledTransactions.delete()
+      before: sdk.Scheduled Transactions.deleteScheduledTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions"]["post"]
+    update:
+      x-speakeasy-group: scheduledTransactions
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.scheduledTransactions.create()
+      before: sdk.Scheduled Transactions.createScheduledTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions/import"]["post"]
+    update:
+      x-speakeasy-name-override: import
+    x-speakeasy-metadata:
+      after: sdk.transactions.import()
+      before: sdk.Transactions.importTransactions()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/accounts"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.accounts.create()
+      before: sdk.Accounts.createAccount()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getSingle
+    x-speakeasy-metadata:
+      after: sdk.budgets.getSingle()
+      before: sdk.Budgets.getBudgetById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.transactions.list()
+      before: sdk.Transactions.getTransactions()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.transactions.create()
+      before: sdk.Transactions.createTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/accounts"]["get"]
+    update:
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      after: sdk.accounts.getAll()
+      before: sdk.Accounts.getAccounts()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}"]["put"]
+    update:
+      x-speakeasy-group: scheduledTransactions
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.scheduledTransactions.update()
+      before: sdk.Scheduled Transactions.updateScheduledTransaction()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}/categories/{category_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: updateMonth
+    x-speakeasy-metadata:
+      after: sdk.categories.updateMonth()
+      before: sdk.Categories.updateMonthCategory()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payee_locations/{payee_location_id}"]["get"]
+    update:
+      x-speakeasy-group: payeeLocations
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.payeeLocations.get()
+      before: sdk.Payee Locations.getPayeeLocationById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/user"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.user.get()
+      before: sdk.User.getUser()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/categories/{category_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.categories.update()
+      before: sdk.Categories.updateCategory()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}"]["get"]
+    update:
+      x-speakeasy-group: scheduledTransactions
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.scheduledTransactions.get()
+      before: sdk.Scheduled Transactions.getScheduledTransactionById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payees/{payee_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.payees.get()
+      before: sdk.Payees.getPayeeById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/accounts/{account_id}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: getByAccount
+    x-speakeasy-metadata:
+      after: sdk.transactions.getByAccount()
+      before: sdk.Transactions.getTransactionsByAccount()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/categories/{category_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.categories.get()
+      before: sdk.Categories.getCategoryById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.transactions.get()
+      before: sdk.Transactions.getTransactionById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions"]["get"]
+    update:
+      x-speakeasy-group: scheduledTransactions
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      after: sdk.scheduledTransactions.getAll()
+      before: sdk.Scheduled Transactions.getScheduledTransactions()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/categories"]["get"]
+    update:
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      after: sdk.categories.getAll()
+      before: sdk.Categories.getCategories()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payees/{payee_id}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: getByPayee
+    x-speakeasy-metadata:
+      after: sdk.transactions.getByPayee()
+      before: sdk.Transactions.getTransactionsByPayee()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}"]["get"]
+    update:
+      x-speakeasy-name-override: getSingle
+    x-speakeasy-metadata:
+      after: sdk.months.getSingle()
+      before: sdk.Months.getBudgetMonth()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.budgets.list()
+      before: sdk.Budgets.getBudgets()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/accounts/{account_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.accounts.get()
+      before: sdk.Accounts.getAccountById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/categories/{category_id}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: listByCategory
+    x-speakeasy-metadata:
+      after: sdk.transactions.listByCategory()
+      before: sdk.Transactions.getTransactionsByCategory()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payees/{payee_id}/payee_locations"]["get"]
+    update:
+      x-speakeasy-group: payeeLocations
+      x-speakeasy-name-override: listByPayee
+    x-speakeasy-metadata:
+      after: sdk.payeeLocations.listByPayee()
+      before: sdk.Payee Locations.getPayeeLocationsByPayee()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/transactions"]["patch"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.transactions.update()
+      before: sdk.Transactions.updateTransactions()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}/categories/{category_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getSingleMonthCategory
+    x-speakeasy-metadata:
+      after: sdk.categories.getSingleMonthCategory()
+      before: sdk.Categories.getMonthCategoryById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/settings"]["get"]
+    update:
+      x-speakeasy-name-override: getSettings
+    x-speakeasy-metadata:
+      after: sdk.budgets.getSettings()
+      before: sdk.Budgets.getBudgetSettingsById()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/payees/{payee_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.payees.update()
+      before: sdk.Payees.updatePayee()
+      created_at: 1754089697759
+      reviewed_at: 1754089795645
+      type: method-name
+  - target: $["paths"]["/budgets/{budget_id}/accounts"]["get"]["x-speakeasy-name-override"]
+    update: list
+    x-speakeasy-metadata:
+      created_at: 1754089881596
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/categories"]["get"]["x-speakeasy-name-override"]
+    update: list
+    x-speakeasy-metadata:
+      created_at: 1754089881596
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/payees"]["get"]["x-speakeasy-name-override"]
+    update: list
+    x-speakeasy-metadata:
+      created_at: 1754089881596
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/scheduled_transactions"]["get"]["x-speakeasy-name-override"]
+    update: list
+    x-speakeasy-metadata:
+      created_at: 1754089881596
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["put"]["x-speakeasy-name-override"]
+    update: update
+    x-speakeasy-metadata:
+      created_at: 1754089905231
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["put"]["x-speakeasy-name-override"]
+    update: modify
+    x-speakeasy-metadata:
+      created_at: 1754089945016
+      type: user-edit
+  - target: $["components"]["schemas"]["SavePayee"]["properties"]["name"]
+    update:
+      nullable: false
+    x-speakeasy-metadata:
+      created_at: 1754089945016
+      type: user-edit
+  - target: $["components"]["schemas"]
+    update:
+      BulkResponse:
+        required:
+          - data
+        type: object
+        properties:
+          data:
+            required:
+              - bulk
+            type: object
+            properties:
+              bulk:
+                required:
+                  - duplicate_import_ids
+                  - transaction_ids
+                type: object
+                properties:
+                  transaction_ids:
+                    type: array
+                    description: The list of Transaction ids that were created.
+                    items:
+                      type: string
+                  duplicate_import_ids:
+                    type: array
+                    description: >-
+                      If any Transactions were not created because they had an `import_id` matching a transaction already on the same account, the specified import_id(s) will be included in this list.
+                    items:
+                      type: string
+    x-speakeasy-metadata:
+      created_at: 1754089945016
+      type: user-edit
+  - target: $["components"]["schemas"]
+    update:
+      BulkTransactions:
+        required:
+          - transactions
+        type: object
+        properties:
+          transactions:
+            type: array
+            items:
+              $ref: '#/components/schemas/SaveTransactionWithOptionalFields'
+    x-speakeasy-metadata:
+      created_at: 1754089945016
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/transactions/{transaction_id}"]["put"]["x-speakeasy-name-override"]
+    update: updateOne
+    x-speakeasy-metadata:
+      created_at: 1754090205206
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/transactions"]["patch"]["x-speakeasy-name-override"]
+    update: updateMany
+    x-speakeasy-metadata:
+      created_at: 1754090232630
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}"]["get"]["x-speakeasy-name-override"]
+    update: get
+    x-speakeasy-metadata:
+      created_at: 1754090290387
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}"]["get"]["x-speakeasy-name-override"]
+    update: get
+    x-speakeasy-metadata:
+      created_at: 1754090469424
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}"]["get"]["x-speakeasy-name-override"]
+    update: getSingle
+    x-speakeasy-metadata:
+      created_at: 1754090475147
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/months"]["get"]["x-speakeasy-name-override"]
+    update: list
+    x-speakeasy-metadata:
+      created_at: 1754090648594
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/accounts/{account_id}/transactions"]["get"]["x-speakeasy-name-override"]
+    update: listByAccount
+    x-speakeasy-metadata:
+      created_at: 1754090713375
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/payees/{payee_id}/transactions"]["get"]["x-speakeasy-name-override"]
+    update: listByPayee
+    x-speakeasy-metadata:
+      created_at: 1754090735751
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}"]["get"]["x-speakeasy-name-override"]
+    update: get
+    x-speakeasy-metadata:
+      created_at: 1754090744890
+      type: user-edit
+  - target: $["paths"]["/budgets/{budget_id}/months/{month}/categories/{category_id}"]["get"]["x-speakeasy-name-override"]
+    update: getByMonth
+    x-speakeasy-metadata:
+      created_at: 1754090807007
+      type: user-edit

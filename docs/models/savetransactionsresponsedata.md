@@ -1,0 +1,22 @@
+# SaveTransactionsResponseData
+
+## Example Usage
+
+```typescript
+import { SaveTransactionsResponseData } from "ynab-ts/models";
+
+let value: SaveTransactionsResponseData = {
+  transactionIds: [],
+  serverKnowledge: 911989,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `transactionIds`                                                                                                                                 | *string*[]                                                                                                                                       | :heavy_check_mark:                                                                                                                               | The transaction ids that were saved                                                                                                              |
+| `transaction`                                                                                                                                    | [models.TransactionDetail](../models/transactiondetail.md)                                                                                       | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `transactions`                                                                                                                                   | [models.TransactionDetail](../models/transactiondetail.md)[]                                                                                     | :heavy_minus_sign:                                                                                                                               | If multiple transactions were specified, the transactions that were saved                                                                        |
+| `duplicateImportIds`                                                                                                                             | *string*[]                                                                                                                                       | :heavy_minus_sign:                                                                                                                               | If multiple transactions were specified, a list of import_ids that were not created because of an existing `import_id` found on the same account |
+| `serverKnowledge`                                                                                                                                | *number*                                                                                                                                         | :heavy_check_mark:                                                                                                                               | The knowledge of the server                                                                                                                      |

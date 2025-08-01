@@ -1,0 +1,42 @@
+speakeasyVersion: 1.592.0
+sources:
+    YNAB API Endpoints:
+        sourceNamespace: ynab-api-endpoints
+        sourceRevisionDigest: sha256:67848e0ad7615e7e053bef10ea8c4664063ff6177cc247b92b097ecd16f35506
+        sourceBlobDigest: sha256:00df3523a52ea10d9d667ab427b8a3f7f6e7bf4594e8830a9de862a98585da2e
+        tags:
+            - latest
+            - 1.75.0
+targets:
+    ynab:
+        source: YNAB API Endpoints
+        sourceNamespace: ynab-api-endpoints
+        sourceRevisionDigest: sha256:67848e0ad7615e7e053bef10ea8c4664063ff6177cc247b92b097ecd16f35506
+        sourceBlobDigest: sha256:00df3523a52ea10d9d667ab427b8a3f7f6e7bf4594e8830a9de862a98585da2e
+        codeSamplesNamespace: ynab-api-endpoints-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:c726bb3b68bd8ca15c931d5a8ca59357f1d2141dd5604587435453c3e1363ba7
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        YNAB API Endpoints:
+            inputs:
+                - location: https://api.ynab.com/papi/open_api_spec.yaml
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            transformations:
+                - removeUnused: true
+                - removeUnused: true
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ynab-api-endpoints
+    targets:
+        ynab:
+            target: typescript
+            source: YNAB API Endpoints
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ynab-api-endpoints-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

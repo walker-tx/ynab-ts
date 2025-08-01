@@ -1,0 +1,19 @@
+# DeleteScheduledTransactionRequest
+
+## Example Usage
+
+```typescript
+import { DeleteScheduledTransactionRequest } from "ynab-ts/models/operations";
+
+let value: DeleteScheduledTransactionRequest = {
+  budgetId: "<id>",
+  scheduledTransactionId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                             | Type                                                                                                                                                                                              | Required                                                                                                                                                                                          | Description                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `budgetId`                                                                                                                                                                                        | *string*                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                | The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). |
+| `scheduledTransactionId`                                                                                                                                                                          | *string*                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                | The id of the scheduled transaction                                                                                                                                                               |

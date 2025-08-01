@@ -1,0 +1,852 @@
+lockVersion: 2.0.0
+id: 9e8b172e-d6e6-4791-b3d2-950296cf9303
+management:
+  docChecksum: eba7e89945dad4f96ba52b5f737bbe56
+  docVersion: 1.75.0
+  speakeasyVersion: 1.592.0
+  generationVersion: 2.667.0
+  releaseVersion: 0.1.11
+  configChecksum: a87523a31e50183421909653468893ea
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.12
+    core: 3.21.16
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.13
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.5
+    groups: 2.81.2
+    methodArguments: 0.1.2
+    nameOverrides: 2.81.2
+    nullables: 0.1.1
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/account.md
+  - docs/models/accountresponse.md
+  - docs/models/accountresponsedata.md
+  - docs/models/accountsresponse.md
+  - docs/models/accountsresponsedata.md
+  - docs/models/accounttype.md
+  - docs/models/budgetdetail.md
+  - docs/models/budgetdetailresponse.md
+  - docs/models/budgetdetailresponsedata.md
+  - docs/models/budgetsettings.md
+  - docs/models/budgetsettingsresponse.md
+  - docs/models/budgetsettingsresponsedata.md
+  - docs/models/budgetsummary.md
+  - docs/models/budgetsummaryresponse.md
+  - docs/models/budgetsummaryresponsedata.md
+  - docs/models/categoriesresponse.md
+  - docs/models/categoriesresponsedata.md
+  - docs/models/category.md
+  - docs/models/categorygroup.md
+  - docs/models/categorygroupwithcategories.md
+  - docs/models/categoryresponse.md
+  - docs/models/categoryresponsedata.md
+  - docs/models/currencyformat.md
+  - docs/models/dateformat.md
+  - docs/models/errordetail.md
+  - docs/models/errorresponse.md
+  - docs/models/errors/errorresponse.md
+  - docs/models/existingtransaction.md
+  - docs/models/goaltype.md
+  - docs/models/hybridtransaction.md
+  - docs/models/hybridtransactiondebttransactiontype.md
+  - docs/models/hybridtransactionsresponse.md
+  - docs/models/hybridtransactionsresponsedata.md
+  - docs/models/monthdetail.md
+  - docs/models/monthdetailresponse.md
+  - docs/models/monthdetailresponsedata.md
+  - docs/models/monthsummariesresponse.md
+  - docs/models/monthsummariesresponsedata.md
+  - docs/models/monthsummary.md
+  - docs/models/newtransaction.md
+  - docs/models/operations/createaccountrequest.md
+  - docs/models/operations/createscheduledtransactionrequest.md
+  - docs/models/operations/createtransactionrequest.md
+  - docs/models/operations/deletescheduledtransactionrequest.md
+  - docs/models/operations/deletetransactionrequest.md
+  - docs/models/operations/getaccountbyidrequest.md
+  - docs/models/operations/getaccountbyidresponse.md
+  - docs/models/operations/getaccountsrequest.md
+  - docs/models/operations/getaccountsresponse.md
+  - docs/models/operations/getbudgetbyidrequest.md
+  - docs/models/operations/getbudgetbyidresponse.md
+  - docs/models/operations/getbudgetmonthrequest.md
+  - docs/models/operations/getbudgetmonthresponse.md
+  - docs/models/operations/getbudgetmonthsrequest.md
+  - docs/models/operations/getbudgetmonthsresponse.md
+  - docs/models/operations/getbudgetsettingsbyidrequest.md
+  - docs/models/operations/getbudgetsettingsbyidresponse.md
+  - docs/models/operations/getbudgetsrequest.md
+  - docs/models/operations/getbudgetsresponse.md
+  - docs/models/operations/getcategoriesrequest.md
+  - docs/models/operations/getcategoriesresponse.md
+  - docs/models/operations/getcategorybyidrequest.md
+  - docs/models/operations/getcategorybyidresponse.md
+  - docs/models/operations/getmonthcategorybyidrequest.md
+  - docs/models/operations/getmonthcategorybyidresponse.md
+  - docs/models/operations/getpayeebyidrequest.md
+  - docs/models/operations/getpayeebyidresponse.md
+  - docs/models/operations/getpayeelocationbyidrequest.md
+  - docs/models/operations/getpayeelocationbyidresponse.md
+  - docs/models/operations/getpayeelocationsbypayeerequest.md
+  - docs/models/operations/getpayeelocationsbypayeeresponse.md
+  - docs/models/operations/getpayeelocationsrequest.md
+  - docs/models/operations/getpayeelocationsresponse.md
+  - docs/models/operations/getpayeesrequest.md
+  - docs/models/operations/getpayeesresponse.md
+  - docs/models/operations/getscheduledtransactionbyidrequest.md
+  - docs/models/operations/getscheduledtransactionbyidresponse.md
+  - docs/models/operations/getscheduledtransactionsrequest.md
+  - docs/models/operations/getscheduledtransactionsresponse.md
+  - docs/models/operations/gettransactionbyidrequest.md
+  - docs/models/operations/gettransactionbyidresponse.md
+  - docs/models/operations/gettransactionsbyaccountrequest.md
+  - docs/models/operations/gettransactionsbyaccountresponse.md
+  - docs/models/operations/gettransactionsbyaccounttype.md
+  - docs/models/operations/gettransactionsbycategoryrequest.md
+  - docs/models/operations/gettransactionsbycategoryresponse.md
+  - docs/models/operations/gettransactionsbycategorytype.md
+  - docs/models/operations/gettransactionsbymonthrequest.md
+  - docs/models/operations/gettransactionsbymonthresponse.md
+  - docs/models/operations/gettransactionsbymonthtype.md
+  - docs/models/operations/gettransactionsbypayeerequest.md
+  - docs/models/operations/gettransactionsbypayeeresponse.md
+  - docs/models/operations/gettransactionsbypayeetype.md
+  - docs/models/operations/gettransactionsrequest.md
+  - docs/models/operations/gettransactionstype.md
+  - docs/models/operations/getuserresponse.md
+  - docs/models/operations/importtransactionsrequest.md
+  - docs/models/operations/updatecategoryrequest.md
+  - docs/models/operations/updatemonthcategoryrequest.md
+  - docs/models/operations/updatepayeerequest.md
+  - docs/models/operations/updatescheduledtransactionrequest.md
+  - docs/models/operations/updatetransactionrequest.md
+  - docs/models/operations/updatetransactionsrequest.md
+  - docs/models/patchcategorywrapper.md
+  - docs/models/patchmonthcategorywrapper.md
+  - docs/models/patchpayeewrapper.md
+  - docs/models/patchtransactionswrapper.md
+  - docs/models/payee.md
+  - docs/models/payeelocation.md
+  - docs/models/payeelocationresponse.md
+  - docs/models/payeelocationresponsedata.md
+  - docs/models/payeelocationsresponse.md
+  - docs/models/payeelocationsresponsedata.md
+  - docs/models/payeeresponse.md
+  - docs/models/payeeresponsedata.md
+  - docs/models/payeesresponse.md
+  - docs/models/payeesresponsedata.md
+  - docs/models/postaccountwrapper.md
+  - docs/models/postscheduledtransactionwrapper.md
+  - docs/models/posttransactionswrapper.md
+  - docs/models/putscheduledtransactionwrapper.md
+  - docs/models/puttransactionwrapper.md
+  - docs/models/saveaccount.md
+  - docs/models/savecategory.md
+  - docs/models/savecategoryresponse.md
+  - docs/models/savecategoryresponsedata.md
+  - docs/models/savemonthcategory.md
+  - docs/models/savepayee.md
+  - docs/models/savepayeeresponse.md
+  - docs/models/savepayeeresponsedata.md
+  - docs/models/savescheduledtransaction.md
+  - docs/models/savesubtransaction.md
+  - docs/models/savetransactionsresponse.md
+  - docs/models/savetransactionsresponsedata.md
+  - docs/models/savetransactionwithidorimportid.md
+  - docs/models/scheduledsubtransaction.md
+  - docs/models/scheduledtransactiondetail.md
+  - docs/models/scheduledtransactiondetailfrequency.md
+  - docs/models/scheduledtransactionfrequency.md
+  - docs/models/scheduledtransactionresponse.md
+  - docs/models/scheduledtransactionresponsedata.md
+  - docs/models/scheduledtransactionsresponse.md
+  - docs/models/scheduledtransactionsresponsedata.md
+  - docs/models/scheduledtransactionsummary.md
+  - docs/models/scheduledtransactionsummaryfrequency.md
+  - docs/models/security.md
+  - docs/models/subtransaction.md
+  - docs/models/transactionclearedstatus.md
+  - docs/models/transactiondetail.md
+  - docs/models/transactiondetaildebttransactiontype.md
+  - docs/models/transactionflagcolor.md
+  - docs/models/transactionresponse.md
+  - docs/models/transactionresponsedata.md
+  - docs/models/transactionsimportresponse.md
+  - docs/models/transactionsimportresponsedata.md
+  - docs/models/transactionsresponse.md
+  - docs/models/transactionsresponsedata.md
+  - docs/models/transactionsummary.md
+  - docs/models/transactionsummarydebttransactiontype.md
+  - docs/models/type.md
+  - docs/models/user.md
+  - docs/models/userresponse.md
+  - docs/models/userresponsedata.md
+  - docs/sdks/accounts/README.md
+  - docs/sdks/budgets/README.md
+  - docs/sdks/categories/README.md
+  - docs/sdks/months/README.md
+  - docs/sdks/payeelocations/README.md
+  - docs/sdks/payees/README.md
+  - docs/sdks/scheduledtransactions/README.md
+  - docs/sdks/transactions/README.md
+  - docs/sdks/user/README.md
+  - docs/sdks/ynab/README.md
+  - docs/types/rfcdate.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/package.json
+  - examples/userGet.example.ts
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/accountsCreate.ts
+  - src/funcs/accountsGet.ts
+  - src/funcs/accountsList.ts
+  - src/funcs/budgetsGet.ts
+  - src/funcs/budgetsGetSettings.ts
+  - src/funcs/budgetsList.ts
+  - src/funcs/categoriesGet.ts
+  - src/funcs/categoriesGetByMonth.ts
+  - src/funcs/categoriesList.ts
+  - src/funcs/categoriesUpdate.ts
+  - src/funcs/categoriesUpdateMonth.ts
+  - src/funcs/monthsGet.ts
+  - src/funcs/monthsList.ts
+  - src/funcs/payeeLocationsGet.ts
+  - src/funcs/payeeLocationsList.ts
+  - src/funcs/payeeLocationsListByPayee.ts
+  - src/funcs/payeesGet.ts
+  - src/funcs/payeesList.ts
+  - src/funcs/payeesUpdate.ts
+  - src/funcs/scheduledTransactionsCreate.ts
+  - src/funcs/scheduledTransactionsDelete.ts
+  - src/funcs/scheduledTransactionsGet.ts
+  - src/funcs/scheduledTransactionsList.ts
+  - src/funcs/scheduledTransactionsUpdate.ts
+  - src/funcs/transactionsCreate.ts
+  - src/funcs/transactionsDelete.ts
+  - src/funcs/transactionsGet.ts
+  - src/funcs/transactionsImport.ts
+  - src/funcs/transactionsList.ts
+  - src/funcs/transactionsListByAccount.ts
+  - src/funcs/transactionsListByCategory.ts
+  - src/funcs/transactionsListByMonth.ts
+  - src/funcs/transactionsListByPayee.ts
+  - src/funcs/transactionsUpdateMany.ts
+  - src/funcs/transactionsUpdateOne.ts
+  - src/funcs/userGet.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/account.ts
+  - src/models/accountresponse.ts
+  - src/models/accountsresponse.ts
+  - src/models/accounttype.ts
+  - src/models/budgetdetail.ts
+  - src/models/budgetdetailresponse.ts
+  - src/models/budgetsettings.ts
+  - src/models/budgetsettingsresponse.ts
+  - src/models/budgetsummary.ts
+  - src/models/budgetsummaryresponse.ts
+  - src/models/categoriesresponse.ts
+  - src/models/category.ts
+  - src/models/categorygroup.ts
+  - src/models/categorygroupwithcategories.ts
+  - src/models/categoryresponse.ts
+  - src/models/currencyformat.ts
+  - src/models/dateformat.ts
+  - src/models/errordetail.ts
+  - src/models/errorresponse.ts
+  - src/models/errors/errorresponse.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/ynabdefaulterror.ts
+  - src/models/errors/ynaberror.ts
+  - src/models/existingtransaction.ts
+  - src/models/hybridtransaction.ts
+  - src/models/hybridtransactionsresponse.ts
+  - src/models/index.ts
+  - src/models/monthdetail.ts
+  - src/models/monthdetailresponse.ts
+  - src/models/monthsummariesresponse.ts
+  - src/models/monthsummary.ts
+  - src/models/newtransaction.ts
+  - src/models/operations/createaccount.ts
+  - src/models/operations/createscheduledtransaction.ts
+  - src/models/operations/createtransaction.ts
+  - src/models/operations/deletescheduledtransaction.ts
+  - src/models/operations/deletetransaction.ts
+  - src/models/operations/getaccountbyid.ts
+  - src/models/operations/getaccounts.ts
+  - src/models/operations/getbudgetbyid.ts
+  - src/models/operations/getbudgetmonth.ts
+  - src/models/operations/getbudgetmonths.ts
+  - src/models/operations/getbudgets.ts
+  - src/models/operations/getbudgetsettingsbyid.ts
+  - src/models/operations/getcategories.ts
+  - src/models/operations/getcategorybyid.ts
+  - src/models/operations/getmonthcategorybyid.ts
+  - src/models/operations/getpayeebyid.ts
+  - src/models/operations/getpayeelocationbyid.ts
+  - src/models/operations/getpayeelocations.ts
+  - src/models/operations/getpayeelocationsbypayee.ts
+  - src/models/operations/getpayees.ts
+  - src/models/operations/getscheduledtransactionbyid.ts
+  - src/models/operations/getscheduledtransactions.ts
+  - src/models/operations/gettransactionbyid.ts
+  - src/models/operations/gettransactions.ts
+  - src/models/operations/gettransactionsbyaccount.ts
+  - src/models/operations/gettransactionsbycategory.ts
+  - src/models/operations/gettransactionsbymonth.ts
+  - src/models/operations/gettransactionsbypayee.ts
+  - src/models/operations/getuser.ts
+  - src/models/operations/importtransactions.ts
+  - src/models/operations/index.ts
+  - src/models/operations/updatecategory.ts
+  - src/models/operations/updatemonthcategory.ts
+  - src/models/operations/updatepayee.ts
+  - src/models/operations/updatescheduledtransaction.ts
+  - src/models/operations/updatetransaction.ts
+  - src/models/operations/updatetransactions.ts
+  - src/models/patchcategorywrapper.ts
+  - src/models/patchmonthcategorywrapper.ts
+  - src/models/patchpayeewrapper.ts
+  - src/models/patchtransactionswrapper.ts
+  - src/models/payee.ts
+  - src/models/payeelocation.ts
+  - src/models/payeelocationresponse.ts
+  - src/models/payeelocationsresponse.ts
+  - src/models/payeeresponse.ts
+  - src/models/payeesresponse.ts
+  - src/models/postaccountwrapper.ts
+  - src/models/postscheduledtransactionwrapper.ts
+  - src/models/posttransactionswrapper.ts
+  - src/models/putscheduledtransactionwrapper.ts
+  - src/models/puttransactionwrapper.ts
+  - src/models/saveaccount.ts
+  - src/models/savecategory.ts
+  - src/models/savecategoryresponse.ts
+  - src/models/savemonthcategory.ts
+  - src/models/savepayee.ts
+  - src/models/savepayeeresponse.ts
+  - src/models/savescheduledtransaction.ts
+  - src/models/savesubtransaction.ts
+  - src/models/savetransactionsresponse.ts
+  - src/models/savetransactionwithidorimportid.ts
+  - src/models/scheduledsubtransaction.ts
+  - src/models/scheduledtransactiondetail.ts
+  - src/models/scheduledtransactionfrequency.ts
+  - src/models/scheduledtransactionresponse.ts
+  - src/models/scheduledtransactionsresponse.ts
+  - src/models/scheduledtransactionsummary.ts
+  - src/models/security.ts
+  - src/models/subtransaction.ts
+  - src/models/transactionclearedstatus.ts
+  - src/models/transactiondetail.ts
+  - src/models/transactionflagcolor.ts
+  - src/models/transactionresponse.ts
+  - src/models/transactionsimportresponse.ts
+  - src/models/transactionsresponse.ts
+  - src/models/transactionsummary.ts
+  - src/models/user.ts
+  - src/models/userresponse.ts
+  - src/sdk/accounts.ts
+  - src/sdk/budgets.ts
+  - src/sdk/categories.ts
+  - src/sdk/index.ts
+  - src/sdk/months.ts
+  - src/sdk/payeelocations.ts
+  - src/sdk/payees.ts
+  - src/sdk/scheduledtransactions.ts
+  - src/sdk/sdk.ts
+  - src/sdk/transactions.ts
+  - src/sdk/user.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  getUser:
+    speakeasy-default-get-user:
+      responses:
+        "200":
+          application/json: {"data": {"user": {"id": "23d6a551-c558-4ea6-af9d-e8b1650326ce"}}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getBudgets:
+    speakeasy-default-get-budgets:
+      responses:
+        "200":
+          application/json: {"data": {"budgets": [{"id": "b1af8d1b-c44f-4d6b-80bc-e8a00ce88649", "name": "<value>"}]}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getBudgetById:
+    speakeasy-default-get-budget-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"budget": {"id": "4eb70827-b301-483b-9a36-b03d018b3822", "name": "<value>"}, "server_knowledge": 277787}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getBudgetSettingsById:
+    speakeasy-default-get-budget-settings-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"settings": {"date_format": {"format": "<value>"}, "currency_format": {"iso_code": "<value>", "example_format": "<value>", "decimal_digits": 70579, "decimal_separator": "<value>", "symbol_first": false, "group_separator": "<value>", "currency_symbol": "R$", "display_symbol": true}}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getAccounts:
+    speakeasy-default-get-accounts:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"accounts": [], "server_knowledge": 246549}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  createAccount:
+    speakeasy-default-create-account:
+      parameters:
+        path:
+          budget_id: "<id>"
+      requestBody:
+        application/json: {"account": {"name": "<value>", "type": "medicalDebt", "balance": 127923}}
+      responses:
+        "201":
+          application/json: {"data": {"account": {"id": "b3fce8e4-82d5-4402-8e50-cc432481281a", "name": "<value>", "type": "studentLoan", "on_budget": true, "closed": true, "balance": 15091, "cleared_balance": 144084, "uncleared_balance": 721678, "transfer_payee_id": null, "deleted": false}}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getAccountById:
+    speakeasy-default-get-account-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          account_id: "d9448c33-e069-48c3-b1ac-8a31e11b2cd5"
+      responses:
+        "200":
+          application/json: {"data": {"account": {"id": "ced69bcd-45b0-4e13-9286-0db047302064", "name": "<value>", "type": "checking", "on_budget": false, "closed": false, "balance": 501879, "cleared_balance": 831233, "uncleared_balance": 998724, "transfer_payee_id": null, "deleted": true}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getCategories:
+    speakeasy-default-get-categories:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"category_groups": [], "server_knowledge": 716259}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getCategoryById:
+    speakeasy-default-get-category-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          category_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"category": {"id": "948e73ca-99d1-46f0-a0e6-f20b2b460efe", "category_group_id": "17e64d2c-56e5-4de8-9c6b-bf0c52337ff9", "name": "<value>", "hidden": false, "budgeted": 461578, "activity": 266424, "balance": 945427, "goal_needs_whole_amount": null, "deleted": false}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updateCategory:
+    speakeasy-default-update-category:
+      parameters:
+        path:
+          budget_id: "<id>"
+          category_id: "<id>"
+      requestBody:
+        application/json: {"category": {}}
+      responses:
+        "200":
+          application/json: {"data": {"category": {"id": "ab56e102-9360-41f5-a0cc-194edbd10167", "category_group_id": "0f0f1efc-798f-43cc-a5f5-aa51d3269fb4", "name": "<value>", "hidden": true, "budgeted": 382498, "activity": 381715, "balance": 894111, "goal_needs_whole_amount": null, "deleted": true}, "server_knowledge": 663926}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getMonthCategoryById:
+    speakeasy-default-get-month-category-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          month: "2025-10-27"
+          category_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"category": {"id": "6e33e479-c941-4de1-b784-e4605f432f43", "category_group_id": "16447980-30c0-4cfb-b49e-655162c73dbe", "name": "<value>", "hidden": false, "budgeted": 175220, "activity": 977529, "balance": 868544, "goal_needs_whole_amount": null, "deleted": true}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updateMonthCategory:
+    speakeasy-default-update-month-category:
+      parameters:
+        path:
+          budget_id: "<id>"
+          month: "2023-01-08"
+          category_id: "<id>"
+      requestBody:
+        application/json: {"category": {"budgeted": 147664}}
+      responses:
+        "200":
+          application/json: {"data": {"category": {"id": "2196fe5e-56a3-445f-89f9-e067dcb307a8", "category_group_id": "fc395ba6-34fd-41df-af83-96da8b31b61f", "name": "<value>", "hidden": true, "budgeted": 971533, "activity": 952801, "balance": 18154, "goal_needs_whole_amount": null, "deleted": true}, "server_knowledge": 896157}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getPayees:
+    speakeasy-default-get-payees:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"payees": [], "server_knowledge": 517384}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getPayeeById:
+    speakeasy-default-get-payee-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          payee_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"payee": {"id": "1e6bf0b0-f152-490e-81a3-e03ea040db5e", "name": "<value>", "deleted": false}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updatePayee:
+    speakeasy-default-update-payee:
+      parameters:
+        path:
+          budget_id: "<id>"
+          payee_id: "<id>"
+      requestBody:
+        application/json: {"payee": {}}
+      responses:
+        "200":
+          application/json: {"data": {"payee": {"id": "11a84016-9623-4291-9c09-9647303bf9cd", "name": "<value>", "deleted": false}, "server_knowledge": 610515}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getPayeeLocations:
+    speakeasy-default-get-payee-locations:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"payee_locations": [{"id": "5fd2e94c-6a45-407a-98ce-326afe4b8a2a", "payee_id": "8874191c-33d8-4cd0-a36f-196eab2e9c37", "latitude": "15.9174", "longitude": "-90.4062", "deleted": false}]}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getPayeeLocationById:
+    speakeasy-default-get-payee-location-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          payee_location_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"payee_location": {"id": "425567dc-9732-4966-ab04-1a39d104f4c1", "payee_id": "48806183-7a0a-4043-bc30-c14c876d503e", "latitude": "58.97", "longitude": "-130.6091", "deleted": false}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getPayeeLocationsByPayee:
+    speakeasy-default-get-payee-locations-by-payee:
+      parameters:
+        path:
+          budget_id: "<id>"
+          payee_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"payee_locations": [{"id": "389780d5-79ca-4eae-9bf3-39a075b9d4c7", "payee_id": "432d0725-319a-4b65-a1a8-84136439a41e", "latitude": "-44.5743", "longitude": "-144.2844", "deleted": false}]}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getBudgetMonths:
+    speakeasy-default-get-budget-months:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"months": [{"month": "2023-09-08", "income": 583422, "budgeted": 205077, "activity": 227876, "to_be_budgeted": 104827, "deleted": true}], "server_knowledge": 563339}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getBudgetMonth:
+    speakeasy-default-get-budget-month:
+      parameters:
+        path:
+          budget_id: "<id>"
+          month: "2025-03-18"
+      responses:
+        "200":
+          application/json: {"data": {"month": {"month": "2025-11-27", "income": 641384, "budgeted": 265028, "activity": 481543, "to_be_budgeted": 360720, "deleted": false, "categories": [{"id": "297ce802-0af3-4287-b8a3-0db5b0d5a131", "category_group_id": "3d0d31bd-5263-4eaf-a00f-e7b198af885a", "name": "<value>", "hidden": false, "budgeted": 890050, "activity": 650512, "balance": 975500, "goal_needs_whole_amount": null, "deleted": true}]}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactions:
+    speakeasy-default-get-transactions:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transactions": [{"id": "<id>", "date": "2025-07-28", "amount": 198321, "cleared": "uncleared", "approved": true, "account_id": "eba8f932-1130-4edd-b647-d456c1eebadf", "deleted": true, "account_name": "<value>", "subtransactions": []}], "server_knowledge": 896787}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  createTransaction:
+    speakeasy-default-create-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {"data": {"transaction_ids": ["<value 1>", "<value 2>"], "server_knowledge": 361192}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updateTransactions:
+    speakeasy-default-update-transactions:
+      parameters:
+        path:
+          budget_id: "<id>"
+      requestBody:
+        application/json: {"transactions": [{}]}
+      responses:
+        "209":
+          application/json: {"data": {"transaction_ids": [], "server_knowledge": 843173}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  importTransactions:
+    speakeasy-default-import-transactions:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transaction_ids": ["<value 1>", "<value 2>", "<value 3>"]}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactionById:
+    speakeasy-default-get-transaction-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          transaction_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transaction": {"id": "<id>", "date": "2023-07-28", "amount": 611734, "cleared": "cleared", "approved": true, "account_id": "23c9de99-0398-4e24-8fa5-bbdf9480cb32", "deleted": true, "account_name": "<value>", "subtransactions": [{"id": "<id>", "transaction_id": "<id>", "amount": 185207, "deleted": false}]}, "server_knowledge": 482991}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updateTransaction:
+    speakeasy-default-update-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+          transaction_id: "<id>"
+      requestBody:
+        application/json: {"transaction": {}}
+      responses:
+        "200":
+          application/json: {"data": {"transaction": {"id": "<id>", "date": "2025-12-14", "amount": 5862, "cleared": "reconciled", "approved": true, "account_id": "d0ef5679-c1b6-4982-8c64-e97e8c1d5e16", "deleted": false, "account_name": "<value>", "subtransactions": [{"id": "<id>", "transaction_id": "<id>", "amount": 172744, "deleted": false}]}, "server_knowledge": 211731}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  deleteTransaction:
+    speakeasy-default-delete-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+          transaction_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transaction": {"id": "<id>", "date": "2024-10-11", "amount": 146238, "cleared": "uncleared", "approved": true, "account_id": "6ee2a2bc-4aa7-4af6-9891-695fc32173a6", "deleted": true, "account_name": "<value>", "subtransactions": [{"id": "<id>", "transaction_id": "<id>", "amount": 917559, "deleted": false}]}, "server_knowledge": 409229}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactionsByAccount:
+    speakeasy-default-get-transactions-by-account:
+      parameters:
+        path:
+          budget_id: "<id>"
+          account_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transactions": [], "server_knowledge": 300232}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactionsByCategory:
+    speakeasy-default-get-transactions-by-category:
+      parameters:
+        path:
+          budget_id: "<id>"
+          category_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transactions": [{"id": "<id>", "date": "2023-06-18", "amount": 720551, "cleared": "uncleared", "approved": true, "account_id": "27be524f-dc73-4505-a7a2-4b9932009b2a", "deleted": true, "type": "subtransaction", "account_name": "<value>"}]}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactionsByPayee:
+    speakeasy-default-get-transactions-by-payee:
+      parameters:
+        path:
+          budget_id: "<id>"
+          payee_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"transactions": []}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getTransactionsByMonth:
+    speakeasy-default-get-transactions-by-month:
+      parameters:
+        path:
+          budget_id: "<id>"
+          month: "<value>"
+      responses:
+        "200":
+          application/json: {"data": {"transactions": [{"id": "<id>", "date": "2023-07-18", "amount": 595841, "cleared": "uncleared", "approved": false, "account_id": "804e5e34-56e3-4e6e-9b8e-c782a447a31e", "deleted": false, "type": "subtransaction", "account_name": "<value>"}]}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getScheduledTransactions:
+    speakeasy-default-get-scheduled-transactions:
+      parameters:
+        path:
+          budget_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"scheduled_transactions": [{"id": "57aa1b5a-0985-4852-b739-8d8b0f081b4f", "date_first": "2023-07-07", "date_next": "2025-12-14", "frequency": "yearly", "amount": 529710, "account_id": "e4b6a890-2b59-423c-8a4d-93941cd3f930", "deleted": false, "account_name": "<value>", "subtransactions": []}], "server_knowledge": 287093}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  createScheduledTransaction:
+    speakeasy-default-create-scheduled-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+      requestBody:
+        application/json: {"scheduled_transaction": {"account_id": "1cb7f54b-9ed5-48fd-8642-a56bd5ee2fca", "date": "2024-04-15"}}
+      responses:
+        "201":
+          application/json: {"data": {"scheduled_transaction": {"id": "bbc12230-712c-4928-9536-0536976691cf", "date_first": "2023-01-19", "date_next": "2024-09-07", "frequency": "everyOtherYear", "amount": 735416, "account_id": "4a0850fa-b6ab-46ab-9668-ae68541e0d79", "deleted": false, "account_name": "<value>", "subtransactions": []}}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  getScheduledTransactionById:
+    speakeasy-default-get-scheduled-transaction-by-id:
+      parameters:
+        path:
+          budget_id: "<id>"
+          scheduled_transaction_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"scheduled_transaction": {"id": "c40637fb-c914-4dea-90d5-8a6cecc7fe69", "date_first": "2024-06-13", "date_next": "2025-08-23", "frequency": "everyOtherYear", "amount": 916585, "account_id": "f97e95b4-ebb9-4ee4-8e1d-7358a1168e70", "deleted": true, "account_name": "<value>", "subtransactions": [{"id": "3188c7e3-bdd1-4b72-bf5b-157131361cb2", "scheduled_transaction_id": "9ad91816-1d41-4021-9534-b61b790b2b9e", "amount": 412222, "deleted": true}]}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+        default:
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  updateScheduledTransaction:
+    speakeasy-default-update-scheduled-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+          scheduled_transaction_id: "<id>"
+      requestBody:
+        application/json: {"scheduled_transaction": {"account_id": "8ca52c3e-66a2-43a1-82f1-fa05cadf8245", "date": "2025-01-04"}}
+      responses:
+        "200":
+          application/json: {"data": {"scheduled_transaction": {"id": "71c70142-45c6-441d-b263-ffd896e5e65a", "date_first": "2023-05-10", "date_next": "2025-06-28", "frequency": "everyOtherWeek", "amount": 795379, "account_id": "46f42d81-ceac-4543-94c4-c78e4eff4339", "deleted": true, "account_name": "<value>", "subtransactions": []}}}
+        "400":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+  deleteScheduledTransaction:
+    speakeasy-default-delete-scheduled-transaction:
+      parameters:
+        path:
+          budget_id: "<id>"
+          scheduled_transaction_id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"scheduled_transaction": {"id": "83afa6aa-bffb-431b-92ef-0b4d7c251023", "date_first": "2024-09-14", "date_next": "2023-05-01", "frequency": "twiceAMonth", "amount": 204334, "account_id": "ed95cffb-7155-4f45-8eeb-3339ae9b0687", "deleted": false, "account_name": "<value>", "subtransactions": []}}}
+        "404":
+          application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
+examplesVersion: 1.0.2
