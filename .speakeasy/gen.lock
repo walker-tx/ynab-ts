@@ -3,15 +3,16 @@ id: 9e8b172e-d6e6-4791-b3d2-950296cf9303
 management:
   docChecksum: eba7e89945dad4f96ba52b5f737bbe56
   docVersion: 1.75.0
-  speakeasyVersion: 1.592.0
-  generationVersion: 2.667.0
-  releaseVersion: 0.1.11
-  configChecksum: a87523a31e50183421909653468893ea
+  speakeasyVersion: 1.596.0
+  generationVersion: 2.672.0
+  releaseVersion: 0.2.0
+  configChecksum: 03e1ee653aa7fd0fec84f049e32c39ae
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.16
+    core: 3.21.19
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -24,6 +25,7 @@ features:
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
+    reactQueryHooks: 0.2.3
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.3.0
@@ -34,6 +36,7 @@ generatedFiles:
   - .gitattributes
   - .npmignore
   - FUNCTIONS.md
+  - REACT_QUERY.md
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
@@ -389,6 +392,45 @@ generatedFiles:
   - src/models/transactionsummary.ts
   - src/models/user.ts
   - src/models/userresponse.ts
+  - src/react-query/_context.tsx
+  - src/react-query/_types.ts
+  - src/react-query/accountsCreate.ts
+  - src/react-query/accountsGet.ts
+  - src/react-query/accountsList.ts
+  - src/react-query/budgetsGet.ts
+  - src/react-query/budgetsGetSettings.ts
+  - src/react-query/budgetsList.ts
+  - src/react-query/categoriesGet.ts
+  - src/react-query/categoriesGetByMonth.ts
+  - src/react-query/categoriesList.ts
+  - src/react-query/categoriesUpdate.ts
+  - src/react-query/categoriesUpdateMonth.ts
+  - src/react-query/index.ts
+  - src/react-query/monthsGet.ts
+  - src/react-query/monthsList.ts
+  - src/react-query/payeeLocationsGet.ts
+  - src/react-query/payeeLocationsList.ts
+  - src/react-query/payeeLocationsListByPayee.ts
+  - src/react-query/payeesGet.ts
+  - src/react-query/payeesList.ts
+  - src/react-query/payeesUpdate.ts
+  - src/react-query/scheduledTransactionsCreate.ts
+  - src/react-query/scheduledTransactionsDelete.ts
+  - src/react-query/scheduledTransactionsGet.ts
+  - src/react-query/scheduledTransactionsList.ts
+  - src/react-query/scheduledTransactionsUpdate.ts
+  - src/react-query/transactionsCreate.ts
+  - src/react-query/transactionsDelete.ts
+  - src/react-query/transactionsGet.ts
+  - src/react-query/transactionsImport.ts
+  - src/react-query/transactionsList.ts
+  - src/react-query/transactionsListByAccount.ts
+  - src/react-query/transactionsListByCategory.ts
+  - src/react-query/transactionsListByMonth.ts
+  - src/react-query/transactionsListByPayee.ts
+  - src/react-query/transactionsUpdateMany.ts
+  - src/react-query/transactionsUpdateOne.ts
+  - src/react-query/userGet.ts
   - src/sdk/accounts.ts
   - src/sdk/budgets.ts
   - src/sdk/categories.ts

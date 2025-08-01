@@ -1,27 +1,26 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    YNAB API Endpoints:
+    YNAB OpenAPI:
         inputs:
             - location: https://api.ynab.com/papi/open_api_spec.yaml
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         transformations:
             - removeUnused: true
-            - removeUnused: true
         output: .speakeasy/out.openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ynab-api-endpoints
+            location: registry.speakeasyapi.dev/walker/ynab/ynab-api
 targets:
     ynab:
         target: typescript
-        source: YNAB API Endpoints
+        source: YNAB OpenAPI
         publish:
             npm:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ynab-api-endpoints-typescript-code-samples
+                location: registry.speakeasyapi.dev/walker/ynab/ynab-api-typescript-code-samples
             labelOverride:
                 fixedValue: Typescript (SDK)
             blocking: false

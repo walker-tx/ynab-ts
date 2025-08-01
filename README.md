@@ -30,6 +30,7 @@ YNAB API Endpoints: Our API uses a REST based design, leverages the JSON data fo
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
+  * [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -44,34 +45,38 @@ YNAB API Endpoints: Our API uses a REST based design, leverages the JSON data fo
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add ynab-ts
+# Install optional peer dependencies if you plan to use React hooks
+npm add @tanstack/react-query react react-dom
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add ynab-ts
+# Install optional peer dependencies if you plan to use React hooks
+pnpm add @tanstack/react-query react react-dom
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add ynab-ts
+# Install optional peer dependencies if you plan to use React hooks
+bun add @tanstack/react-query react react-dom
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add ynab-ts zod
+# Install optional peer dependencies if you plan to use React hooks
+yarn add @tanstack/react-query react react-dom
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -267,6 +272,68 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start React hooks with TanStack Query [react-query] -->
+## React hooks with TanStack Query
+
+React hooks built on [TanStack Query][tanstack-query] are included in this SDK.
+These hooks and the utility functions provided alongside them can be used to
+build rich applications that pull data from the API using one of the most
+popular asynchronous state management library.
+
+[tanstack-query]: https://tanstack.com/query/v5/docs/framework/react/overview
+
+To learn about this feature and how to get started, check
+[REACT_QUERY.md](./REACT_QUERY.md).
+
+> [!WARNING]
+>
+> This feature is currently in **preview** and is subject to breaking changes
+> within the current major version of the SDK as we gather user feedback on it.
+
+<details>
+
+<summary>Available React hooks</summary>
+
+- [`useAccountsCreateMutation`](docs/sdks/accounts/README.md#create) - Create a new account
+- [`useAccountsGet`](docs/sdks/accounts/README.md#get) - Single account
+- [`useAccountsList`](docs/sdks/accounts/README.md#list) - Account list
+- [`useBudgetsGet`](docs/sdks/budgets/README.md#get) - Single budget
+- [`useBudgetsGetSettings`](docs/sdks/budgets/README.md#getsettings) - Budget Settings
+- [`useBudgetsList`](docs/sdks/budgets/README.md#list) - List budgets
+- [`useCategoriesGet`](docs/sdks/categories/README.md#get) - Single category
+- [`useCategoriesGetByMonth`](docs/sdks/categories/README.md#getbymonth) - Single category for a specific budget month
+- [`useCategoriesList`](docs/sdks/categories/README.md#list) - List categories
+- [`useCategoriesUpdateMonthMutation`](docs/sdks/categories/README.md#updatemonth) - Update a category for a specific month
+- [`useCategoriesUpdateMutation`](docs/sdks/categories/README.md#update) - Update a category
+- [`useMonthsGet`](docs/sdks/months/README.md#get) - Single budget month
+- [`useMonthsList`](docs/sdks/months/README.md#list) - List budget months
+- [`usePayeeLocationsGet`](docs/sdks/payeelocations/README.md#get) - Single payee location
+- [`usePayeeLocationsList`](docs/sdks/payeelocations/README.md#list) - List payee locations
+- [`usePayeeLocationsListByPayee`](docs/sdks/payeelocations/README.md#listbypayee) - List locations for a payee
+- [`usePayeesGet`](docs/sdks/payees/README.md#get) - Single payee
+- [`usePayeesList`](docs/sdks/payees/README.md#list) - List payees
+- [`usePayeesUpdateMutation`](docs/sdks/payees/README.md#update) - Update a payee
+- [`useScheduledTransactionsCreateMutation`](docs/sdks/scheduledtransactions/README.md#create) - Create a single scheduled transaction
+- [`useScheduledTransactionsDeleteMutation`](docs/sdks/scheduledtransactions/README.md#delete) - Deletes an existing scheduled transaction
+- [`useScheduledTransactionsGet`](docs/sdks/scheduledtransactions/README.md#get) - Single scheduled transaction
+- [`useScheduledTransactionsList`](docs/sdks/scheduledtransactions/README.md#list) - List scheduled transactions
+- [`useScheduledTransactionsUpdateMutation`](docs/sdks/scheduledtransactions/README.md#update) - Updates an existing scheduled transaction
+- [`useTransactionsCreateMutation`](docs/sdks/transactions/README.md#create) - Create a single transaction or multiple transactions
+- [`useTransactionsDeleteMutation`](docs/sdks/transactions/README.md#delete) - Deletes an existing transaction
+- [`useTransactionsGet`](docs/sdks/transactions/README.md#get) - Single transaction
+- [`useTransactionsImportMutation`](docs/sdks/transactions/README.md#import) - Import transactions
+- [`useTransactionsList`](docs/sdks/transactions/README.md#list) - List transactions
+- [`useTransactionsListByAccount`](docs/sdks/transactions/README.md#listbyaccount) - List account transactions
+- [`useTransactionsListByCategory`](docs/sdks/transactions/README.md#listbycategory) - List category transactions, excluding any pending transactions
+- [`useTransactionsListByMonth`](docs/sdks/transactions/README.md#listbymonth) - List transactions in month, excluding any pending transactions
+- [`useTransactionsListByPayee`](docs/sdks/transactions/README.md#listbypayee) - List payee transactions, excluding any pending transactions
+- [`useTransactionsUpdateManyMutation`](docs/sdks/transactions/README.md#updatemany) - Update multiple transactions
+- [`useTransactionsUpdateOneMutation`](docs/sdks/transactions/README.md#updateone) - Updates an existing transaction
+- [`useUserGet`](docs/sdks/user/README.md#get) - User info
+
+</details>
+<!-- End React hooks with TanStack Query [react-query] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
