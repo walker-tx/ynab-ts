@@ -16,6 +16,9 @@ targets:
     ynab:
         target: typescript
         source: YNAB API Endpoints
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ynab-api-endpoints-typescript-code-samples
