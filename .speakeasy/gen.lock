@@ -5,8 +5,10 @@ management:
   docVersion: 1.75.0
   speakeasyVersion: 1.596.0
   generationVersion: 2.672.0
-  releaseVersion: 0.2.0
-  configChecksum: 03e1ee653aa7fd0fec84f049e32c39ae
+  releaseVersion: 0.2.1
+  configChecksum: 1ee3f0f54bcdb4b1be126acbd067cffa
+  repoURL: https://github.com/walker-tx/ynab-ts.git
+  installationURL: https://github.com/walker-tx/ynab-ts
   published: true
 features:
   typescript:
