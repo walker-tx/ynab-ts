@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetCategoriesRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetCategoriesRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetCategoriesResponse =
-  | models.CategoriesResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetCategoriesRequest$inboundSchema: z.ZodType<
@@ -88,61 +83,5 @@ export function getCategoriesRequestFromJSON(
     jsonString,
     (x) => GetCategoriesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetCategoriesRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetCategoriesResponse$inboundSchema: z.ZodType<
-  GetCategoriesResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.CategoriesResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetCategoriesResponse$Outbound =
-  | models.CategoriesResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetCategoriesResponse$outboundSchema: z.ZodType<
-  GetCategoriesResponse$Outbound,
-  z.ZodTypeDef,
-  GetCategoriesResponse
-> = z.union([
-  models.CategoriesResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCategoriesResponse$ {
-  /** @deprecated use `GetCategoriesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetCategoriesResponse$inboundSchema;
-  /** @deprecated use `GetCategoriesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetCategoriesResponse$outboundSchema;
-  /** @deprecated use `GetCategoriesResponse$Outbound` instead. */
-  export type Outbound = GetCategoriesResponse$Outbound;
-}
-
-export function getCategoriesResponseToJSON(
-  getCategoriesResponse: GetCategoriesResponse,
-): string {
-  return JSON.stringify(
-    GetCategoriesResponse$outboundSchema.parse(getCategoriesResponse),
-  );
-}
-
-export function getCategoriesResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetCategoriesResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetCategoriesResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetCategoriesResponse' from JSON`,
   );
 }

@@ -20,7 +20,7 @@ export class Payees extends ClientSDK {
   async list(
     request: operations.GetPayeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPayeesResponse> {
+  ): Promise<models.PayeesResponse> {
     return unwrapAsync(payeesList(
       this,
       request,
@@ -37,7 +37,7 @@ export class Payees extends ClientSDK {
   async get(
     request: operations.GetPayeeByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPayeeByIdResponse> {
+  ): Promise<models.PayeeResponse> {
     return unwrapAsync(payeesGet(
       this,
       request,

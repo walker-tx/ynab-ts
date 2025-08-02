@@ -102,13 +102,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPayeeLocationsResponse](../../models/operations/getpayeelocationsresponse.md)\>**
+**Promise\<[models.PayeeLocationsResponse](../../models/payeelocationsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get
@@ -206,13 +207,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPayeeLocationByIdResponse](../../models/operations/getpayeelocationbyidresponse.md)\>**
+**Promise\<[models.PayeeLocationResponse](../../models/payeelocationresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## listByPayee
@@ -310,11 +312,12 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPayeeLocationsByPayeeResponse](../../models/operations/getpayeelocationsbypayeeresponse.md)\>**
+**Promise\<[models.PayeeLocationsResponse](../../models/payeelocationsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

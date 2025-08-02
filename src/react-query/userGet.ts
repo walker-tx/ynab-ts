@@ -16,12 +16,12 @@ import { YnabCore } from "../core.js";
 import { userGet } from "../funcs/userGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import * as models from "../models/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
 
-export type UserGetQueryData = operations.GetUserResponse;
+export type UserGetQueryData = models.UserResponse;
 
 /**
  * User info

@@ -423,7 +423,7 @@ const ynab = new Ynab({
 
 async function run() {
   try {
-    const result = await ynab.budgets.list();
+    const result = await ynab.user.get();
 
     console.log(result);
   } catch (error) {
@@ -449,7 +449,7 @@ run();
 ### Error Classes
 **Primary errors:**
 * [`YnabError`](./src/models/errors/ynaberror.ts): The base class for HTTP error responses.
-  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): *
+  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Generic error.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -467,8 +467,6 @@ run();
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
-
-\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

@@ -7,9 +7,9 @@ import { PayeeResponseData } from "ynab-ts/models";
 
 let value: PayeeResponseData = {
   payee: {
-    id: "ad31d49d-acd9-4ea8-9e6e-f16ca4138335",
+    id: "72c83b58-6a5c-4474-931d-93a26344e3ae",
     name: "<value>",
-    deleted: false,
+    deleted: true,
   },
 };
 ```

@@ -96,7 +96,7 @@ export class Transactions extends ClientSDK {
   async get(
     request: operations.GetTransactionByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTransactionByIdResponse> {
+  ): Promise<models.TransactionResponse> {
     return unwrapAsync(transactionsGet(
       this,
       request,
@@ -147,7 +147,7 @@ export class Transactions extends ClientSDK {
   async listByAccount(
     request: operations.GetTransactionsByAccountRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTransactionsByAccountResponse> {
+  ): Promise<models.TransactionsResponse> {
     return unwrapAsync(transactionsListByAccount(
       this,
       request,
@@ -164,7 +164,7 @@ export class Transactions extends ClientSDK {
   async listByCategory(
     request: operations.GetTransactionsByCategoryRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTransactionsByCategoryResponse> {
+  ): Promise<models.HybridTransactionsResponse> {
     return unwrapAsync(transactionsListByCategory(
       this,
       request,
@@ -181,7 +181,7 @@ export class Transactions extends ClientSDK {
   async listByPayee(
     request: operations.GetTransactionsByPayeeRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTransactionsByPayeeResponse> {
+  ): Promise<models.HybridTransactionsResponse> {
     return unwrapAsync(transactionsListByPayee(
       this,
       request,
@@ -198,7 +198,7 @@ export class Transactions extends ClientSDK {
   async listByMonth(
     request: operations.GetTransactionsByMonthRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTransactionsByMonthResponse> {
+  ): Promise<models.HybridTransactionsResponse> {
     return unwrapAsync(transactionsListByMonth(
       this,
       request,

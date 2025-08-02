@@ -30,7 +30,6 @@ export * from "./gettransactionsbyaccount.js";
 export * from "./gettransactionsbycategory.js";
 export * from "./gettransactionsbymonth.js";
 export * from "./gettransactionsbypayee.js";
-export * from "./getuser.js";
 export * from "./importtransactions.js";
 export * from "./updatecategory.js";
 export * from "./updatemonthcategory.js";

@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetPayeeByIdRequest = {
   /**
@@ -19,8 +18,6 @@ export type GetPayeeByIdRequest = {
    */
   payeeId: string;
 };
-
-export type GetPayeeByIdResponse = models.PayeeResponse | models.ErrorResponse;
 
 /** @internal */
 export const GetPayeeByIdRequest$inboundSchema: z.ZodType<
@@ -86,61 +83,5 @@ export function getPayeeByIdRequestFromJSON(
     jsonString,
     (x) => GetPayeeByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetPayeeByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetPayeeByIdResponse$inboundSchema: z.ZodType<
-  GetPayeeByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.PayeeResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetPayeeByIdResponse$Outbound =
-  | models.PayeeResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetPayeeByIdResponse$outboundSchema: z.ZodType<
-  GetPayeeByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetPayeeByIdResponse
-> = z.union([
-  models.PayeeResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPayeeByIdResponse$ {
-  /** @deprecated use `GetPayeeByIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetPayeeByIdResponse$inboundSchema;
-  /** @deprecated use `GetPayeeByIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetPayeeByIdResponse$outboundSchema;
-  /** @deprecated use `GetPayeeByIdResponse$Outbound` instead. */
-  export type Outbound = GetPayeeByIdResponse$Outbound;
-}
-
-export function getPayeeByIdResponseToJSON(
-  getPayeeByIdResponse: GetPayeeByIdResponse,
-): string {
-  return JSON.stringify(
-    GetPayeeByIdResponse$outboundSchema.parse(getPayeeByIdResponse),
-  );
-}
-
-export function getPayeeByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetPayeeByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetPayeeByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPayeeByIdResponse' from JSON`,
   );
 }

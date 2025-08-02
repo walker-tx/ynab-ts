@@ -8,7 +8,7 @@ import { CategoriesResponse } from "ynab-ts/models";
 let value: CategoriesResponse = {
   data: {
     categoryGroups: [],
-    serverKnowledge: 24481,
+    serverKnowledge: 754721,
   },
 };
 ```

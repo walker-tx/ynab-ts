@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetBudgetMonthsRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetBudgetMonthsRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetBudgetMonthsResponse =
-  | models.MonthSummariesResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetBudgetMonthsRequest$inboundSchema: z.ZodType<
@@ -88,61 +83,5 @@ export function getBudgetMonthsRequestFromJSON(
     jsonString,
     (x) => GetBudgetMonthsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetBudgetMonthsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetBudgetMonthsResponse$inboundSchema: z.ZodType<
-  GetBudgetMonthsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.MonthSummariesResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetBudgetMonthsResponse$Outbound =
-  | models.MonthSummariesResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetBudgetMonthsResponse$outboundSchema: z.ZodType<
-  GetBudgetMonthsResponse$Outbound,
-  z.ZodTypeDef,
-  GetBudgetMonthsResponse
-> = z.union([
-  models.MonthSummariesResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetBudgetMonthsResponse$ {
-  /** @deprecated use `GetBudgetMonthsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetBudgetMonthsResponse$inboundSchema;
-  /** @deprecated use `GetBudgetMonthsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetBudgetMonthsResponse$outboundSchema;
-  /** @deprecated use `GetBudgetMonthsResponse$Outbound` instead. */
-  export type Outbound = GetBudgetMonthsResponse$Outbound;
-}
-
-export function getBudgetMonthsResponseToJSON(
-  getBudgetMonthsResponse: GetBudgetMonthsResponse,
-): string {
-  return JSON.stringify(
-    GetBudgetMonthsResponse$outboundSchema.parse(getBudgetMonthsResponse),
-  );
-}
-
-export function getBudgetMonthsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetBudgetMonthsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetBudgetMonthsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetBudgetMonthsResponse' from JSON`,
   );
 }

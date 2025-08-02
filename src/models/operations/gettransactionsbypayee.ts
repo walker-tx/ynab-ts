@@ -9,7 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 /**
  * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
@@ -47,10 +46,6 @@ export type GetTransactionsByPayeeRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetTransactionsByPayeeResponse =
-  | models.HybridTransactionsResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetTransactionsByPayeeType$inboundSchema: z.ZodNativeEnum<
@@ -152,63 +147,5 @@ export function getTransactionsByPayeeRequestFromJSON(
     jsonString,
     (x) => GetTransactionsByPayeeRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTransactionsByPayeeRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetTransactionsByPayeeResponse$inboundSchema: z.ZodType<
-  GetTransactionsByPayeeResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.HybridTransactionsResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetTransactionsByPayeeResponse$Outbound =
-  | models.HybridTransactionsResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetTransactionsByPayeeResponse$outboundSchema: z.ZodType<
-  GetTransactionsByPayeeResponse$Outbound,
-  z.ZodTypeDef,
-  GetTransactionsByPayeeResponse
-> = z.union([
-  models.HybridTransactionsResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetTransactionsByPayeeResponse$ {
-  /** @deprecated use `GetTransactionsByPayeeResponse$inboundSchema` instead. */
-  export const inboundSchema = GetTransactionsByPayeeResponse$inboundSchema;
-  /** @deprecated use `GetTransactionsByPayeeResponse$outboundSchema` instead. */
-  export const outboundSchema = GetTransactionsByPayeeResponse$outboundSchema;
-  /** @deprecated use `GetTransactionsByPayeeResponse$Outbound` instead. */
-  export type Outbound = GetTransactionsByPayeeResponse$Outbound;
-}
-
-export function getTransactionsByPayeeResponseToJSON(
-  getTransactionsByPayeeResponse: GetTransactionsByPayeeResponse,
-): string {
-  return JSON.stringify(
-    GetTransactionsByPayeeResponse$outboundSchema.parse(
-      getTransactionsByPayeeResponse,
-    ),
-  );
-}
-
-export function getTransactionsByPayeeResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetTransactionsByPayeeResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetTransactionsByPayeeResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetTransactionsByPayeeResponse' from JSON`,
   );
 }

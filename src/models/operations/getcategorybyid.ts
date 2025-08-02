@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetCategoryByIdRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetCategoryByIdRequest = {
    */
   categoryId: string;
 };
-
-export type GetCategoryByIdResponse =
-  | models.CategoryResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetCategoryByIdRequest$inboundSchema: z.ZodType<
@@ -88,61 +83,5 @@ export function getCategoryByIdRequestFromJSON(
     jsonString,
     (x) => GetCategoryByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetCategoryByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetCategoryByIdResponse$inboundSchema: z.ZodType<
-  GetCategoryByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.CategoryResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetCategoryByIdResponse$Outbound =
-  | models.CategoryResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetCategoryByIdResponse$outboundSchema: z.ZodType<
-  GetCategoryByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetCategoryByIdResponse
-> = z.union([
-  models.CategoryResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCategoryByIdResponse$ {
-  /** @deprecated use `GetCategoryByIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetCategoryByIdResponse$inboundSchema;
-  /** @deprecated use `GetCategoryByIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetCategoryByIdResponse$outboundSchema;
-  /** @deprecated use `GetCategoryByIdResponse$Outbound` instead. */
-  export type Outbound = GetCategoryByIdResponse$Outbound;
-}
-
-export function getCategoryByIdResponseToJSON(
-  getCategoryByIdResponse: GetCategoryByIdResponse,
-): string {
-  return JSON.stringify(
-    GetCategoryByIdResponse$outboundSchema.parse(getCategoryByIdResponse),
-  );
-}
-
-export function getCategoryByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetCategoryByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetCategoryByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetCategoryByIdResponse' from JSON`,
   );
 }

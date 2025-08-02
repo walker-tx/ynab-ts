@@ -21,6 +21,7 @@ import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { YnabError } from "../models/errors/ynaberror.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -37,7 +38,7 @@ export function scheduledTransactionsGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetScheduledTransactionByIdResponse,
+    models.ScheduledTransactionResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -63,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetScheduledTransactionByIdResponse,
+      models.ScheduledTransactionResponse,
       | errors.ErrorResponse
       | YnabError
       | ResponseValidationError
@@ -145,7 +146,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "4XX", "5XX", "default"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -159,7 +160,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetScheduledTransactionByIdResponse,
+    models.ScheduledTransactionResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -170,14 +171,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetScheduledTransactionByIdResponse$inboundSchema),
+    M.json(200, models.ScheduledTransactionResponse$inboundSchema),
     M.jsonErr(404, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json(
-      "default",
-      operations.GetScheduledTransactionByIdResponse$inboundSchema,
-    ),
+    M.jsonErr("default", errors.ErrorResponse$inboundSchema),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

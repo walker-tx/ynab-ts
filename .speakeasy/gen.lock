@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9e8b172e-d6e6-4791-b3d2-950296cf9303
 management:
-  docChecksum: eba7e89945dad4f96ba52b5f737bbe56
+  docChecksum: 0947926ed5ba77897efd8b5e50f1d01e
   docVersion: 1.75.0
   speakeasyVersion: 1.596.0
   generationVersion: 2.672.0
-  releaseVersion: 0.2.0
-  configChecksum: 03e1ee653aa7fd0fec84f049e32c39ae
+  releaseVersion: 0.3.2
+  configChecksum: 4706385c2a5058c31ca9033e757af789
   published: true
 features:
   typescript:
@@ -17,6 +17,7 @@ features:
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    errors: 2.86.0
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -64,8 +65,8 @@ generatedFiles:
   - docs/models/categoryresponsedata.md
   - docs/models/currencyformat.md
   - docs/models/dateformat.md
+  - docs/models/defaultbudget.md
   - docs/models/errordetail.md
-  - docs/models/errorresponse.md
   - docs/models/errors/errorresponse.md
   - docs/models/existingtransaction.md
   - docs/models/goaltype.md
@@ -86,56 +87,33 @@ generatedFiles:
   - docs/models/operations/deletescheduledtransactionrequest.md
   - docs/models/operations/deletetransactionrequest.md
   - docs/models/operations/getaccountbyidrequest.md
-  - docs/models/operations/getaccountbyidresponse.md
   - docs/models/operations/getaccountsrequest.md
-  - docs/models/operations/getaccountsresponse.md
   - docs/models/operations/getbudgetbyidrequest.md
-  - docs/models/operations/getbudgetbyidresponse.md
   - docs/models/operations/getbudgetmonthrequest.md
-  - docs/models/operations/getbudgetmonthresponse.md
   - docs/models/operations/getbudgetmonthsrequest.md
-  - docs/models/operations/getbudgetmonthsresponse.md
   - docs/models/operations/getbudgetsettingsbyidrequest.md
-  - docs/models/operations/getbudgetsettingsbyidresponse.md
   - docs/models/operations/getbudgetsrequest.md
-  - docs/models/operations/getbudgetsresponse.md
   - docs/models/operations/getcategoriesrequest.md
-  - docs/models/operations/getcategoriesresponse.md
   - docs/models/operations/getcategorybyidrequest.md
-  - docs/models/operations/getcategorybyidresponse.md
   - docs/models/operations/getmonthcategorybyidrequest.md
-  - docs/models/operations/getmonthcategorybyidresponse.md
   - docs/models/operations/getpayeebyidrequest.md
-  - docs/models/operations/getpayeebyidresponse.md
   - docs/models/operations/getpayeelocationbyidrequest.md
-  - docs/models/operations/getpayeelocationbyidresponse.md
   - docs/models/operations/getpayeelocationsbypayeerequest.md
-  - docs/models/operations/getpayeelocationsbypayeeresponse.md
   - docs/models/operations/getpayeelocationsrequest.md
-  - docs/models/operations/getpayeelocationsresponse.md
   - docs/models/operations/getpayeesrequest.md
-  - docs/models/operations/getpayeesresponse.md
   - docs/models/operations/getscheduledtransactionbyidrequest.md
-  - docs/models/operations/getscheduledtransactionbyidresponse.md
   - docs/models/operations/getscheduledtransactionsrequest.md
-  - docs/models/operations/getscheduledtransactionsresponse.md
   - docs/models/operations/gettransactionbyidrequest.md
-  - docs/models/operations/gettransactionbyidresponse.md
   - docs/models/operations/gettransactionsbyaccountrequest.md
-  - docs/models/operations/gettransactionsbyaccountresponse.md
   - docs/models/operations/gettransactionsbyaccounttype.md
   - docs/models/operations/gettransactionsbycategoryrequest.md
-  - docs/models/operations/gettransactionsbycategoryresponse.md
   - docs/models/operations/gettransactionsbycategorytype.md
   - docs/models/operations/gettransactionsbymonthrequest.md
-  - docs/models/operations/gettransactionsbymonthresponse.md
   - docs/models/operations/gettransactionsbymonthtype.md
   - docs/models/operations/gettransactionsbypayeerequest.md
-  - docs/models/operations/gettransactionsbypayeeresponse.md
   - docs/models/operations/gettransactionsbypayeetype.md
   - docs/models/operations/gettransactionsrequest.md
   - docs/models/operations/gettransactionstype.md
-  - docs/models/operations/getuserresponse.md
   - docs/models/operations/importtransactionsrequest.md
   - docs/models/operations/updatecategoryrequest.md
   - docs/models/operations/updatemonthcategoryrequest.md
@@ -296,7 +274,6 @@ generatedFiles:
   - src/models/currencyformat.ts
   - src/models/dateformat.ts
   - src/models/errordetail.ts
-  - src/models/errorresponse.ts
   - src/models/errors/errorresponse.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
@@ -341,7 +318,6 @@ generatedFiles:
   - src/models/operations/gettransactionsbycategory.ts
   - src/models/operations/gettransactionsbymonth.ts
   - src/models/operations/gettransactionsbypayee.ts
-  - src/models/operations/getuser.ts
   - src/models/operations/importtransactions.ts
   - src/models/operations/index.ts
   - src/models/operations/updatecategory.ts

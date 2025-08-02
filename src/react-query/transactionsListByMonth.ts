@@ -16,6 +16,7 @@ import { YnabCore } from "../core.js";
 import { transactionsListByMonth } from "../funcs/transactionsListByMonth.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
@@ -27,7 +28,7 @@ import {
 } from "./_types.js";
 
 export type TransactionsListByMonthQueryData =
-  operations.GetTransactionsByMonthResponse;
+  models.HybridTransactionsResponse;
 
 /**
  * List transactions in month, excluding any pending transactions

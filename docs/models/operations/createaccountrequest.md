@@ -10,8 +10,8 @@ let value: CreateAccountRequest = {
   postAccountWrapper: {
     account: {
       name: "<value>",
-      type: "studentLoan",
-      balance: 560041,
+      type: "cash",
+      balance: 828776,
     },
   },
 };

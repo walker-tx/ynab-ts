@@ -12,7 +12,7 @@ let value: UpdateMonthCategoryRequest = {
   categoryId: "<id>",
   patchMonthCategoryWrapper: {
     category: {
-      budgeted: 617483,
+      budgeted: 109722,
     },
   },
 };

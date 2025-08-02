@@ -8,12 +8,12 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: MonthDetailResponseData = {
   month: {
-    month: new RFCDate("2025-01-02"),
-    income: 142295,
-    budgeted: 801655,
-    activity: 568347,
-    toBeBudgeted: 623956,
-    deleted: true,
+    month: new RFCDate("2024-04-19"),
+    income: 588542,
+    budgeted: 63736,
+    activity: 236819,
+    toBeBudgeted: 916783,
+    deleted: false,
     categories: [],
   },
 };

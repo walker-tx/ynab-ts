@@ -10,17 +10,24 @@ let value: TransactionsResponseData = {
   transactions: [
     {
       id: "<id>",
-      date: new RFCDate("2025-10-25"),
-      amount: 478027,
-      cleared: "cleared",
-      approved: true,
-      accountId: "2e1cef00-ea26-48cd-967c-0f5bf9847295",
-      deleted: true,
+      date: new RFCDate("2025-10-02"),
+      amount: 417843,
+      cleared: "reconciled",
+      approved: false,
+      accountId: "45621025-b16f-4b7b-8805-ac8a3c6588b2",
+      deleted: false,
       accountName: "<value>",
-      subtransactions: [],
+      subtransactions: [
+        {
+          id: "<id>",
+          transactionId: "<id>",
+          amount: 239600,
+          deleted: true,
+        },
+      ],
     },
   ],
-  serverKnowledge: 917422,
+  serverKnowledge: 376433,
 };
 ```
 

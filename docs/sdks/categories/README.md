@@ -106,13 +106,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetCategoriesResponse](../../models/operations/getcategoriesresponse.md)\>**
+**Promise\<[models.CategoriesResponse](../../models/categoriesresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get
@@ -210,13 +211,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetCategoryByIdResponse](../../models/operations/getcategorybyidresponse.md)\>**
+**Promise\<[models.CategoryResponse](../../models/categoryresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## update
@@ -417,13 +419,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetMonthCategoryByIdResponse](../../models/operations/getmonthcategorybyidresponse.md)\>**
+**Promise\<[models.CategoryResponse](../../models/categoryresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## updateMonth

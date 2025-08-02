@@ -6,6 +6,7 @@ import { budgetsGet } from "../funcs/budgetsGet.js";
 import { budgetsGetSettings } from "../funcs/budgetsGetSettings.js";
 import { budgetsList } from "../funcs/budgetsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -19,7 +20,7 @@ export class Budgets extends ClientSDK {
   async list(
     request?: operations.GetBudgetsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetBudgetsResponse> {
+  ): Promise<models.BudgetSummaryResponse> {
     return unwrapAsync(budgetsList(
       this,
       request,
@@ -36,7 +37,7 @@ export class Budgets extends ClientSDK {
   async get(
     request: operations.GetBudgetByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetBudgetByIdResponse> {
+  ): Promise<models.BudgetDetailResponse> {
     return unwrapAsync(budgetsGet(
       this,
       request,
@@ -53,7 +54,7 @@ export class Budgets extends ClientSDK {
   async getSettings(
     request: operations.GetBudgetSettingsByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetBudgetSettingsByIdResponse> {
+  ): Promise<models.BudgetSettingsResponse> {
     return unwrapAsync(budgetsGetSettings(
       this,
       request,

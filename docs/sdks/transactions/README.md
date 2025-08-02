@@ -501,13 +501,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetTransactionByIdResponse](../../models/operations/gettransactionbyidresponse.md)\>**
+**Promise\<[models.TransactionResponse](../../models/transactionresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## updateOne
@@ -797,13 +798,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetTransactionsByAccountResponse](../../models/operations/gettransactionsbyaccountresponse.md)\>**
+**Promise\<[models.TransactionsResponse](../../models/transactionsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## listByCategory
@@ -901,13 +903,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetTransactionsByCategoryResponse](../../models/operations/gettransactionsbycategoryresponse.md)\>**
+**Promise\<[models.HybridTransactionsResponse](../../models/hybridtransactionsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## listByPayee
@@ -1005,13 +1008,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetTransactionsByPayeeResponse](../../models/operations/gettransactionsbypayeeresponse.md)\>**
+**Promise\<[models.HybridTransactionsResponse](../../models/hybridtransactionsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## listByMonth
@@ -1109,11 +1113,12 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetTransactionsByMonthResponse](../../models/operations/gettransactionsbymonthresponse.md)\>**
+**Promise\<[models.HybridTransactionsResponse](../../models/hybridtransactionsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

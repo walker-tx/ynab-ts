@@ -104,13 +104,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetScheduledTransactionsResponse](../../models/operations/getscheduledtransactionsresponse.md)\>**
+**Promise\<[models.ScheduledTransactionsResponse](../../models/scheduledtransactionsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## create
@@ -313,13 +314,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetScheduledTransactionByIdResponse](../../models/operations/getscheduledtransactionbyidresponse.md)\>**
+**Promise\<[models.ScheduledTransactionResponse](../../models/scheduledtransactionresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## update

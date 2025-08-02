@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetScheduledTransactionByIdRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetScheduledTransactionByIdRequest = {
    */
   scheduledTransactionId: string;
 };
-
-export type GetScheduledTransactionByIdResponse =
-  | models.ScheduledTransactionResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetScheduledTransactionByIdRequest$inboundSchema: z.ZodType<
@@ -92,66 +87,5 @@ export function getScheduledTransactionByIdRequestFromJSON(
     (x) =>
       GetScheduledTransactionByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetScheduledTransactionByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetScheduledTransactionByIdResponse$inboundSchema: z.ZodType<
-  GetScheduledTransactionByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.ScheduledTransactionResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetScheduledTransactionByIdResponse$Outbound =
-  | models.ScheduledTransactionResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetScheduledTransactionByIdResponse$outboundSchema: z.ZodType<
-  GetScheduledTransactionByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetScheduledTransactionByIdResponse
-> = z.union([
-  models.ScheduledTransactionResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetScheduledTransactionByIdResponse$ {
-  /** @deprecated use `GetScheduledTransactionByIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetScheduledTransactionByIdResponse$inboundSchema;
-  /** @deprecated use `GetScheduledTransactionByIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetScheduledTransactionByIdResponse$outboundSchema;
-  /** @deprecated use `GetScheduledTransactionByIdResponse$Outbound` instead. */
-  export type Outbound = GetScheduledTransactionByIdResponse$Outbound;
-}
-
-export function getScheduledTransactionByIdResponseToJSON(
-  getScheduledTransactionByIdResponse: GetScheduledTransactionByIdResponse,
-): string {
-  return JSON.stringify(
-    GetScheduledTransactionByIdResponse$outboundSchema.parse(
-      getScheduledTransactionByIdResponse,
-    ),
-  );
-}
-
-export function getScheduledTransactionByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetScheduledTransactionByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetScheduledTransactionByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetScheduledTransactionByIdResponse' from JSON`,
   );
 }

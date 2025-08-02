@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetBudgetsRequest = {
   /**
@@ -15,10 +14,6 @@ export type GetBudgetsRequest = {
    */
   includeAccounts?: boolean | undefined;
 };
-
-export type GetBudgetsResponse =
-  | models.BudgetSummaryResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetBudgetsRequest$inboundSchema: z.ZodType<
@@ -79,61 +74,5 @@ export function getBudgetsRequestFromJSON(
     jsonString,
     (x) => GetBudgetsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetBudgetsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetBudgetsResponse$inboundSchema: z.ZodType<
-  GetBudgetsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.BudgetSummaryResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetBudgetsResponse$Outbound =
-  | models.BudgetSummaryResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetBudgetsResponse$outboundSchema: z.ZodType<
-  GetBudgetsResponse$Outbound,
-  z.ZodTypeDef,
-  GetBudgetsResponse
-> = z.union([
-  models.BudgetSummaryResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetBudgetsResponse$ {
-  /** @deprecated use `GetBudgetsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetBudgetsResponse$inboundSchema;
-  /** @deprecated use `GetBudgetsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetBudgetsResponse$outboundSchema;
-  /** @deprecated use `GetBudgetsResponse$Outbound` instead. */
-  export type Outbound = GetBudgetsResponse$Outbound;
-}
-
-export function getBudgetsResponseToJSON(
-  getBudgetsResponse: GetBudgetsResponse,
-): string {
-  return JSON.stringify(
-    GetBudgetsResponse$outboundSchema.parse(getBudgetsResponse),
-  );
-}
-
-export function getBudgetsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetBudgetsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetBudgetsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetBudgetsResponse' from JSON`,
   );
 }

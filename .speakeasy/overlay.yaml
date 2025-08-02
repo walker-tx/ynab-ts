@@ -1,0 +1,20 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: example overlay
+  version: 0.0.0
+actions:
+  - target: $.paths
+    update:
+      x-speakeasy-errors:
+        statusCodes:
+          - "default"
+          - "4XX"
+          - "5XX"
+  - target: $.components.schemas.BudgetSummaryResponse..default_budget.*
+    remove: true
+  - target: $.components.schemas.BudgetSummaryResponse..default_budget
+    update:
+      allOf:
+        - nullable: true
+        - $ref: "#/components/schemas/BudgetSummary"

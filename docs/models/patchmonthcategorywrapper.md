@@ -7,7 +7,7 @@ import { PatchMonthCategoryWrapper } from "ynab-ts/models";
 
 let value: PatchMonthCategoryWrapper = {
   category: {
-    budgeted: 617483,
+    budgeted: 109722,
   },
 };
 ```

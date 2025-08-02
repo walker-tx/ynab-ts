@@ -20,7 +20,7 @@ export class Accounts extends ClientSDK {
   async list(
     request: operations.GetAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAccountsResponse> {
+  ): Promise<models.AccountsResponse> {
     return unwrapAsync(accountsList(
       this,
       request,
@@ -54,7 +54,7 @@ export class Accounts extends ClientSDK {
   async get(
     request: operations.GetAccountByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAccountByIdResponse> {
+  ): Promise<models.AccountResponse> {
     return unwrapAsync(accountsGet(
       this,
       request,

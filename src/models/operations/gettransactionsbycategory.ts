@@ -9,7 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 /**
  * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
@@ -47,10 +46,6 @@ export type GetTransactionsByCategoryRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetTransactionsByCategoryResponse =
-  | models.HybridTransactionsResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetTransactionsByCategoryType$inboundSchema: z.ZodNativeEnum<
@@ -152,64 +147,5 @@ export function getTransactionsByCategoryRequestFromJSON(
     jsonString,
     (x) => GetTransactionsByCategoryRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTransactionsByCategoryRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetTransactionsByCategoryResponse$inboundSchema: z.ZodType<
-  GetTransactionsByCategoryResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.HybridTransactionsResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetTransactionsByCategoryResponse$Outbound =
-  | models.HybridTransactionsResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetTransactionsByCategoryResponse$outboundSchema: z.ZodType<
-  GetTransactionsByCategoryResponse$Outbound,
-  z.ZodTypeDef,
-  GetTransactionsByCategoryResponse
-> = z.union([
-  models.HybridTransactionsResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetTransactionsByCategoryResponse$ {
-  /** @deprecated use `GetTransactionsByCategoryResponse$inboundSchema` instead. */
-  export const inboundSchema = GetTransactionsByCategoryResponse$inboundSchema;
-  /** @deprecated use `GetTransactionsByCategoryResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetTransactionsByCategoryResponse$outboundSchema;
-  /** @deprecated use `GetTransactionsByCategoryResponse$Outbound` instead. */
-  export type Outbound = GetTransactionsByCategoryResponse$Outbound;
-}
-
-export function getTransactionsByCategoryResponseToJSON(
-  getTransactionsByCategoryResponse: GetTransactionsByCategoryResponse,
-): string {
-  return JSON.stringify(
-    GetTransactionsByCategoryResponse$outboundSchema.parse(
-      getTransactionsByCategoryResponse,
-    ),
-  );
-}
-
-export function getTransactionsByCategoryResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetTransactionsByCategoryResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetTransactionsByCategoryResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetTransactionsByCategoryResponse' from JSON`,
   );
 }

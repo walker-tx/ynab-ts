@@ -8,7 +8,7 @@ import { BudgetSummaryResponseData } from "ynab-ts/models";
 let value: BudgetSummaryResponseData = {
   budgets: [
     {
-      id: "e543211a-f628-4437-aba3-db6ac39a8ee8",
+      id: "9f01d3ad-0a21-4eb0-80b5-de0cdeff7cfc",
       name: "<value>",
     },
   ],
@@ -20,4 +20,4 @@ let value: BudgetSummaryResponseData = {
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
 | `budgets`                                            | [models.BudgetSummary](../models/budgetsummary.md)[] | :heavy_check_mark:                                   | N/A                                                  |
-| `defaultBudget`                                      | [models.BudgetSummary](../models/budgetsummary.md)   | :heavy_minus_sign:                                   | N/A                                                  |
+| `defaultBudget`                                      | [models.DefaultBudget](../models/defaultbudget.md)   | :heavy_minus_sign:                                   | N/A                                                  |

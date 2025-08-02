@@ -7,10 +7,10 @@ import { PayeeLocationResponseData } from "ynab-ts/models";
 
 let value: PayeeLocationResponseData = {
   payeeLocation: {
-    id: "cbe9e3f1-faec-49fe-8f53-eebb01921be9",
-    payeeId: "4cb2b6aa-916e-4db6-be7e-f52a497f3e45",
-    latitude: "33.6346",
-    longitude: "80.8569",
+    id: "30c05c1e-64ef-486c-94a7-14356778332c",
+    payeeId: "63109a2b-e9b7-453e-9114-bf11365dbbf3",
+    latitude: "-35.5473",
+    longitude: "-105.7897",
     deleted: true,
   },
 };

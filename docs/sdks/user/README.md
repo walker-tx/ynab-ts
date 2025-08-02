@@ -94,10 +94,11 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetUserResponse](../../models/operations/getuserresponse.md)\>**
+**Promise\<[models.UserResponse](../../models/userresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

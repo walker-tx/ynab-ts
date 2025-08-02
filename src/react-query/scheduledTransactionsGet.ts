@@ -16,6 +16,7 @@ import { YnabCore } from "../core.js";
 import { scheduledTransactionsGet } from "../funcs/scheduledTransactionsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
@@ -26,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ScheduledTransactionsGetQueryData =
-  operations.GetScheduledTransactionByIdResponse;
+  models.ScheduledTransactionResponse;
 
 /**
  * Single scheduled transaction

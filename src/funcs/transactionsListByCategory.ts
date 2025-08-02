@@ -21,6 +21,7 @@ import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { YnabError } from "../models/errors/ynaberror.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -37,7 +38,7 @@ export function transactionsListByCategory(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetTransactionsByCategoryResponse,
+    models.HybridTransactionsResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -49,11 +50,7 @@ export function transactionsListByCategory(
     | SDKValidationError
   >
 > {
-  return new APIPromise($do(
-    client,
-    request,
-    options,
-  ));
+  return new APIPromise($do(client, request, options));
 }
 
 async function $do(
@@ -63,7 +60,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetTransactionsByCategoryResponse,
+      models.HybridTransactionsResponse,
       | errors.ErrorResponse
       | YnabError
       | ResponseValidationError
@@ -105,14 +102,16 @@ async function $do(
   )(pathParams);
 
   const query = encodeFormQuery({
-    "last_knowledge_of_server": payload.last_knowledge_of_server,
-    "since_date": payload.since_date,
-    "type": payload.type,
+    last_knowledge_of_server: payload.last_knowledge_of_server,
+    since_date: payload.since_date,
+    type: payload.type,
   });
 
-  const headers = new Headers(compactMap({
-    Accept: "application/json",
-  }));
+  const headers = new Headers(
+    compactMap({
+      Accept: "application/json",
+    }),
+  );
 
   const secConfig = await extractSecurity(client._options.bearer);
   const securityInput = secConfig == null ? {} : { bearer: secConfig };
@@ -127,23 +126,26 @@ async function $do(
     resolvedSecurity: requestSecurity,
 
     securitySource: client._options.bearer,
-    retryConfig: options?.retries
-      || client._options.retryConfig
-      || { strategy: "none" },
+    retryConfig: options?.retries ||
+      client._options.retryConfig || { strategy: "none" },
     retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
 
-  const requestRes = client._createRequest(context, {
-    security: requestSecurity,
-    method: "GET",
-    baseURL: options?.serverURL,
-    path: path,
-    headers: headers,
-    query: query,
-    body: body,
-    userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
-  }, options);
+  const requestRes = client._createRequest(
+    context,
+    {
+      security: requestSecurity,
+      method: "GET",
+      baseURL: options?.serverURL,
+      path: path,
+      headers: headers,
+      query: query,
+      body: body,
+      userAgent: client._options.userAgent,
+      timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    },
+    options,
+  );
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
   }
@@ -151,7 +153,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "4XX", "5XX", "default"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -165,7 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetTransactionsByCategoryResponse,
+    models.HybridTransactionsResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -176,14 +178,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetTransactionsByCategoryResponse$inboundSchema),
+    M.json(200, models.HybridTransactionsResponse$inboundSchema),
     M.jsonErr(404, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json(
-      "default",
-      operations.GetTransactionsByCategoryResponse$inboundSchema,
-    ),
+    M.jsonErr("default", errors.ErrorResponse$inboundSchema),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

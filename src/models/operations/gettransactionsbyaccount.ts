@@ -9,7 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 /**
  * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
@@ -47,10 +46,6 @@ export type GetTransactionsByAccountRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetTransactionsByAccountResponse =
-  | models.TransactionsResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetTransactionsByAccountType$inboundSchema: z.ZodNativeEnum<
@@ -152,63 +147,5 @@ export function getTransactionsByAccountRequestFromJSON(
     jsonString,
     (x) => GetTransactionsByAccountRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTransactionsByAccountRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetTransactionsByAccountResponse$inboundSchema: z.ZodType<
-  GetTransactionsByAccountResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.TransactionsResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetTransactionsByAccountResponse$Outbound =
-  | models.TransactionsResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetTransactionsByAccountResponse$outboundSchema: z.ZodType<
-  GetTransactionsByAccountResponse$Outbound,
-  z.ZodTypeDef,
-  GetTransactionsByAccountResponse
-> = z.union([
-  models.TransactionsResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetTransactionsByAccountResponse$ {
-  /** @deprecated use `GetTransactionsByAccountResponse$inboundSchema` instead. */
-  export const inboundSchema = GetTransactionsByAccountResponse$inboundSchema;
-  /** @deprecated use `GetTransactionsByAccountResponse$outboundSchema` instead. */
-  export const outboundSchema = GetTransactionsByAccountResponse$outboundSchema;
-  /** @deprecated use `GetTransactionsByAccountResponse$Outbound` instead. */
-  export type Outbound = GetTransactionsByAccountResponse$Outbound;
-}
-
-export function getTransactionsByAccountResponseToJSON(
-  getTransactionsByAccountResponse: GetTransactionsByAccountResponse,
-): string {
-  return JSON.stringify(
-    GetTransactionsByAccountResponse$outboundSchema.parse(
-      getTransactionsByAccountResponse,
-    ),
-  );
-}
-
-export function getTransactionsByAccountResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetTransactionsByAccountResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetTransactionsByAccountResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetTransactionsByAccountResponse' from JSON`,
   );
 }

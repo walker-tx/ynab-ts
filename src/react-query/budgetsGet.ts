@@ -16,6 +16,7 @@ import { YnabCore } from "../core.js";
 import { budgetsGet } from "../funcs/budgetsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
@@ -25,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type BudgetsGetQueryData = operations.GetBudgetByIdResponse;
+export type BudgetsGetQueryData = models.BudgetDetailResponse;
 
 /**
  * Single budget

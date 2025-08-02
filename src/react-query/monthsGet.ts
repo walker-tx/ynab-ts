@@ -16,6 +16,7 @@ import { YnabCore } from "../core.js";
 import { monthsGet } from "../funcs/monthsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
@@ -26,7 +27,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type MonthsGetQueryData = operations.GetBudgetMonthResponse;
+export type MonthsGetQueryData = models.MonthDetailResponse;
 
 /**
  * Single budget month

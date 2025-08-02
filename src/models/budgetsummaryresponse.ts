@@ -6,22 +6,159 @@ import * as z from "zod";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
+import { RFCDate } from "../types/rfcdate.js";
+import {
+  Account,
+  Account$inboundSchema,
+  Account$Outbound,
+  Account$outboundSchema,
+} from "./account.js";
 import {
   BudgetSummary,
   BudgetSummary$inboundSchema,
   BudgetSummary$Outbound,
   BudgetSummary$outboundSchema,
 } from "./budgetsummary.js";
+import {
+  CurrencyFormat,
+  CurrencyFormat$inboundSchema,
+  CurrencyFormat$Outbound,
+  CurrencyFormat$outboundSchema,
+} from "./currencyformat.js";
+import {
+  DateFormat,
+  DateFormat$inboundSchema,
+  DateFormat$Outbound,
+  DateFormat$outboundSchema,
+} from "./dateformat.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+
+export type DefaultBudget = {
+  id: string;
+  name: string;
+  /**
+   * The last time any changes were made to the budget from either a web or mobile client
+   */
+  lastModifiedOn?: Date | undefined;
+  /**
+   * The earliest budget month
+   */
+  firstMonth?: RFCDate | undefined;
+  /**
+   * The latest budget month
+   */
+  lastMonth?: RFCDate | undefined;
+  /**
+   * The date format setting for the budget.  In some cases the format will not be available and will be specified as null.
+   */
+  dateFormat?: DateFormat | null | undefined;
+  /**
+   * The currency format setting for the budget.  In some cases the format will not be available and will be specified as null.
+   */
+  currencyFormat?: CurrencyFormat | null | undefined;
+  /**
+   * The budget accounts (only included if `include_accounts=true` specified as query parameter)
+   */
+  accounts?: Array<Account> | undefined;
+};
 
 export type BudgetSummaryResponseData = {
   budgets: Array<BudgetSummary>;
-  defaultBudget?: BudgetSummary | undefined;
+  defaultBudget?: DefaultBudget | null | undefined;
 };
 
 export type BudgetSummaryResponse = {
   data: BudgetSummaryResponseData;
 };
+
+/** @internal */
+export const DefaultBudget$inboundSchema: z.ZodType<
+  DefaultBudget,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+  last_modified_on: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  first_month: z.string().transform(v => new RFCDate(v)).optional(),
+  last_month: z.string().transform(v => new RFCDate(v)).optional(),
+  date_format: z.nullable(DateFormat$inboundSchema).optional(),
+  currency_format: z.nullable(CurrencyFormat$inboundSchema).optional(),
+  accounts: z.array(Account$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "last_modified_on": "lastModifiedOn",
+    "first_month": "firstMonth",
+    "last_month": "lastMonth",
+    "date_format": "dateFormat",
+    "currency_format": "currencyFormat",
+  });
+});
+
+/** @internal */
+export type DefaultBudget$Outbound = {
+  id: string;
+  name: string;
+  last_modified_on?: string | undefined;
+  first_month?: string | undefined;
+  last_month?: string | undefined;
+  date_format?: DateFormat$Outbound | null | undefined;
+  currency_format?: CurrencyFormat$Outbound | null | undefined;
+  accounts?: Array<Account$Outbound> | undefined;
+};
+
+/** @internal */
+export const DefaultBudget$outboundSchema: z.ZodType<
+  DefaultBudget$Outbound,
+  z.ZodTypeDef,
+  DefaultBudget
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+  lastModifiedOn: z.date().transform(v => v.toISOString()).optional(),
+  firstMonth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  lastMonth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  dateFormat: z.nullable(DateFormat$outboundSchema).optional(),
+  currencyFormat: z.nullable(CurrencyFormat$outboundSchema).optional(),
+  accounts: z.array(Account$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    lastModifiedOn: "last_modified_on",
+    firstMonth: "first_month",
+    lastMonth: "last_month",
+    dateFormat: "date_format",
+    currencyFormat: "currency_format",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DefaultBudget$ {
+  /** @deprecated use `DefaultBudget$inboundSchema` instead. */
+  export const inboundSchema = DefaultBudget$inboundSchema;
+  /** @deprecated use `DefaultBudget$outboundSchema` instead. */
+  export const outboundSchema = DefaultBudget$outboundSchema;
+  /** @deprecated use `DefaultBudget$Outbound` instead. */
+  export type Outbound = DefaultBudget$Outbound;
+}
+
+export function defaultBudgetToJSON(defaultBudget: DefaultBudget): string {
+  return JSON.stringify(DefaultBudget$outboundSchema.parse(defaultBudget));
+}
+
+export function defaultBudgetFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultBudget, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultBudget$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultBudget' from JSON`,
+  );
+}
 
 /** @internal */
 export const BudgetSummaryResponseData$inboundSchema: z.ZodType<
@@ -30,7 +167,8 @@ export const BudgetSummaryResponseData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   budgets: z.array(BudgetSummary$inboundSchema),
-  default_budget: BudgetSummary$inboundSchema.optional(),
+  default_budget: z.nullable(z.lazy(() => DefaultBudget$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_budget": "defaultBudget",
@@ -40,7 +178,7 @@ export const BudgetSummaryResponseData$inboundSchema: z.ZodType<
 /** @internal */
 export type BudgetSummaryResponseData$Outbound = {
   budgets: Array<BudgetSummary$Outbound>;
-  default_budget?: BudgetSummary$Outbound | undefined;
+  default_budget?: DefaultBudget$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -50,7 +188,8 @@ export const BudgetSummaryResponseData$outboundSchema: z.ZodType<
   BudgetSummaryResponseData
 > = z.object({
   budgets: z.array(BudgetSummary$outboundSchema),
-  defaultBudget: BudgetSummary$outboundSchema.optional(),
+  defaultBudget: z.nullable(z.lazy(() => DefaultBudget$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     defaultBudget: "default_budget",

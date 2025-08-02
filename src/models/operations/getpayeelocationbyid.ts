@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetPayeeLocationByIdRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetPayeeLocationByIdRequest = {
    */
   payeeLocationId: string;
 };
-
-export type GetPayeeLocationByIdResponse =
-  | models.PayeeLocationResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetPayeeLocationByIdRequest$inboundSchema: z.ZodType<
@@ -90,63 +85,5 @@ export function getPayeeLocationByIdRequestFromJSON(
     jsonString,
     (x) => GetPayeeLocationByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetPayeeLocationByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetPayeeLocationByIdResponse$inboundSchema: z.ZodType<
-  GetPayeeLocationByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.PayeeLocationResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetPayeeLocationByIdResponse$Outbound =
-  | models.PayeeLocationResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetPayeeLocationByIdResponse$outboundSchema: z.ZodType<
-  GetPayeeLocationByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetPayeeLocationByIdResponse
-> = z.union([
-  models.PayeeLocationResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPayeeLocationByIdResponse$ {
-  /** @deprecated use `GetPayeeLocationByIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetPayeeLocationByIdResponse$inboundSchema;
-  /** @deprecated use `GetPayeeLocationByIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetPayeeLocationByIdResponse$outboundSchema;
-  /** @deprecated use `GetPayeeLocationByIdResponse$Outbound` instead. */
-  export type Outbound = GetPayeeLocationByIdResponse$Outbound;
-}
-
-export function getPayeeLocationByIdResponseToJSON(
-  getPayeeLocationByIdResponse: GetPayeeLocationByIdResponse,
-): string {
-  return JSON.stringify(
-    GetPayeeLocationByIdResponse$outboundSchema.parse(
-      getPayeeLocationByIdResponse,
-    ),
-  );
-}
-
-export function getPayeeLocationByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetPayeeLocationByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetPayeeLocationByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPayeeLocationByIdResponse' from JSON`,
   );
 }

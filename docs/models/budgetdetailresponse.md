@@ -8,10 +8,10 @@ import { BudgetDetailResponse } from "ynab-ts/models";
 let value: BudgetDetailResponse = {
   data: {
     budget: {
-      id: "a109ef23-ef1e-4e58-8678-671dac1e684d",
+      id: "5269af24-8b35-4141-8db7-7d6d17229d25",
       name: "<value>",
     },
-    serverKnowledge: 521503,
+    serverKnowledge: 207038,
   },
 };
 ```

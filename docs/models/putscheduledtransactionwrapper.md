@@ -8,8 +8,8 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: PutScheduledTransactionWrapper = {
   scheduledTransaction: {
-    accountId: "01919e7e-076b-4fe6-a47a-bc40351e2a56",
-    date: new RFCDate("2023-04-11"),
+    accountId: "770d6e29-0239-40f0-97c4-dd8017c801e0",
+    date: new RFCDate("2025-12-31"),
   },
 };
 ```

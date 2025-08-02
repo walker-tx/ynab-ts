@@ -6,6 +6,7 @@ sources:
             - location: https://api.ynab.com/papi/open_api_spec.yaml
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: .speakeasy/overlay.yaml
         transformations:
             - removeUnused: true
         output: .speakeasy/out.openapi.yaml

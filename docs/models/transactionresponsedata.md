@@ -9,23 +9,23 @@ import { RFCDate } from "ynab-ts/types";
 let value: TransactionResponseData = {
   transaction: {
     id: "<id>",
-    date: new RFCDate("2023-01-26"),
-    amount: 678323,
+    date: new RFCDate("2025-04-28"),
+    amount: 965869,
     cleared: "uncleared",
     approved: true,
-    accountId: "7c5529a9-76ef-4e14-8974-dfbadd3085ff",
-    deleted: true,
+    accountId: "bbee3163-2f52-4be6-9f63-80d510832081",
+    deleted: false,
     accountName: "<value>",
     subtransactions: [
       {
         id: "<id>",
         transactionId: "<id>",
-        amount: 666160,
+        amount: 239600,
         deleted: true,
       },
     ],
   },
-  serverKnowledge: 773933,
+  serverKnowledge: 240716,
 };
 ```
 

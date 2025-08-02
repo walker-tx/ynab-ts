@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetMonthCategoryByIdRequest = {
   /**
@@ -24,10 +23,6 @@ export type GetMonthCategoryByIdRequest = {
    */
   categoryId: string;
 };
-
-export type GetMonthCategoryByIdResponse =
-  | models.CategoryResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetMonthCategoryByIdRequest$inboundSchema: z.ZodType<
@@ -98,63 +93,5 @@ export function getMonthCategoryByIdRequestFromJSON(
     jsonString,
     (x) => GetMonthCategoryByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetMonthCategoryByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetMonthCategoryByIdResponse$inboundSchema: z.ZodType<
-  GetMonthCategoryByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.CategoryResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetMonthCategoryByIdResponse$Outbound =
-  | models.CategoryResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetMonthCategoryByIdResponse$outboundSchema: z.ZodType<
-  GetMonthCategoryByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetMonthCategoryByIdResponse
-> = z.union([
-  models.CategoryResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetMonthCategoryByIdResponse$ {
-  /** @deprecated use `GetMonthCategoryByIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetMonthCategoryByIdResponse$inboundSchema;
-  /** @deprecated use `GetMonthCategoryByIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetMonthCategoryByIdResponse$outboundSchema;
-  /** @deprecated use `GetMonthCategoryByIdResponse$Outbound` instead. */
-  export type Outbound = GetMonthCategoryByIdResponse$Outbound;
-}
-
-export function getMonthCategoryByIdResponseToJSON(
-  getMonthCategoryByIdResponse: GetMonthCategoryByIdResponse,
-): string {
-  return JSON.stringify(
-    GetMonthCategoryByIdResponse$outboundSchema.parse(
-      getMonthCategoryByIdResponse,
-    ),
-  );
-}
-
-export function getMonthCategoryByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetMonthCategoryByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetMonthCategoryByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetMonthCategoryByIdResponse' from JSON`,
   );
 }

@@ -9,15 +9,15 @@ import { RFCDate } from "ynab-ts/types";
 let value: MonthSummariesResponseData = {
   months: [
     {
-      month: new RFCDate("2023-06-08"),
-      income: 646984,
-      budgeted: 814414,
-      activity: 295873,
-      toBeBudgeted: 17631,
-      deleted: false,
+      month: new RFCDate("2025-04-05"),
+      income: 701986,
+      budgeted: 544473,
+      activity: 653510,
+      toBeBudgeted: 838567,
+      deleted: true,
     },
   ],
-  serverKnowledge: 753336,
+  serverKnowledge: 520571,
 };
 ```
 

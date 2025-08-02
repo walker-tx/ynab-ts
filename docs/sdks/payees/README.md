@@ -104,13 +104,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPayeesResponse](../../models/operations/getpayeesresponse.md)\>**
+**Promise\<[models.PayeesResponse](../../models/payeesresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get
@@ -208,13 +209,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPayeeByIdResponse](../../models/operations/getpayeebyidresponse.md)\>**
+**Promise\<[models.PayeeResponse](../../models/payeeresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## update

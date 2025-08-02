@@ -20,7 +20,6 @@ export * from "./categoryresponse.js";
 export * from "./currencyformat.js";
 export * from "./dateformat.js";
 export * from "./errordetail.js";
-export * from "./errorresponse.js";
 export * from "./existingtransaction.js";
 export * from "./hybridtransaction.js";
 export * from "./hybridtransactionsresponse.js";

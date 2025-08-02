@@ -144,7 +144,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX", "default"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -173,6 +173,7 @@ async function $do(
     M.jsonErr(400, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
+    M.fail("default"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

@@ -22,7 +22,7 @@ export class ScheduledTransactions extends ClientSDK {
   async list(
     request: operations.GetScheduledTransactionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetScheduledTransactionsResponse> {
+  ): Promise<models.ScheduledTransactionsResponse> {
     return unwrapAsync(scheduledTransactionsList(
       this,
       request,
@@ -56,7 +56,7 @@ export class ScheduledTransactions extends ClientSDK {
   async get(
     request: operations.GetScheduledTransactionByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetScheduledTransactionByIdResponse> {
+  ): Promise<models.ScheduledTransactionResponse> {
     return unwrapAsync(scheduledTransactionsGet(
       this,
       request,

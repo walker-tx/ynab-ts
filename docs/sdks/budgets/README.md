@@ -98,13 +98,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetBudgetsResponse](../../models/operations/getbudgetsresponse.md)\>**
+**Promise\<[models.BudgetSummaryResponse](../../models/budgetsummaryresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get
@@ -200,13 +201,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetBudgetByIdResponse](../../models/operations/getbudgetbyidresponse.md)\>**
+**Promise\<[models.BudgetDetailResponse](../../models/budgetdetailresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## getSettings
@@ -302,11 +304,12 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetBudgetSettingsByIdResponse](../../models/operations/getbudgetsettingsbyidresponse.md)\>**
+**Promise\<[models.BudgetSettingsResponse](../../models/budgetsettingsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

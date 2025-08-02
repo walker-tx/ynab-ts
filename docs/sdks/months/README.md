@@ -103,13 +103,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetBudgetMonthsResponse](../../models/operations/getbudgetmonthsresponse.md)\>**
+**Promise\<[models.MonthSummariesResponse](../../models/monthsummariesresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get
@@ -209,11 +210,12 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetBudgetMonthResponse](../../models/operations/getbudgetmonthresponse.md)\>**
+**Promise\<[models.MonthDetailResponse](../../models/monthdetailresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

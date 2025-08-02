@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetAccountsRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetAccountsRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetAccountsResponse =
-  | models.AccountsResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetAccountsRequest$inboundSchema: z.ZodType<
@@ -88,61 +83,5 @@ export function getAccountsRequestFromJSON(
     jsonString,
     (x) => GetAccountsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAccountsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAccountsResponse$inboundSchema: z.ZodType<
-  GetAccountsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.AccountsResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetAccountsResponse$Outbound =
-  | models.AccountsResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetAccountsResponse$outboundSchema: z.ZodType<
-  GetAccountsResponse$Outbound,
-  z.ZodTypeDef,
-  GetAccountsResponse
-> = z.union([
-  models.AccountsResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAccountsResponse$ {
-  /** @deprecated use `GetAccountsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAccountsResponse$inboundSchema;
-  /** @deprecated use `GetAccountsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAccountsResponse$outboundSchema;
-  /** @deprecated use `GetAccountsResponse$Outbound` instead. */
-  export type Outbound = GetAccountsResponse$Outbound;
-}
-
-export function getAccountsResponseToJSON(
-  getAccountsResponse: GetAccountsResponse,
-): string {
-  return JSON.stringify(
-    GetAccountsResponse$outboundSchema.parse(getAccountsResponse),
-  );
-}
-
-export function getAccountsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAccountsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAccountsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAccountsResponse' from JSON`,
   );
 }

@@ -8,16 +8,16 @@ import { AccountResponse } from "ynab-ts/models";
 let value: AccountResponse = {
   data: {
     account: {
-      id: "e1a74a36-dbc6-476d-9fa1-22682cacf3b5",
+      id: "648fd228-74a6-47fc-aec4-c95585053739",
       name: "<value>",
-      type: "otherDebt",
+      type: "studentLoan",
       onBudget: true,
       closed: true,
-      balance: 754665,
-      clearedBalance: 623725,
-      unclearedBalance: 443438,
-      transferPayeeId: "b3cb70e8-2b57-442c-86d8-0e2d9ae5b2f2",
-      deleted: true,
+      balance: 453980,
+      clearedBalance: 450513,
+      unclearedBalance: 728335,
+      transferPayeeId: "273636e6-0a3d-46b7-b20e-ca039dd894fe",
+      deleted: false,
     },
   },
 };

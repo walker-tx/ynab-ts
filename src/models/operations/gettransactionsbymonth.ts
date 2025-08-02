@@ -9,7 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 /**
  * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
@@ -47,10 +46,6 @@ export type GetTransactionsByMonthRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetTransactionsByMonthResponse =
-  | models.HybridTransactionsResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetTransactionsByMonthType$inboundSchema: z.ZodNativeEnum<
@@ -150,63 +145,5 @@ export function getTransactionsByMonthRequestFromJSON(
     jsonString,
     (x) => GetTransactionsByMonthRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTransactionsByMonthRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetTransactionsByMonthResponse$inboundSchema: z.ZodType<
-  GetTransactionsByMonthResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.HybridTransactionsResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetTransactionsByMonthResponse$Outbound =
-  | models.HybridTransactionsResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetTransactionsByMonthResponse$outboundSchema: z.ZodType<
-  GetTransactionsByMonthResponse$Outbound,
-  z.ZodTypeDef,
-  GetTransactionsByMonthResponse
-> = z.union([
-  models.HybridTransactionsResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetTransactionsByMonthResponse$ {
-  /** @deprecated use `GetTransactionsByMonthResponse$inboundSchema` instead. */
-  export const inboundSchema = GetTransactionsByMonthResponse$inboundSchema;
-  /** @deprecated use `GetTransactionsByMonthResponse$outboundSchema` instead. */
-  export const outboundSchema = GetTransactionsByMonthResponse$outboundSchema;
-  /** @deprecated use `GetTransactionsByMonthResponse$Outbound` instead. */
-  export type Outbound = GetTransactionsByMonthResponse$Outbound;
-}
-
-export function getTransactionsByMonthResponseToJSON(
-  getTransactionsByMonthResponse: GetTransactionsByMonthResponse,
-): string {
-  return JSON.stringify(
-    GetTransactionsByMonthResponse$outboundSchema.parse(
-      getTransactionsByMonthResponse,
-    ),
-  );
-}
-
-export function getTransactionsByMonthResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetTransactionsByMonthResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetTransactionsByMonthResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetTransactionsByMonthResponse' from JSON`,
   );
 }

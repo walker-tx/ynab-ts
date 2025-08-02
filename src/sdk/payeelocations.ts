@@ -6,6 +6,7 @@ import { payeeLocationsGet } from "../funcs/payeeLocationsGet.js";
 import { payeeLocationsList } from "../funcs/payeeLocationsList.js";
 import { payeeLocationsListByPayee } from "../funcs/payeeLocationsListByPayee.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -19,7 +20,7 @@ export class PayeeLocations extends ClientSDK {
   async list(
     request: operations.GetPayeeLocationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPayeeLocationsResponse> {
+  ): Promise<models.PayeeLocationsResponse> {
     return unwrapAsync(payeeLocationsList(
       this,
       request,
@@ -36,7 +37,7 @@ export class PayeeLocations extends ClientSDK {
   async get(
     request: operations.GetPayeeLocationByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPayeeLocationByIdResponse> {
+  ): Promise<models.PayeeLocationResponse> {
     return unwrapAsync(payeeLocationsGet(
       this,
       request,
@@ -53,7 +54,7 @@ export class PayeeLocations extends ClientSDK {
   async listByPayee(
     request: operations.GetPayeeLocationsByPayeeRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPayeeLocationsByPayeeResponse> {
+  ): Promise<models.PayeeLocationsResponse> {
     return unwrapAsync(payeeLocationsListByPayee(
       this,
       request,

@@ -5,6 +5,7 @@
 import { monthsGet } from "../funcs/monthsGet.js";
 import { monthsList } from "../funcs/monthsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -18,7 +19,7 @@ export class Months extends ClientSDK {
   async list(
     request: operations.GetBudgetMonthsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetBudgetMonthsResponse> {
+  ): Promise<models.MonthSummariesResponse> {
     return unwrapAsync(monthsList(
       this,
       request,
@@ -35,7 +36,7 @@ export class Months extends ClientSDK {
   async get(
     request: operations.GetBudgetMonthRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetBudgetMonthResponse> {
+  ): Promise<models.MonthDetailResponse> {
     return unwrapAsync(monthsGet(
       this,
       request,

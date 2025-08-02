@@ -8,13 +8,13 @@ import { SaveCategoryResponse } from "ynab-ts/models";
 let value: SaveCategoryResponse = {
   data: {
     category: {
-      id: "c918abb1-80a5-4e11-a6be-a299e061a503",
-      categoryGroupId: "21b36303-d7d6-45d1-a0eb-c02ade2d251f",
+      id: "89356df0-343f-4d82-ba7c-6df8c1bc3c2e",
+      categoryGroupId: "aaecf2a3-9cdf-47d6-8c37-6205d9168f19",
       name: "<value>",
-      hidden: true,
-      budgeted: 373182,
-      activity: 396964,
-      balance: 944990,
+      hidden: false,
+      budgeted: 161155,
+      activity: 322573,
+      balance: 254364,
       deleted: false,
     },
     serverKnowledge: 860475,

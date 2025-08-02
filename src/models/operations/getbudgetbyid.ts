@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetBudgetByIdRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetBudgetByIdRequest = {
    */
   lastKnowledgeOfServer?: number | undefined;
 };
-
-export type GetBudgetByIdResponse =
-  | models.BudgetDetailResponse
-  | models.ErrorResponse;
 
 /** @internal */
 export const GetBudgetByIdRequest$inboundSchema: z.ZodType<
@@ -88,61 +83,5 @@ export function getBudgetByIdRequestFromJSON(
     jsonString,
     (x) => GetBudgetByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetBudgetByIdRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetBudgetByIdResponse$inboundSchema: z.ZodType<
-  GetBudgetByIdResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  models.BudgetDetailResponse$inboundSchema,
-  models.ErrorResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetBudgetByIdResponse$Outbound =
-  | models.BudgetDetailResponse$Outbound
-  | models.ErrorResponse$Outbound;
-
-/** @internal */
-export const GetBudgetByIdResponse$outboundSchema: z.ZodType<
-  GetBudgetByIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetBudgetByIdResponse
-> = z.union([
-  models.BudgetDetailResponse$outboundSchema,
-  models.ErrorResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetBudgetByIdResponse$ {
-  /** @deprecated use `GetBudgetByIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetBudgetByIdResponse$inboundSchema;
-  /** @deprecated use `GetBudgetByIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetBudgetByIdResponse$outboundSchema;
-  /** @deprecated use `GetBudgetByIdResponse$Outbound` instead. */
-  export type Outbound = GetBudgetByIdResponse$Outbound;
-}
-
-export function getBudgetByIdResponseToJSON(
-  getBudgetByIdResponse: GetBudgetByIdResponse,
-): string {
-  return JSON.stringify(
-    GetBudgetByIdResponse$outboundSchema.parse(getBudgetByIdResponse),
-  );
-}
-
-export function getBudgetByIdResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetBudgetByIdResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetBudgetByIdResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetBudgetByIdResponse' from JSON`,
   );
 }

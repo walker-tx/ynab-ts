@@ -1604,6 +1604,11 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: scheduledTransactions
       x-speakeasy-name-override: delete
+  x-speakeasy-errors:
+    statusCodes:
+      - "default"
+      - "4XX"
+      - "5XX"
 components:
   schemas:
     ErrorResponse:
@@ -1703,7 +1708,9 @@ components:
               items:
                 $ref: "#/components/schemas/BudgetSummary"
             default_budget:
-              $ref: "#/components/schemas/BudgetSummary"
+              allOf:
+                - nullable: true
+                - $ref: "#/components/schemas/BudgetSummary"
     BudgetSummary:
       required:
         - id

@@ -19,7 +19,7 @@ let value: TransactionDetail = {
     {
       id: "<id>",
       transactionId: "<id>",
-      amount: 666160,
+      amount: 239600,
       deleted: true,
     },
   ],

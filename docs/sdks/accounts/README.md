@@ -104,13 +104,14 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetAccountsResponse](../../models/operations/getaccountsresponse.md)\>**
+**Promise\<[models.AccountsResponse](../../models/accountsresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## create
@@ -313,11 +314,12 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetAccountByIdResponse](../../models/operations/getaccountbyidresponse.md)\>**
+**Promise\<[models.AccountResponse](../../models/accountresponse.md)\>**
 
 ### Errors
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
+| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

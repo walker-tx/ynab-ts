@@ -4,7 +4,7 @@
 
 import { userGet } from "../funcs/userGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import * as models from "../models/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class User extends ClientSDK {
@@ -16,7 +16,7 @@ export class User extends ClientSDK {
    */
   async get(
     options?: RequestOptions,
-  ): Promise<operations.GetUserResponse> {
+  ): Promise<models.UserResponse> {
     return unwrapAsync(userGet(
       this,
       options,

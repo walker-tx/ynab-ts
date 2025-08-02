@@ -10,16 +10,7 @@ let value: BudgetSettingsResponseData = {
     dateFormat: {
       format: "<value>",
     },
-    currencyFormat: {
-      isoCode: "<value>",
-      exampleFormat: "<value>",
-      decimalDigits: 868621,
-      decimalSeparator: "<value>",
-      symbolFirst: true,
-      groupSeparator: "<value>",
-      currencySymbol: "ƒ",
-      displaySymbol: true,
-    },
+    currencyFormat: null,
   },
 };
 ```

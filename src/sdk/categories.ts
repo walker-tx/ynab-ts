@@ -22,7 +22,7 @@ export class Categories extends ClientSDK {
   async list(
     request: operations.GetCategoriesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCategoriesResponse> {
+  ): Promise<models.CategoriesResponse> {
     return unwrapAsync(categoriesList(
       this,
       request,
@@ -39,7 +39,7 @@ export class Categories extends ClientSDK {
   async get(
     request: operations.GetCategoryByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCategoryByIdResponse> {
+  ): Promise<models.CategoryResponse> {
     return unwrapAsync(categoriesGet(
       this,
       request,
@@ -73,7 +73,7 @@ export class Categories extends ClientSDK {
   async getByMonth(
     request: operations.GetMonthCategoryByIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetMonthCategoryByIdResponse> {
+  ): Promise<models.CategoryResponse> {
     return unwrapAsync(categoriesGetByMonth(
       this,
       request,
