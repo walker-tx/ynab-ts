@@ -1,18 +1,20 @@
 lockVersion: 2.0.0
 id: 9e8b172e-d6e6-4791-b3d2-950296cf9303
 management:
-  docChecksum: 0947926ed5ba77897efd8b5e50f1d01e
-  docVersion: 1.75.0
-  speakeasyVersion: 1.596.0
-  generationVersion: 2.672.0
-  releaseVersion: 0.3.2
-  configChecksum: 4706385c2a5058c31ca9033e757af789
+  docChecksum: dd730e66ea691c8b5165ee76811156d2
+  docVersion: 1.77.0
+  speakeasyVersion: 1.600.2
+  generationVersion: 2.677.3
+  releaseVersion: 0.4.0
+  configChecksum: 82e34813ff278d99e1a2c6473d073b44
+  repoURL: https://github.com/walker-tx/ynab-ts.git
+  installationURL: https://github.com/walker-tx/ynab-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.19
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -801,7 +803,7 @@ examples:
           month: "<value>"
       responses:
         "200":
-          application/json: {"data": {"transactions": [{"id": "<id>", "date": "2023-07-18", "amount": 595841, "cleared": "uncleared", "approved": false, "account_id": "804e5e34-56e3-4e6e-9b8e-c782a447a31e", "deleted": false, "type": "subtransaction", "account_name": "<value>"}]}}
+          application/json: {"data": {"transactions": [{"id": "<id>", "date": "2023-07-18", "amount": 595841, "cleared": "uncleared", "approved": false, "account_id": "804e5e34-56e3-4e6e-9b8e-c782a447a31e", "deleted": false, "account_name": "<value>", "subtransactions": [{"id": "<id>", "transaction_id": "<id>", "amount": 180666, "deleted": false}]}], "server_knowledge": 498025}}
         "404":
           application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
         default:
