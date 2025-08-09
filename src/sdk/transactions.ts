@@ -198,7 +198,7 @@ export class Transactions extends ClientSDK {
   async listByMonth(
     request: operations.GetTransactionsByMonthRequest,
     options?: RequestOptions,
-  ): Promise<models.HybridTransactionsResponse> {
+  ): Promise<models.TransactionsResponse> {
     return unwrapAsync(transactionsListByMonth(
       this,
       request,
