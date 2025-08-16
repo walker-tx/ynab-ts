@@ -1113,7 +1113,7 @@ import {
 
 ### Response
 
-**Promise\<[models.HybridTransactionsResponse](../../models/hybridtransactionsresponse.md)\>**
+**Promise\<[models.TransactionsResponse](../../models/transactionsresponse.md)\>**
 
 ### Errors
 
