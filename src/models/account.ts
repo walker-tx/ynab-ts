@@ -58,7 +58,7 @@ export type Account = {
    */
   lastReconciledAt?: Date | null | undefined;
   /**
-   * The original debt/loan account balance, specified in milliunits format.
+   * This field is deprecated and will always be null.
    */
   debtOriginalBalance?: number | null | undefined;
   debtInterestRates?: { [k: string]: number } | null | undefined;

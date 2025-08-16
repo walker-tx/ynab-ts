@@ -27,8 +27,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type TransactionsListByMonthQueryData =
-  models.HybridTransactionsResponse;
+export type TransactionsListByMonthQueryData = models.TransactionsResponse;
 
 /**
  * List transactions in month, excluding any pending transactions
