@@ -104,6 +104,10 @@ export type Category = {
    */
   goalOverallLeft?: number | null | undefined;
   /**
+   * The date/time the goal was snoozed.  If the goal is not snoozed, this will be null.
+   */
+  goalSnoozedAt?: Date | null | undefined;
+  /**
    * Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
    */
   deleted: boolean;
@@ -159,6 +163,9 @@ export const Category$inboundSchema: z.ZodType<
   goal_under_funded: z.nullable(z.number().int()).optional(),
   goal_overall_funded: z.nullable(z.number().int()).optional(),
   goal_overall_left: z.nullable(z.number().int()).optional(),
+  goal_snoozed_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -178,6 +185,7 @@ export const Category$inboundSchema: z.ZodType<
     "goal_under_funded": "goalUnderFunded",
     "goal_overall_funded": "goalOverallFunded",
     "goal_overall_left": "goalOverallLeft",
+    "goal_snoozed_at": "goalSnoozedAt",
   });
 });
 
@@ -206,6 +214,7 @@ export type Category$Outbound = {
   goal_under_funded?: number | null | undefined;
   goal_overall_funded?: number | null | undefined;
   goal_overall_left?: number | null | undefined;
+  goal_snoozed_at?: string | null | undefined;
   deleted: boolean;
 };
 
@@ -242,6 +251,8 @@ export const Category$outboundSchema: z.ZodType<
   goalUnderFunded: z.nullable(z.number().int()).optional(),
   goalOverallFunded: z.nullable(z.number().int()).optional(),
   goalOverallLeft: z.nullable(z.number().int()).optional(),
+  goalSnoozedAt: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -261,6 +272,7 @@ export const Category$outboundSchema: z.ZodType<
     goalUnderFunded: "goal_under_funded",
     goalOverallFunded: "goal_overall_funded",
     goalOverallLeft: "goal_overall_left",
+    goalSnoozedAt: "goal_snoozed_at",
   });
 });
 
