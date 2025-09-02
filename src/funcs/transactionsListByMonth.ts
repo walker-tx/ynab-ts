@@ -38,7 +38,7 @@ export function transactionsListByMonth(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.HybridTransactionsResponse,
+    models.TransactionsResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.HybridTransactionsResponse,
+      models.TransactionsResponse,
       | errors.ErrorResponse
       | YnabError
       | ResponseValidationError
@@ -166,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.HybridTransactionsResponse,
+    models.TransactionsResponse,
     | errors.ErrorResponse
     | YnabError
     | ResponseValidationError
@@ -177,7 +177,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.HybridTransactionsResponse$inboundSchema),
+    M.json(200, models.TransactionsResponse$inboundSchema),
     M.jsonErr(404, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
