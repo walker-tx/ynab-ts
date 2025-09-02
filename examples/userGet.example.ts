@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the ynab-ts SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx userGet.ts
+ * npm run build && npx tsx userGet.example.ts
  */
 
 import { Ynab } from "ynab-ts";

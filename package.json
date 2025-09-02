@@ -1,6 +1,6 @@
 {
   "name": "ynab-ts",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "author": "Speakeasy",
   "type": "module",
   "tshy": {
@@ -20,6 +20,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/walker-tx/ynab-ts.git"
+  },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build": "tshy",
@@ -48,8 +52,8 @@
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "tshy": "^2.0.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.22.0"
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
     "zod": "^3.20.0"

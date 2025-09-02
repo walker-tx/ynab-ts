@@ -3,7 +3,7 @@ info:
   title: YNAB API Endpoints
   description: >-
     Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.  API Documentation is at https://api.ynab.com
-  version: 1.75.0
+  version: 1.77.0
 servers:
   - url: https://api.ynab.com/v1
 security:
@@ -1393,7 +1393,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HybridTransactionsResponse"
+                $ref: "#/components/schemas/TransactionsResponse"
         "404":
           description: No transactions were found
           content:
@@ -1924,7 +1924,7 @@ components:
           type: integer
           nullable: true
           description: >-
-            The original debt/loan account balance, specified in milliunits format.
+            This field is deprecated and will always be null.
           format: int64
         debt_interest_rates:
           $ref: "#/components/schemas/LoanAccountPeriodicValue"
@@ -2171,6 +2171,12 @@ components:
           description: >-
             The amount of funding still needed to complete the goal within the current goal period.
           format: int64
+          nullable: true
+        goal_snoozed_at:
+          type: string
+          description: >-
+            The date/time the goal was snoozed.  If the goal is not snoozed, this will be null.
+          format: date-time
           nullable: true
         deleted:
           type: boolean
