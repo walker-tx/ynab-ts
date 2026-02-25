@@ -9,7 +9,7 @@ import { RFCDate } from "ynab-ts/types";
 let value: MonthDetailResponse = {
   data: {
     month: {
-      month: new RFCDate("2024-04-19"),
+      month: new RFCDate("2025-04-19"),
       income: 588542,
       budgeted: 63736,
       activity: 236819,

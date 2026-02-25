@@ -8,7 +8,7 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: HybridTransaction = {
   id: "<id>",
-  date: new RFCDate("2024-04-30"),
+  date: new RFCDate("2025-04-30"),
   amount: 346503,
   cleared: "reconciled",
   approved: true,

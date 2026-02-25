@@ -1,435 +1,1726 @@
 lockVersion: 2.0.0
 id: 9e8b172e-d6e6-4791-b3d2-950296cf9303
 management:
-  docChecksum: dd730e66ea691c8b5165ee76811156d2
+  docChecksum: ef3937770efb03849471f75d24652f77
   docVersion: 1.77.0
-  speakeasyVersion: 1.606.10
-  generationVersion: 2.687.13
-  releaseVersion: 0.4.0
-  configChecksum: f3f7647d641291c5176f5282ad2f5de7
+  speakeasyVersion: 1.728.0
+  generationVersion: 2.839.0
+  releaseVersion: 0.5.0
+  configChecksum: cc1b971c8190eeb566d2bd2c5927dd31
   repoURL: https://github.com/walker-tx/ynab-ts.git
   installationURL: https://github.com/walker-tx/ynab-ts
   published: true
+persistentEdits:
+  generation_id: 5d292a4e-40c3-416b-b4b6-bf36a73abe71
+  pristine_commit_hash: 962fc37e5899291b0fedb9ca056ba1f92b585b20
+  pristine_tree_hash: 2db1b798806d49646a20f775a18fafc331fab724
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.12
-    core: 3.21.20
+    constsAndDefaults: 0.1.14
+    core: 3.26.34
     defaultEnabledRetries: 0.1.0
-    devContainers: 2.90.0
+    devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    errors: 2.86.0
-    globalSecurity: 2.82.13
+    errors: 2.86.2
+    globalSecurity: 2.82.15
     globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.5
-    groups: 2.81.2
+    globalSecurityFlattening: 0.1.1
+    globalServerURLs: 2.83.0
+    groups: 2.81.3
     methodArguments: 0.1.2
-    nameOverrides: 2.81.2
+    nameOverrides: 2.81.4
     nullables: 0.1.1
-    reactQueryHooks: 0.2.3
-    responseFormat: 0.2.3
+    reactQueryHooks: 0.2.4
+    responseFormat: 0.3.0
     retries: 2.83.0
-    sdkHooks: 0.3.0
-generatedFiles:
-  - .devcontainer/README.md
-  - .devcontainer/devcontainer.json
-  - .devcontainer/setup.sh
-  - .gitattributes
-  - .npmignore
-  - FUNCTIONS.md
-  - REACT_QUERY.md
-  - RUNTIMES.md
-  - USAGE.md
-  - docs/lib/utils/retryconfig.md
-  - docs/models/account.md
-  - docs/models/accountresponse.md
-  - docs/models/accountresponsedata.md
-  - docs/models/accountsresponse.md
-  - docs/models/accountsresponsedata.md
-  - docs/models/accounttype.md
-  - docs/models/budgetdetail.md
-  - docs/models/budgetdetailresponse.md
-  - docs/models/budgetdetailresponsedata.md
-  - docs/models/budgetsettings.md
-  - docs/models/budgetsettingsresponse.md
-  - docs/models/budgetsettingsresponsedata.md
-  - docs/models/budgetsummary.md
-  - docs/models/budgetsummaryresponse.md
-  - docs/models/budgetsummaryresponsedata.md
-  - docs/models/categoriesresponse.md
-  - docs/models/categoriesresponsedata.md
-  - docs/models/category.md
-  - docs/models/categorygroup.md
-  - docs/models/categorygroupwithcategories.md
-  - docs/models/categoryresponse.md
-  - docs/models/categoryresponsedata.md
-  - docs/models/currencyformat.md
-  - docs/models/dateformat.md
-  - docs/models/defaultbudget.md
-  - docs/models/errordetail.md
-  - docs/models/errors/errorresponse.md
-  - docs/models/existingtransaction.md
-  - docs/models/goaltype.md
-  - docs/models/hybridtransaction.md
-  - docs/models/hybridtransactiondebttransactiontype.md
-  - docs/models/hybridtransactionsresponse.md
-  - docs/models/hybridtransactionsresponsedata.md
-  - docs/models/monthdetail.md
-  - docs/models/monthdetailresponse.md
-  - docs/models/monthdetailresponsedata.md
-  - docs/models/monthsummariesresponse.md
-  - docs/models/monthsummariesresponsedata.md
-  - docs/models/monthsummary.md
-  - docs/models/newtransaction.md
-  - docs/models/operations/createaccountrequest.md
-  - docs/models/operations/createscheduledtransactionrequest.md
-  - docs/models/operations/createtransactionrequest.md
-  - docs/models/operations/deletescheduledtransactionrequest.md
-  - docs/models/operations/deletetransactionrequest.md
-  - docs/models/operations/getaccountbyidrequest.md
-  - docs/models/operations/getaccountsrequest.md
-  - docs/models/operations/getbudgetbyidrequest.md
-  - docs/models/operations/getbudgetmonthrequest.md
-  - docs/models/operations/getbudgetmonthsrequest.md
-  - docs/models/operations/getbudgetsettingsbyidrequest.md
-  - docs/models/operations/getbudgetsrequest.md
-  - docs/models/operations/getcategoriesrequest.md
-  - docs/models/operations/getcategorybyidrequest.md
-  - docs/models/operations/getmonthcategorybyidrequest.md
-  - docs/models/operations/getpayeebyidrequest.md
-  - docs/models/operations/getpayeelocationbyidrequest.md
-  - docs/models/operations/getpayeelocationsbypayeerequest.md
-  - docs/models/operations/getpayeelocationsrequest.md
-  - docs/models/operations/getpayeesrequest.md
-  - docs/models/operations/getscheduledtransactionbyidrequest.md
-  - docs/models/operations/getscheduledtransactionsrequest.md
-  - docs/models/operations/gettransactionbyidrequest.md
-  - docs/models/operations/gettransactionsbyaccountrequest.md
-  - docs/models/operations/gettransactionsbyaccounttype.md
-  - docs/models/operations/gettransactionsbycategoryrequest.md
-  - docs/models/operations/gettransactionsbycategorytype.md
-  - docs/models/operations/gettransactionsbymonthrequest.md
-  - docs/models/operations/gettransactionsbymonthtype.md
-  - docs/models/operations/gettransactionsbypayeerequest.md
-  - docs/models/operations/gettransactionsbypayeetype.md
-  - docs/models/operations/gettransactionsrequest.md
-  - docs/models/operations/gettransactionstype.md
-  - docs/models/operations/importtransactionsrequest.md
-  - docs/models/operations/updatecategoryrequest.md
-  - docs/models/operations/updatemonthcategoryrequest.md
-  - docs/models/operations/updatepayeerequest.md
-  - docs/models/operations/updatescheduledtransactionrequest.md
-  - docs/models/operations/updatetransactionrequest.md
-  - docs/models/operations/updatetransactionsrequest.md
-  - docs/models/patchcategorywrapper.md
-  - docs/models/patchmonthcategorywrapper.md
-  - docs/models/patchpayeewrapper.md
-  - docs/models/patchtransactionswrapper.md
-  - docs/models/payee.md
-  - docs/models/payeelocation.md
-  - docs/models/payeelocationresponse.md
-  - docs/models/payeelocationresponsedata.md
-  - docs/models/payeelocationsresponse.md
-  - docs/models/payeelocationsresponsedata.md
-  - docs/models/payeeresponse.md
-  - docs/models/payeeresponsedata.md
-  - docs/models/payeesresponse.md
-  - docs/models/payeesresponsedata.md
-  - docs/models/postaccountwrapper.md
-  - docs/models/postscheduledtransactionwrapper.md
-  - docs/models/posttransactionswrapper.md
-  - docs/models/putscheduledtransactionwrapper.md
-  - docs/models/puttransactionwrapper.md
-  - docs/models/saveaccount.md
-  - docs/models/savecategory.md
-  - docs/models/savecategoryresponse.md
-  - docs/models/savecategoryresponsedata.md
-  - docs/models/savemonthcategory.md
-  - docs/models/savepayee.md
-  - docs/models/savepayeeresponse.md
-  - docs/models/savepayeeresponsedata.md
-  - docs/models/savescheduledtransaction.md
-  - docs/models/savesubtransaction.md
-  - docs/models/savetransactionsresponse.md
-  - docs/models/savetransactionsresponsedata.md
-  - docs/models/savetransactionwithidorimportid.md
-  - docs/models/scheduledsubtransaction.md
-  - docs/models/scheduledtransactiondetail.md
-  - docs/models/scheduledtransactiondetailfrequency.md
-  - docs/models/scheduledtransactionfrequency.md
-  - docs/models/scheduledtransactionresponse.md
-  - docs/models/scheduledtransactionresponsedata.md
-  - docs/models/scheduledtransactionsresponse.md
-  - docs/models/scheduledtransactionsresponsedata.md
-  - docs/models/scheduledtransactionsummary.md
-  - docs/models/scheduledtransactionsummaryfrequency.md
-  - docs/models/security.md
-  - docs/models/subtransaction.md
-  - docs/models/transactionclearedstatus.md
-  - docs/models/transactiondetail.md
-  - docs/models/transactiondetaildebttransactiontype.md
-  - docs/models/transactionflagcolor.md
-  - docs/models/transactionresponse.md
-  - docs/models/transactionresponsedata.md
-  - docs/models/transactionsimportresponse.md
-  - docs/models/transactionsimportresponsedata.md
-  - docs/models/transactionsresponse.md
-  - docs/models/transactionsresponsedata.md
-  - docs/models/transactionsummary.md
-  - docs/models/transactionsummarydebttransactiontype.md
-  - docs/models/type.md
-  - docs/models/user.md
-  - docs/models/userresponse.md
-  - docs/models/userresponsedata.md
-  - docs/sdks/accounts/README.md
-  - docs/sdks/budgets/README.md
-  - docs/sdks/categories/README.md
-  - docs/sdks/months/README.md
-  - docs/sdks/payeelocations/README.md
-  - docs/sdks/payees/README.md
-  - docs/sdks/scheduledtransactions/README.md
-  - docs/sdks/transactions/README.md
-  - docs/sdks/user/README.md
-  - docs/sdks/ynab/README.md
-  - docs/types/rfcdate.md
-  - eslint.config.mjs
-  - examples/.env.template
-  - examples/README.md
-  - examples/package.json
-  - examples/userGet.example.ts
-  - jsr.json
-  - package.json
-  - src/core.ts
-  - src/funcs/accountsCreate.ts
-  - src/funcs/accountsGet.ts
-  - src/funcs/accountsList.ts
-  - src/funcs/budgetsGet.ts
-  - src/funcs/budgetsGetSettings.ts
-  - src/funcs/budgetsList.ts
-  - src/funcs/categoriesGet.ts
-  - src/funcs/categoriesGetByMonth.ts
-  - src/funcs/categoriesList.ts
-  - src/funcs/categoriesUpdate.ts
-  - src/funcs/categoriesUpdateMonth.ts
-  - src/funcs/monthsGet.ts
-  - src/funcs/monthsList.ts
-  - src/funcs/payeeLocationsGet.ts
-  - src/funcs/payeeLocationsList.ts
-  - src/funcs/payeeLocationsListByPayee.ts
-  - src/funcs/payeesGet.ts
-  - src/funcs/payeesList.ts
-  - src/funcs/payeesUpdate.ts
-  - src/funcs/scheduledTransactionsCreate.ts
-  - src/funcs/scheduledTransactionsDelete.ts
-  - src/funcs/scheduledTransactionsGet.ts
-  - src/funcs/scheduledTransactionsList.ts
-  - src/funcs/scheduledTransactionsUpdate.ts
-  - src/funcs/transactionsCreate.ts
-  - src/funcs/transactionsDelete.ts
-  - src/funcs/transactionsGet.ts
-  - src/funcs/transactionsImport.ts
-  - src/funcs/transactionsList.ts
-  - src/funcs/transactionsListByAccount.ts
-  - src/funcs/transactionsListByCategory.ts
-  - src/funcs/transactionsListByMonth.ts
-  - src/funcs/transactionsListByPayee.ts
-  - src/funcs/transactionsUpdateMany.ts
-  - src/funcs/transactionsUpdateOne.ts
-  - src/funcs/userGet.ts
-  - src/hooks/hooks.ts
-  - src/hooks/index.ts
-  - src/hooks/types.ts
-  - src/index.ts
-  - src/lib/base64.ts
-  - src/lib/config.ts
-  - src/lib/dlv.ts
-  - src/lib/encodings.ts
-  - src/lib/env.ts
-  - src/lib/files.ts
-  - src/lib/http.ts
-  - src/lib/is-plain-object.ts
-  - src/lib/logger.ts
-  - src/lib/matchers.ts
-  - src/lib/primitives.ts
-  - src/lib/retries.ts
-  - src/lib/schemas.ts
-  - src/lib/sdks.ts
-  - src/lib/security.ts
-  - src/lib/url.ts
-  - src/models/account.ts
-  - src/models/accountresponse.ts
-  - src/models/accountsresponse.ts
-  - src/models/accounttype.ts
-  - src/models/budgetdetail.ts
-  - src/models/budgetdetailresponse.ts
-  - src/models/budgetsettings.ts
-  - src/models/budgetsettingsresponse.ts
-  - src/models/budgetsummary.ts
-  - src/models/budgetsummaryresponse.ts
-  - src/models/categoriesresponse.ts
-  - src/models/category.ts
-  - src/models/categorygroup.ts
-  - src/models/categorygroupwithcategories.ts
-  - src/models/categoryresponse.ts
-  - src/models/currencyformat.ts
-  - src/models/dateformat.ts
-  - src/models/errordetail.ts
-  - src/models/errors/errorresponse.ts
-  - src/models/errors/httpclienterrors.ts
-  - src/models/errors/index.ts
-  - src/models/errors/responsevalidationerror.ts
-  - src/models/errors/sdkvalidationerror.ts
-  - src/models/errors/ynabdefaulterror.ts
-  - src/models/errors/ynaberror.ts
-  - src/models/existingtransaction.ts
-  - src/models/hybridtransaction.ts
-  - src/models/hybridtransactionsresponse.ts
-  - src/models/index.ts
-  - src/models/monthdetail.ts
-  - src/models/monthdetailresponse.ts
-  - src/models/monthsummariesresponse.ts
-  - src/models/monthsummary.ts
-  - src/models/newtransaction.ts
-  - src/models/operations/createaccount.ts
-  - src/models/operations/createscheduledtransaction.ts
-  - src/models/operations/createtransaction.ts
-  - src/models/operations/deletescheduledtransaction.ts
-  - src/models/operations/deletetransaction.ts
-  - src/models/operations/getaccountbyid.ts
-  - src/models/operations/getaccounts.ts
-  - src/models/operations/getbudgetbyid.ts
-  - src/models/operations/getbudgetmonth.ts
-  - src/models/operations/getbudgetmonths.ts
-  - src/models/operations/getbudgets.ts
-  - src/models/operations/getbudgetsettingsbyid.ts
-  - src/models/operations/getcategories.ts
-  - src/models/operations/getcategorybyid.ts
-  - src/models/operations/getmonthcategorybyid.ts
-  - src/models/operations/getpayeebyid.ts
-  - src/models/operations/getpayeelocationbyid.ts
-  - src/models/operations/getpayeelocations.ts
-  - src/models/operations/getpayeelocationsbypayee.ts
-  - src/models/operations/getpayees.ts
-  - src/models/operations/getscheduledtransactionbyid.ts
-  - src/models/operations/getscheduledtransactions.ts
-  - src/models/operations/gettransactionbyid.ts
-  - src/models/operations/gettransactions.ts
-  - src/models/operations/gettransactionsbyaccount.ts
-  - src/models/operations/gettransactionsbycategory.ts
-  - src/models/operations/gettransactionsbymonth.ts
-  - src/models/operations/gettransactionsbypayee.ts
-  - src/models/operations/importtransactions.ts
-  - src/models/operations/index.ts
-  - src/models/operations/updatecategory.ts
-  - src/models/operations/updatemonthcategory.ts
-  - src/models/operations/updatepayee.ts
-  - src/models/operations/updatescheduledtransaction.ts
-  - src/models/operations/updatetransaction.ts
-  - src/models/operations/updatetransactions.ts
-  - src/models/patchcategorywrapper.ts
-  - src/models/patchmonthcategorywrapper.ts
-  - src/models/patchpayeewrapper.ts
-  - src/models/patchtransactionswrapper.ts
-  - src/models/payee.ts
-  - src/models/payeelocation.ts
-  - src/models/payeelocationresponse.ts
-  - src/models/payeelocationsresponse.ts
-  - src/models/payeeresponse.ts
-  - src/models/payeesresponse.ts
-  - src/models/postaccountwrapper.ts
-  - src/models/postscheduledtransactionwrapper.ts
-  - src/models/posttransactionswrapper.ts
-  - src/models/putscheduledtransactionwrapper.ts
-  - src/models/puttransactionwrapper.ts
-  - src/models/saveaccount.ts
-  - src/models/savecategory.ts
-  - src/models/savecategoryresponse.ts
-  - src/models/savemonthcategory.ts
-  - src/models/savepayee.ts
-  - src/models/savepayeeresponse.ts
-  - src/models/savescheduledtransaction.ts
-  - src/models/savesubtransaction.ts
-  - src/models/savetransactionsresponse.ts
-  - src/models/savetransactionwithidorimportid.ts
-  - src/models/scheduledsubtransaction.ts
-  - src/models/scheduledtransactiondetail.ts
-  - src/models/scheduledtransactionfrequency.ts
-  - src/models/scheduledtransactionresponse.ts
-  - src/models/scheduledtransactionsresponse.ts
-  - src/models/scheduledtransactionsummary.ts
-  - src/models/security.ts
-  - src/models/subtransaction.ts
-  - src/models/transactionclearedstatus.ts
-  - src/models/transactiondetail.ts
-  - src/models/transactionflagcolor.ts
-  - src/models/transactionresponse.ts
-  - src/models/transactionsimportresponse.ts
-  - src/models/transactionsresponse.ts
-  - src/models/transactionsummary.ts
-  - src/models/user.ts
-  - src/models/userresponse.ts
-  - src/react-query/_context.tsx
-  - src/react-query/_types.ts
-  - src/react-query/accountsCreate.ts
-  - src/react-query/accountsGet.ts
-  - src/react-query/accountsList.ts
-  - src/react-query/budgetsGet.ts
-  - src/react-query/budgetsGetSettings.ts
-  - src/react-query/budgetsList.ts
-  - src/react-query/categoriesGet.ts
-  - src/react-query/categoriesGetByMonth.ts
-  - src/react-query/categoriesList.ts
-  - src/react-query/categoriesUpdate.ts
-  - src/react-query/categoriesUpdateMonth.ts
-  - src/react-query/index.ts
-  - src/react-query/monthsGet.ts
-  - src/react-query/monthsList.ts
-  - src/react-query/payeeLocationsGet.ts
-  - src/react-query/payeeLocationsList.ts
-  - src/react-query/payeeLocationsListByPayee.ts
-  - src/react-query/payeesGet.ts
-  - src/react-query/payeesList.ts
-  - src/react-query/payeesUpdate.ts
-  - src/react-query/scheduledTransactionsCreate.ts
-  - src/react-query/scheduledTransactionsDelete.ts
-  - src/react-query/scheduledTransactionsGet.ts
-  - src/react-query/scheduledTransactionsList.ts
-  - src/react-query/scheduledTransactionsUpdate.ts
-  - src/react-query/transactionsCreate.ts
-  - src/react-query/transactionsDelete.ts
-  - src/react-query/transactionsGet.ts
-  - src/react-query/transactionsImport.ts
-  - src/react-query/transactionsList.ts
-  - src/react-query/transactionsListByAccount.ts
-  - src/react-query/transactionsListByCategory.ts
-  - src/react-query/transactionsListByMonth.ts
-  - src/react-query/transactionsListByPayee.ts
-  - src/react-query/transactionsUpdateMany.ts
-  - src/react-query/transactionsUpdateOne.ts
-  - src/react-query/userGet.ts
-  - src/sdk/accounts.ts
-  - src/sdk/budgets.ts
-  - src/sdk/categories.ts
-  - src/sdk/index.ts
-  - src/sdk/months.ts
-  - src/sdk/payeelocations.ts
-  - src/sdk/payees.ts
-  - src/sdk/scheduledtransactions.ts
-  - src/sdk/sdk.ts
-  - src/sdk/transactions.ts
-  - src/sdk/user.ts
-  - src/types/async.ts
-  - src/types/blobs.ts
-  - src/types/constdatetime.ts
-  - src/types/enums.ts
-  - src/types/fp.ts
-  - src/types/index.ts
-  - src/types/operations.ts
-  - src/types/rfcdate.ts
-  - src/types/streams.ts
-  - tsconfig.json
+    sdkHooks: 0.4.0
+trackedFiles:
+  .devcontainer/README.md:
+    id: b170c0f184ac
+    last_write_checksum: sha1:83ed0235f0bd231d7b95c2dff406c50b186467d8
+    pristine_git_object: e01b82d5d84147bfbe4fa80e1f1972c2a11ff111
+  .devcontainer/devcontainer.json:
+    id: b34062a34eb1
+    last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
+    pristine_git_object: 4d560dd5f40afaf10d96eb75b1f02cd48bbd640c
+  .devcontainer/setup.sh:
+    id: 5f1dfbfeb8eb
+    last_write_checksum: sha1:0b84e779a79404d9d526a0f321935c815c1c9800
+    pristine_git_object: eb7b26baa5041e23c793bf76d2eab6a519fccf23
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
+    pristine_git_object: 113eead5093c17d43a46159132885318f281a68a
+  .npmignore:
+    id: aa70c1f807c3
+    last_write_checksum: sha1:425e91786e3b6cddd2b364bf3f9f9cd38e3c3e1a
+    pristine_git_object: 134e78a629b846b88e408199011801852bacc600
+  FUNCTIONS.md:
+    id: 21b9df02aaeb
+    last_write_checksum: sha1:e32e18693468bf4fcbe6acb8669d3d88c379d01f
+    pristine_git_object: 48b39963b6ed404af97dbb693b6a3a8f4e26a16a
+  REACT_QUERY.md:
+    id: 43d3a3ba4147
+    last_write_checksum: sha1:7ca02e00571fee2c391591b98f2fbd77606cae1d
+    pristine_git_object: a245b2b803984929412f689125905c8bde90cb16
+  RUNTIMES.md:
+    id: 620c490847b6
+    last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
+    pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:c4f3b8baa25b3a5dca0c016bb89f39b2974ada8a
+    pristine_git_object: 791b0a1d479a5abba678a37f6aea044dad43c74f
+  docs/lib/utils/retryconfig.md:
+    id: 0ce9707cb848
+    last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
+    pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
+  docs/models/account.md:
+    id: f7d1e7e7409d
+    last_write_checksum: sha1:696b4d342fe27cb04a3e34075f0f3ef824026243
+    pristine_git_object: c6e8d983ec2539bd713803f10471e11fa697c24b
+  docs/models/accountresponse.md:
+    id: 0247e4757dd8
+    last_write_checksum: sha1:cc673e0ebc0f8ced5668cc31de1091847272e751
+    pristine_git_object: d6c0de98f3207eedb19d8fac3d21586dc991700e
+  docs/models/accountresponsedata.md:
+    id: 10ea85a7ff80
+    last_write_checksum: sha1:fa65d88d710e62e014cf45d5c6f7ef773ad3ad05
+    pristine_git_object: 27e782a04d355487a302cc1bfad770169778bac1
+  docs/models/accountsresponse.md:
+    id: 09f6bcd0181b
+    last_write_checksum: sha1:10bcc86315860b04cc52a88e65fd9d12e38305fa
+    pristine_git_object: 53a328b95bd12029da5412c7fc91f40b59fe6d90
+  docs/models/accountsresponsedata.md:
+    id: 6a5c5062c0dc
+    last_write_checksum: sha1:57afec19bd7440ec69da87e15e4da6831c1c047e
+    pristine_git_object: 43082e0837b76c1eab0958ba724d45f1a83b1e3f
+  docs/models/accounttype.md:
+    id: 3e5f862a6af7
+    last_write_checksum: sha1:1b37aff3457d8a262933b6ec0e5a713dd324ba43
+    pristine_git_object: eee45cdedd09cd259fea2d4f7440cf5581c9e034
+  docs/models/budgetdetail.md:
+    id: 0e6987f979df
+    last_write_checksum: sha1:389242a4fd5473bb5c74cd6c41d4e6fa90ca3233
+    pristine_git_object: e9361c5644b1e02e85e4c70f96a6014bfe31e3d4
+  docs/models/budgetdetailresponse.md:
+    id: f5fe857e7897
+    last_write_checksum: sha1:14ad8355f3ee681d8f02ff41fada3150af00d7d8
+    pristine_git_object: 7914b89ac65bea5b66bc449c7da7339b9298880c
+  docs/models/budgetdetailresponsedata.md:
+    id: c5eb65136766
+    last_write_checksum: sha1:3ed705f7549b46aad2f10e7544c31e93d3a51ebf
+    pristine_git_object: 126794a100697323d197836d6b1416b9d206ae20
+  docs/models/budgetsettings.md:
+    id: 82f1ecc5b3f4
+    last_write_checksum: sha1:a7c2f1cf755fa5e0fa1edda720850b3b2b1e5bd9
+    pristine_git_object: 29785334c197cd239b50b5c9d3c1433b06f304e9
+  docs/models/budgetsettingsresponse.md:
+    id: 01df12946df0
+    last_write_checksum: sha1:a9a73558ec21f894308a97864c9c6523462cfab4
+    pristine_git_object: d2cb5cff00a64230ee4f0c58c4659f747ed2985f
+  docs/models/budgetsettingsresponsedata.md:
+    id: 2eba2edeb60e
+    last_write_checksum: sha1:82cf046889230be202d2dc91b0997650303c1bb0
+    pristine_git_object: 2ddd14b8c5b2cf3a325e3f2ad876c7ad94d99e99
+  docs/models/budgetsummary.md:
+    id: acd7a064d904
+    last_write_checksum: sha1:1fa977a493bcfa55eba695d8217b71a7bfa77cec
+    pristine_git_object: f4c7e434a145c9350b68eda7d62ca68d2ce6880d
+  docs/models/budgetsummaryresponse.md:
+    id: 37b25d1876b0
+    last_write_checksum: sha1:93c3934d703f2d99483c311907a0284a7764e47c
+    pristine_git_object: e1437d9c917fede0d834f5a247efe4598e4c6693
+  docs/models/budgetsummaryresponsedata.md:
+    id: b4fad9a1060b
+    last_write_checksum: sha1:b2e2048696371e8b86416143755116b1a8927475
+    pristine_git_object: 8c9430be83145babd98076830d8684bdacaa5e34
+  docs/models/categoriesresponse.md:
+    id: b914b7144a91
+    last_write_checksum: sha1:0482ad20b739dfc32dce868e4a539fb77d7bfe71
+    pristine_git_object: 4089665e2f78146aad51930d2abdd9fa4f6e8ab4
+  docs/models/categoriesresponsedata.md:
+    id: 7a3c6c83ff0a
+    last_write_checksum: sha1:c606ba50b09af47db0cdf4cb9d3b0ab88fe182c2
+    pristine_git_object: eb7c031ba6217b4f10f1b781db2542a57310e1a7
+  docs/models/category.md:
+    id: 61e7fe02a3f6
+    last_write_checksum: sha1:c9ea6e663778de129072049f760b48b945422cba
+    pristine_git_object: 242a227481cfeae2444b6b95f843269bbd99cf79
+  docs/models/categorygroup.md:
+    id: 1b396ea1cc66
+    last_write_checksum: sha1:cba9c26581e7523cac9b226156060b85c1a48613
+    pristine_git_object: f5e190291372654fb5a187300b667ef29b179ee2
+  docs/models/categorygroupwithcategories.md:
+    id: 793134ecabba
+    last_write_checksum: sha1:ec36aea182ebe1910c56c9d4ab89959bae0ec5b4
+    pristine_git_object: 0f0f07a8b977eabaf388f2094976a7a9e44ae87f
+  docs/models/categoryresponse.md:
+    id: ec9261ee790c
+    last_write_checksum: sha1:f1650a9d164fab68863a44cb02523507a5c75f18
+    pristine_git_object: e556d27fe6433a503bc105cb646cb1217e9f3b65
+  docs/models/categoryresponsedata.md:
+    id: 1bbbf77fcb82
+    last_write_checksum: sha1:328d6fdc3a2a6c27fddbb6a7938f1bf0e689e2a5
+    pristine_git_object: 626879175cbfcf091e0c42c41cdc83f314853e78
+  docs/models/currencyformat.md:
+    id: 8613c9de3e9a
+    last_write_checksum: sha1:08358717c6958103bfc8c592d17905e914ef3c1b
+    pristine_git_object: e7a0696509f4faa1e5c04595f478b86f3328e50f
+  docs/models/dateformat.md:
+    id: 8ce7774a456d
+    last_write_checksum: sha1:dabf5fcf85d7a1d6e6cfd0531640a14701856799
+    pristine_git_object: c142f37f83b93d49bfc13b7f1e304af215cc0e55
+  docs/models/defaultbudget.md:
+    id: 5fecbe74fe5a
+    last_write_checksum: sha1:27074bc27c0be17c1063e86a3da66a6fda88c17f
+    pristine_git_object: 9f00b98a2c656da82abba220bfc421bb9ddab62d
+  docs/models/errordetail.md:
+    id: 8ef87dd0aeb1
+    last_write_checksum: sha1:daa3e56bd2724726db1bebf12b213f8cbafd0511
+    pristine_git_object: efda01b0258ff799edbdee97bd822ee8d8c61450
+  docs/models/errors/errorresponse.md:
+    id: f49cea889d69
+    last_write_checksum: sha1:b48e9ba0bad7d42bb8d688b7f0423dd9fd0ec6f1
+    pristine_git_object: b25c586fb8c86fb98e0f60fba1833623184ef259
+  docs/models/existingtransaction.md:
+    id: ab3679450235
+    last_write_checksum: sha1:b583c71de8f80895c20105debafdb00f700d749a
+    pristine_git_object: affd11ad037f95dec3be32d87963cfc698c9b7a9
+  docs/models/goaltype.md:
+    id: 12bc51cee404
+    last_write_checksum: sha1:459b7a19486ff98467c5194caaf7172f03980aff
+    pristine_git_object: a74bc32e84cfbc87b79b437316118edf854c3deb
+  docs/models/hybridtransaction.md:
+    id: 9f38f85a7142
+    last_write_checksum: sha1:e1ca351143d2faebd93b1d9abba51c5713f70500
+    pristine_git_object: 2d74b10799c248d6a8f432ff72e4dc93ee9013c1
+  docs/models/hybridtransactiondebttransactiontype.md:
+    id: ba599fd71e80
+    last_write_checksum: sha1:9f443f69c6a5e56e21722f939e94e03ed78e6ef8
+    pristine_git_object: 625a642a449b0f4ee010686c2bd7bb72a4876a44
+  docs/models/hybridtransactionsresponse.md:
+    id: af94151e62e7
+    last_write_checksum: sha1:4aa96c66c1aaaf60e01e746970c47540a638f933
+    pristine_git_object: b244367c71284f91834f40edb8c1e82ac9d19491
+  docs/models/hybridtransactionsresponsedata.md:
+    id: e31520b9ecdd
+    last_write_checksum: sha1:455691388efbb952f6a13aa23676f15f5756a77e
+    pristine_git_object: 7aea6f099a72a172561cc5aba44ede77636b4d9e
+  docs/models/monthdetail.md:
+    id: e30155702836
+    last_write_checksum: sha1:669d216d182cada939779660729be26410e6267d
+    pristine_git_object: 428e9f7f4c37c705ec99cb300e7b068291403e5d
+  docs/models/monthdetailresponse.md:
+    id: de3616e2b64a
+    last_write_checksum: sha1:84cea669d488fab0710bf1e80e1a7281df9451d2
+    pristine_git_object: 269f52f34fef99231b75a15ea0175d3762c39c3f
+  docs/models/monthdetailresponsedata.md:
+    id: 78f1a7803231
+    last_write_checksum: sha1:4cceab776044ac87c4939653085d6b1dd87033fb
+    pristine_git_object: b9e1fef3537abde3962203296ffd8189ee110328
+  docs/models/monthsummariesresponse.md:
+    id: 23a2a86b816a
+    last_write_checksum: sha1:1ceaa54a795a437c9101abf5eb2ebbe564b2332f
+    pristine_git_object: c6336166f4af182d3673664dd247ee50e0adc4ce
+  docs/models/monthsummariesresponsedata.md:
+    id: fd20d5af7c08
+    last_write_checksum: sha1:80a878eb108015eaf24d2c429bff88886a42bef0
+    pristine_git_object: 1c6beb8231012698e3a84d412d3630848ffbe2a9
+  docs/models/monthsummary.md:
+    id: efe8d1bc71d3
+    last_write_checksum: sha1:cc1c01392a42182e6cde27d36d979a766c0f76e5
+    pristine_git_object: 6ebc89094b07045aad76c24107b06295d75fce5e
+  docs/models/newtransaction.md:
+    id: 8a1fbfcbf93d
+    last_write_checksum: sha1:8e52fa9cdd3df060b86f316a95a157fbe4d3d51f
+    pristine_git_object: b0cf39af598139eea2f0b8d2e2fdcd791021e356
+  docs/models/operations/createaccountrequest.md:
+    id: 4bd6ef0c782f
+    last_write_checksum: sha1:490603e919c645519c82f2051f103f3eaef5f413
+    pristine_git_object: 7b066c85891e1e533c61cad791a7646776d87937
+  docs/models/operations/createscheduledtransactionrequest.md:
+    id: 9f831e4779e5
+    last_write_checksum: sha1:2e5397783f53e9502829d50f4a92fe94317e8526
+    pristine_git_object: 28d04ffae3a29c3347b856553e892ccd282755d9
+  docs/models/operations/createtransactionrequest.md:
+    id: cbbd329e3cc5
+    last_write_checksum: sha1:88dd155c85edf173b9d16b9064134593638532f4
+    pristine_git_object: 95cd5606960977319af00b4ad5449e193a2ae4a3
+  docs/models/operations/deletescheduledtransactionrequest.md:
+    id: daa6979dde71
+    last_write_checksum: sha1:52541f4404a76190f7d0d5678caf7034ecb1a67e
+    pristine_git_object: 6a00e6acec2fb435f98b5257b3cf2608e25aeb23
+  docs/models/operations/deletetransactionrequest.md:
+    id: 322cb8a6a44d
+    last_write_checksum: sha1:520fd04a1067e366abde99b1c9b754cc2844f942
+    pristine_git_object: bf74309bdf8bd742797aaee7e5e69db2081031e1
+  docs/models/operations/getaccountbyidrequest.md:
+    id: 39675058265f
+    last_write_checksum: sha1:4af872d35ebb0ec8217013ca862f639d3161e9f6
+    pristine_git_object: 3a239bb52fa2aeb85fe5396ce1cef2e08cc599ad
+  docs/models/operations/getaccountsrequest.md:
+    id: 2dd32d914bc4
+    last_write_checksum: sha1:138c254954c4088e0806f731ba2be6d8ab6b5d50
+    pristine_git_object: d5e6ae81d56f92567ecf98005d8847faad168a59
+  docs/models/operations/getbudgetbyidrequest.md:
+    id: 1f846571dd23
+    last_write_checksum: sha1:4a0e66f04f366f7c920df56fdad1f45a2f20c9ac
+    pristine_git_object: fa85063f50a23b52769dfe8f6feefb6f1024f00a
+  docs/models/operations/getbudgetmonthrequest.md:
+    id: a3a95ceec703
+    last_write_checksum: sha1:d7b8e94887dc874a00fae892f71a306834ee9029
+    pristine_git_object: e3bf9b32c8209d72a411bc6bfb1806e080ec6350
+  docs/models/operations/getbudgetmonthsrequest.md:
+    id: 7c15c53fc2e3
+    last_write_checksum: sha1:29e1a79a82172c2d119207bb666371e86678743a
+    pristine_git_object: f1e11cc4c65e3389502c47b305da047c2fcea6c4
+  docs/models/operations/getbudgetsettingsbyidrequest.md:
+    id: 91518395a054
+    last_write_checksum: sha1:30c92cb07722d06b196fb71df47bec7ab95db076
+    pristine_git_object: 6230dc145433002964e27ffb9edfb40519a20f5e
+  docs/models/operations/getbudgetsrequest.md:
+    id: 7c9e08ab74d5
+    last_write_checksum: sha1:07652245df352481a7827df9de75b53ec3a39869
+    pristine_git_object: dbf5247f257c2cfd8831ab67b1c585a6043d1a5a
+  docs/models/operations/getcategoriesrequest.md:
+    id: fcbfff665b80
+    last_write_checksum: sha1:7b87a962fd39aa747c1723bf54d65286768115d1
+    pristine_git_object: ddd758803a1fd3616809d6ce6ab7d436041c7abd
+  docs/models/operations/getcategorybyidrequest.md:
+    id: 48ef11d4f09f
+    last_write_checksum: sha1:16215aa13b14261c1b9da1bafc44a05b5d0ed741
+    pristine_git_object: ab8567a084f0c2b34ab92868001f2b712279e363
+  docs/models/operations/getmonthcategorybyidrequest.md:
+    id: 50c695d2f4d0
+    last_write_checksum: sha1:958d161973b85fae30802f9100dfe052c5fe2df9
+    pristine_git_object: ffcf42388427065f56ac716c489b904cb5cbabf5
+  docs/models/operations/getpayeebyidrequest.md:
+    id: 2e8d386f3c9d
+    last_write_checksum: sha1:011902edc620e40ff35d9071239423b00ddd3cf7
+    pristine_git_object: 1cb928588eddaebc71c9d4ffdfd739561b8a962e
+  docs/models/operations/getpayeelocationbyidrequest.md:
+    id: 5424a5e52603
+    last_write_checksum: sha1:84be979d1251c4bc7a216fed52b6822cd180a7aa
+    pristine_git_object: 8074774696918dacf50bd10e1baf549b7d9c855a
+  docs/models/operations/getpayeelocationsbypayeerequest.md:
+    id: 1f6fa0fbeae4
+    last_write_checksum: sha1:537e382ee13ae3b633075465ac0274392164ca7c
+    pristine_git_object: 79d461e446435e645b21b1ff8a3138acb51b972e
+  docs/models/operations/getpayeelocationsrequest.md:
+    id: df8a5d1049e3
+    last_write_checksum: sha1:225f68099981d06dcdbb502560063ee80b86bf8c
+    pristine_git_object: 15c0d13a0244eee396aac4a95679d5bfdb13214c
+  docs/models/operations/getpayeesrequest.md:
+    id: 157d2a4a202e
+    last_write_checksum: sha1:e0fa4ab92f7f19122720a289b227112e0bc82203
+    pristine_git_object: ddbff042772aba989d7839646182cfddfd707735
+  docs/models/operations/getscheduledtransactionbyidrequest.md:
+    id: 2149e5270a9b
+    last_write_checksum: sha1:21e0fddc01ed165c11f5293afb625d8ab8332abd
+    pristine_git_object: 3c67e5acaa9801fa89bf7617d4a72cf3ada72023
+  docs/models/operations/getscheduledtransactionsrequest.md:
+    id: 3ad510343ea2
+    last_write_checksum: sha1:0058e3ed9c40585911c35ceefe0f393a61f07d86
+    pristine_git_object: e4fc879328582fea7a6496e93d71235bb95cc883
+  docs/models/operations/gettransactionbyidrequest.md:
+    id: 0e4013c65303
+    last_write_checksum: sha1:14bc5f01d4a74e6bbe56688a65e5820758d53b10
+    pristine_git_object: ca08e969eca79d60eccee4654db2789bb8341c70
+  docs/models/operations/gettransactionsbyaccountrequest.md:
+    id: a47234518f23
+    last_write_checksum: sha1:32bc7e8e53f69a4730cccf239655a67c2727e359
+    pristine_git_object: ee5cdfd951703470524fd50b201ac6095fc58cc6
+  docs/models/operations/gettransactionsbyaccounttype.md:
+    id: b79865b6e030
+    last_write_checksum: sha1:cc4bceda59ddbee6e40f2c4ef32ce78f81ff4d12
+    pristine_git_object: 611b6a8545b33752e0ea0fb8daac9000c85c8c42
+  docs/models/operations/gettransactionsbycategoryrequest.md:
+    id: 8c1576da3ad9
+    last_write_checksum: sha1:322be8c1f5a3181648338b8b39141425f77dbbb3
+    pristine_git_object: e0d8539f06daa4bab72dce2e5e8387b971b3cff5
+  docs/models/operations/gettransactionsbycategorytype.md:
+    id: 19f1016f6b2c
+    last_write_checksum: sha1:85144059d420398a37e9c7da0070efdd3828ae43
+    pristine_git_object: 98dd82daac242ab03a2b55ed2da11211592d659a
+  docs/models/operations/gettransactionsbymonthrequest.md:
+    id: bf8387280e76
+    last_write_checksum: sha1:899b2ab8ca86290ec26e4579ee1621849ca3c55f
+    pristine_git_object: 952a78e91dd1ff7af6e9d5a77996c5b4065c8948
+  docs/models/operations/gettransactionsbymonthtype.md:
+    id: 627f9ce5bb6b
+    last_write_checksum: sha1:5661008182c872e34009f4319e16a949966bc12e
+    pristine_git_object: 42cf0b8df74524a4ee187fb69c4b14d919f9f4a9
+  docs/models/operations/gettransactionsbypayeerequest.md:
+    id: 9d4fc909ffa8
+    last_write_checksum: sha1:780ed9b0be9bf2ff270506bcc46142ca7f640713
+    pristine_git_object: 1b5350b673a77ed62de5a0c3fa55e4d28659cf54
+  docs/models/operations/gettransactionsbypayeetype.md:
+    id: d468c02ebef3
+    last_write_checksum: sha1:6aef98c01ef18ac847ab05064e127b17f587219c
+    pristine_git_object: 3ab8776d90e31a709e189fa7c6df8c1026397fc3
+  docs/models/operations/gettransactionsrequest.md:
+    id: a60e957ccf1c
+    last_write_checksum: sha1:16c47cd4159777503bdaf0ff614c1e4d6f4f17e4
+    pristine_git_object: 10894be706e9179288b76e9856222fe7b2d92ad7
+  docs/models/operations/gettransactionstype.md:
+    id: eab24584d505
+    last_write_checksum: sha1:a9ce04e54e38ac0965bafa5eae61a8dc05a71124
+    pristine_git_object: 050b24e1a112b8a6b6eddd551d0a691684b9cf25
+  docs/models/operations/importtransactionsrequest.md:
+    id: ea974ffad7e2
+    last_write_checksum: sha1:49e23140150650f6fd75e0202eb4a60f111c66fe
+    pristine_git_object: da5564a19b50d000457688dbad791f070a78b259
+  docs/models/operations/updatecategoryrequest.md:
+    id: 07dfc917042e
+    last_write_checksum: sha1:f5e1dac42410db8703b923dde83136c6b6249f97
+    pristine_git_object: b216b2c0faf1c7bb0ea821b6517b20e41dab7ede
+  docs/models/operations/updatemonthcategoryrequest.md:
+    id: fd0630d369f1
+    last_write_checksum: sha1:e7c122467dc5894d811d66cb82e6e9db86992acd
+    pristine_git_object: 379f7249f0615cf57075cd32efc6dab27b2efce6
+  docs/models/operations/updatepayeerequest.md:
+    id: 63076d0c3277
+    last_write_checksum: sha1:40329a8b7787245d83bb6538e83f5a31a672a7f0
+    pristine_git_object: 25410859ed7a83df454dc35b3306f75a467af476
+  docs/models/operations/updatescheduledtransactionrequest.md:
+    id: fd1e61725dbf
+    last_write_checksum: sha1:607a091cf6ba9feb3a2ca6862b761966a9d3cc46
+    pristine_git_object: cbbde5974714e3ace82e34871892353b274f720d
+  docs/models/operations/updatetransactionrequest.md:
+    id: 45e27d1578ae
+    last_write_checksum: sha1:ca7a6e452c5d57f332a96f69ceea06c0c2542657
+    pristine_git_object: 4a00e909ae164c3dc55399d7064a7bea84f7073c
+  docs/models/operations/updatetransactionsrequest.md:
+    id: bd4462da541b
+    last_write_checksum: sha1:1884c1061c7eb678bb68e7f384801c6431038a20
+    pristine_git_object: 71a997b2c2ba29a723d779690f87cd75405a60ff
+  docs/models/patchcategorywrapper.md:
+    id: 83969477d253
+    last_write_checksum: sha1:545d54dd208c3e60458fb5051d34122161ec5f5a
+    pristine_git_object: 85fa3558cdbe719d7b1c493df087b9d90c6fcc2a
+  docs/models/patchmonthcategorywrapper.md:
+    id: 58bd0c338c3e
+    last_write_checksum: sha1:27934534162fcedf2542eab495e3066588bfe0ef
+    pristine_git_object: 848c92210b2c076a0161bdced98d01f04ccbd5f5
+  docs/models/patchpayeewrapper.md:
+    id: 79d726e2c321
+    last_write_checksum: sha1:72a1f81ebb6bb0e905025c863e582e10bea92ad0
+    pristine_git_object: 1bf8647f44534d9e50c679dac25f57737c4dc471
+  docs/models/patchtransactionswrapper.md:
+    id: f44fbca41615
+    last_write_checksum: sha1:3a72285deefba288a75d8776b217109b5f136bd9
+    pristine_git_object: ea7cbde4c208047c5c192bca2d5bbd3cc291566b
+  docs/models/payee.md:
+    id: 1b1e8012fded
+    last_write_checksum: sha1:21f8d23f200a90628265e8c8901597ebb8219e35
+    pristine_git_object: c846231ef983b568264dcdd3fc1f9cc16244b774
+  docs/models/payeelocation.md:
+    id: cafdf262e3af
+    last_write_checksum: sha1:858102856c38eaa0bb65160b2937ea290a0fe3d7
+    pristine_git_object: 55553e1966da4c09b055b914a1480dfef49d8279
+  docs/models/payeelocationresponse.md:
+    id: b49525ae5da3
+    last_write_checksum: sha1:b156541e9d84bfbd9d00f4fcd8892a1d5c277861
+    pristine_git_object: 00ddb52dfe5a5661ffd8998b2cb5060e0266a88f
+  docs/models/payeelocationresponsedata.md:
+    id: cbeeb875252a
+    last_write_checksum: sha1:32e52139cd9fa554e482085f48f25b5d6abc2c69
+    pristine_git_object: 2a3480bba1886d0b1799cf8cc954ecc9ea4a202b
+  docs/models/payeelocationsresponse.md:
+    id: 7ccf585853ad
+    last_write_checksum: sha1:881414dc8a2a092010d21bab4ee7ae2912e2f8fa
+    pristine_git_object: 6280dcf4f1fb7967bb1e18b01e03feb2bd1e1901
+  docs/models/payeelocationsresponsedata.md:
+    id: 8cf38de31e1d
+    last_write_checksum: sha1:5d3ab9f78729487a34a713ce72f08f7d166006a3
+    pristine_git_object: b37b9ae6a3635045eba0fcf8ec195ec8d759f295
+  docs/models/payeeresponse.md:
+    id: 8eaa5820d208
+    last_write_checksum: sha1:9669ab7d4c128658add353a5db88a90e28998c3c
+    pristine_git_object: ca2e6eabb75d57be6742aa43a95b9b6c3752f9b1
+  docs/models/payeeresponsedata.md:
+    id: 7a982cb11615
+    last_write_checksum: sha1:e978be0f2e8f75ceefabdc3bd15ddba05f789f1f
+    pristine_git_object: afe638999dfc501f2f4c8d2075262ee701338ea7
+  docs/models/payeesresponse.md:
+    id: 60518527bdd3
+    last_write_checksum: sha1:33c36d3d0356dac4684fc4d342dd9e66dd18f527
+    pristine_git_object: 883b5369f9d4339f810e6082c3126a285e223509
+  docs/models/payeesresponsedata.md:
+    id: 43b720d4659e
+    last_write_checksum: sha1:32fcf7d620e7c3ed4a586fd51a1e6e447a2c3eac
+    pristine_git_object: da8785d4827dd564ff68d0e3db51f5cec21f1662
+  docs/models/postaccountwrapper.md:
+    id: 24afb5375791
+    last_write_checksum: sha1:3f47b7f4bea0626bd88d3e1c76cecaf99365e02d
+    pristine_git_object: 413c6ed8ea6c97c0e2b6e0bbe735f726ef1164fb
+  docs/models/postscheduledtransactionwrapper.md:
+    id: f25b213a3587
+    last_write_checksum: sha1:2ed505b31042d5fafafa806079a0bc981a44b3fc
+    pristine_git_object: c26d095a1b9205d7e8ec532203103c3788d818b0
+  docs/models/posttransactionswrapper.md:
+    id: c53269eb76a2
+    last_write_checksum: sha1:9fa760c0a0d2db57af5da0ce6f8c436447615a3a
+    pristine_git_object: c404217737a7711e89788ddf5193fe8e45d0ee54
+  docs/models/putscheduledtransactionwrapper.md:
+    id: e1ed1bc3c6e8
+    last_write_checksum: sha1:d95c1ea2d4de6cfc4e9cb4a34a84f5c5654c165c
+    pristine_git_object: 6fecc3f201d65082a1601ddbd96931f580f78eb4
+  docs/models/puttransactionwrapper.md:
+    id: 17772c0d4504
+    last_write_checksum: sha1:5fb28e12bb0401fad5e6f30ab6f3696c2da17be7
+    pristine_git_object: 02646577fc90497bb10fac2931c690a005d1024c
+  docs/models/saveaccount.md:
+    id: 8a32eac594d5
+    last_write_checksum: sha1:df62660d17271060f88b49ad703990350581fd2f
+    pristine_git_object: 76d79d271422b01980c125953e1d5aaa3ba908a9
+  docs/models/savecategory.md:
+    id: 0bc78c132014
+    last_write_checksum: sha1:d5ca54098479bb5d2c953619c1de14816cd1e325
+    pristine_git_object: fe25d6bf13642eff79d87be276ec2445cbd9dc0a
+  docs/models/savecategoryresponse.md:
+    id: 0225886e0691
+    last_write_checksum: sha1:d9c48af0a4a24a77602762fbbc7ed1a6a7456412
+    pristine_git_object: bc75c5a924a465436c5b021aeca325046196c289
+  docs/models/savecategoryresponsedata.md:
+    id: d55d847a40fc
+    last_write_checksum: sha1:ea6d15fb84bf208733ed7d358a528fea51ae774a
+    pristine_git_object: 2e679ab37e216d3cd2a3e2e53208fe66a6bfdfd4
+  docs/models/savemonthcategory.md:
+    id: 1e5e9344e5de
+    last_write_checksum: sha1:2bdf702ba68d5658631c0cd4b22d5eca79445379
+    pristine_git_object: b71fc2431a2a41e37ec749b479a1150f87e207a4
+  docs/models/savepayee.md:
+    id: c3eda28ce581
+    last_write_checksum: sha1:a48a9d7d690e338975e86d052d37fb5c62a1a731
+    pristine_git_object: bba738cb3282d14d0a41d051175d9fd2ccffba3e
+  docs/models/savepayeeresponse.md:
+    id: b2ae60053136
+    last_write_checksum: sha1:1bee37c2152980cb6cb96ca65f6ba011783aabf6
+    pristine_git_object: e81498e66027c298a9bf4dc915ddf86a71b5f3ae
+  docs/models/savepayeeresponsedata.md:
+    id: 848ede442839
+    last_write_checksum: sha1:468fd82d9a46334846de8233dbfc766786f2614b
+    pristine_git_object: d3d3c8bd0ac47bb3df366441600686b5573d1c67
+  docs/models/savescheduledtransaction.md:
+    id: 7a57ec1f84f3
+    last_write_checksum: sha1:6f931f60657372eb4c9f37a12ea653f9da0cf384
+    pristine_git_object: da4eacd5f21c220d273c411212e5452d1e007d48
+  docs/models/savesubtransaction.md:
+    id: 8948eb65ad7f
+    last_write_checksum: sha1:953f4fe8c12f668e36b3ec113e4b3970d1c79199
+    pristine_git_object: 795ccb33090759163ede5a9b8f9c88511acc9346
+  docs/models/savetransactionsresponse.md:
+    id: 2118bf0f066f
+    last_write_checksum: sha1:5d8ab5ce3c3f951f811405534fdd0167294e9553
+    pristine_git_object: fb326438128f64ef6d7919402ef05de80488c4d0
+  docs/models/savetransactionsresponsedata.md:
+    id: d83e494724fd
+    last_write_checksum: sha1:d326df12e8df5d326a8a895febb1c86883d30f2d
+    pristine_git_object: a25bbebc6aa7517b5c5c56e556af0f72378779ce
+  docs/models/savetransactionwithidorimportid.md:
+    id: 50cc889df48f
+    last_write_checksum: sha1:3f1f0240e32bef9162962b34c208d131ee0b1383
+    pristine_git_object: d2558c1fdf6fc81c6768bc1da7816c14cbf6b700
+  docs/models/scheduledsubtransaction.md:
+    id: 0914b4dae469
+    last_write_checksum: sha1:da7f55eb410f27c6f9a351b950f801a893e216ea
+    pristine_git_object: 79a52771634d2050b2f62fed84a5b215813d9ae1
+  docs/models/scheduledtransactiondetail.md:
+    id: bede12e47d9a
+    last_write_checksum: sha1:9535692e4e5dd1f258e5c76748e214ce036fa5d9
+    pristine_git_object: e6cf6c8de67a87eba920ad0b0dec34d736093b6c
+  docs/models/scheduledtransactiondetailfrequency.md:
+    id: 181eb8eed7aa
+    last_write_checksum: sha1:891a99543cce3d4649ba69baf2f27a0b6bf46079
+    pristine_git_object: d10b992ce359f01661541090f16a041398b67ba9
+  docs/models/scheduledtransactionfrequency.md:
+    id: f2a56136fcd6
+    last_write_checksum: sha1:dd5d622b9fec6f5d51fb5e874d244a1e4ce2072e
+    pristine_git_object: 9d63fcd361a1878e23874026dbde9a1f629a616f
+  docs/models/scheduledtransactionresponse.md:
+    id: d671d3d9a5ac
+    last_write_checksum: sha1:8ff8bea181b2dbd61d5f0f43a978be630aa99c64
+    pristine_git_object: 3d2905997a4f8e82c4ab0ef39d1e885bc609811d
+  docs/models/scheduledtransactionresponsedata.md:
+    id: 6019b2a682b4
+    last_write_checksum: sha1:607af1d798751f632eb19ca0a314d19342d77585
+    pristine_git_object: beda6a34bddce27c908a9f3ef26f5bcba4e93382
+  docs/models/scheduledtransactionsresponse.md:
+    id: bb0d60694eac
+    last_write_checksum: sha1:2458ab50fc1412b418526bae271572d142f56733
+    pristine_git_object: 4c8b73f96c81def54b222b0f147e846dce8012b2
+  docs/models/scheduledtransactionsresponsedata.md:
+    id: e512cb779b12
+    last_write_checksum: sha1:8ad9cf6a61fa19d866c727e8c1920e33d6e32f77
+    pristine_git_object: c7398822203eee08ab1bf223664a9aece5c8a7b1
+  docs/models/scheduledtransactionsummary.md:
+    id: 24c9ce40ad0c
+    last_write_checksum: sha1:8a772b145cea661b17e88e2e0d707f79c9e119e8
+    pristine_git_object: 6ec64232c72718a57738abc4c544b30c957dfd0d
+  docs/models/scheduledtransactionsummaryfrequency.md:
+    id: 41263a7caba9
+    last_write_checksum: sha1:49d6efcc4b335426280a9c2a326db7b21bcbc09b
+    pristine_git_object: 58fb4846b0a5c5ac50fdfcf7e719fa53dd350444
+  docs/models/security.md:
+    id: 452e4d4eb67a
+    last_write_checksum: sha1:02291bc72f9c21b1a5c449ac073bb4cc554e6887
+    pristine_git_object: 625c1c9e8f5fe6d6776a0dc3452162cb8cd34d5d
+  docs/models/subtransaction.md:
+    id: ae945661aada
+    last_write_checksum: sha1:d045721fe4db2c1a00ada7406749c5846d310dde
+    pristine_git_object: 8483cd4e814e7093fed2f04df73dc4da750eccb2
+  docs/models/transactionclearedstatus.md:
+    id: 5fcb5366aeb2
+    last_write_checksum: sha1:2d0487f9c19ff9b7fa7e5cf9771204f62e34f427
+    pristine_git_object: b3324e99ae2c205f70f3237921bfd8c6ba49b3b5
+  docs/models/transactiondetail.md:
+    id: b8ad3a2e93dd
+    last_write_checksum: sha1:cfda0b627d625ba5ec44d330d5c63efca0fb650b
+    pristine_git_object: 6fec7838b9a75f02033f7062b975ee140cf5f101
+  docs/models/transactiondetaildebttransactiontype.md:
+    id: a9f068f76e07
+    last_write_checksum: sha1:fd9152a98940751e418af9adeb6bf207e39b503e
+    pristine_git_object: 35f3c16e3e5f696cc254ce8b7e44d58cba422905
+  docs/models/transactionflagcolor.md:
+    id: 3f96fa5c7293
+    last_write_checksum: sha1:2b23cd8e7ca305d7624a89576c3d4a9a74387d8f
+    pristine_git_object: 4e2050566fcc0f6994173827c644e6217bbeef62
+  docs/models/transactionresponse.md:
+    id: 3377719d1f52
+    last_write_checksum: sha1:e77b4633964797dad8f7786f4956fe3d4d70175b
+    pristine_git_object: fe1d760eb20692419ca4f9eb38735c10ae57fdba
+  docs/models/transactionresponsedata.md:
+    id: d0835be37569
+    last_write_checksum: sha1:9ca0291f2a9d2c289c81ff9c059bd8781dfac0d6
+    pristine_git_object: e79bca8b5cd0da258cbdf513051ed650d84ebf06
+  docs/models/transactionsimportresponse.md:
+    id: 095a3a46b03b
+    last_write_checksum: sha1:942aadf2445b622d0235f8ffeb71af99bbd53c85
+    pristine_git_object: b06d2cc9dd090653f2d8dbdd8f116e615d24a1dc
+  docs/models/transactionsimportresponsedata.md:
+    id: de8d0be040ea
+    last_write_checksum: sha1:62b8197678dca746d654d7e61ce439a99a631965
+    pristine_git_object: 2aa75661a6aaa52313c1d0216937d6aad8d80a01
+  docs/models/transactionsresponse.md:
+    id: ca61b2f49c2f
+    last_write_checksum: sha1:b45e88b83ba45119493f44ce5aed027542702ab8
+    pristine_git_object: b37926f6e39338c1e8473ddda21953226f56db2d
+  docs/models/transactionsresponsedata.md:
+    id: b6a687c7a3e6
+    last_write_checksum: sha1:d0b243c529979b926378d7a1c28fd70e25dc0d6f
+    pristine_git_object: ec624a8f105624575122266e6a2df7b13298654d
+  docs/models/transactionsummary.md:
+    id: 67e790637e68
+    last_write_checksum: sha1:1adf75c411b661ee7a63e88bfb1b708892d97287
+    pristine_git_object: e399fd60b76a4532e6a62de1854a7f57c9e8ffdd
+  docs/models/transactionsummarydebttransactiontype.md:
+    id: 3d08d9db71e3
+    last_write_checksum: sha1:a788258cbc08796b86005cf9350faf61fb509fc3
+    pristine_git_object: bb573cbdd52bb05caecfc910b668f8411e5daf67
+  docs/models/type.md:
+    id: 98c32f09b2c8
+    last_write_checksum: sha1:78ed92599cb72ce736794661fa392d4599c55c4b
+    pristine_git_object: 514e8d03bbb7e716818b5138e7581b9c06dbc428
+  docs/models/user.md:
+    id: 8306f1e41187
+    last_write_checksum: sha1:2e295171eecf6138bfc43736b7bdb4cb99032bd7
+    pristine_git_object: f2f313c7925819272f28eed8ae2bee34aadc41b2
+  docs/models/userresponse.md:
+    id: c123c829bc2f
+    last_write_checksum: sha1:e5c340c3b32813d64952346646fbe0b215b16edc
+    pristine_git_object: 5a435e9c95959162af6cbeaa47ac5e0403fb783b
+  docs/models/userresponsedata.md:
+    id: cee3ed5479fb
+    last_write_checksum: sha1:6581e722a6737d2a6df2a7a4ea6837808023c1a9
+    pristine_git_object: d940083f7360f72ed45d256f6696c14dd980f72c
+  docs/sdks/accounts/README.md:
+    id: d6c754b1ca96
+    last_write_checksum: sha1:db3c5b8ebbcbb64a450b354394188914d041da71
+    pristine_git_object: 18afa3b4ac5f216525f32f97afec941bd2eade75
+  docs/sdks/budgets/README.md:
+    id: b5446f1b88f7
+    last_write_checksum: sha1:bc36d3f83c4ded2644f196f19ecc9997392d1802
+    pristine_git_object: a14b483868fe171aea8f7cc9286632fc9aa45bff
+  docs/sdks/categories/README.md:
+    id: 2e253d7225b0
+    last_write_checksum: sha1:18c5c02c73fef0132be1f5b68fc6497e9ac28516
+    pristine_git_object: 83b4d2fd7d27ca9031562c9bca15feb5e0bc6fc7
+  docs/sdks/months/README.md:
+    id: be07824ace97
+    last_write_checksum: sha1:84c16d8775510b2be178e2bac50dbc1308a20748
+    pristine_git_object: 2e57b0749db9c813a186fd35ae60f82ff101ebc6
+  docs/sdks/payeelocations/README.md:
+    id: f35fb9a71fe6
+    last_write_checksum: sha1:af7ea6e1bea90a7073c4a86a38da09f62e25b574
+    pristine_git_object: 5d5698a572e110e2107ebddd544448e389c3dc65
+  docs/sdks/payees/README.md:
+    id: 561413156bdf
+    last_write_checksum: sha1:7744992ada56a2d271866dfe52bb82a45df47a05
+    pristine_git_object: a7c03f36465a973c4b065090543a13f1cf149c24
+  docs/sdks/scheduledtransactions/README.md:
+    id: ad40cf718a41
+    last_write_checksum: sha1:1d71a3bb41fa41737294da51436892fb10153930
+    pristine_git_object: 1633bce52eda18ab2332566074ae212f70d0bf15
+  docs/sdks/transactions/README.md:
+    id: 85592abe3c6b
+    last_write_checksum: sha1:ba3b04135e096c27600f9a7ba899d93eedebd9b0
+    pristine_git_object: 27f1168479662b809b8d672db5cd6a9272d29440
+  docs/sdks/user/README.md:
+    id: 437dd7dc6e30
+    last_write_checksum: sha1:92f6e62ff9ea62ca7274ad3ff993a0a8ce278f36
+    pristine_git_object: 2c401f174e7e343b9547f7ceb6639bdf4fb78ab9
+  docs/types/rfcdate.md:
+    id: 5f9756408fae
+    last_write_checksum: sha1:57b4b3cec635cbd12767ed8672f96e257ef88845
+    pristine_git_object: 5d8591eb5a5a2603d0b385aeb88e6325fd503eb8
+  eslint.config.mjs:
+    id: 461c8d07f6da
+    last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
+    pristine_git_object: 67bccfec985be20a00970d90155752832dd47135
+  examples/.env.template:
+    id: 52cbe5afed92
+    last_write_checksum: sha1:3331741775c0bf1c324a5057651ba203b1ddf7ba
+    pristine_git_object: 87615a1d88e8b3ea114c65275b8660f5073932f3
+  examples/README.md:
+    id: 9d0f69d6e677
+    last_write_checksum: sha1:6b52d9d422bc4d58fd9087e7b363b912b4f2aa4c
+    pristine_git_object: 83c308f52506382b634fe3209e5bb4d846d3e6e4
+  examples/package.json:
+    id: c1d7b0ec8e7e
+    last_write_checksum: sha1:3eadafd9fc45c43cdad2bc8e759a9499f4421bd6
+    pristine_git_object: 22b17d8dc0c306219fa9cdebef23ce2bfccc3809
+  examples/userGet.example.ts:
+    id: 387d0495ec04
+    last_write_checksum: sha1:c4128b7d1242a35722088809d398db69525b481a
+    pristine_git_object: a1f682b8067eb9fbf35d52cba63c43f9885c8208
+  jsr.json:
+    id: 7f6ab7767282
+    last_write_checksum: sha1:b7ff7b66e82b3bfb82638e57a955898c9424d72d
+    pristine_git_object: e14bc792130d04087c6579c3d8496c064eca2fca
+  package.json:
+    id: 7030d0b2f71b
+    last_write_checksum: sha1:17e1808eb76c4522b76ec0c3396f957de8e68655
+    pristine_git_object: b8f1d411181474680f81598fcdf670af68130daf
+  src/core.ts:
+    id: f431fdbcd144
+    last_write_checksum: sha1:296c7cf6dbd13310dc5005da40675d693baa1bae
+    pristine_git_object: 33abe2b20d933535e0f471fbbe7e5a7419376e45
+  src/funcs/accountsCreate.ts:
+    id: dcd4056ed25a
+    last_write_checksum: sha1:3e3248ff57a9d106c6a074e1a6fe96c1a45034d9
+    pristine_git_object: e274fd061c4c4535d6b69355f1f0553b074d7c4b
+  src/funcs/accountsGet.ts:
+    id: d510cda6e9c2
+    last_write_checksum: sha1:f8a34cc9c0c6fd6d110f57236c85afa746b5297e
+    pristine_git_object: 5483f36c7270a314f79249a4c30fe5d837e2288e
+  src/funcs/accountsList.ts:
+    id: d5dc1c9c2e7b
+    last_write_checksum: sha1:ee254ee0d414b6f2faaedab09f42a7586cfcee4c
+    pristine_git_object: 375e59f98c25c13c083c4a3cc723e2b651993617
+  src/funcs/budgetsGet.ts:
+    id: 8202462d8b5f
+    last_write_checksum: sha1:a9559642d114b08fb086d6793b7a2ef3b015349b
+    pristine_git_object: a3c4d8ad3224f49770cdbbdb910d2f8650435ccd
+  src/funcs/budgetsGetSettings.ts:
+    id: 4c5e00c91b40
+    last_write_checksum: sha1:878155cbcd36e71f1ede784674f8983012105851
+    pristine_git_object: bbeb970c707d301d1a1b0a612a4c2fc27c828d10
+  src/funcs/budgetsList.ts:
+    id: fbceeaaaa16e
+    last_write_checksum: sha1:d96c4c0abd090072fb0a950247ebbad57f04a8e2
+    pristine_git_object: 23c601af0c5c9a44ccdc414b7cc91032792515ac
+  src/funcs/categoriesGet.ts:
+    id: 22c3b1f4195c
+    last_write_checksum: sha1:9ee9968dca0d74840967f22ba3e51936fa95d35b
+    pristine_git_object: 7d6ecd26bd1eb0b24fc8ddece76d447f88622bab
+  src/funcs/categoriesGetByMonth.ts:
+    id: deac7eae5d26
+    last_write_checksum: sha1:22de46f6a14684953b94212a6bbda44060dddc9a
+    pristine_git_object: c4b768f8cae053dc29111e460bcdd84c1f7b0c32
+  src/funcs/categoriesList.ts:
+    id: 34fb161f76f6
+    last_write_checksum: sha1:be418ac257690034effa2933721c40ae7c0685a4
+    pristine_git_object: 91fcb5ccd3a2c985bd17ef6aa694b8f4b148e8d1
+  src/funcs/categoriesUpdate.ts:
+    id: 8da1bcb80afa
+    last_write_checksum: sha1:e5adeb09ea83b7fcddd9a94593b92d7a06ceb8ed
+    pristine_git_object: a920f1bcd6396f8bcb3c81d94ef956a66f7a080e
+  src/funcs/categoriesUpdateMonth.ts:
+    id: 98da607e2f1a
+    last_write_checksum: sha1:a5f95ef36bd63eafaacbb7aaf0059c842905cbfb
+    pristine_git_object: d3f28f74cc46cc55a0810b82fbcc2915534e2a6f
+  src/funcs/monthsGet.ts:
+    id: e69f2fb79f80
+    last_write_checksum: sha1:94764fc09732466fc0161b9ca8047b7646fe3e58
+    pristine_git_object: d0be6c8ad9a1988981ab7fc261904d1ec7a198bf
+  src/funcs/monthsList.ts:
+    id: f01d423c8f23
+    last_write_checksum: sha1:e6f5074e4af504e3af931fc6d5c2317a067c3181
+    pristine_git_object: 53763d92fb2d04f48fd1ae3d29822358623ca953
+  src/funcs/payeeLocationsGet.ts:
+    id: c534fb097228
+    last_write_checksum: sha1:20ef99e97c92a79801986e169d477a9b7b2293f5
+    pristine_git_object: b2529df8c1788ecef4c6648ddddb1680d4dbc2d6
+  src/funcs/payeeLocationsList.ts:
+    id: 9a92a042d005
+    last_write_checksum: sha1:1a494dfa93a32d6add84e72fb5579279091c9c7d
+    pristine_git_object: dc2d32519f3bd97948be232c85506fff0fad9a0d
+  src/funcs/payeeLocationsListByPayee.ts:
+    id: 9e3447a4da04
+    last_write_checksum: sha1:a524e15f8eeb13caaa6c00009224fd8d22f8a3b0
+    pristine_git_object: 8d4df5210cd1bbeb6912e3808a13eecd11cc6d91
+  src/funcs/payeesGet.ts:
+    id: 78e901abbe05
+    last_write_checksum: sha1:6072016613b65dedb8c84c79cf0f804852ff32b5
+    pristine_git_object: 0317b88ed1f9b9635d2ecac6333afc143588c727
+  src/funcs/payeesList.ts:
+    id: 032170c12e2c
+    last_write_checksum: sha1:aaafd59a6c14060095bd91783dba93c0bb8cfda7
+    pristine_git_object: 55741af392024b5c20c3147c3bc8e9e285c6b321
+  src/funcs/payeesUpdate.ts:
+    id: f6ac0712065b
+    last_write_checksum: sha1:4de68d71095f0ab0d926c8e0d59d2406317cde5a
+    pristine_git_object: e5aca332e1d660001fc93069106be4322f45d054
+  src/funcs/scheduledTransactionsCreate.ts:
+    id: 1b7038aecd7a
+    last_write_checksum: sha1:ad00dfb88dbec4814946bce09c4dbcaad6fa3a2d
+    pristine_git_object: 490f3b99fab8f16801647aebc91fa1eb77cd6fb4
+  src/funcs/scheduledTransactionsDelete.ts:
+    id: b074eb730a16
+    last_write_checksum: sha1:2d7bf9a47d9468029df351edad852e961a2af7db
+    pristine_git_object: 84d9c17f919ae9dd305931fd3e615f01541089de
+  src/funcs/scheduledTransactionsGet.ts:
+    id: 1ba1a7761166
+    last_write_checksum: sha1:43173d962ac31591295a420d94da4fa4e9f22456
+    pristine_git_object: 0ab7d0165fdde9437e026be6250c9763e0114375
+  src/funcs/scheduledTransactionsList.ts:
+    id: 24597e0a771a
+    last_write_checksum: sha1:0c411f17ccc9ad49a18829714f8cce0b003b47c2
+    pristine_git_object: adb1792a71063438007c29102e7961b12d43395a
+  src/funcs/scheduledTransactionsUpdate.ts:
+    id: 518c6bd74348
+    last_write_checksum: sha1:fc1cd52a0e77c4a5bf3443bf15b6e07bcb141cf0
+    pristine_git_object: eb962c320c4f8481234d870fc917f76d9de082b9
+  src/funcs/transactionsCreate.ts:
+    id: f64f7fcda797
+    last_write_checksum: sha1:12fcba10ab1de4c4e489342c58ad05c868652283
+    pristine_git_object: 0916767754e626d358a07a57186b5fa2cbda60ef
+  src/funcs/transactionsDelete.ts:
+    id: e78a186ef45d
+    last_write_checksum: sha1:e44230317e931f9f5faa85bc971c6f49705ef96f
+    pristine_git_object: 39c67dba88eb316202a38a345195547510ca869a
+  src/funcs/transactionsGet.ts:
+    id: 22628bbeff2c
+    last_write_checksum: sha1:49be0bdc558c51362485806a50c03c9992c8c37d
+    pristine_git_object: 5c23cb49afec297d1959fb7a429bb8112c0d8309
+  src/funcs/transactionsImport.ts:
+    id: ceb16db1e2f6
+    last_write_checksum: sha1:a6d1b13fb61947ed187c06da8e181b1f2c112ac8
+    pristine_git_object: e87adf2ea99501bf5e6d680649bcc4cd0a765070
+  src/funcs/transactionsList.ts:
+    id: 4876c16785b7
+    last_write_checksum: sha1:a2979a443a6ba607b7f04ee1e2d33f3840377f1d
+    pristine_git_object: 6b08f1af2d46e824bfdce88612f5556653c613a8
+  src/funcs/transactionsListByAccount.ts:
+    id: 5e8a6c4e9a2c
+    last_write_checksum: sha1:6707d04f4c8343fcfe08621b2c29d22513aa202d
+    pristine_git_object: b1b0258ad9c6c2a1c44730ed1fbc10c913a813d3
+  src/funcs/transactionsListByCategory.ts:
+    id: a3900665db8a
+    last_write_checksum: sha1:a7ba2cf0ed14774f6e6f8adb8217472ec3873219
+    pristine_git_object: 15f32426b8784a6f44c5e209230711345158a7ab
+  src/funcs/transactionsListByMonth.ts:
+    id: 77b448971515
+    last_write_checksum: sha1:a83343a34a97134afba54f7ea7e8596bf59dd060
+    pristine_git_object: 8a0a53c44e7a9033c58efbfafe1eae564883448d
+  src/funcs/transactionsListByPayee.ts:
+    id: df76749c5017
+    last_write_checksum: sha1:d4e76a55c59e9f3a39f15883e94746035a97305e
+    pristine_git_object: efd33eeae1675941996d2ba3a86da899641a5b6b
+  src/funcs/transactionsUpdateMany.ts:
+    id: 3798889542f2
+    last_write_checksum: sha1:3ea7afe0b90d8e085d83f4d4c6efc50ea62dff0a
+    pristine_git_object: 2ce1c3eba562fc162b30dc46d21f3ccbe3e06b4a
+  src/funcs/transactionsUpdateOne.ts:
+    id: b38da1c69c6d
+    last_write_checksum: sha1:e49c336621d8b9493ffeb6d81a13b20f72ca5d33
+    pristine_git_object: 86b6533482259af27b504caa34e1d863d6dcf0d7
+  src/funcs/userGet.ts:
+    id: 63a31c09bff4
+    last_write_checksum: sha1:530faf908bcbf9ca4ef58b66ec44f76fbfd40075
+    pristine_git_object: c5be1ef5ea56874387349ec84dff1ba2af9c819d
+  src/hooks/hooks.ts:
+    id: a2463fc6f69b
+    last_write_checksum: sha1:7dd975bbcc46a32dd394f86a4652b74ecc70d874
+    pristine_git_object: 7ed9e0445ac189e0f90687c6ef602212702bde90
+  src/hooks/index.ts:
+    id: 5f2dab62b520
+    last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
+    pristine_git_object: f60ec7acd76141a71d78008c5a362eb0236d8335
+  src/hooks/types.ts:
+    id: 2a02d86ec24f
+    last_write_checksum: sha1:27a3444c4839bec58ae89820fd8c2483edafc3f4
+    pristine_git_object: 9c36bf01332084f735909a71036c3544cc4c7e3a
+  src/index.ts:
+    id: c5fb850250c7
+    last_write_checksum: sha1:35c9cde3ae14b18b3f893a1afe8b6c44f8760f24
+    pristine_git_object: dbcba164a0082e3bb8c43cf21fa7f8ffb9d35dfc
+  src/lib/base64.ts:
+    id: "598522066688"
+    last_write_checksum: sha1:b0b12ddbd8625efb47c0e955a18641aeb10c6532
+    pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
+  src/lib/config.ts:
+    id: 320761608fb3
+    last_write_checksum: sha1:a76b78056937a7ba7e696581bc9f21f20225fd00
+    pristine_git_object: cdcef7a65af8edfb7505864a6f454c9d57eba44e
+  src/lib/dlv.ts:
+    id: b1988214835a
+    last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
+    pristine_git_object: e81091f5e536f82739f71379b1fddc2d147c49e2
+  src/lib/encodings.ts:
+    id: 3bd8ead98afd
+    last_write_checksum: sha1:d20c131976ab8ac68b22bdde2b7ed84b5b873922
+    pristine_git_object: 31cd3733907afbee3641b9ab680ed417247a7d33
+  src/lib/env.ts:
+    id: c52972a3b198
+    last_write_checksum: sha1:7724e19ccb4cdbbd436a63b6bf5c7e6320ebc77b
+    pristine_git_object: 1b46fe9aa2da23608998f1a575dac10b0bb0a491
+  src/lib/files.ts:
+    id: e5efa54fcb95
+    last_write_checksum: sha1:d0f325f445b8d22e7d73baf052c585ec2dd24841
+    pristine_git_object: 0344cd046d033f9e8a55de02f7935c5cec5dc30b
+  src/lib/http.ts:
+    id: 63a80782d37e
+    last_write_checksum: sha1:797cbf16d3c7c4d62d3ba0eedb08617524938457
+    pristine_git_object: 13cf1fd7894a89f727b8d2db2ad24313a94f68c7
+  src/lib/is-plain-object.ts:
+    id: b9862591096a
+    last_write_checksum: sha1:df687f25a9590b6fd95d39df41a652ae3fd4e517
+    pristine_git_object: 61070d3d7c7e5e95b1ed7e7ea21869eb0767db77
+  src/lib/logger.ts:
+    id: 7ee7741a02bf
+    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
+    pristine_git_object: d181f2937d4128afbe9b0327e0f81d1fa9c877b7
+  src/lib/matchers.ts:
+    id: d54b2253b719
+    last_write_checksum: sha1:2a0f7522ba77dc680ee624bc5b7d31ee624f9302
+    pristine_git_object: 351f832efcc274edde5531ef03c2d22cff4caedf
+  src/lib/primitives.ts:
+    id: 74859f750b28
+    last_write_checksum: sha1:987869fc54790b9c22e9182099103d6aa7c67016
+    pristine_git_object: d21f1dc49affa4e6d324bdd60811b470fdfa7eb6
+  src/lib/retries.ts:
+    id: b24a69d15639
+    last_write_checksum: sha1:f3da74dffcbe2756c69393f8600205aa1dc06e68
+    pristine_git_object: e3ce9aba72150fc3c18f3105d39b21aba809377b
+  src/lib/schemas.ts:
+    id: deb4b531fae1
+    last_write_checksum: sha1:209cfaabfa7fc1c1310f97453215cb0755619c6e
+    pristine_git_object: 47edb9725c2482c667e2ddc8a56b1fec4285c492
+  src/lib/sdks.ts:
+    id: 8a6d91f1218d
+    last_write_checksum: sha1:c1d9512fd292658f7014898ed44a92769c9bb627
+    pristine_git_object: b6e6945006b1121f08a3f2385fb3f89beb56eb3a
+  src/lib/security.ts:
+    id: 0502afa7922e
+    last_write_checksum: sha1:1d03ebc38c5fadb252d416e179e2de852b0b2b45
+    pristine_git_object: 07d0bed406dd468efb67292a631d022028b56cc2
+  src/lib/url.ts:
+    id: b0057e24ed76
+    last_write_checksum: sha1:d124050c7e755c0cce233b9e029afb584ff65201
+    pristine_git_object: f3a8de6c021de59c991707946cd294596cae954d
+  src/models/account.ts:
+    id: d5ea65253b06
+    last_write_checksum: sha1:d1ab94e1b80ed0874541f95fc9383cb6378a1ce4
+    pristine_git_object: eb784c54ecdf4e5c083ea95b33f3969339e1b4f0
+  src/models/accountresponse.ts:
+    id: 65412d3af0d1
+    last_write_checksum: sha1:6db408113c33386f646c0065628f355aa181538b
+    pristine_git_object: e4eb08aa199b56067730b5dcd106d4002057e556
+  src/models/accountsresponse.ts:
+    id: 189a4764af5a
+    last_write_checksum: sha1:27922bc81a32dde16b9c569c25566a7651558d97
+    pristine_git_object: 5036ef3baf8589c0c17dad1e93d4abb5d8fb795c
+  src/models/accounttype.ts:
+    id: d7e0ac61c6f0
+    last_write_checksum: sha1:074a90a625ce14fe4d5e051e3b688b16c10b205b
+    pristine_git_object: 815447f06914e2287af8ccc0d1f32fdfe6cf5423
+  src/models/budgetdetail.ts:
+    id: 32c546ece9d8
+    last_write_checksum: sha1:520d721d969957f23f360d1bb8e8e5209b5f8f35
+    pristine_git_object: b383d016f59a6d07b60e2e57ec6374f3f2868118
+  src/models/budgetdetailresponse.ts:
+    id: 7c29e48faac2
+    last_write_checksum: sha1:827fefb2a811847a0b6810b3713b9a05c545e281
+    pristine_git_object: ee7555dff4d6082a664936a8018894da32db7097
+  src/models/budgetsettings.ts:
+    id: 1a92cf01b971
+    last_write_checksum: sha1:80614d794d4b13452641bfd3227fab0972ceb03f
+    pristine_git_object: d5d001f6670b970ccda69d75260726fc0c54befe
+  src/models/budgetsettingsresponse.ts:
+    id: b8a41118e8f0
+    last_write_checksum: sha1:dd2bf9dbb0630b8fe296471707ab12132ab2ec56
+    pristine_git_object: 37abe9f558b0b50b58ebf79d24b476f833649d3e
+  src/models/budgetsummary.ts:
+    id: fe25c836c622
+    last_write_checksum: sha1:2411de98a7273fd64399ae57cfa9718617446263
+    pristine_git_object: dd33ed3557ba055c979c7dcfedec0ef619909237
+  src/models/budgetsummaryresponse.ts:
+    id: b2bfed027dc5
+    last_write_checksum: sha1:8f2b70c437500ac302d53b476dcf94a4a5ccd720
+    pristine_git_object: 4be78c99774a9f6ba9d6398c6afe90efe6cfaff8
+  src/models/categoriesresponse.ts:
+    id: 85e68ec66828
+    last_write_checksum: sha1:9825e0978155791e0dc28462624b9fd4d4ee3f28
+    pristine_git_object: 62d9fe8da3910aa9025904abfc8548226b8f5076
+  src/models/category.ts:
+    id: 7099facb0cf3
+    last_write_checksum: sha1:563bef490fd475d99b20e5d05da9349273d363ca
+    pristine_git_object: cb40b5571b1cdbf5476ffcde724c6ddcb501ad09
+  src/models/categorygroup.ts:
+    id: 4e2c303e2319
+    last_write_checksum: sha1:654301b0efbb964365dda14f62759b4c27ca4767
+    pristine_git_object: cd222a7365de0c2b4ea9298a6f6ea5dcdffedaa7
+  src/models/categorygroupwithcategories.ts:
+    id: 76bf6ee8ad3f
+    last_write_checksum: sha1:77838e7ebbdc7348b85622fab3d8d7020ce54772
+    pristine_git_object: 127d0a5019334dfde4280f40ef190cf44324bb71
+  src/models/categoryresponse.ts:
+    id: efc52cc5c690
+    last_write_checksum: sha1:dd2502fe51572a85f091e1f44ec9881e61a262c0
+    pristine_git_object: 157635d71ace226af7954ea622fc5aac2017b7f7
+  src/models/currencyformat.ts:
+    id: 9a95d57682c1
+    last_write_checksum: sha1:471798a856cc333e4c5bfcceb097b7f5ca7de8c8
+    pristine_git_object: aea11e8a826a4bdea9474f41f9433ab59536a326
+  src/models/dateformat.ts:
+    id: 73f019203dff
+    last_write_checksum: sha1:e3296239d95489cc35382bceea8e71290f5e3519
+    pristine_git_object: 4529a73836a4239e444bebe6daec8b0c3fbe1ad4
+  src/models/errordetail.ts:
+    id: 0058c3dc35c3
+    last_write_checksum: sha1:530cf9da3d948f8493d91be0aa18b14773155357
+    pristine_git_object: 2f1f2f1af039aaa3296eb68d51c78949ca1a3be4
+  src/models/errors/errorresponse.ts:
+    id: 2ed61f23f9f1
+    last_write_checksum: sha1:d4ee7f8fa34d280f6918ad8a1a1a1172b8223831
+    pristine_git_object: 6dd398e0a4d4ec441b10df9931e5d3fbd06482a9
+  src/models/errors/httpclienterrors.ts:
+    id: 6948de76af99
+    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
+    pristine_git_object: b34f612124c797c2a1106b9735708f679a90b74f
+  src/models/errors/index.ts:
+    id: c4e22507cb83
+    last_write_checksum: sha1:54c5c271fd868d6a0a1898679bf9d8805ff34081
+    pristine_git_object: 43ddd134bfe390a78006354baf2bb898a693fe8a
+  src/models/errors/responsevalidationerror.ts:
+    id: 88ff98a41be9
+    last_write_checksum: sha1:87519c064a56c6d0f470cd3eaa142ca2fc7cf086
+    pristine_git_object: 7dc82b5c8481fc1a4fe0f365b0b0265940c1bb0b
+  src/models/errors/sdkvalidationerror.ts:
+    id: fb6b2b49c445
+    last_write_checksum: sha1:a69da17627bcc32b820544608f3400423ea53f26
+    pristine_git_object: 6826e1208a5d7b7d310535d18909646522bf0fbd
+  src/models/errors/ynabdefaulterror.ts:
+    id: cb23f1e8e310
+    last_write_checksum: sha1:417a7545e94080607bbe09c4f452e3b7e9e7112d
+    pristine_git_object: 71e5f87386ece346f771b147af408ff93b946b7a
+  src/models/errors/ynaberror.ts:
+    id: a00d917f6251
+    last_write_checksum: sha1:a2c2f95473c99d73af25faaa7e1bb6bef1b71ad5
+    pristine_git_object: 72a9d4d6767df799fc98482de8080a78a1bbe588
+  src/models/existingtransaction.ts:
+    id: d331d892db6e
+    last_write_checksum: sha1:c16088d77e93d170b16d249e681079dcf63cf10a
+    pristine_git_object: 2f079a365fec452881f68d8ece4546a7cf427d91
+  src/models/hybridtransaction.ts:
+    id: aa1db62f2a9b
+    last_write_checksum: sha1:69af9d1377b482e094e3907ad8eb0871c4669802
+    pristine_git_object: 910fd0e334228427f1073c291daf1455d6db1347
+  src/models/hybridtransactionsresponse.ts:
+    id: c4b52600b718
+    last_write_checksum: sha1:3b56a018a0386bdf9611b06e380e0f54fcedab1e
+    pristine_git_object: a68c036aceef5ef738eefada2035861e2cbbf91a
+  src/models/index.ts:
+    id: f93644b0f37e
+    last_write_checksum: sha1:adc83c10c6b8f039a33c476d91254d9fc45cc076
+    pristine_git_object: 5a0930138e747b8e62437edae35d0d590602e8c6
+  src/models/monthdetail.ts:
+    id: a304915be27a
+    last_write_checksum: sha1:ae684d93e35d56751e6f30c3366afc273ffaba84
+    pristine_git_object: dff224dd91b225854a52f194a7618647d7d3ec24
+  src/models/monthdetailresponse.ts:
+    id: 268f434bbe91
+    last_write_checksum: sha1:0b51b035c5e24e960b6766c6cf9a0a50821e82cc
+    pristine_git_object: bfbcf1b733b75ebebcabc598cc983b681df1350e
+  src/models/monthsummariesresponse.ts:
+    id: f60b2633e9ca
+    last_write_checksum: sha1:ce31272b8dbc3314676fba443dac8b2f8f2216f7
+    pristine_git_object: 197b48bc52ff19219680e03862ad322bd55ffdd6
+  src/models/monthsummary.ts:
+    id: cc89e102cbcc
+    last_write_checksum: sha1:d281ab7f9bccd65d72a477104d07996e3ee1bf7a
+    pristine_git_object: 8957c67361f8f32e93b29dc09284671d03e0a998
+  src/models/newtransaction.ts:
+    id: 6ea608e55a01
+    last_write_checksum: sha1:0e55df4a2acf518b40c7d6631c9e1c8af9b738ba
+    pristine_git_object: ebd06b84fee3cb87c16b16ef3d82c5fd14fa1812
+  src/models/operations/createaccount.ts:
+    id: ccbd9eae6348
+    last_write_checksum: sha1:473ba5d4b40358bf233c534f72c76737d2bc720e
+    pristine_git_object: 6c8442dd0e0e0fc6e26b6db0fc1edbf2dee0a116
+  src/models/operations/createscheduledtransaction.ts:
+    id: d61839bd587f
+    last_write_checksum: sha1:08416b339b9e4962e0ba196d04176d38db0c69d3
+    pristine_git_object: 088d749a994ad9ae3a854b93ab14bb824f75f056
+  src/models/operations/createtransaction.ts:
+    id: 16da9656c1db
+    last_write_checksum: sha1:6ce430dfd7a25a864c42c25787a8f75b289cb622
+    pristine_git_object: 9c0653090d1333496df73fc9c4b60d15a81499ca
+  src/models/operations/deletescheduledtransaction.ts:
+    id: 194bd7faa2ab
+    last_write_checksum: sha1:d9f20063c77bc5fc81aff0195013b97b1a364d7b
+    pristine_git_object: eac94eceb7fc3f8a4fdaa810f64f80af0619f3d3
+  src/models/operations/deletetransaction.ts:
+    id: a610afac3644
+    last_write_checksum: sha1:d16dd04c64d163cc5ff47656c2c441c884d88198
+    pristine_git_object: 9518df93258abd9239af32db95be224a35a24004
+  src/models/operations/getaccountbyid.ts:
+    id: 46aa212deb84
+    last_write_checksum: sha1:cb4af79e19c59292323c7a14d351e9756a98ffff
+    pristine_git_object: 4f41248f362186d633424892bc84741fd5341ddf
+  src/models/operations/getaccounts.ts:
+    id: c31c40e3e724
+    last_write_checksum: sha1:352f91f316e051425060fd4f367f4b570ab121eb
+    pristine_git_object: 1e679e7a072f704febe35070c64a3d3dbf92d790
+  src/models/operations/getbudgetbyid.ts:
+    id: f21e02bffc54
+    last_write_checksum: sha1:5787a3edc8bdc68136b68fbde22750f2a97364f7
+    pristine_git_object: e249a004f4bcd807aeab083d048318248b823275
+  src/models/operations/getbudgetmonth.ts:
+    id: c293cee7db64
+    last_write_checksum: sha1:aba90ce73eed07b96ad07483d33bf649ee837bfa
+    pristine_git_object: b34a544598b04fe3bf48b8ead31ab1fb8f59582b
+  src/models/operations/getbudgetmonths.ts:
+    id: 065c4a252a70
+    last_write_checksum: sha1:494e37dcd3fb6e89c5e1332de69f4fec358376b4
+    pristine_git_object: 89ecb69a6ca7d75082885861bdb68f58ca8daa8f
+  src/models/operations/getbudgets.ts:
+    id: 1d8ed0f55234
+    last_write_checksum: sha1:fde3e6714d8ed09dcec0a1b660b9f7fbfb4796d0
+    pristine_git_object: 8b6b829a5a2fefc4f899c85924eba1b6220ff2bf
+  src/models/operations/getbudgetsettingsbyid.ts:
+    id: 3aad9ff4b39f
+    last_write_checksum: sha1:c81d4dd236b5265977c1ca8c6f00288f803c509d
+    pristine_git_object: dd3050cc1e5174106976e23efb3de15cf5aa971c
+  src/models/operations/getcategories.ts:
+    id: 4e57684ed7a4
+    last_write_checksum: sha1:533bdf7de24538d9ac51c4fff64e393a8051ca87
+    pristine_git_object: bfa654a87fe6798481b87a59ea181688c8c003df
+  src/models/operations/getcategorybyid.ts:
+    id: 9b1f23e47571
+    last_write_checksum: sha1:70a206e239bd313d642a8e54d24e38b879afa94d
+    pristine_git_object: 008bf30dcf608d00f7ef9e9b3f56a9751eba6f08
+  src/models/operations/getmonthcategorybyid.ts:
+    id: 1ba51f5a0470
+    last_write_checksum: sha1:c6d375727d2e8e92aa1fd20e7c8e5939357b0e2d
+    pristine_git_object: 6ffadc8f568c8f68d4f8499dc2223029edb631ec
+  src/models/operations/getpayeebyid.ts:
+    id: 8605ca2e8b5f
+    last_write_checksum: sha1:e17040f65b25c711316e022c4d54ccb4c74208aa
+    pristine_git_object: b0b21355ffd4fa54e99ca487d8c288780a58bb99
+  src/models/operations/getpayeelocationbyid.ts:
+    id: ad037ce806e9
+    last_write_checksum: sha1:9726599a6e247e4fc702a2c95fca694a6e788670
+    pristine_git_object: 141aea2a55752956245ba4b20d841bd7ff087d67
+  src/models/operations/getpayeelocations.ts:
+    id: 3d10a60125b9
+    last_write_checksum: sha1:f2f1bf85837a7e1213de89daa2bee81038e68a38
+    pristine_git_object: 975391c8a84852a8cbffd581d61e68f3e91ff642
+  src/models/operations/getpayeelocationsbypayee.ts:
+    id: 0790812acf71
+    last_write_checksum: sha1:1f69663c6e35590ec653e496b7c4c15ac13e9ca8
+    pristine_git_object: 7520f71bdb32a5c4c3c9ea3edc65bc2c8f5cc03b
+  src/models/operations/getpayees.ts:
+    id: 5c2632dcc72c
+    last_write_checksum: sha1:59457557580248c5a71324fa7b113459dda34f37
+    pristine_git_object: 680103efc178571f890eb5caeb52a3856d0b39da
+  src/models/operations/getscheduledtransactionbyid.ts:
+    id: 049479c105af
+    last_write_checksum: sha1:aaffe2afe9dbb6496afcdf00f790e28c1ae80205
+    pristine_git_object: bf8ae594eb1b31ee79d3cdfac1a9708218aea106
+  src/models/operations/getscheduledtransactions.ts:
+    id: 7d85baaf3a44
+    last_write_checksum: sha1:a1bc429280106297344324957c2a0235afe4c839
+    pristine_git_object: 57390ee3481791cec311de4ce12ba41303a5962f
+  src/models/operations/gettransactionbyid.ts:
+    id: 6948027a052a
+    last_write_checksum: sha1:5ad1ccf6e3408e0af87aa5e64dac271c45a22f48
+    pristine_git_object: 20c4882ba6efe5bdff7099791b4d5448484e348e
+  src/models/operations/gettransactions.ts:
+    id: 488920f0797c
+    last_write_checksum: sha1:c365622e25f8f4a9a21638e44b574604fe8a5ea4
+    pristine_git_object: 2da5829650d8bcaa57742d6ca8f2a514eba14a41
+  src/models/operations/gettransactionsbyaccount.ts:
+    id: 75f4190fd58a
+    last_write_checksum: sha1:a5555a7cc8be6112e36393935a3534dc50d8314e
+    pristine_git_object: 8b20e7f4a5804f827228a8c61ef6c8a9b9acd0e5
+  src/models/operations/gettransactionsbycategory.ts:
+    id: 50ed7ccc97c6
+    last_write_checksum: sha1:55f435734c8c52c6e1532dfe66abbbceff76a493
+    pristine_git_object: db3bcb670cf04407e7e1bc659b3f2e8f26af9eae
+  src/models/operations/gettransactionsbymonth.ts:
+    id: c73b2b32c85a
+    last_write_checksum: sha1:67f761557cae9c0e825600e3deee70c05b72e8af
+    pristine_git_object: f9b230c100277b047a66c48c8d69cfedcacbcabe
+  src/models/operations/gettransactionsbypayee.ts:
+    id: a7904def834d
+    last_write_checksum: sha1:125b57bc07a28e3029c344959c24d76927ce8a6e
+    pristine_git_object: 84e9cdf0df52def4adeb114a80e8cdd17eb90a33
+  src/models/operations/importtransactions.ts:
+    id: 823b7d335d37
+    last_write_checksum: sha1:748d0fd45d9f1b68074d66ba83178c028a611242
+    pristine_git_object: 6a167fa07adbe088efc134264db02bcf4d983e0d
+  src/models/operations/index.ts:
+    id: 0d9ffaf774d2
+    last_write_checksum: sha1:463d0713c568d592fb8087f2a6a6c20873a275aa
+    pristine_git_object: dfa76815cd1db34f440ca47841cff76a0751614c
+  src/models/operations/updatecategory.ts:
+    id: 22312af31b72
+    last_write_checksum: sha1:a61b306ba65df9e68657696f926ab5739fde9d0f
+    pristine_git_object: bac8ba5ca956f2cc0d54f67179377d5d7a0daa26
+  src/models/operations/updatemonthcategory.ts:
+    id: 9a3f524f226c
+    last_write_checksum: sha1:f935c969f14ee4b783f1dbe573d7a97c97dadd49
+    pristine_git_object: e702f62d47b9f7a3c9ee134279837be8f101a751
+  src/models/operations/updatepayee.ts:
+    id: 536dd06751ef
+    last_write_checksum: sha1:20de1a97d1fbae84186380e99231aca41447a810
+    pristine_git_object: 4668f47df5339ac2f04328e8ecbd66a4fbe86c6a
+  src/models/operations/updatescheduledtransaction.ts:
+    id: 6e9a9ddd9fe3
+    last_write_checksum: sha1:5216c01871391d6b9c7389de3329d2d65c9047b5
+    pristine_git_object: e4255a5111179e2dc77a5f9794e0c33b9189e525
+  src/models/operations/updatetransaction.ts:
+    id: dc3697f32b4b
+    last_write_checksum: sha1:17912b45209ab6c7c6a292a78eee814150221e09
+    pristine_git_object: b7d63475d028450cd3d549559e9011f5b8e75a29
+  src/models/operations/updatetransactions.ts:
+    id: 2e5cb08ca698
+    last_write_checksum: sha1:5e28cfcbe085e30fec63a0f465a3c574f4a3d37d
+    pristine_git_object: 3efa4691dca5c444f1bb88fd5b6cead098b7417a
+  src/models/patchcategorywrapper.ts:
+    id: c69e8d3ac835
+    last_write_checksum: sha1:d47448364cfa22cedf3327672d2bdf50a00fce9c
+    pristine_git_object: bb4e2f55b4f815eddccc0bac6e7ec878b5587b68
+  src/models/patchmonthcategorywrapper.ts:
+    id: c42daf7331f8
+    last_write_checksum: sha1:3252b883b9d2134e26477a78651a66873562f229
+    pristine_git_object: fa9c59d92d0dd096767ef0bacb65224a7c6720de
+  src/models/patchpayeewrapper.ts:
+    id: de115a464ab7
+    last_write_checksum: sha1:0692b1ffe2f16b55d9e9958fe464fa6dc1fdbd76
+    pristine_git_object: 571d3304f17fa07b6f8f2270dbc0f1310cb9dbc8
+  src/models/patchtransactionswrapper.ts:
+    id: 61ef5479e8a6
+    last_write_checksum: sha1:716ee05d0a2546c46bc67c5de5a7722410aa09b1
+    pristine_git_object: 442aba61263e1fcda611f1e0b8e6a988425d8c1a
+  src/models/payee.ts:
+    id: 8c68db5e1e66
+    last_write_checksum: sha1:c73b54096152978984cc662e429d56df38374c92
+    pristine_git_object: 677b7ee31c87edf2a79b4882618eca6410125223
+  src/models/payeelocation.ts:
+    id: 9d099f8645bb
+    last_write_checksum: sha1:f78816ed12aebc609a614cb1990912f6df019788
+    pristine_git_object: 565f7f05751ccd4a5abc632671d4e7b61f502d8c
+  src/models/payeelocationresponse.ts:
+    id: 014628712da9
+    last_write_checksum: sha1:e63cfa57514e66f204a76591674c325e05bf1371
+    pristine_git_object: 01145306988dabe85440c7239e4c0c727ff3a857
+  src/models/payeelocationsresponse.ts:
+    id: afa9bc41fcc4
+    last_write_checksum: sha1:7024fc8feb50dee4872c408a49814f22ecd1bd7b
+    pristine_git_object: e099051b81472e64f64b4cd77b7f81031d8fbae7
+  src/models/payeeresponse.ts:
+    id: ed83aeb0653f
+    last_write_checksum: sha1:6546d62a76235915252953eb27a02880f2239488
+    pristine_git_object: 70211e853fcf9fcfce865e874fa71ecd04ff254f
+  src/models/payeesresponse.ts:
+    id: 0ad7090fc140
+    last_write_checksum: sha1:06a9dbe29fe96aad732d0fdfa0bff9b3fbcac6a1
+    pristine_git_object: d48692a77168bb0439b5bff88462d9fae02f771b
+  src/models/postaccountwrapper.ts:
+    id: a220763acaaf
+    last_write_checksum: sha1:92424d8b18037baa4502928de4ca5ea7d4142fd8
+    pristine_git_object: a8ae24afdb62c39940331a675ea50a2ee58127ff
+  src/models/postscheduledtransactionwrapper.ts:
+    id: 025d5f905d58
+    last_write_checksum: sha1:f7e1577075459656a01aab531f9dd74cf12fee6c
+    pristine_git_object: b4550a2f250789dcb29328470d3450e65a039cb7
+  src/models/posttransactionswrapper.ts:
+    id: e5d747d4b104
+    last_write_checksum: sha1:4bcffabe246eca0097d5cddfa916904cced6683f
+    pristine_git_object: 79cc32259f335894e69377e1fe2eec3679055e9e
+  src/models/putscheduledtransactionwrapper.ts:
+    id: 60ccc544c7e8
+    last_write_checksum: sha1:589a6fc3a180a9a63c26007f9bf67eb4546466fb
+    pristine_git_object: 26cbe600627e7ed4b0445f784ea105b01c588e8e
+  src/models/puttransactionwrapper.ts:
+    id: 652a6d19f0d2
+    last_write_checksum: sha1:4ac9b7cbb4a47656f706d47c590cad19ccce2d1e
+    pristine_git_object: 0e4b88908e3c653320a07d7b3c0c1f6f8f56cea6
+  src/models/saveaccount.ts:
+    id: fa8c3cf85303
+    last_write_checksum: sha1:15eb4e7b6fba6b8a165d071073a9768c97f79506
+    pristine_git_object: bc6d92e194e5592558c5d29e1f2a606541923446
+  src/models/savecategory.ts:
+    id: 7c6d48b23640
+    last_write_checksum: sha1:98aaaae08a697ee8fa446110da427f2f1a933781
+    pristine_git_object: c2f0d56a923b2d70d2bb6220c9f32637b296de13
+  src/models/savecategoryresponse.ts:
+    id: 3d28b48c2e32
+    last_write_checksum: sha1:2781b83cae9a3c0aecc8b7ebd0bd6f464551ba63
+    pristine_git_object: b3272f61c7ae6174aec69729fc3e4d42a7bc9c11
+  src/models/savemonthcategory.ts:
+    id: bd056d13a47a
+    last_write_checksum: sha1:c980a41575744978c8c9c92c6b83d4b7dc1c1d5c
+    pristine_git_object: ea9621b668b578dd36602476cb37430a9101e66b
+  src/models/savepayee.ts:
+    id: 062098350a6a
+    last_write_checksum: sha1:8c89524666e203e9c2ba20e086bce546be6b2a0c
+    pristine_git_object: f7c243731944ce77863054001b98b6166ba823e5
+  src/models/savepayeeresponse.ts:
+    id: 301404e29e25
+    last_write_checksum: sha1:b2b84da8457f2b0a4b3c134ee422ccb03a75eda6
+    pristine_git_object: 2a2808de879cebc85620facfca2b35eea2c86811
+  src/models/savescheduledtransaction.ts:
+    id: 05e522961623
+    last_write_checksum: sha1:50de5c3d6d03f7c08ca9adf670add77e89ac30ef
+    pristine_git_object: a6abf8b4588d1501b4609985474204d8d83c185b
+  src/models/savesubtransaction.ts:
+    id: 70ff37b24187
+    last_write_checksum: sha1:132582e5ca41d0a4d82640630b04a2e8c32a4c9c
+    pristine_git_object: 5c189287fd816470930704c3fca103202541d96b
+  src/models/savetransactionsresponse.ts:
+    id: 91bcc19fb149
+    last_write_checksum: sha1:19f7b70d3af3eaf018244eeabe533d66de705b4d
+    pristine_git_object: ec08b426cbff374533e8ac5afb38bd38aae58a2e
+  src/models/savetransactionwithidorimportid.ts:
+    id: e8b21cba1f5c
+    last_write_checksum: sha1:a6fcbf1681d907b4e83bc95e3ea3f20188558af2
+    pristine_git_object: 5d52f1824f57c02377adf94022e26616e190ed64
+  src/models/scheduledsubtransaction.ts:
+    id: 14bb1195fa06
+    last_write_checksum: sha1:4f498f9e567ad5a7001d1a10d42c28a38aeffad7
+    pristine_git_object: 9a21b128365f9d68816fb2c097bdec67e68b392d
+  src/models/scheduledtransactiondetail.ts:
+    id: d9b3e6d553ba
+    last_write_checksum: sha1:a2ea731fab7e07358d51e2a8fd185b0e654f014f
+    pristine_git_object: 771cf0f2aefdd22ab442744c4e0674587be746f5
+  src/models/scheduledtransactionfrequency.ts:
+    id: 7bcf2f4f8491
+    last_write_checksum: sha1:39791313663d39f6b5f727e530f15dc51a89b5a0
+    pristine_git_object: 0a87002ab3a465cbcc74d200409a6ed112ed3162
+  src/models/scheduledtransactionresponse.ts:
+    id: 55982a366e23
+    last_write_checksum: sha1:e4be1735df87a7719c4594d4fe67af5995044389
+    pristine_git_object: bf95c3ae6a9a06f47b544d05de2b3c637fb8e56a
+  src/models/scheduledtransactionsresponse.ts:
+    id: cd32824c3eb9
+    last_write_checksum: sha1:063dd8bd63cf59aca33b9aa9495686ef58e91bcb
+    pristine_git_object: 2b8db0eff01c6a5cbd6f9746e564cf2b373e03ce
+  src/models/scheduledtransactionsummary.ts:
+    id: 43388c666552
+    last_write_checksum: sha1:4cc8d61940fcaf9d214e45b2e1a22de03da931c5
+    pristine_git_object: 4f234b1e1491e84f335e22d95a1cd7549ba51f56
+  src/models/security.ts:
+    id: d90c6c784ca5
+    last_write_checksum: sha1:887fe19d71e6c8deb15f843030199382da7927a2
+    pristine_git_object: 69a462764d21ec50a2844e73267b6a89aa91fdcb
+  src/models/subtransaction.ts:
+    id: 5f109e06ac90
+    last_write_checksum: sha1:dbf2616edaea4ce89c6cdca3480233f9a4a329b7
+    pristine_git_object: dee4f506bf910decf9656834507ee2572a7e6f9a
+  src/models/transactionclearedstatus.ts:
+    id: 0ebb90368954
+    last_write_checksum: sha1:b84ef506f2f733bc4d7814ca4a963a72d1277325
+    pristine_git_object: 5de2f931a4e46f31d875c4df236ee99a448c3faa
+  src/models/transactiondetail.ts:
+    id: a2d28f467436
+    last_write_checksum: sha1:1abafcbbd86717cb9eeb635590169bd7a8c29c7f
+    pristine_git_object: 41b5d43a3d8dbcbb1e2c951700b8374542ade75f
+  src/models/transactionflagcolor.ts:
+    id: 0695b7c516e9
+    last_write_checksum: sha1:73dfe7237e5f2a0351bb2269cf5e14760e7dfb35
+    pristine_git_object: c34cb9cddea98e385b7208e0fb68173811f94770
+  src/models/transactionresponse.ts:
+    id: f293b6ef2c8f
+    last_write_checksum: sha1:223fb136ac616616f71103e4f22993bf69d982aa
+    pristine_git_object: 85139664d681ea3551b0ade572c91041beddb91e
+  src/models/transactionsimportresponse.ts:
+    id: f42ec8c10e72
+    last_write_checksum: sha1:087e325fe7f316c0f0986ec65325031143cbd9b4
+    pristine_git_object: 72d07103a8cc7395ef004bcb5ceab8745c684233
+  src/models/transactionsresponse.ts:
+    id: 2aff0ba74831
+    last_write_checksum: sha1:3a36041c2d76be8c03664655d571e6d7307e8cd3
+    pristine_git_object: ffd6069bea9013dc56e01ed12f87316b82a333f8
+  src/models/transactionsummary.ts:
+    id: 5be8e1e03c4d
+    last_write_checksum: sha1:678792ce3f6473a526f35e038e41da0507757967
+    pristine_git_object: 1962ce131a746c730721913453cc699387588188
+  src/models/user.ts:
+    id: 30400d1cf3c2
+    last_write_checksum: sha1:e2464aff750d022df40df1a7e20e7fc2b850033e
+    pristine_git_object: fc4763ae5179abe4e41c703590d26431d2ddc2f0
+  src/models/userresponse.ts:
+    id: 46cc5345b5f2
+    last_write_checksum: sha1:5a6448b403d1381772f93ff19d7126403c564c7d
+    pristine_git_object: 358dcce9c6c75168eb4ad452ee693e06d7becfe9
+  src/react-query/_context.tsx:
+    id: f8dc7b3db733
+    last_write_checksum: sha1:dd22378a1bb5a2402135faf2e92b559bd50b5fa9
+    pristine_git_object: 4ff2bbc8430d5da3c8c8fb4dbfc404e003bb0c8d
+  src/react-query/_types.ts:
+    id: 8d58d2bd1914
+    last_write_checksum: sha1:6d4204885f4aeae1a0bc6d19522dd26f7c044112
+    pristine_git_object: cd2a95549b7da1cf5d492db48cfa037b47203554
+  src/react-query/accountsCreate.ts:
+    id: 0cedfc81c2b6
+    last_write_checksum: sha1:f1ad0cb6573379d5bbeac6650773897b53281e64
+    pristine_git_object: 74cefe8d0dfb9ef3abd2fa067c6afa50cd8f555d
+  src/react-query/accountsGet.core.ts:
+    id: a313faa0a75c
+    last_write_checksum: sha1:e759682431289d5bbc5a5e7f187baac5e03fb124
+    pristine_git_object: 815681a9212e61f30d8b48203cbcb478990b190a
+  src/react-query/accountsGet.ts:
+    id: 32a9803b9678
+    last_write_checksum: sha1:e9a49624e227c3d0876b8400ca09f985fd3c1191
+    pristine_git_object: 9ac76eb525330ff4051664dcd5a80487e63d9850
+  src/react-query/accountsList.core.ts:
+    id: 2d4ca46be8b3
+    last_write_checksum: sha1:4ad20b0a02af837de79f982ac2ecf94e4f000c71
+    pristine_git_object: 244714234b40ff3d62c5d3b62670b3f9fd03db92
+  src/react-query/accountsList.ts:
+    id: c847792f2a0c
+    last_write_checksum: sha1:3bcfb7127e790d39e55b01688f932c27702f6d0f
+    pristine_git_object: 94d9ea19eb3488fda3ca001d3e1bcaea945bb89e
+  src/react-query/budgetsGet.core.ts:
+    id: 4e0ff54dc5f5
+    last_write_checksum: sha1:482af8c5b013827e500a860296fd1eec7ea12146
+    pristine_git_object: 1bff8887e9e0bbebb07e40b5cf829776a291a597
+  src/react-query/budgetsGet.ts:
+    id: 92bf5a756adb
+    last_write_checksum: sha1:d1ce06214032361d8dfc8e7ca5901f406aa93f78
+    pristine_git_object: 404fa5ecc8b3f170110352f32f9dee96bb1ff5dc
+  src/react-query/budgetsGetSettings.core.ts:
+    id: e13f19b0fc0a
+    last_write_checksum: sha1:12e4053c8e448913a687b9bdddbeee2e53e83c86
+    pristine_git_object: f7eb7f3a985fe92811395658230db638302c3784
+  src/react-query/budgetsGetSettings.ts:
+    id: 5d5a2e46ecb8
+    last_write_checksum: sha1:0661e5b21e150276c38fae7ba770f0223f840395
+    pristine_git_object: c1eb8ae9e1a611c43ac4d43f2dca135b7a56b35a
+  src/react-query/budgetsList.core.ts:
+    id: 549797f28878
+    last_write_checksum: sha1:65ad288ac9b18f9aa5cfb2c10b628100b58ae49c
+    pristine_git_object: dfbb5a9f16184f29e0bdebe7d9f142381a0b7680
+  src/react-query/budgetsList.ts:
+    id: f117bffed641
+    last_write_checksum: sha1:4e210a24d5974e41fb8f75872c0d09981beb0eee
+    pristine_git_object: 2fa199490fc6babc5a2ecf54877f67bb3ea4bdc7
+  src/react-query/categoriesGet.core.ts:
+    id: 7fee44c45b1a
+    last_write_checksum: sha1:5f93eb937a222a403e97573bf8a241bdb6a52ca3
+    pristine_git_object: 0d774776dadd709104fc083f6e7f6d7e8766a469
+  src/react-query/categoriesGet.ts:
+    id: b3e4e8002655
+    last_write_checksum: sha1:8d5e843acfe146c0b34effb2fa269bb0b8c1ef5d
+    pristine_git_object: a13fa1b48415aa3a28eee17b987fb59f748602eb
+  src/react-query/categoriesGetByMonth.core.ts:
+    id: dc94747ce3ec
+    last_write_checksum: sha1:302e45cedc420c1d4cb9b7e815c45f9a84150e9b
+    pristine_git_object: 5b2007caf5931fc22148073ad87579d4302c93cb
+  src/react-query/categoriesGetByMonth.ts:
+    id: fd5b6f596c5b
+    last_write_checksum: sha1:d9ad0e4ae9de2f252239d58942ac1f429bf54974
+    pristine_git_object: 399b51f4e6a57bdccec897b2912b43c919b2293b
+  src/react-query/categoriesList.core.ts:
+    id: c18cb218c90f
+    last_write_checksum: sha1:bd882056e6653c9367d9742f067db45b010d59c3
+    pristine_git_object: bc823f43a548bd5d9e3f209fa7b1596aa41fc32a
+  src/react-query/categoriesList.ts:
+    id: 75ffcdeede2a
+    last_write_checksum: sha1:bf769a92490f04bc0bcc38eb146fa0d0801b994f
+    pristine_git_object: 36072d20dd5f76ddb6ff2930d2902ef668893dcc
+  src/react-query/categoriesUpdate.ts:
+    id: 5cd289116fb0
+    last_write_checksum: sha1:de45034a311931531691e85130a584aa79d74b6d
+    pristine_git_object: fec411bfd7128b552a1bd9c4267fd41737d5a6d6
+  src/react-query/categoriesUpdateMonth.ts:
+    id: eae92ec7b702
+    last_write_checksum: sha1:92b3a32688ed8b8f829935519bcf446a9119f656
+    pristine_git_object: cbfb3daa67685c00a8cc12f0901605831017aefa
+  src/react-query/index.ts:
+    id: 9e975471aa65
+    last_write_checksum: sha1:dfb6b04185715f2227c025f44d70b73ad6e6ba54
+    pristine_git_object: 7de740e1550b278b8be29e31ca9ea9ef58996d3c
+  src/react-query/monthsGet.core.ts:
+    id: 3812fe9421cd
+    last_write_checksum: sha1:06739d08efa0a3539429098e3d7cd46780b800b9
+    pristine_git_object: 349d28c1cf9ed88a13af4912df82827975fcb7d6
+  src/react-query/monthsGet.ts:
+    id: f249ff336908
+    last_write_checksum: sha1:1322601534af558369aa6e47569a2312f4198f3b
+    pristine_git_object: 55fa548d6f511fc169ff0b7ccaaea928289198bd
+  src/react-query/monthsList.core.ts:
+    id: 6a2033e725e1
+    last_write_checksum: sha1:b6334e18ac608d3ce1eccc03d488d3062c5fd583
+    pristine_git_object: e414e485d620d6f4e3bfc39ec3d7b31ea7a8c4ef
+  src/react-query/monthsList.ts:
+    id: 8e7a40dd5acf
+    last_write_checksum: sha1:e46062322ce90be66e8c1da10e68f711e76f0643
+    pristine_git_object: 7f3703f8c92be2653ff778ab533932b6d9a21d01
+  src/react-query/payeeLocationsGet.core.ts:
+    id: 2ba9f83ff3c4
+    last_write_checksum: sha1:7d930676928e6532c30d828a9e3637ec78688110
+    pristine_git_object: 460bdbf127a1980cce613dc1af6f3e576e06e43d
+  src/react-query/payeeLocationsGet.ts:
+    id: 4195bd9a9ebc
+    last_write_checksum: sha1:beaa1422911377aade7d99c11994011d39121a16
+    pristine_git_object: fe7e0741e5baefad119e6fd439d8b763f9c2359c
+  src/react-query/payeeLocationsList.core.ts:
+    id: d01d6a9e5c81
+    last_write_checksum: sha1:ec453fd6cf784b5b7a59bbede861c426a0a74b66
+    pristine_git_object: ac86faa3c608defc17f3b7c23a1665e066e9caf5
+  src/react-query/payeeLocationsList.ts:
+    id: b944e45cac6b
+    last_write_checksum: sha1:e56411aff19314787b798f690b535a9b009887c5
+    pristine_git_object: 9598bd9ad87427dad549e36c5b98e32407cce438
+  src/react-query/payeeLocationsListByPayee.core.ts:
+    id: 58c3169bd77e
+    last_write_checksum: sha1:dd5623d8e726c28b5ed4308cc69bbd8273aa4ce2
+    pristine_git_object: b9dc50a1f92be23130707bd3f5b1d169af13f435
+  src/react-query/payeeLocationsListByPayee.ts:
+    id: 10e465c8142f
+    last_write_checksum: sha1:10c742ff0acfe8247a5d72b4f2a7acc2aec85bbc
+    pristine_git_object: 5dc992762b5bf04a72e9a1b63c14f4890e48bf52
+  src/react-query/payeesGet.core.ts:
+    id: 32e86c3bc02c
+    last_write_checksum: sha1:0e7e97a6d22fe3f29cdc1f7464c3cedb317fb2c1
+    pristine_git_object: 3579639c6c828cfe6341bcf7b577e9e652de04bd
+  src/react-query/payeesGet.ts:
+    id: b9a7864a5fa8
+    last_write_checksum: sha1:4fa360b27095bb567ab7f65c1b8c90ca999ef216
+    pristine_git_object: 801009c052cb08d46d355a8028094fd63d3011a3
+  src/react-query/payeesList.core.ts:
+    id: e817fbaaf047
+    last_write_checksum: sha1:1679420394c817f60fc189df9d1c2a62e94fb225
+    pristine_git_object: 0f09b99abd94cfd8c1f4a9c32eccabe6fb8ed414
+  src/react-query/payeesList.ts:
+    id: 14bae3a613c3
+    last_write_checksum: sha1:1a0b6b9c23093e2bcdd56a38ffc69a283e924c0e
+    pristine_git_object: 7d06d047afb6dfed477d4269977834b111ff745f
+  src/react-query/payeesUpdate.ts:
+    id: e3116a630def
+    last_write_checksum: sha1:9273e451cd70239982b70e47bbc18a30295d5e39
+    pristine_git_object: 1473203459b21d564706d6dcfda3af883178a2f4
+  src/react-query/scheduledTransactionsCreate.ts:
+    id: 9e86e04fb925
+    last_write_checksum: sha1:53d3908df42c5a086ed2d42cb9c3f810ea8148aa
+    pristine_git_object: ab276a3e5588f672feef0ae382b0ef6bdbf0e044
+  src/react-query/scheduledTransactionsDelete.ts:
+    id: a85fe57c9171
+    last_write_checksum: sha1:d0244abee08c17e0c9d950de6030a73f3268801c
+    pristine_git_object: 657223f041ace22510ef7419d64ceba464bc32cc
+  src/react-query/scheduledTransactionsGet.core.ts:
+    id: 6751d292c4bb
+    last_write_checksum: sha1:898a60416d296095a6892b4b6c1b12a3e18667c1
+    pristine_git_object: c1e16be2e3af7171380133df784b2ef1e43d120f
+  src/react-query/scheduledTransactionsGet.ts:
+    id: 873d82b3af76
+    last_write_checksum: sha1:5f3be64920114f87b612a22e149fd0c30a5d26bb
+    pristine_git_object: d5343ba25016fd7f5eedabaaf5b8fadec0f7b826
+  src/react-query/scheduledTransactionsList.core.ts:
+    id: 53a3927dfbda
+    last_write_checksum: sha1:c8085f2d2a2fd14f8ae83ac1a9591016e71c366e
+    pristine_git_object: e3c89d33692bd34a639950cfca9d6618d6bb959f
+  src/react-query/scheduledTransactionsList.ts:
+    id: 3769bf2d4e8f
+    last_write_checksum: sha1:f4eb14b53af9ca7ea6884d2f7eb2f9bdf50429aa
+    pristine_git_object: e86f1ca8e6e3a4a6ef78bfa501d6a1f692729c96
+  src/react-query/scheduledTransactionsUpdate.ts:
+    id: ae004bfaf753
+    last_write_checksum: sha1:091127efb973ded6e0ff7cb83ae85d44d100eaf9
+    pristine_git_object: fdf4e68d475d9da85414c21daf978bf9a3fc2d34
+  src/react-query/transactionsCreate.ts:
+    id: 0a340a33e8d8
+    last_write_checksum: sha1:3f528278f2558b0e200d388afb4e0c2d04f5fba2
+    pristine_git_object: c85607e1d8d4ff6240c407b61d4f7fa5eed2f549
+  src/react-query/transactionsDelete.ts:
+    id: 7046619fb88a
+    last_write_checksum: sha1:dfaa8471b2f3388400097d56db0dfe9665139dc7
+    pristine_git_object: dec61064d597a79c5551f3998b83e02fafeab638
+  src/react-query/transactionsGet.core.ts:
+    id: 94327f3e7a72
+    last_write_checksum: sha1:72631615cb3e05788d43619b4517c24c494c50e6
+    pristine_git_object: 3b34ad56cffdd1b35c7922be39d2cc8cdacf81b4
+  src/react-query/transactionsGet.ts:
+    id: bbfacaa12329
+    last_write_checksum: sha1:74fd0c7749166fdb1161d2e5ec093a9a84b07fc6
+    pristine_git_object: 81772f70e54c88baf2f43cfece0dc1ea1224e5d5
+  src/react-query/transactionsImport.ts:
+    id: 5aabdaf2fce7
+    last_write_checksum: sha1:ea8464bb2685744467f8171043c34f7135c20267
+    pristine_git_object: bb3a7293be6913d1df6b6e29cfb417c4c299bfa5
+  src/react-query/transactionsList.core.ts:
+    id: 59e4aa09679e
+    last_write_checksum: sha1:159871b3d1f917ad9e99b069f1fedd1ab42c0f5a
+    pristine_git_object: 0fd0bab2f06cb74093bd28412f26452cd1ec7701
+  src/react-query/transactionsList.ts:
+    id: b5b79f0dde73
+    last_write_checksum: sha1:de21f65f971070ea23c4c0d38122f57164dcdd22
+    pristine_git_object: 6b7c4516a83607b39b3c48e971f3754d6f00779f
+  src/react-query/transactionsListByAccount.core.ts:
+    id: cfad53105274
+    last_write_checksum: sha1:a9a323bb686c6f015e1739c4f86480e420fd914e
+    pristine_git_object: 689051dd9526351ae5015456421d6e297ad3bdf9
+  src/react-query/transactionsListByAccount.ts:
+    id: a078b755e7b1
+    last_write_checksum: sha1:bc31fc8daa52697bbfd36d42c283552c9996abeb
+    pristine_git_object: 03c92f234f857ad111b1882f3526476f774faa0d
+  src/react-query/transactionsListByCategory.core.ts:
+    id: e75ae2aeb887
+    last_write_checksum: sha1:7af96d46db2d6775d874f13b936a631383fce5b1
+    pristine_git_object: cb84628b1577615b0256bb87f5d2743474b578b2
+  src/react-query/transactionsListByCategory.ts:
+    id: f30cbe27f109
+    last_write_checksum: sha1:ebfcd77a978af781d56d418f2d3fd82519ae27d3
+    pristine_git_object: 364db7baec5b321ef0910b1c378f5c91775e843c
+  src/react-query/transactionsListByMonth.core.ts:
+    id: 4ae2e996fdc7
+    last_write_checksum: sha1:e8a5d4aa99714299926070377e79c0ee9480e967
+    pristine_git_object: d6278f0fed2ce1c751f4e58da502cc4760383483
+  src/react-query/transactionsListByMonth.ts:
+    id: fa7dd2520bbe
+    last_write_checksum: sha1:3f9f59697ccd0f41e84b2769b18b53814f136394
+    pristine_git_object: a8f4835b8e8a697470846d90fc673962713ef20f
+  src/react-query/transactionsListByPayee.core.ts:
+    id: f6929f8ed808
+    last_write_checksum: sha1:32424ba7ab3f66cd83f4e8d3341e3914a32572de
+    pristine_git_object: 200b166a50db4c1287e2e106b6b9aed7e278a77f
+  src/react-query/transactionsListByPayee.ts:
+    id: d2ea25beccc8
+    last_write_checksum: sha1:38e8734a7be71360c45baf68f23c7be243b4262c
+    pristine_git_object: a888e727be4f9d42ae371d53c673c85d665746b8
+  src/react-query/transactionsUpdateMany.ts:
+    id: 989acbbb51d9
+    last_write_checksum: sha1:0f430a1a336930038537953c22de5ee59f3f13c0
+    pristine_git_object: 6c45233912b03da9d979cd85b166feaf681c4922
+  src/react-query/transactionsUpdateOne.ts:
+    id: 54c45add1f66
+    last_write_checksum: sha1:58872caa2b8020dde587e3485650e1d0140eb82e
+    pristine_git_object: 1d8edd3f589a067a0925c3ab059249619cf48ee3
+  src/react-query/userGet.core.ts:
+    id: 59ff16041b37
+    last_write_checksum: sha1:beec43be909344a381c2f6b6a0db0932a07103e1
+    pristine_git_object: 300a90f2dea6d85bcdd19b934ca3b82c37156b02
+  src/react-query/userGet.ts:
+    id: 3d84f4ffa598
+    last_write_checksum: sha1:72345dcadb56709b559700ae6d2d5f1bfa767a97
+    pristine_git_object: 5381a282e36fe861d5b639c94e5729f4e56571d1
+  src/sdk/accounts.ts:
+    id: a4031260e046
+    last_write_checksum: sha1:450e0b4bf2c3e665b77af5e83a160be46f8e15a2
+    pristine_git_object: 43a9ea5bbbd2ce8949560f78c519b9db584d5d7c
+  src/sdk/budgets.ts:
+    id: ac88e7c60f2e
+    last_write_checksum: sha1:a33b495708bc580525ceb9ad3205629518fc9756
+    pristine_git_object: 66d4984f0f63675dd1e6523e08d8bec93bf11b2c
+  src/sdk/categories.ts:
+    id: dd687ec18f95
+    last_write_checksum: sha1:8131f3f754a5b0ec4ce7e35665dc6bfefb7a7d7d
+    pristine_git_object: 6d33e9b969527d46b6f2b1b39439a833e2ecdd20
+  src/sdk/index.ts:
+    id: a857902a703f
+    last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
+    pristine_git_object: ecac2264817bb369ff2dbf0f0e9029807e67ff77
+  src/sdk/months.ts:
+    id: c9fadeadc146
+    last_write_checksum: sha1:50c9debbc78d49b9e2ee9b2af17f9f71d8cb2282
+    pristine_git_object: a9d2ce3f09070ddf65a9ef687cf8c1686813fef9
+  src/sdk/payeelocations.ts:
+    id: 85d0dc2ac6e9
+    last_write_checksum: sha1:803bc4ea7a88374a2ce399672177d02dd6dc7c98
+    pristine_git_object: 41f7241e146b1dfd39ebd01af3bf71dde6da4241
+  src/sdk/payees.ts:
+    id: fd1d9307ce6c
+    last_write_checksum: sha1:27ae6d26cd5435c0a615831cffb5f3072d050203
+    pristine_git_object: e447c1daa5d318c94e6218445fc47ffad57066c7
+  src/sdk/scheduledtransactions.ts:
+    id: 1f76f28da89f
+    last_write_checksum: sha1:50f3bf872b9fc7522b4b8f78e544bd350afed2dc
+    pristine_git_object: 67ac3d5373357bcb4bd69b8afe6bef8661b8e8a1
+  src/sdk/sdk.ts:
+    id: 784571af2f69
+    last_write_checksum: sha1:2459963058a4b47d4b8851464d9c0b7ef1fd4ce1
+    pristine_git_object: 90b54064c0f6e7bb5639f6f401919cabbcb71225
+  src/sdk/transactions.ts:
+    id: bcd7a9b32ed7
+    last_write_checksum: sha1:2e9209a3841a61d670165cdf37b2f249be9f53c2
+    pristine_git_object: ee2be2c9e862b21de0b5e3ea847a5ff2e6ca608a
+  src/sdk/user.ts:
+    id: 363e2a871b31
+    last_write_checksum: sha1:33bb89987deef897d7aed253981ad84aa0e20af5
+    pristine_git_object: 3e5e873fff20e8a4d2461e7d81de51326a9a0b63
+  src/types/async.ts:
+    id: fac8da972f86
+    last_write_checksum: sha1:3ff07b3feaf390ec1aeb18ff938e139c6c4a9585
+    pristine_git_object: 689dba5de50e8769e5f3bb913e3f42a146d15bc1
+  src/types/blobs.ts:
+    id: f8ab9b326c86
+    last_write_checksum: sha1:cf45d78916671cb6345a11c97c633c64402bc27c
+    pristine_git_object: cce2892d4f573a120ef3907db90ab15f5979cfda
+  src/types/constdatetime.ts:
+    id: 0f7b6f513917
+    last_write_checksum: sha1:dfaaf9adfaf49808bd4c9dea0039f21b7088d9c0
+    pristine_git_object: fe62144eaf6a2054fc8ca9a98466e70f41b5434d
+  src/types/enums.ts:
+    id: 4d03ddfe5100
+    last_write_checksum: sha1:ee590453d2c87e33e89c633d37ee46907eca0e58
+    pristine_git_object: aba0ffd2a3308a31e516d83b52823d80aa65a8f9
+  src/types/fp.ts:
+    id: ae9f0fb8aab6
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+    pristine_git_object: ccbe51eac69dfb0da5131f14fd753c4b47c1d527
+  src/types/index.ts:
+    id: cd7a0a5ed005
+    last_write_checksum: sha1:bf43b3dccb960ca9ae9c5ab940da4786255881cd
+    pristine_git_object: abf0b7ab8f196829df8946da40d627a46da68e3c
+  src/types/operations.ts:
+    id: 314da01dca47
+    last_write_checksum: sha1:c49e724cfb1259296381cb57bc0fcdd2eae45865
+    pristine_git_object: beb81e10f0b9eee2ed398a853fe6f737b743f818
+  src/types/rfcdate.ts:
+    id: 9eb64906dcd6
+    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
+    pristine_git_object: c79b3f53a3dd922aa2ace5a4191c8652cf9a8e89
+  src/types/streams.ts:
+    id: f99be9c4bf14
+    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
+    pristine_git_object: a0163e7a99cea88f21d0ad4ce3af1c720180ee20
+  src/types/unrecognized.ts:
+    id: 476605c40716
+    last_write_checksum: sha1:d33ac686528492f4cdc0dbf81ed343b4afe020fe
+    pristine_git_object: b7a2a13f3dff50663429df24ae2f55b647ff1084
+  tsconfig.json:
+    id: 61ebb9fd6e8c
+    last_write_checksum: sha1:c3ec7996536cdb9a54319e7d1eb3b199b733d34c
+    pristine_git_object: 0ccdbe286a8780e06a469a9eb7e2fb95322fd507
 examples:
   getUser:
     speakeasy-default-get-user:
@@ -870,13 +2161,401 @@ examples:
         "404":
           application/json: {"error": {"id": "<id>", "name": "<value>", "detail": "<value>"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `ynab.transactions.listByMonth()`:  `response.data` **Changed** **Breaking** :warning:
-  * `ynab.budgets.get()`:  `response.data.budget.categories.[].goalSnoozedAt` **Added**
-  * `ynab.categories.list()`:  `response.data.categoryGroups.[].categories.[].goalSnoozedAt` **Added**
-  * `ynab.categories.get()`:  `response.data.category.goalSnoozedAt` **Added**
-  * `ynab.categories.update()`:  `response.data.category.goalSnoozedAt` **Added**
-  * `ynab.categories.getByMonth()`:  `response.data.category.goalSnoozedAt` **Added**
-  * `ynab.categories.updateMonth()`:  `response.data.category.goalSnoozedAt` **Added**
-  * `ynab.months.get()`:  `response.data.month.categories.[].goalSnoozedAt` **Added**
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - REACT_QUERY.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/account.md
+  - docs/models/accountresponse.md
+  - docs/models/accountresponsedata.md
+  - docs/models/accountsresponse.md
+  - docs/models/accountsresponsedata.md
+  - docs/models/accounttype.md
+  - docs/models/budgetdetail.md
+  - docs/models/budgetdetailresponse.md
+  - docs/models/budgetdetailresponsedata.md
+  - docs/models/budgetsettings.md
+  - docs/models/budgetsettingsresponse.md
+  - docs/models/budgetsettingsresponsedata.md
+  - docs/models/budgetsummary.md
+  - docs/models/budgetsummaryresponse.md
+  - docs/models/budgetsummaryresponsedata.md
+  - docs/models/categoriesresponse.md
+  - docs/models/categoriesresponsedata.md
+  - docs/models/category.md
+  - docs/models/categorygroup.md
+  - docs/models/categorygroupwithcategories.md
+  - docs/models/categoryresponse.md
+  - docs/models/categoryresponsedata.md
+  - docs/models/currencyformat.md
+  - docs/models/dateformat.md
+  - docs/models/defaultbudget.md
+  - docs/models/errordetail.md
+  - docs/models/errors/errorresponse.md
+  - docs/models/existingtransaction.md
+  - docs/models/goaltype.md
+  - docs/models/hybridtransaction.md
+  - docs/models/hybridtransactiondebttransactiontype.md
+  - docs/models/hybridtransactionsresponse.md
+  - docs/models/hybridtransactionsresponsedata.md
+  - docs/models/monthdetail.md
+  - docs/models/monthdetailresponse.md
+  - docs/models/monthdetailresponsedata.md
+  - docs/models/monthsummariesresponse.md
+  - docs/models/monthsummariesresponsedata.md
+  - docs/models/monthsummary.md
+  - docs/models/newtransaction.md
+  - docs/models/operations/createaccountrequest.md
+  - docs/models/operations/createscheduledtransactionrequest.md
+  - docs/models/operations/createtransactionrequest.md
+  - docs/models/operations/deletescheduledtransactionrequest.md
+  - docs/models/operations/deletetransactionrequest.md
+  - docs/models/operations/getaccountbyidrequest.md
+  - docs/models/operations/getaccountsrequest.md
+  - docs/models/operations/getbudgetbyidrequest.md
+  - docs/models/operations/getbudgetmonthrequest.md
+  - docs/models/operations/getbudgetmonthsrequest.md
+  - docs/models/operations/getbudgetsettingsbyidrequest.md
+  - docs/models/operations/getbudgetsrequest.md
+  - docs/models/operations/getcategoriesrequest.md
+  - docs/models/operations/getcategorybyidrequest.md
+  - docs/models/operations/getmonthcategorybyidrequest.md
+  - docs/models/operations/getpayeebyidrequest.md
+  - docs/models/operations/getpayeelocationbyidrequest.md
+  - docs/models/operations/getpayeelocationsbypayeerequest.md
+  - docs/models/operations/getpayeelocationsrequest.md
+  - docs/models/operations/getpayeesrequest.md
+  - docs/models/operations/getscheduledtransactionbyidrequest.md
+  - docs/models/operations/getscheduledtransactionsrequest.md
+  - docs/models/operations/gettransactionbyidrequest.md
+  - docs/models/operations/gettransactionsbyaccountrequest.md
+  - docs/models/operations/gettransactionsbyaccounttype.md
+  - docs/models/operations/gettransactionsbycategoryrequest.md
+  - docs/models/operations/gettransactionsbycategorytype.md
+  - docs/models/operations/gettransactionsbymonthrequest.md
+  - docs/models/operations/gettransactionsbymonthtype.md
+  - docs/models/operations/gettransactionsbypayeerequest.md
+  - docs/models/operations/gettransactionsbypayeetype.md
+  - docs/models/operations/gettransactionsrequest.md
+  - docs/models/operations/gettransactionstype.md
+  - docs/models/operations/importtransactionsrequest.md
+  - docs/models/operations/updatecategoryrequest.md
+  - docs/models/operations/updatemonthcategoryrequest.md
+  - docs/models/operations/updatepayeerequest.md
+  - docs/models/operations/updatescheduledtransactionrequest.md
+  - docs/models/operations/updatetransactionrequest.md
+  - docs/models/operations/updatetransactionsrequest.md
+  - docs/models/patchcategorywrapper.md
+  - docs/models/patchmonthcategorywrapper.md
+  - docs/models/patchpayeewrapper.md
+  - docs/models/patchtransactionswrapper.md
+  - docs/models/payee.md
+  - docs/models/payeelocation.md
+  - docs/models/payeelocationresponse.md
+  - docs/models/payeelocationresponsedata.md
+  - docs/models/payeelocationsresponse.md
+  - docs/models/payeelocationsresponsedata.md
+  - docs/models/payeeresponse.md
+  - docs/models/payeeresponsedata.md
+  - docs/models/payeesresponse.md
+  - docs/models/payeesresponsedata.md
+  - docs/models/postaccountwrapper.md
+  - docs/models/postscheduledtransactionwrapper.md
+  - docs/models/posttransactionswrapper.md
+  - docs/models/putscheduledtransactionwrapper.md
+  - docs/models/puttransactionwrapper.md
+  - docs/models/saveaccount.md
+  - docs/models/savecategory.md
+  - docs/models/savecategoryresponse.md
+  - docs/models/savecategoryresponsedata.md
+  - docs/models/savemonthcategory.md
+  - docs/models/savepayee.md
+  - docs/models/savepayeeresponse.md
+  - docs/models/savepayeeresponsedata.md
+  - docs/models/savescheduledtransaction.md
+  - docs/models/savesubtransaction.md
+  - docs/models/savetransactionsresponse.md
+  - docs/models/savetransactionsresponsedata.md
+  - docs/models/savetransactionwithidorimportid.md
+  - docs/models/scheduledsubtransaction.md
+  - docs/models/scheduledtransactiondetail.md
+  - docs/models/scheduledtransactiondetailfrequency.md
+  - docs/models/scheduledtransactionfrequency.md
+  - docs/models/scheduledtransactionresponse.md
+  - docs/models/scheduledtransactionresponsedata.md
+  - docs/models/scheduledtransactionsresponse.md
+  - docs/models/scheduledtransactionsresponsedata.md
+  - docs/models/scheduledtransactionsummary.md
+  - docs/models/scheduledtransactionsummaryfrequency.md
+  - docs/models/security.md
+  - docs/models/subtransaction.md
+  - docs/models/transactionclearedstatus.md
+  - docs/models/transactiondetail.md
+  - docs/models/transactiondetaildebttransactiontype.md
+  - docs/models/transactionflagcolor.md
+  - docs/models/transactionresponse.md
+  - docs/models/transactionresponsedata.md
+  - docs/models/transactionsimportresponse.md
+  - docs/models/transactionsimportresponsedata.md
+  - docs/models/transactionsresponse.md
+  - docs/models/transactionsresponsedata.md
+  - docs/models/transactionsummary.md
+  - docs/models/transactionsummarydebttransactiontype.md
+  - docs/models/type.md
+  - docs/models/user.md
+  - docs/models/userresponse.md
+  - docs/models/userresponsedata.md
+  - docs/sdks/accounts/README.md
+  - docs/sdks/budgets/README.md
+  - docs/sdks/categories/README.md
+  - docs/sdks/months/README.md
+  - docs/sdks/payeelocations/README.md
+  - docs/sdks/payees/README.md
+  - docs/sdks/scheduledtransactions/README.md
+  - docs/sdks/transactions/README.md
+  - docs/sdks/user/README.md
+  - docs/sdks/ynab/README.md
+  - docs/types/rfcdate.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/package.json
+  - examples/userGet.example.ts
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/accountsCreate.ts
+  - src/funcs/accountsGet.ts
+  - src/funcs/accountsList.ts
+  - src/funcs/budgetsGet.ts
+  - src/funcs/budgetsGetSettings.ts
+  - src/funcs/budgetsList.ts
+  - src/funcs/categoriesGet.ts
+  - src/funcs/categoriesGetByMonth.ts
+  - src/funcs/categoriesList.ts
+  - src/funcs/categoriesUpdate.ts
+  - src/funcs/categoriesUpdateMonth.ts
+  - src/funcs/monthsGet.ts
+  - src/funcs/monthsList.ts
+  - src/funcs/payeeLocationsGet.ts
+  - src/funcs/payeeLocationsList.ts
+  - src/funcs/payeeLocationsListByPayee.ts
+  - src/funcs/payeesGet.ts
+  - src/funcs/payeesList.ts
+  - src/funcs/payeesUpdate.ts
+  - src/funcs/scheduledTransactionsCreate.ts
+  - src/funcs/scheduledTransactionsDelete.ts
+  - src/funcs/scheduledTransactionsGet.ts
+  - src/funcs/scheduledTransactionsList.ts
+  - src/funcs/scheduledTransactionsUpdate.ts
+  - src/funcs/transactionsCreate.ts
+  - src/funcs/transactionsDelete.ts
+  - src/funcs/transactionsGet.ts
+  - src/funcs/transactionsImport.ts
+  - src/funcs/transactionsList.ts
+  - src/funcs/transactionsListByAccount.ts
+  - src/funcs/transactionsListByCategory.ts
+  - src/funcs/transactionsListByMonth.ts
+  - src/funcs/transactionsListByPayee.ts
+  - src/funcs/transactionsUpdateMany.ts
+  - src/funcs/transactionsUpdateOne.ts
+  - src/funcs/userGet.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/account.ts
+  - src/models/accountresponse.ts
+  - src/models/accountsresponse.ts
+  - src/models/accounttype.ts
+  - src/models/budgetdetail.ts
+  - src/models/budgetdetailresponse.ts
+  - src/models/budgetsettings.ts
+  - src/models/budgetsettingsresponse.ts
+  - src/models/budgetsummary.ts
+  - src/models/budgetsummaryresponse.ts
+  - src/models/categoriesresponse.ts
+  - src/models/category.ts
+  - src/models/categorygroup.ts
+  - src/models/categorygroupwithcategories.ts
+  - src/models/categoryresponse.ts
+  - src/models/currencyformat.ts
+  - src/models/dateformat.ts
+  - src/models/errordetail.ts
+  - src/models/errors/errorresponse.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/ynabdefaulterror.ts
+  - src/models/errors/ynaberror.ts
+  - src/models/existingtransaction.ts
+  - src/models/hybridtransaction.ts
+  - src/models/hybridtransactionsresponse.ts
+  - src/models/index.ts
+  - src/models/monthdetail.ts
+  - src/models/monthdetailresponse.ts
+  - src/models/monthsummariesresponse.ts
+  - src/models/monthsummary.ts
+  - src/models/newtransaction.ts
+  - src/models/operations/createaccount.ts
+  - src/models/operations/createscheduledtransaction.ts
+  - src/models/operations/createtransaction.ts
+  - src/models/operations/deletescheduledtransaction.ts
+  - src/models/operations/deletetransaction.ts
+  - src/models/operations/getaccountbyid.ts
+  - src/models/operations/getaccounts.ts
+  - src/models/operations/getbudgetbyid.ts
+  - src/models/operations/getbudgetmonth.ts
+  - src/models/operations/getbudgetmonths.ts
+  - src/models/operations/getbudgets.ts
+  - src/models/operations/getbudgetsettingsbyid.ts
+  - src/models/operations/getcategories.ts
+  - src/models/operations/getcategorybyid.ts
+  - src/models/operations/getmonthcategorybyid.ts
+  - src/models/operations/getpayeebyid.ts
+  - src/models/operations/getpayeelocationbyid.ts
+  - src/models/operations/getpayeelocations.ts
+  - src/models/operations/getpayeelocationsbypayee.ts
+  - src/models/operations/getpayees.ts
+  - src/models/operations/getscheduledtransactionbyid.ts
+  - src/models/operations/getscheduledtransactions.ts
+  - src/models/operations/gettransactionbyid.ts
+  - src/models/operations/gettransactions.ts
+  - src/models/operations/gettransactionsbyaccount.ts
+  - src/models/operations/gettransactionsbycategory.ts
+  - src/models/operations/gettransactionsbymonth.ts
+  - src/models/operations/gettransactionsbypayee.ts
+  - src/models/operations/importtransactions.ts
+  - src/models/operations/index.ts
+  - src/models/operations/updatecategory.ts
+  - src/models/operations/updatemonthcategory.ts
+  - src/models/operations/updatepayee.ts
+  - src/models/operations/updatescheduledtransaction.ts
+  - src/models/operations/updatetransaction.ts
+  - src/models/operations/updatetransactions.ts
+  - src/models/patchcategorywrapper.ts
+  - src/models/patchmonthcategorywrapper.ts
+  - src/models/patchpayeewrapper.ts
+  - src/models/patchtransactionswrapper.ts
+  - src/models/payee.ts
+  - src/models/payeelocation.ts
+  - src/models/payeelocationresponse.ts
+  - src/models/payeelocationsresponse.ts
+  - src/models/payeeresponse.ts
+  - src/models/payeesresponse.ts
+  - src/models/postaccountwrapper.ts
+  - src/models/postscheduledtransactionwrapper.ts
+  - src/models/posttransactionswrapper.ts
+  - src/models/putscheduledtransactionwrapper.ts
+  - src/models/puttransactionwrapper.ts
+  - src/models/saveaccount.ts
+  - src/models/savecategory.ts
+  - src/models/savecategoryresponse.ts
+  - src/models/savemonthcategory.ts
+  - src/models/savepayee.ts
+  - src/models/savepayeeresponse.ts
+  - src/models/savescheduledtransaction.ts
+  - src/models/savesubtransaction.ts
+  - src/models/savetransactionsresponse.ts
+  - src/models/savetransactionwithidorimportid.ts
+  - src/models/scheduledsubtransaction.ts
+  - src/models/scheduledtransactiondetail.ts
+  - src/models/scheduledtransactionfrequency.ts
+  - src/models/scheduledtransactionresponse.ts
+  - src/models/scheduledtransactionsresponse.ts
+  - src/models/scheduledtransactionsummary.ts
+  - src/models/security.ts
+  - src/models/subtransaction.ts
+  - src/models/transactionclearedstatus.ts
+  - src/models/transactiondetail.ts
+  - src/models/transactionflagcolor.ts
+  - src/models/transactionresponse.ts
+  - src/models/transactionsimportresponse.ts
+  - src/models/transactionsresponse.ts
+  - src/models/transactionsummary.ts
+  - src/models/user.ts
+  - src/models/userresponse.ts
+  - src/react-query/_context.tsx
+  - src/react-query/_types.ts
+  - src/react-query/accountsCreate.ts
+  - src/react-query/accountsGet.ts
+  - src/react-query/accountsList.ts
+  - src/react-query/budgetsGet.ts
+  - src/react-query/budgetsGetSettings.ts
+  - src/react-query/budgetsList.ts
+  - src/react-query/categoriesGet.ts
+  - src/react-query/categoriesGetByMonth.ts
+  - src/react-query/categoriesList.ts
+  - src/react-query/categoriesUpdate.ts
+  - src/react-query/categoriesUpdateMonth.ts
+  - src/react-query/index.ts
+  - src/react-query/monthsGet.ts
+  - src/react-query/monthsList.ts
+  - src/react-query/payeeLocationsGet.ts
+  - src/react-query/payeeLocationsList.ts
+  - src/react-query/payeeLocationsListByPayee.ts
+  - src/react-query/payeesGet.ts
+  - src/react-query/payeesList.ts
+  - src/react-query/payeesUpdate.ts
+  - src/react-query/scheduledTransactionsCreate.ts
+  - src/react-query/scheduledTransactionsDelete.ts
+  - src/react-query/scheduledTransactionsGet.ts
+  - src/react-query/scheduledTransactionsList.ts
+  - src/react-query/scheduledTransactionsUpdate.ts
+  - src/react-query/transactionsCreate.ts
+  - src/react-query/transactionsDelete.ts
+  - src/react-query/transactionsGet.ts
+  - src/react-query/transactionsImport.ts
+  - src/react-query/transactionsList.ts
+  - src/react-query/transactionsListByAccount.ts
+  - src/react-query/transactionsListByCategory.ts
+  - src/react-query/transactionsListByMonth.ts
+  - src/react-query/transactionsListByPayee.ts
+  - src/react-query/transactionsUpdateMany.ts
+  - src/react-query/transactionsUpdateOne.ts
+  - src/react-query/userGet.ts
+  - src/sdk/accounts.ts
+  - src/sdk/budgets.ts
+  - src/sdk/categories.ts
+  - src/sdk/index.ts
+  - src/sdk/months.ts
+  - src/sdk/payeelocations.ts
+  - src/sdk/payees.ts
+  - src/sdk/scheduledtransactions.ts
+  - src/sdk/sdk.ts
+  - src/sdk/transactions.ts
+  - src/sdk/user.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json

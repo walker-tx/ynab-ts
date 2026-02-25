@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { transactionsListByPayee } from "../funcs/transactionsListByPayee.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,9 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildTransactionsListByPayeeQuery,
+  prefetchTransactionsListByPayee,
+  queryKeyTransactionsListByPayee,
+  TransactionsListByPayeeQueryData,
+} from "./transactionsListByPayee.core.js";
+export {
+  buildTransactionsListByPayeeQuery,
+  prefetchTransactionsListByPayee,
+  queryKeyTransactionsListByPayee,
+  type TransactionsListByPayeeQueryData,
+};
 
-export type TransactionsListByPayeeQueryData =
-  models.HybridTransactionsResponse;
+export type TransactionsListByPayeeQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List payee transactions, excluding any pending transactions
@@ -38,8 +61,14 @@ export type TransactionsListByPayeeQueryData =
  */
 export function useTransactionsListByPayee(
   request: operations.GetTransactionsByPayeeRequest,
-  options?: QueryHookOptions<TransactionsListByPayeeQueryData>,
-): UseQueryResult<TransactionsListByPayeeQueryData, Error> {
+  options?: QueryHookOptions<
+    TransactionsListByPayeeQueryData,
+    TransactionsListByPayeeQueryError
+  >,
+): UseQueryResult<
+  TransactionsListByPayeeQueryData,
+  TransactionsListByPayeeQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildTransactionsListByPayeeQuery(
@@ -59,8 +88,14 @@ export function useTransactionsListByPayee(
  */
 export function useTransactionsListByPayeeSuspense(
   request: operations.GetTransactionsByPayeeRequest,
-  options?: SuspenseQueryHookOptions<TransactionsListByPayeeQueryData>,
-): UseSuspenseQueryResult<TransactionsListByPayeeQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TransactionsListByPayeeQueryData,
+    TransactionsListByPayeeQueryError
+  >,
+): UseSuspenseQueryResult<
+  TransactionsListByPayeeQueryData,
+  TransactionsListByPayeeQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildTransactionsListByPayeeQuery(
@@ -69,19 +104,6 @@ export function useTransactionsListByPayeeSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchTransactionsListByPayee(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetTransactionsByPayeeRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildTransactionsListByPayeeQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -132,61 +154,4 @@ export function invalidateAllTransactionsListByPayee(
     ...filters,
     queryKey: ["ynab-ts", "Transactions", "listByPayee"],
   });
-}
-
-export function buildTransactionsListByPayeeQuery(
-  client$: YnabCore,
-  request: operations.GetTransactionsByPayeeRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<TransactionsListByPayeeQueryData>;
-} {
-  return {
-    queryKey: queryKeyTransactionsListByPayee(
-      request.budgetId,
-      request.payeeId,
-      {
-        sinceDate: request.sinceDate,
-        type: request.type,
-        lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-      },
-    ),
-    queryFn: async function transactionsListByPayeeQueryFn(
-      ctx,
-    ): Promise<TransactionsListByPayeeQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(transactionsListByPayee(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyTransactionsListByPayee(
-  budgetId: string,
-  payeeId: string,
-  parameters: {
-    sinceDate?: RFCDate | undefined;
-    type?: operations.GetTransactionsByPayeeType | undefined;
-    lastKnowledgeOfServer?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "ynab-ts",
-    "Transactions",
-    "listByPayee",
-    budgetId,
-    payeeId,
-    parameters,
-  ];
 }

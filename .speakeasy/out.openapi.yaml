@@ -36,18 +36,18 @@ paths:
       description: Returns authenticated user information
       operationId: getUser
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The user info
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-name-override: get
   /budgets:
     get:
@@ -63,12 +63,6 @@ paths:
           schema:
             type: boolean
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of budgets
           content:
@@ -77,6 +71,12 @@ paths:
                 $ref: "#/components/schemas/BudgetSummaryResponse"
         "404":
           description: No budgets were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -106,12 +106,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested budget
           content:
@@ -120,6 +114,12 @@ paths:
                 $ref: "#/components/schemas/BudgetDetailResponse"
         "404":
           description: The specified budget was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -141,12 +141,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested budget settings
           content:
@@ -155,6 +149,12 @@ paths:
                 $ref: "#/components/schemas/BudgetSettingsResponse"
         "404":
           description: The specified Budget was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -183,12 +183,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested accounts
           content:
@@ -197,6 +191,12 @@ paths:
                 $ref: "#/components/schemas/AccountsResponse"
         "404":
           description: No accounts were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -262,12 +262,6 @@ paths:
             type: string
             format: uuid
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested account
           content:
@@ -276,6 +270,12 @@ paths:
                 $ref: "#/components/schemas/AccountResponse"
         "404":
           description: The requested account was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -305,12 +305,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The categories grouped by category group
           content:
@@ -319,6 +313,12 @@ paths:
                 $ref: "#/components/schemas/CategoriesResponse"
         "404":
           description: No categories were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -347,12 +347,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested category
           content:
@@ -361,6 +355,12 @@ paths:
                 $ref: "#/components/schemas/CategoryResponse"
         "404":
           description: The category not was found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -442,12 +442,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested month category
           content:
@@ -456,6 +450,12 @@ paths:
                 $ref: "#/components/schemas/CategoryResponse"
         "404":
           description: The month category was not was found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -537,12 +537,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested list of payees
           content:
@@ -551,6 +545,12 @@ paths:
                 $ref: "#/components/schemas/PayeesResponse"
         "404":
           description: No payees were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -578,12 +578,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested payee
           content:
@@ -592,6 +586,12 @@ paths:
                 $ref: "#/components/schemas/PayeeResponse"
         "404":
           description: The payee was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -658,12 +658,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of payee locations
           content:
@@ -672,6 +666,12 @@ paths:
                 $ref: "#/components/schemas/PayeeLocationsResponse"
         "404":
           description: No payees locations were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -700,12 +700,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The payee location
           content:
@@ -714,6 +708,12 @@ paths:
                 $ref: "#/components/schemas/PayeeLocationResponse"
         "404":
           description: The payee location was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -742,12 +742,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested payee locations
           content:
@@ -756,6 +750,12 @@ paths:
                 $ref: "#/components/schemas/PayeeLocationsResponse"
         "404":
           description: No payees locations were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -785,12 +785,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of budget months
           content:
@@ -799,6 +793,12 @@ paths:
                 $ref: "#/components/schemas/MonthSummariesResponse"
         "404":
           description: No budget months were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -828,12 +828,6 @@ paths:
             type: string
             format: date
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The budget month detail
           content:
@@ -842,6 +836,12 @@ paths:
                 $ref: "#/components/schemas/MonthDetailResponse"
         "404":
           description: The budget month was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1048,12 +1048,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested transaction
           content:
@@ -1062,6 +1056,12 @@ paths:
                 $ref: "#/components/schemas/TransactionResponse"
         "404":
           description: The transaction was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1189,12 +1189,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested transactions
           content:
@@ -1203,6 +1197,12 @@ paths:
                 $ref: "#/components/schemas/TransactionsResponse"
         "404":
           description: No transactions were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1253,12 +1253,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested transactions
           content:
@@ -1267,6 +1261,12 @@ paths:
                 $ref: "#/components/schemas/HybridTransactionsResponse"
         "404":
           description: No transactions were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1317,12 +1317,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested transactions
           content:
@@ -1331,6 +1325,12 @@ paths:
                 $ref: "#/components/schemas/HybridTransactionsResponse"
         "404":
           description: No transactions were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1382,12 +1382,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested transactions
           content:
@@ -1396,6 +1390,12 @@ paths:
                 $ref: "#/components/schemas/TransactionsResponse"
         "404":
           description: No transactions were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1424,12 +1424,6 @@ paths:
             type: integer
             format: int64
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The list of requested scheduled transactions
           content:
@@ -1438,6 +1432,12 @@ paths:
                 $ref: "#/components/schemas/ScheduledTransactionsResponse"
         "404":
           description: No scheduled transactions were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -1506,12 +1506,6 @@ paths:
           schema:
             type: string
       responses:
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
         "200":
           description: The requested Scheduled Transaction
           content:
@@ -1520,6 +1514,12 @@ paths:
                 $ref: "#/components/schemas/ScheduledTransactionResponse"
         "404":
           description: The scheduled transaction was not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -2108,7 +2108,7 @@ components:
           description: >-
             Indicates the monthly rollover behavior for "NEED"-type goals. When "true", the goal will always ask for the target amount in the new month ("Set Aside"). When "false", previous month category funding is used ("Refill"). For other goal types, this field will be null.
           nullable: true
-          default:
+          default: null
         goal_day:
           type: integer
           description: >-
@@ -2699,6 +2699,7 @@ components:
       properties:
         name:
           type: string
+          nullable: false
           maxLength: 500
           description: The name of the payee. The name must be a maximum of 500 characters.
     PatchCategoryWrapper:

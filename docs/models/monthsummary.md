@@ -7,7 +7,7 @@ import { MonthSummary } from "ynab-ts/models";
 import { RFCDate } from "ynab-ts/types";
 
 let value: MonthSummary = {
-  month: new RFCDate("2025-07-18"),
+  month: new RFCDate("2026-07-18"),
   income: 903938,
   budgeted: 118492,
   activity: 207115,

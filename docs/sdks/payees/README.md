@@ -1,5 +1,4 @@
 # Payees
-(*payees*)
 
 ## Overview
 

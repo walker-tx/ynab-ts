@@ -11,6 +11,17 @@ import { YnabCore } from "../core.js";
 import { transactionsDelete } from "../funcs/transactionsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -24,6 +35,17 @@ export type TransactionsDeleteMutationVariables = {
 
 export type TransactionsDeleteMutationData = models.TransactionResponse;
 
+export type TransactionsDeleteMutationError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Deletes an existing transaction
  *
@@ -33,12 +55,12 @@ export type TransactionsDeleteMutationData = models.TransactionResponse;
 export function useTransactionsDeleteMutation(
   options?: MutationHookOptions<
     TransactionsDeleteMutationData,
-    Error,
+    TransactionsDeleteMutationError,
     TransactionsDeleteMutationVariables
   >,
 ): UseMutationResult<
   TransactionsDeleteMutationData,
-  Error,
+  TransactionsDeleteMutationError,
   TransactionsDeleteMutationVariables
 > {
   const client = useYnabContext();

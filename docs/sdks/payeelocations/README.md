@@ -1,5 +1,4 @@
 # PayeeLocations
-(*payeeLocations*)
 
 ## Overview
 

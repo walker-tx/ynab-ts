@@ -5,29 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { scheduledTransactionsList } from "../funcs/scheduledTransactionsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildScheduledTransactionsListQuery,
+  prefetchScheduledTransactionsList,
+  queryKeyScheduledTransactionsList,
+  ScheduledTransactionsListQueryData,
+} from "./scheduledTransactionsList.core.js";
+export {
+  buildScheduledTransactionsListQuery,
+  prefetchScheduledTransactionsList,
+  queryKeyScheduledTransactionsList,
+  type ScheduledTransactionsListQueryData,
+};
 
-export type ScheduledTransactionsListQueryData =
-  models.ScheduledTransactionsResponse;
+export type ScheduledTransactionsListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List scheduled transactions
@@ -37,8 +60,14 @@ export type ScheduledTransactionsListQueryData =
  */
 export function useScheduledTransactionsList(
   request: operations.GetScheduledTransactionsRequest,
-  options?: QueryHookOptions<ScheduledTransactionsListQueryData>,
-): UseQueryResult<ScheduledTransactionsListQueryData, Error> {
+  options?: QueryHookOptions<
+    ScheduledTransactionsListQueryData,
+    ScheduledTransactionsListQueryError
+  >,
+): UseQueryResult<
+  ScheduledTransactionsListQueryData,
+  ScheduledTransactionsListQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildScheduledTransactionsListQuery(
@@ -58,8 +87,14 @@ export function useScheduledTransactionsList(
  */
 export function useScheduledTransactionsListSuspense(
   request: operations.GetScheduledTransactionsRequest,
-  options?: SuspenseQueryHookOptions<ScheduledTransactionsListQueryData>,
-): UseSuspenseQueryResult<ScheduledTransactionsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ScheduledTransactionsListQueryData,
+    ScheduledTransactionsListQueryError
+  >,
+): UseSuspenseQueryResult<
+  ScheduledTransactionsListQueryData,
+  ScheduledTransactionsListQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildScheduledTransactionsListQuery(
@@ -68,19 +103,6 @@ export function useScheduledTransactionsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchScheduledTransactionsList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetScheduledTransactionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildScheduledTransactionsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -121,43 +143,4 @@ export function invalidateAllScheduledTransactionsList(
     ...filters,
     queryKey: ["ynab-ts", "scheduledTransactions", "list"],
   });
-}
-
-export function buildScheduledTransactionsListQuery(
-  client$: YnabCore,
-  request: operations.GetScheduledTransactionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ScheduledTransactionsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyScheduledTransactionsList(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function scheduledTransactionsListQueryFn(
-      ctx,
-    ): Promise<ScheduledTransactionsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(scheduledTransactionsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyScheduledTransactionsList(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "scheduledTransactions", "list", budgetId, parameters];
 }

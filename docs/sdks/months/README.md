@@ -1,5 +1,4 @@
 # Months
-(*months*)
 
 ## Overview
 

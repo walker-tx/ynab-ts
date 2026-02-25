@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { budgetsList } from "../funcs/budgetsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  BudgetsListQueryData,
+  buildBudgetsListQuery,
+  prefetchBudgetsList,
+  queryKeyBudgetsList,
+} from "./budgetsList.core.js";
+export {
+  type BudgetsListQueryData,
+  buildBudgetsListQuery,
+  prefetchBudgetsList,
+  queryKeyBudgetsList,
+};
 
-export type BudgetsListQueryData = models.BudgetSummaryResponse;
+export type BudgetsListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List budgets
@@ -36,8 +60,8 @@ export type BudgetsListQueryData = models.BudgetSummaryResponse;
  */
 export function useBudgetsList(
   request?: operations.GetBudgetsRequest | undefined,
-  options?: QueryHookOptions<BudgetsListQueryData>,
-): UseQueryResult<BudgetsListQueryData, Error> {
+  options?: QueryHookOptions<BudgetsListQueryData, BudgetsListQueryError>,
+): UseQueryResult<BudgetsListQueryData, BudgetsListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildBudgetsListQuery(
@@ -57,8 +81,11 @@ export function useBudgetsList(
  */
 export function useBudgetsListSuspense(
   request?: operations.GetBudgetsRequest | undefined,
-  options?: SuspenseQueryHookOptions<BudgetsListQueryData>,
-): UseSuspenseQueryResult<BudgetsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    BudgetsListQueryData,
+    BudgetsListQueryError
+  >,
+): UseSuspenseQueryResult<BudgetsListQueryData, BudgetsListQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildBudgetsListQuery(
@@ -67,19 +94,6 @@ export function useBudgetsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchBudgetsList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request?: operations.GetBudgetsRequest | undefined,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildBudgetsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -114,40 +128,4 @@ export function invalidateAllBudgetsList(
     ...filters,
     queryKey: ["ynab-ts", "Budgets", "list"],
   });
-}
-
-export function buildBudgetsListQuery(
-  client$: YnabCore,
-  request?: operations.GetBudgetsRequest | undefined,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<BudgetsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyBudgetsList({
-      includeAccounts: request?.includeAccounts,
-    }),
-    queryFn: async function budgetsListQueryFn(
-      ctx,
-    ): Promise<BudgetsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(budgetsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyBudgetsList(
-  parameters: { includeAccounts?: boolean | undefined },
-): QueryKey {
-  return ["ynab-ts", "Budgets", "list", parameters];
 }

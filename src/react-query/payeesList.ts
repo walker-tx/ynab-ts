@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { payeesList } from "../funcs/payeesList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildPayeesListQuery,
+  PayeesListQueryData,
+  prefetchPayeesList,
+  queryKeyPayeesList,
+} from "./payeesList.core.js";
+export {
+  buildPayeesListQuery,
+  type PayeesListQueryData,
+  prefetchPayeesList,
+  queryKeyPayeesList,
+};
 
-export type PayeesListQueryData = models.PayeesResponse;
+export type PayeesListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List payees
@@ -36,8 +60,8 @@ export type PayeesListQueryData = models.PayeesResponse;
  */
 export function usePayeesList(
   request: operations.GetPayeesRequest,
-  options?: QueryHookOptions<PayeesListQueryData>,
-): UseQueryResult<PayeesListQueryData, Error> {
+  options?: QueryHookOptions<PayeesListQueryData, PayeesListQueryError>,
+): UseQueryResult<PayeesListQueryData, PayeesListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildPayeesListQuery(
@@ -57,8 +81,8 @@ export function usePayeesList(
  */
 export function usePayeesListSuspense(
   request: operations.GetPayeesRequest,
-  options?: SuspenseQueryHookOptions<PayeesListQueryData>,
-): UseSuspenseQueryResult<PayeesListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<PayeesListQueryData, PayeesListQueryError>,
+): UseSuspenseQueryResult<PayeesListQueryData, PayeesListQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildPayeesListQuery(
@@ -67,19 +91,6 @@ export function usePayeesListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayeesList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetPayeesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayeesListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,41 +131,4 @@ export function invalidateAllPayeesList(
     ...filters,
     queryKey: ["ynab-ts", "Payees", "list"],
   });
-}
-
-export function buildPayeesListQuery(
-  client$: YnabCore,
-  request: operations.GetPayeesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<PayeesListQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayeesList(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function payeesListQueryFn(
-      ctx,
-    ): Promise<PayeesListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payeesList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayeesList(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "Payees", "list", budgetId, parameters];
 }

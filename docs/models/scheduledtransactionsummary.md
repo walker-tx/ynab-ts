@@ -8,8 +8,8 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: ScheduledTransactionSummary = {
   id: "c123875f-9432-45c6-95e8-84218726b2c0",
-  dateFirst: new RFCDate("2024-03-10"),
-  dateNext: new RFCDate("2024-05-17"),
+  dateFirst: new RFCDate("2025-03-10"),
+  dateNext: new RFCDate("2025-05-17"),
   frequency: "twiceAMonth",
   amount: 415303,
   accountId: "51d2e1c8-a7fb-4e7f-bbf9-470ec53561b4",

@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { transactionsListByCategory } from "../funcs/transactionsListByCategory.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,9 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildTransactionsListByCategoryQuery,
+  prefetchTransactionsListByCategory,
+  queryKeyTransactionsListByCategory,
+  TransactionsListByCategoryQueryData,
+} from "./transactionsListByCategory.core.js";
+export {
+  buildTransactionsListByCategoryQuery,
+  prefetchTransactionsListByCategory,
+  queryKeyTransactionsListByCategory,
+  type TransactionsListByCategoryQueryData,
+};
 
-export type TransactionsListByCategoryQueryData =
-  models.HybridTransactionsResponse;
+export type TransactionsListByCategoryQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List category transactions, excluding any pending transactions
@@ -38,8 +61,14 @@ export type TransactionsListByCategoryQueryData =
  */
 export function useTransactionsListByCategory(
   request: operations.GetTransactionsByCategoryRequest,
-  options?: QueryHookOptions<TransactionsListByCategoryQueryData>,
-): UseQueryResult<TransactionsListByCategoryQueryData, Error> {
+  options?: QueryHookOptions<
+    TransactionsListByCategoryQueryData,
+    TransactionsListByCategoryQueryError
+  >,
+): UseQueryResult<
+  TransactionsListByCategoryQueryData,
+  TransactionsListByCategoryQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildTransactionsListByCategoryQuery(
@@ -59,8 +88,14 @@ export function useTransactionsListByCategory(
  */
 export function useTransactionsListByCategorySuspense(
   request: operations.GetTransactionsByCategoryRequest,
-  options?: SuspenseQueryHookOptions<TransactionsListByCategoryQueryData>,
-): UseSuspenseQueryResult<TransactionsListByCategoryQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TransactionsListByCategoryQueryData,
+    TransactionsListByCategoryQueryError
+  >,
+): UseSuspenseQueryResult<
+  TransactionsListByCategoryQueryData,
+  TransactionsListByCategoryQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildTransactionsListByCategoryQuery(
@@ -69,19 +104,6 @@ export function useTransactionsListByCategorySuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchTransactionsListByCategory(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetTransactionsByCategoryRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildTransactionsListByCategoryQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -132,61 +154,4 @@ export function invalidateAllTransactionsListByCategory(
     ...filters,
     queryKey: ["ynab-ts", "Transactions", "listByCategory"],
   });
-}
-
-export function buildTransactionsListByCategoryQuery(
-  client$: YnabCore,
-  request: operations.GetTransactionsByCategoryRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<TransactionsListByCategoryQueryData>;
-} {
-  return {
-    queryKey: queryKeyTransactionsListByCategory(
-      request.budgetId,
-      request.categoryId,
-      {
-        sinceDate: request.sinceDate,
-        type: request.type,
-        lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-      },
-    ),
-    queryFn: async function transactionsListByCategoryQueryFn(
-      ctx,
-    ): Promise<TransactionsListByCategoryQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(transactionsListByCategory(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyTransactionsListByCategory(
-  budgetId: string,
-  categoryId: string,
-  parameters: {
-    sinceDate?: RFCDate | undefined;
-    type?: operations.GetTransactionsByCategoryType | undefined;
-    lastKnowledgeOfServer?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "ynab-ts",
-    "Transactions",
-    "listByCategory",
-    budgetId,
-    categoryId,
-    parameters,
-  ];
 }

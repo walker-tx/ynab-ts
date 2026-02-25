@@ -5,29 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { scheduledTransactionsGet } from "../funcs/scheduledTransactionsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildScheduledTransactionsGetQuery,
+  prefetchScheduledTransactionsGet,
+  queryKeyScheduledTransactionsGet,
+  ScheduledTransactionsGetQueryData,
+} from "./scheduledTransactionsGet.core.js";
+export {
+  buildScheduledTransactionsGetQuery,
+  prefetchScheduledTransactionsGet,
+  queryKeyScheduledTransactionsGet,
+  type ScheduledTransactionsGetQueryData,
+};
 
-export type ScheduledTransactionsGetQueryData =
-  models.ScheduledTransactionResponse;
+export type ScheduledTransactionsGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single scheduled transaction
@@ -37,8 +60,14 @@ export type ScheduledTransactionsGetQueryData =
  */
 export function useScheduledTransactionsGet(
   request: operations.GetScheduledTransactionByIdRequest,
-  options?: QueryHookOptions<ScheduledTransactionsGetQueryData>,
-): UseQueryResult<ScheduledTransactionsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    ScheduledTransactionsGetQueryData,
+    ScheduledTransactionsGetQueryError
+  >,
+): UseQueryResult<
+  ScheduledTransactionsGetQueryData,
+  ScheduledTransactionsGetQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildScheduledTransactionsGetQuery(
@@ -58,8 +87,14 @@ export function useScheduledTransactionsGet(
  */
 export function useScheduledTransactionsGetSuspense(
   request: operations.GetScheduledTransactionByIdRequest,
-  options?: SuspenseQueryHookOptions<ScheduledTransactionsGetQueryData>,
-): UseSuspenseQueryResult<ScheduledTransactionsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ScheduledTransactionsGetQueryData,
+    ScheduledTransactionsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  ScheduledTransactionsGetQueryData,
+  ScheduledTransactionsGetQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildScheduledTransactionsGetQuery(
@@ -68,19 +103,6 @@ export function useScheduledTransactionsGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchScheduledTransactionsGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetScheduledTransactionByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildScheduledTransactionsGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -115,50 +137,4 @@ export function invalidateAllScheduledTransactionsGet(
     ...filters,
     queryKey: ["ynab-ts", "scheduledTransactions", "get"],
   });
-}
-
-export function buildScheduledTransactionsGetQuery(
-  client$: YnabCore,
-  request: operations.GetScheduledTransactionByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ScheduledTransactionsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyScheduledTransactionsGet(
-      request.budgetId,
-      request.scheduledTransactionId,
-    ),
-    queryFn: async function scheduledTransactionsGetQueryFn(
-      ctx,
-    ): Promise<ScheduledTransactionsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(scheduledTransactionsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyScheduledTransactionsGet(
-  budgetId: string,
-  scheduledTransactionId: string,
-): QueryKey {
-  return [
-    "ynab-ts",
-    "scheduledTransactions",
-    "get",
-    budgetId,
-    scheduledTransactionId,
-  ];
 }

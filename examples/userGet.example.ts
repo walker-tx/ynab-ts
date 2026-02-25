@@ -18,7 +18,7 @@ const ynab = new Ynab({
 });
 
 async function main() {
-  const result = await ynab.get();
+  const result = await ynab.user.get();
 
   console.log(result);
 }

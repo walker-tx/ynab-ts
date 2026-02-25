@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { categoriesGet } from "../funcs/categoriesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildCategoriesGetQuery,
+  CategoriesGetQueryData,
+  prefetchCategoriesGet,
+  queryKeyCategoriesGet,
+} from "./categoriesGet.core.js";
+export {
+  buildCategoriesGetQuery,
+  type CategoriesGetQueryData,
+  prefetchCategoriesGet,
+  queryKeyCategoriesGet,
+};
 
-export type CategoriesGetQueryData = models.CategoryResponse;
+export type CategoriesGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single category
@@ -36,8 +60,8 @@ export type CategoriesGetQueryData = models.CategoryResponse;
  */
 export function useCategoriesGet(
   request: operations.GetCategoryByIdRequest,
-  options?: QueryHookOptions<CategoriesGetQueryData>,
-): UseQueryResult<CategoriesGetQueryData, Error> {
+  options?: QueryHookOptions<CategoriesGetQueryData, CategoriesGetQueryError>,
+): UseQueryResult<CategoriesGetQueryData, CategoriesGetQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildCategoriesGetQuery(
@@ -57,8 +81,11 @@ export function useCategoriesGet(
  */
 export function useCategoriesGetSuspense(
   request: operations.GetCategoryByIdRequest,
-  options?: SuspenseQueryHookOptions<CategoriesGetQueryData>,
-): UseSuspenseQueryResult<CategoriesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CategoriesGetQueryData,
+    CategoriesGetQueryError
+  >,
+): UseSuspenseQueryResult<CategoriesGetQueryData, CategoriesGetQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildCategoriesGetQuery(
@@ -67,19 +94,6 @@ export function useCategoriesGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCategoriesGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetCategoryByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCategoriesGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -112,39 +126,4 @@ export function invalidateAllCategoriesGet(
     ...filters,
     queryKey: ["ynab-ts", "Categories", "get"],
   });
-}
-
-export function buildCategoriesGetQuery(
-  client$: YnabCore,
-  request: operations.GetCategoryByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<CategoriesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyCategoriesGet(request.budgetId, request.categoryId),
-    queryFn: async function categoriesGetQueryFn(
-      ctx,
-    ): Promise<CategoriesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(categoriesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCategoriesGet(
-  budgetId: string,
-  categoryId: string,
-): QueryKey {
-  return ["ynab-ts", "Categories", "get", budgetId, categoryId];
 }

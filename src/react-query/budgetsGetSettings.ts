@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { budgetsGetSettings } from "../funcs/budgetsGetSettings.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  BudgetsGetSettingsQueryData,
+  buildBudgetsGetSettingsQuery,
+  prefetchBudgetsGetSettings,
+  queryKeyBudgetsGetSettings,
+} from "./budgetsGetSettings.core.js";
+export {
+  type BudgetsGetSettingsQueryData,
+  buildBudgetsGetSettingsQuery,
+  prefetchBudgetsGetSettings,
+  queryKeyBudgetsGetSettings,
+};
 
-export type BudgetsGetSettingsQueryData = models.BudgetSettingsResponse;
+export type BudgetsGetSettingsQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Budget Settings
@@ -36,8 +60,11 @@ export type BudgetsGetSettingsQueryData = models.BudgetSettingsResponse;
  */
 export function useBudgetsGetSettings(
   request: operations.GetBudgetSettingsByIdRequest,
-  options?: QueryHookOptions<BudgetsGetSettingsQueryData>,
-): UseQueryResult<BudgetsGetSettingsQueryData, Error> {
+  options?: QueryHookOptions<
+    BudgetsGetSettingsQueryData,
+    BudgetsGetSettingsQueryError
+  >,
+): UseQueryResult<BudgetsGetSettingsQueryData, BudgetsGetSettingsQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildBudgetsGetSettingsQuery(
@@ -57,8 +84,14 @@ export function useBudgetsGetSettings(
  */
 export function useBudgetsGetSettingsSuspense(
   request: operations.GetBudgetSettingsByIdRequest,
-  options?: SuspenseQueryHookOptions<BudgetsGetSettingsQueryData>,
-): UseSuspenseQueryResult<BudgetsGetSettingsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    BudgetsGetSettingsQueryData,
+    BudgetsGetSettingsQueryError
+  >,
+): UseSuspenseQueryResult<
+  BudgetsGetSettingsQueryData,
+  BudgetsGetSettingsQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildBudgetsGetSettingsQuery(
@@ -67,19 +100,6 @@ export function useBudgetsGetSettingsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchBudgetsGetSettings(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetBudgetSettingsByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildBudgetsGetSettingsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -112,38 +132,4 @@ export function invalidateAllBudgetsGetSettings(
     ...filters,
     queryKey: ["ynab-ts", "Budgets", "getSettings"],
   });
-}
-
-export function buildBudgetsGetSettingsQuery(
-  client$: YnabCore,
-  request: operations.GetBudgetSettingsByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<BudgetsGetSettingsQueryData>;
-} {
-  return {
-    queryKey: queryKeyBudgetsGetSettings(request.budgetId),
-    queryFn: async function budgetsGetSettingsQueryFn(
-      ctx,
-    ): Promise<BudgetsGetSettingsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(budgetsGetSettings(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyBudgetsGetSettings(budgetId: string): QueryKey {
-  return ["ynab-ts", "Budgets", "getSettings", budgetId];
 }

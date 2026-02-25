@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { categoriesList } from "../funcs/categoriesList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildCategoriesListQuery,
+  CategoriesListQueryData,
+  prefetchCategoriesList,
+  queryKeyCategoriesList,
+} from "./categoriesList.core.js";
+export {
+  buildCategoriesListQuery,
+  type CategoriesListQueryData,
+  prefetchCategoriesList,
+  queryKeyCategoriesList,
+};
 
-export type CategoriesListQueryData = models.CategoriesResponse;
+export type CategoriesListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List categories
@@ -36,8 +60,8 @@ export type CategoriesListQueryData = models.CategoriesResponse;
  */
 export function useCategoriesList(
   request: operations.GetCategoriesRequest,
-  options?: QueryHookOptions<CategoriesListQueryData>,
-): UseQueryResult<CategoriesListQueryData, Error> {
+  options?: QueryHookOptions<CategoriesListQueryData, CategoriesListQueryError>,
+): UseQueryResult<CategoriesListQueryData, CategoriesListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildCategoriesListQuery(
@@ -57,8 +81,11 @@ export function useCategoriesList(
  */
 export function useCategoriesListSuspense(
   request: operations.GetCategoriesRequest,
-  options?: SuspenseQueryHookOptions<CategoriesListQueryData>,
-): UseSuspenseQueryResult<CategoriesListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CategoriesListQueryData,
+    CategoriesListQueryError
+  >,
+): UseSuspenseQueryResult<CategoriesListQueryData, CategoriesListQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildCategoriesListQuery(
@@ -67,19 +94,6 @@ export function useCategoriesListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCategoriesList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetCategoriesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCategoriesListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,41 +134,4 @@ export function invalidateAllCategoriesList(
     ...filters,
     queryKey: ["ynab-ts", "Categories", "list"],
   });
-}
-
-export function buildCategoriesListQuery(
-  client$: YnabCore,
-  request: operations.GetCategoriesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<CategoriesListQueryData>;
-} {
-  return {
-    queryKey: queryKeyCategoriesList(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function categoriesListQueryFn(
-      ctx,
-    ): Promise<CategoriesListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(categoriesList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCategoriesList(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "Categories", "list", budgetId, parameters];
 }

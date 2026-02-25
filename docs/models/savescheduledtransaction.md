@@ -8,7 +8,7 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: SaveScheduledTransaction = {
   accountId: "0ce9a2fe-832a-4674-8da3-ca23e3c1e269",
-  date: new RFCDate("2024-03-04"),
+  date: new RFCDate("2025-03-04"),
 };
 ```
 
