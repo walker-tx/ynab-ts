@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { monthsGet } from "../funcs/monthsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,8 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildMonthsGetQuery,
+  MonthsGetQueryData,
+  prefetchMonthsGet,
+  queryKeyMonthsGet,
+} from "./monthsGet.core.js";
+export {
+  buildMonthsGetQuery,
+  type MonthsGetQueryData,
+  prefetchMonthsGet,
+  queryKeyMonthsGet,
+};
 
-export type MonthsGetQueryData = models.MonthDetailResponse;
+export type MonthsGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single budget month
@@ -37,8 +61,8 @@ export type MonthsGetQueryData = models.MonthDetailResponse;
  */
 export function useMonthsGet(
   request: operations.GetBudgetMonthRequest,
-  options?: QueryHookOptions<MonthsGetQueryData>,
-): UseQueryResult<MonthsGetQueryData, Error> {
+  options?: QueryHookOptions<MonthsGetQueryData, MonthsGetQueryError>,
+): UseQueryResult<MonthsGetQueryData, MonthsGetQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildMonthsGetQuery(
@@ -58,8 +82,8 @@ export function useMonthsGet(
  */
 export function useMonthsGetSuspense(
   request: operations.GetBudgetMonthRequest,
-  options?: SuspenseQueryHookOptions<MonthsGetQueryData>,
-): UseSuspenseQueryResult<MonthsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<MonthsGetQueryData, MonthsGetQueryError>,
+): UseSuspenseQueryResult<MonthsGetQueryData, MonthsGetQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildMonthsGetQuery(
@@ -68,19 +92,6 @@ export function useMonthsGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchMonthsGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetBudgetMonthRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildMonthsGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -113,34 +124,4 @@ export function invalidateAllMonthsGet(
     ...filters,
     queryKey: ["ynab-ts", "Months", "get"],
   });
-}
-
-export function buildMonthsGetQuery(
-  client$: YnabCore,
-  request: operations.GetBudgetMonthRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<MonthsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyMonthsGet(request.budgetId, request.month),
-    queryFn: async function monthsGetQueryFn(ctx): Promise<MonthsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(monthsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyMonthsGet(budgetId: string, month: RFCDate): QueryKey {
-  return ["ynab-ts", "Months", "get", budgetId, month];
 }

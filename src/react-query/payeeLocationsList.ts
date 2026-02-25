@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { payeeLocationsList } from "../funcs/payeeLocationsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildPayeeLocationsListQuery,
+  PayeeLocationsListQueryData,
+  prefetchPayeeLocationsList,
+  queryKeyPayeeLocationsList,
+} from "./payeeLocationsList.core.js";
+export {
+  buildPayeeLocationsListQuery,
+  type PayeeLocationsListQueryData,
+  prefetchPayeeLocationsList,
+  queryKeyPayeeLocationsList,
+};
 
-export type PayeeLocationsListQueryData = models.PayeeLocationsResponse;
+export type PayeeLocationsListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List payee locations
@@ -36,8 +60,11 @@ export type PayeeLocationsListQueryData = models.PayeeLocationsResponse;
  */
 export function usePayeeLocationsList(
   request: operations.GetPayeeLocationsRequest,
-  options?: QueryHookOptions<PayeeLocationsListQueryData>,
-): UseQueryResult<PayeeLocationsListQueryData, Error> {
+  options?: QueryHookOptions<
+    PayeeLocationsListQueryData,
+    PayeeLocationsListQueryError
+  >,
+): UseQueryResult<PayeeLocationsListQueryData, PayeeLocationsListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildPayeeLocationsListQuery(
@@ -57,8 +84,14 @@ export function usePayeeLocationsList(
  */
 export function usePayeeLocationsListSuspense(
   request: operations.GetPayeeLocationsRequest,
-  options?: SuspenseQueryHookOptions<PayeeLocationsListQueryData>,
-): UseSuspenseQueryResult<PayeeLocationsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayeeLocationsListQueryData,
+    PayeeLocationsListQueryError
+  >,
+): UseSuspenseQueryResult<
+  PayeeLocationsListQueryData,
+  PayeeLocationsListQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildPayeeLocationsListQuery(
@@ -67,19 +100,6 @@ export function usePayeeLocationsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayeeLocationsList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetPayeeLocationsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayeeLocationsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -112,38 +132,4 @@ export function invalidateAllPayeeLocationsList(
     ...filters,
     queryKey: ["ynab-ts", "payeeLocations", "list"],
   });
-}
-
-export function buildPayeeLocationsListQuery(
-  client$: YnabCore,
-  request: operations.GetPayeeLocationsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PayeeLocationsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayeeLocationsList(request.budgetId),
-    queryFn: async function payeeLocationsListQueryFn(
-      ctx,
-    ): Promise<PayeeLocationsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payeeLocationsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayeeLocationsList(budgetId: string): QueryKey {
-  return ["ynab-ts", "payeeLocations", "list", budgetId];
 }

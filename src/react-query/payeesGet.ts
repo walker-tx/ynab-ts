@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { payeesGet } from "../funcs/payeesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildPayeesGetQuery,
+  PayeesGetQueryData,
+  prefetchPayeesGet,
+  queryKeyPayeesGet,
+} from "./payeesGet.core.js";
+export {
+  buildPayeesGetQuery,
+  type PayeesGetQueryData,
+  prefetchPayeesGet,
+  queryKeyPayeesGet,
+};
 
-export type PayeesGetQueryData = models.PayeeResponse;
+export type PayeesGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single payee
@@ -36,8 +60,8 @@ export type PayeesGetQueryData = models.PayeeResponse;
  */
 export function usePayeesGet(
   request: operations.GetPayeeByIdRequest,
-  options?: QueryHookOptions<PayeesGetQueryData>,
-): UseQueryResult<PayeesGetQueryData, Error> {
+  options?: QueryHookOptions<PayeesGetQueryData, PayeesGetQueryError>,
+): UseQueryResult<PayeesGetQueryData, PayeesGetQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildPayeesGetQuery(
@@ -57,8 +81,8 @@ export function usePayeesGet(
  */
 export function usePayeesGetSuspense(
   request: operations.GetPayeeByIdRequest,
-  options?: SuspenseQueryHookOptions<PayeesGetQueryData>,
-): UseSuspenseQueryResult<PayeesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<PayeesGetQueryData, PayeesGetQueryError>,
+): UseSuspenseQueryResult<PayeesGetQueryData, PayeesGetQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildPayeesGetQuery(
@@ -67,19 +91,6 @@ export function usePayeesGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayeesGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetPayeeByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayeesGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -112,34 +123,4 @@ export function invalidateAllPayeesGet(
     ...filters,
     queryKey: ["ynab-ts", "Payees", "get"],
   });
-}
-
-export function buildPayeesGetQuery(
-  client$: YnabCore,
-  request: operations.GetPayeeByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<PayeesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayeesGet(request.budgetId, request.payeeId),
-    queryFn: async function payeesGetQueryFn(ctx): Promise<PayeesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payeesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayeesGet(budgetId: string, payeeId: string): QueryKey {
-  return ["ynab-ts", "Payees", "get", budgetId, payeeId];
 }

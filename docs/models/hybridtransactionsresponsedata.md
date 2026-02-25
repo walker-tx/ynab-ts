@@ -10,7 +10,7 @@ let value: HybridTransactionsResponseData = {
   transactions: [
     {
       id: "<id>",
-      date: new RFCDate("2024-09-07"),
+      date: new RFCDate("2025-09-07"),
       amount: 170634,
       cleared: "uncleared",
       approved: true,

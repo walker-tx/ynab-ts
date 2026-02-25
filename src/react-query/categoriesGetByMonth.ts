@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { categoriesGetByMonth } from "../funcs/categoriesGetByMonth.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,8 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildCategoriesGetByMonthQuery,
+  CategoriesGetByMonthQueryData,
+  prefetchCategoriesGetByMonth,
+  queryKeyCategoriesGetByMonth,
+} from "./categoriesGetByMonth.core.js";
+export {
+  buildCategoriesGetByMonthQuery,
+  type CategoriesGetByMonthQueryData,
+  prefetchCategoriesGetByMonth,
+  queryKeyCategoriesGetByMonth,
+};
 
-export type CategoriesGetByMonthQueryData = models.CategoryResponse;
+export type CategoriesGetByMonthQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single category for a specific budget month
@@ -37,8 +61,14 @@ export type CategoriesGetByMonthQueryData = models.CategoryResponse;
  */
 export function useCategoriesGetByMonth(
   request: operations.GetMonthCategoryByIdRequest,
-  options?: QueryHookOptions<CategoriesGetByMonthQueryData>,
-): UseQueryResult<CategoriesGetByMonthQueryData, Error> {
+  options?: QueryHookOptions<
+    CategoriesGetByMonthQueryData,
+    CategoriesGetByMonthQueryError
+  >,
+): UseQueryResult<
+  CategoriesGetByMonthQueryData,
+  CategoriesGetByMonthQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildCategoriesGetByMonthQuery(
@@ -58,8 +88,14 @@ export function useCategoriesGetByMonth(
  */
 export function useCategoriesGetByMonthSuspense(
   request: operations.GetMonthCategoryByIdRequest,
-  options?: SuspenseQueryHookOptions<CategoriesGetByMonthQueryData>,
-): UseSuspenseQueryResult<CategoriesGetByMonthQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CategoriesGetByMonthQueryData,
+    CategoriesGetByMonthQueryError
+  >,
+): UseSuspenseQueryResult<
+  CategoriesGetByMonthQueryData,
+  CategoriesGetByMonthQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildCategoriesGetByMonthQuery(
@@ -68,19 +104,6 @@ export function useCategoriesGetByMonthSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCategoriesGetByMonth(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetMonthCategoryByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCategoriesGetByMonthQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -115,46 +138,4 @@ export function invalidateAllCategoriesGetByMonth(
     ...filters,
     queryKey: ["ynab-ts", "Categories", "getByMonth"],
   });
-}
-
-export function buildCategoriesGetByMonthQuery(
-  client$: YnabCore,
-  request: operations.GetMonthCategoryByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CategoriesGetByMonthQueryData>;
-} {
-  return {
-    queryKey: queryKeyCategoriesGetByMonth(
-      request.budgetId,
-      request.month,
-      request.categoryId,
-    ),
-    queryFn: async function categoriesGetByMonthQueryFn(
-      ctx,
-    ): Promise<CategoriesGetByMonthQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(categoriesGetByMonth(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCategoriesGetByMonth(
-  budgetId: string,
-  month: RFCDate,
-  categoryId: string,
-): QueryKey {
-  return ["ynab-ts", "Categories", "getByMonth", budgetId, month, categoryId];
 }

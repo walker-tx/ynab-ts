@@ -1,5 +1,4 @@
 # ScheduledTransactions
-(*scheduledTransactions*)
 
 ## Overview
 

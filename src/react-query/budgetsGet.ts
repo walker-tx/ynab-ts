@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { budgetsGet } from "../funcs/budgetsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  BudgetsGetQueryData,
+  buildBudgetsGetQuery,
+  prefetchBudgetsGet,
+  queryKeyBudgetsGet,
+} from "./budgetsGet.core.js";
+export {
+  type BudgetsGetQueryData,
+  buildBudgetsGetQuery,
+  prefetchBudgetsGet,
+  queryKeyBudgetsGet,
+};
 
-export type BudgetsGetQueryData = models.BudgetDetailResponse;
+export type BudgetsGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Single budget
@@ -36,8 +60,8 @@ export type BudgetsGetQueryData = models.BudgetDetailResponse;
  */
 export function useBudgetsGet(
   request: operations.GetBudgetByIdRequest,
-  options?: QueryHookOptions<BudgetsGetQueryData>,
-): UseQueryResult<BudgetsGetQueryData, Error> {
+  options?: QueryHookOptions<BudgetsGetQueryData, BudgetsGetQueryError>,
+): UseQueryResult<BudgetsGetQueryData, BudgetsGetQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildBudgetsGetQuery(
@@ -57,8 +81,8 @@ export function useBudgetsGet(
  */
 export function useBudgetsGetSuspense(
   request: operations.GetBudgetByIdRequest,
-  options?: SuspenseQueryHookOptions<BudgetsGetQueryData>,
-): UseSuspenseQueryResult<BudgetsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<BudgetsGetQueryData, BudgetsGetQueryError>,
+): UseSuspenseQueryResult<BudgetsGetQueryData, BudgetsGetQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildBudgetsGetQuery(
@@ -67,19 +91,6 @@ export function useBudgetsGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchBudgetsGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetBudgetByIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildBudgetsGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,41 +131,4 @@ export function invalidateAllBudgetsGet(
     ...filters,
     queryKey: ["ynab-ts", "Budgets", "get"],
   });
-}
-
-export function buildBudgetsGetQuery(
-  client$: YnabCore,
-  request: operations.GetBudgetByIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<BudgetsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyBudgetsGet(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function budgetsGetQueryFn(
-      ctx,
-    ): Promise<BudgetsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(budgetsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyBudgetsGet(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "Budgets", "get", budgetId, parameters];
 }

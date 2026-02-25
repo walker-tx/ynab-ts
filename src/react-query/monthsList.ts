@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { monthsList } from "../funcs/monthsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildMonthsListQuery,
+  MonthsListQueryData,
+  prefetchMonthsList,
+  queryKeyMonthsList,
+} from "./monthsList.core.js";
+export {
+  buildMonthsListQuery,
+  type MonthsListQueryData,
+  prefetchMonthsList,
+  queryKeyMonthsList,
+};
 
-export type MonthsListQueryData = models.MonthSummariesResponse;
+export type MonthsListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List budget months
@@ -36,8 +60,8 @@ export type MonthsListQueryData = models.MonthSummariesResponse;
  */
 export function useMonthsList(
   request: operations.GetBudgetMonthsRequest,
-  options?: QueryHookOptions<MonthsListQueryData>,
-): UseQueryResult<MonthsListQueryData, Error> {
+  options?: QueryHookOptions<MonthsListQueryData, MonthsListQueryError>,
+): UseQueryResult<MonthsListQueryData, MonthsListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildMonthsListQuery(
@@ -57,8 +81,8 @@ export function useMonthsList(
  */
 export function useMonthsListSuspense(
   request: operations.GetBudgetMonthsRequest,
-  options?: SuspenseQueryHookOptions<MonthsListQueryData>,
-): UseSuspenseQueryResult<MonthsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<MonthsListQueryData, MonthsListQueryError>,
+): UseSuspenseQueryResult<MonthsListQueryData, MonthsListQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildMonthsListQuery(
@@ -67,19 +91,6 @@ export function useMonthsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchMonthsList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetBudgetMonthsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildMonthsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,41 +131,4 @@ export function invalidateAllMonthsList(
     ...filters,
     queryKey: ["ynab-ts", "Months", "list"],
   });
-}
-
-export function buildMonthsListQuery(
-  client$: YnabCore,
-  request: operations.GetBudgetMonthsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<MonthsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyMonthsList(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function monthsListQueryFn(
-      ctx,
-    ): Promise<MonthsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(monthsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyMonthsList(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "Months", "list", budgetId, parameters];
 }

@@ -11,6 +11,17 @@ import { YnabCore } from "../core.js";
 import { transactionsUpdateMany } from "../funcs/transactionsUpdateMany.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -25,6 +36,17 @@ export type TransactionsUpdateManyMutationVariables = {
 export type TransactionsUpdateManyMutationData =
   models.SaveTransactionsResponse;
 
+export type TransactionsUpdateManyMutationError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update multiple transactions
  *
@@ -34,12 +56,12 @@ export type TransactionsUpdateManyMutationData =
 export function useTransactionsUpdateManyMutation(
   options?: MutationHookOptions<
     TransactionsUpdateManyMutationData,
-    Error,
+    TransactionsUpdateManyMutationError,
     TransactionsUpdateManyMutationVariables
   >,
 ): UseMutationResult<
   TransactionsUpdateManyMutationData,
-  Error,
+  TransactionsUpdateManyMutationError,
   TransactionsUpdateManyMutationVariables
 > {
   const client = useYnabContext();

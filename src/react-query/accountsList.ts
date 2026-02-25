@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { accountsList } from "../funcs/accountsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useYnabContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  AccountsListQueryData,
+  buildAccountsListQuery,
+  prefetchAccountsList,
+  queryKeyAccountsList,
+} from "./accountsList.core.js";
+export {
+  type AccountsListQueryData,
+  buildAccountsListQuery,
+  prefetchAccountsList,
+  queryKeyAccountsList,
+};
 
-export type AccountsListQueryData = models.AccountsResponse;
+export type AccountsListQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Account list
@@ -36,8 +60,8 @@ export type AccountsListQueryData = models.AccountsResponse;
  */
 export function useAccountsList(
   request: operations.GetAccountsRequest,
-  options?: QueryHookOptions<AccountsListQueryData>,
-): UseQueryResult<AccountsListQueryData, Error> {
+  options?: QueryHookOptions<AccountsListQueryData, AccountsListQueryError>,
+): UseQueryResult<AccountsListQueryData, AccountsListQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildAccountsListQuery(
@@ -57,8 +81,11 @@ export function useAccountsList(
  */
 export function useAccountsListSuspense(
   request: operations.GetAccountsRequest,
-  options?: SuspenseQueryHookOptions<AccountsListQueryData>,
-): UseSuspenseQueryResult<AccountsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AccountsListQueryData,
+    AccountsListQueryError
+  >,
+): UseSuspenseQueryResult<AccountsListQueryData, AccountsListQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildAccountsListQuery(
@@ -67,19 +94,6 @@ export function useAccountsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAccountsList(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetAccountsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAccountsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,41 +134,4 @@ export function invalidateAllAccountsList(
     ...filters,
     queryKey: ["ynab-ts", "Accounts", "list"],
   });
-}
-
-export function buildAccountsListQuery(
-  client$: YnabCore,
-  request: operations.GetAccountsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<AccountsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyAccountsList(request.budgetId, {
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function accountsListQueryFn(
-      ctx,
-    ): Promise<AccountsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(accountsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAccountsList(
-  budgetId: string,
-  parameters: { lastKnowledgeOfServer?: number | undefined },
-): QueryKey {
-  return ["ynab-ts", "Accounts", "list", budgetId, parameters];
 }

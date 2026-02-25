@@ -11,6 +11,17 @@ import { YnabCore } from "../core.js";
 import { scheduledTransactionsDelete } from "../funcs/scheduledTransactionsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -25,6 +36,17 @@ export type ScheduledTransactionsDeleteMutationVariables = {
 export type ScheduledTransactionsDeleteMutationData =
   models.ScheduledTransactionResponse;
 
+export type ScheduledTransactionsDeleteMutationError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Deletes an existing scheduled transaction
  *
@@ -34,12 +56,12 @@ export type ScheduledTransactionsDeleteMutationData =
 export function useScheduledTransactionsDeleteMutation(
   options?: MutationHookOptions<
     ScheduledTransactionsDeleteMutationData,
-    Error,
+    ScheduledTransactionsDeleteMutationError,
     ScheduledTransactionsDeleteMutationVariables
   >,
 ): UseMutationResult<
   ScheduledTransactionsDeleteMutationData,
-  Error,
+  ScheduledTransactionsDeleteMutationError,
   ScheduledTransactionsDeleteMutationVariables
 > {
   const client = useYnabContext();

@@ -5,23 +5,47 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { userGet } from "../funcs/userGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
-import { unwrapAsync } from "../types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import { useYnabContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  buildUserGetQuery,
+  prefetchUserGet,
+  queryKeyUserGet,
+  UserGetQueryData,
+} from "./userGet.core.js";
+export {
+  buildUserGetQuery,
+  prefetchUserGet,
+  queryKeyUserGet,
+  type UserGetQueryData,
+};
 
-export type UserGetQueryData = models.UserResponse;
+export type UserGetQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * User info
@@ -30,8 +54,8 @@ export type UserGetQueryData = models.UserResponse;
  * Returns authenticated user information
  */
 export function useUserGet(
-  options?: QueryHookOptions<UserGetQueryData>,
-): UseQueryResult<UserGetQueryData, Error> {
+  options?: QueryHookOptions<UserGetQueryData, UserGetQueryError>,
+): UseQueryResult<UserGetQueryData, UserGetQueryError> {
   const client = useYnabContext();
   return useQuery({
     ...buildUserGetQuery(
@@ -49,8 +73,8 @@ export function useUserGet(
  * Returns authenticated user information
  */
 export function useUserGetSuspense(
-  options?: SuspenseQueryHookOptions<UserGetQueryData>,
-): UseSuspenseQueryResult<UserGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<UserGetQueryData, UserGetQueryError>,
+): UseSuspenseQueryResult<UserGetQueryData, UserGetQueryError> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildUserGetQuery(
@@ -58,17 +82,6 @@ export function useUserGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchUserGet(
-  queryClient: QueryClient,
-  client$: YnabCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildUserGetQuery(
-      client$,
-    ),
   });
 }
 
@@ -89,32 +102,4 @@ export function invalidateAllUserGet(
     ...filters,
     queryKey: ["ynab-ts", "User", "get"],
   });
-}
-
-export function buildUserGetQuery(
-  client$: YnabCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<UserGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyUserGet(),
-    queryFn: async function userGetQueryFn(ctx): Promise<UserGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(userGet(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyUserGet(): QueryKey {
-  return ["ynab-ts", "User", "get"];
 }

@@ -8,7 +8,7 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: GetMonthCategoryByIdRequest = {
   budgetId: "<id>",
-  month: new RFCDate("2025-07-27"),
+  month: new RFCDate("2026-07-27"),
   categoryId: "<id>",
 };
 ```

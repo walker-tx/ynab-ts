@@ -8,7 +8,7 @@ import { RFCDate } from "ynab-ts/types";
 
 let value: TransactionDetail = {
   id: "<id>",
-  date: new RFCDate("2023-03-10"),
+  date: new RFCDate("2024-03-09"),
   amount: 666881,
   cleared: "uncleared",
   approved: false,

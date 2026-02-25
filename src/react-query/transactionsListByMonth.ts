@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { transactionsListByMonth } from "../funcs/transactionsListByMonth.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,8 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildTransactionsListByMonthQuery,
+  prefetchTransactionsListByMonth,
+  queryKeyTransactionsListByMonth,
+  TransactionsListByMonthQueryData,
+} from "./transactionsListByMonth.core.js";
+export {
+  buildTransactionsListByMonthQuery,
+  prefetchTransactionsListByMonth,
+  queryKeyTransactionsListByMonth,
+  type TransactionsListByMonthQueryData,
+};
 
-export type TransactionsListByMonthQueryData = models.TransactionsResponse;
+export type TransactionsListByMonthQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List transactions in month, excluding any pending transactions
@@ -37,8 +61,14 @@ export type TransactionsListByMonthQueryData = models.TransactionsResponse;
  */
 export function useTransactionsListByMonth(
   request: operations.GetTransactionsByMonthRequest,
-  options?: QueryHookOptions<TransactionsListByMonthQueryData>,
-): UseQueryResult<TransactionsListByMonthQueryData, Error> {
+  options?: QueryHookOptions<
+    TransactionsListByMonthQueryData,
+    TransactionsListByMonthQueryError
+  >,
+): UseQueryResult<
+  TransactionsListByMonthQueryData,
+  TransactionsListByMonthQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildTransactionsListByMonthQuery(
@@ -58,8 +88,14 @@ export function useTransactionsListByMonth(
  */
 export function useTransactionsListByMonthSuspense(
   request: operations.GetTransactionsByMonthRequest,
-  options?: SuspenseQueryHookOptions<TransactionsListByMonthQueryData>,
-): UseSuspenseQueryResult<TransactionsListByMonthQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TransactionsListByMonthQueryData,
+    TransactionsListByMonthQueryError
+  >,
+): UseSuspenseQueryResult<
+  TransactionsListByMonthQueryData,
+  TransactionsListByMonthQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildTransactionsListByMonthQuery(
@@ -68,19 +104,6 @@ export function useTransactionsListByMonthSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchTransactionsListByMonth(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetTransactionsByMonthRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildTransactionsListByMonthQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -131,57 +154,4 @@ export function invalidateAllTransactionsListByMonth(
     ...filters,
     queryKey: ["ynab-ts", "Transactions", "listByMonth"],
   });
-}
-
-export function buildTransactionsListByMonthQuery(
-  client$: YnabCore,
-  request: operations.GetTransactionsByMonthRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<TransactionsListByMonthQueryData>;
-} {
-  return {
-    queryKey: queryKeyTransactionsListByMonth(request.budgetId, request.month, {
-      sinceDate: request.sinceDate,
-      type: request.type,
-      lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-    }),
-    queryFn: async function transactionsListByMonthQueryFn(
-      ctx,
-    ): Promise<TransactionsListByMonthQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(transactionsListByMonth(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyTransactionsListByMonth(
-  budgetId: string,
-  month: string,
-  parameters: {
-    sinceDate?: RFCDate | undefined;
-    type?: operations.GetTransactionsByMonthType | undefined;
-    lastKnowledgeOfServer?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "ynab-ts",
-    "Transactions",
-    "listByMonth",
-    budgetId,
-    month,
-    parameters,
-  ];
 }

@@ -1,5 +1,4 @@
 # Categories
-(*categories*)
 
 ## Overview
 

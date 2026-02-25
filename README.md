@@ -74,12 +74,9 @@ bun add @tanstack/react-query react react-dom
 ### Yarn
 
 ```bash
-yarn add ynab-ts zod
+yarn add ynab-ts
 # Install optional peer dependencies if you plan to use React hooks
 yarn add @tanstack/react-query react react-dom
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
 ```
 
 > [!NOTE]
@@ -151,19 +148,19 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [accounts](docs/sdks/accounts/README.md)
+### [Accounts](docs/sdks/accounts/README.md)
 
 * [list](docs/sdks/accounts/README.md#list) - Account list
 * [create](docs/sdks/accounts/README.md#create) - Create a new account
 * [get](docs/sdks/accounts/README.md#get) - Single account
 
-### [budgets](docs/sdks/budgets/README.md)
+### [Budgets](docs/sdks/budgets/README.md)
 
 * [list](docs/sdks/budgets/README.md#list) - List budgets
 * [get](docs/sdks/budgets/README.md#get) - Single budget
 * [getSettings](docs/sdks/budgets/README.md#getsettings) - Budget Settings
 
-### [categories](docs/sdks/categories/README.md)
+### [Categories](docs/sdks/categories/README.md)
 
 * [list](docs/sdks/categories/README.md#list) - List categories
 * [get](docs/sdks/categories/README.md#get) - Single category
@@ -171,24 +168,24 @@ run();
 * [getByMonth](docs/sdks/categories/README.md#getbymonth) - Single category for a specific budget month
 * [updateMonth](docs/sdks/categories/README.md#updatemonth) - Update a category for a specific month
 
-### [months](docs/sdks/months/README.md)
+### [Months](docs/sdks/months/README.md)
 
 * [list](docs/sdks/months/README.md#list) - List budget months
 * [get](docs/sdks/months/README.md#get) - Single budget month
 
-### [payeeLocations](docs/sdks/payeelocations/README.md)
+### [PayeeLocations](docs/sdks/payeelocations/README.md)
 
 * [list](docs/sdks/payeelocations/README.md#list) - List payee locations
 * [get](docs/sdks/payeelocations/README.md#get) - Single payee location
 * [listByPayee](docs/sdks/payeelocations/README.md#listbypayee) - List locations for a payee
 
-### [payees](docs/sdks/payees/README.md)
+### [Payees](docs/sdks/payees/README.md)
 
 * [list](docs/sdks/payees/README.md#list) - List payees
 * [get](docs/sdks/payees/README.md#get) - Single payee
 * [update](docs/sdks/payees/README.md#update) - Update a payee
 
-### [scheduledTransactions](docs/sdks/scheduledtransactions/README.md)
+### [ScheduledTransactions](docs/sdks/scheduledtransactions/README.md)
 
 * [list](docs/sdks/scheduledtransactions/README.md#list) - List scheduled transactions
 * [create](docs/sdks/scheduledtransactions/README.md#create) - Create a single scheduled transaction
@@ -196,7 +193,7 @@ run();
 * [update](docs/sdks/scheduledtransactions/README.md#update) - Updates an existing scheduled transaction
 * [delete](docs/sdks/scheduledtransactions/README.md#delete) - Deletes an existing scheduled transaction
 
-### [transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [list](docs/sdks/transactions/README.md#list) - List transactions
 * [create](docs/sdks/transactions/README.md#create) - Create a single transaction or multiple transactions
@@ -210,10 +207,9 @@ run();
 * [listByPayee](docs/sdks/transactions/README.md#listbypayee) - List payee transactions, excluding any pending transactions
 * [listByMonth](docs/sdks/transactions/README.md#listbymonth) - List transactions in month, excluding any pending transactions
 
-### [user](docs/sdks/user/README.md)
+### [User](docs/sdks/user/README.md)
 
 * [get](docs/sdks/user/README.md#get) - User info
-
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -507,19 +503,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Ynab } from "ynab-ts";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "ynab-ts/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -539,7 +539,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Ynab({ httpClient });
+const sdk = new Ynab({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

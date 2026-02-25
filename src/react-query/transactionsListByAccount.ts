@@ -5,20 +5,23 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { YnabCore } from "../core.js";
-import { transactionsListByAccount } from "../funcs/transactionsListByAccount.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as operations from "../models/operations/index.js";
-import { unwrapAsync } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { useYnabContext } from "./_context.js";
 import {
@@ -26,8 +29,29 @@ import {
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildTransactionsListByAccountQuery,
+  prefetchTransactionsListByAccount,
+  queryKeyTransactionsListByAccount,
+  TransactionsListByAccountQueryData,
+} from "./transactionsListByAccount.core.js";
+export {
+  buildTransactionsListByAccountQuery,
+  prefetchTransactionsListByAccount,
+  queryKeyTransactionsListByAccount,
+  type TransactionsListByAccountQueryData,
+};
 
-export type TransactionsListByAccountQueryData = models.TransactionsResponse;
+export type TransactionsListByAccountQueryError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List account transactions
@@ -37,8 +61,14 @@ export type TransactionsListByAccountQueryData = models.TransactionsResponse;
  */
 export function useTransactionsListByAccount(
   request: operations.GetTransactionsByAccountRequest,
-  options?: QueryHookOptions<TransactionsListByAccountQueryData>,
-): UseQueryResult<TransactionsListByAccountQueryData, Error> {
+  options?: QueryHookOptions<
+    TransactionsListByAccountQueryData,
+    TransactionsListByAccountQueryError
+  >,
+): UseQueryResult<
+  TransactionsListByAccountQueryData,
+  TransactionsListByAccountQueryError
+> {
   const client = useYnabContext();
   return useQuery({
     ...buildTransactionsListByAccountQuery(
@@ -58,8 +88,14 @@ export function useTransactionsListByAccount(
  */
 export function useTransactionsListByAccountSuspense(
   request: operations.GetTransactionsByAccountRequest,
-  options?: SuspenseQueryHookOptions<TransactionsListByAccountQueryData>,
-): UseSuspenseQueryResult<TransactionsListByAccountQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TransactionsListByAccountQueryData,
+    TransactionsListByAccountQueryError
+  >,
+): UseSuspenseQueryResult<
+  TransactionsListByAccountQueryData,
+  TransactionsListByAccountQueryError
+> {
   const client = useYnabContext();
   return useSuspenseQuery({
     ...buildTransactionsListByAccountQuery(
@@ -68,19 +104,6 @@ export function useTransactionsListByAccountSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchTransactionsListByAccount(
-  queryClient: QueryClient,
-  client$: YnabCore,
-  request: operations.GetTransactionsByAccountRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildTransactionsListByAccountQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -131,61 +154,4 @@ export function invalidateAllTransactionsListByAccount(
     ...filters,
     queryKey: ["ynab-ts", "Transactions", "listByAccount"],
   });
-}
-
-export function buildTransactionsListByAccountQuery(
-  client$: YnabCore,
-  request: operations.GetTransactionsByAccountRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<TransactionsListByAccountQueryData>;
-} {
-  return {
-    queryKey: queryKeyTransactionsListByAccount(
-      request.budgetId,
-      request.accountId,
-      {
-        sinceDate: request.sinceDate,
-        type: request.type,
-        lastKnowledgeOfServer: request.lastKnowledgeOfServer,
-      },
-    ),
-    queryFn: async function transactionsListByAccountQueryFn(
-      ctx,
-    ): Promise<TransactionsListByAccountQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(transactionsListByAccount(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyTransactionsListByAccount(
-  budgetId: string,
-  accountId: string,
-  parameters: {
-    sinceDate?: RFCDate | undefined;
-    type?: operations.GetTransactionsByAccountType | undefined;
-    lastKnowledgeOfServer?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "ynab-ts",
-    "Transactions",
-    "listByAccount",
-    budgetId,
-    accountId,
-    parameters,
-  ];
 }

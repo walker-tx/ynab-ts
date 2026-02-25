@@ -11,6 +11,17 @@ import { YnabCore } from "../core.js";
 import { accountsCreate } from "../funcs/accountsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { YnabError } from "../models/errors/ynaberror.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -24,6 +35,17 @@ export type AccountsCreateMutationVariables = {
 
 export type AccountsCreateMutationData = models.AccountResponse;
 
+export type AccountsCreateMutationError =
+  | errors.ErrorResponse
+  | YnabError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a new account
  *
@@ -33,12 +55,12 @@ export type AccountsCreateMutationData = models.AccountResponse;
 export function useAccountsCreateMutation(
   options?: MutationHookOptions<
     AccountsCreateMutationData,
-    Error,
+    AccountsCreateMutationError,
     AccountsCreateMutationVariables
   >,
 ): UseMutationResult<
   AccountsCreateMutationData,
-  Error,
+  AccountsCreateMutationError,
   AccountsCreateMutationVariables
 > {
   const client = useYnabContext();
