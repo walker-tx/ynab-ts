@@ -2,21 +2,23 @@
 
 ## Overview
 
+The scheduled transactions for a plan; upcoming and recurring transactions that have not yet been entered into an account. Each has a frequency along with the first and next dates it will occur (date_first and date_next).
+
 ### Available Operations
 
-* [list](#list) - List scheduled transactions
-* [create](#create) - Create a single scheduled transaction
-* [get](#get) - Single scheduled transaction
-* [update](#update) - Updates an existing scheduled transaction
-* [delete](#delete) - Deletes an existing scheduled transaction
+* [getScheduledTransactions](#getscheduledtransactions) - Get all scheduled transactions
+* [createScheduledTransaction](#createscheduledtransaction) - Create a scheduled transaction
+* [getScheduledTransactionById](#getscheduledtransactionbyid) - Get a scheduled transaction
+* [updateScheduledTransaction](#updatescheduledtransaction) - Update a scheduled transaction
+* [deleteScheduledTransaction](#deletescheduledtransaction) - Delete a scheduled transaction
 
-## list
+## getScheduledTransactions
 
 Returns all scheduled transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getScheduledTransactions" method="get" path="/budgets/{budget_id}/scheduled_transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getScheduledTransactions" method="get" path="/plans/{plan_id}/scheduled_transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -25,8 +27,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.scheduledTransactions.list({
-    budgetId: "<id>",
+  const result = await ynab.scheduledTransactions.getScheduledTransactions({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -41,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { scheduledTransactionsList } from "ynab-ts/funcs/scheduledTransactionsList.js";
+import { scheduledTransactionsGetScheduledTransactions } from "ynab-ts/funcs/scheduledTransactionsGetScheduledTransactions.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -50,14 +52,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await scheduledTransactionsList(ynab, {
-    budgetId: "<id>",
+  const res = await scheduledTransactionsGetScheduledTransactions(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("scheduledTransactionsList failed:", res.error);
+    console.log("scheduledTransactionsGetScheduledTransactions failed:", res.error);
   }
 }
 
@@ -77,19 +79,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useScheduledTransactionsList,
-  useScheduledTransactionsListSuspense,
+  useScheduledTransactionsGetScheduledTransactions,
+  useScheduledTransactionsGetScheduledTransactionsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchScheduledTransactionsList,
+  prefetchScheduledTransactionsGetScheduledTransactions,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateScheduledTransactionsList,
-  invalidateAllScheduledTransactionsList,
-} from "ynab-ts/react-query/scheduledTransactionsList.js";
+  invalidateScheduledTransactionsGetScheduledTransactions,
+  invalidateAllScheduledTransactionsGetScheduledTransactions,
+} from "ynab-ts/react-query/scheduledTransactionsGetScheduledTransactions.js";
 ```
 
 ### Parameters
@@ -110,16 +112,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## create
+## createScheduledTransaction
 
 Creates a single scheduled transaction (a transaction with a future date).
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createScheduledTransaction" method="post" path="/budgets/{budget_id}/scheduled_transactions" -->
+<!-- UsageSnippet language="typescript" operationID="createScheduledTransaction" method="post" path="/plans/{plan_id}/scheduled_transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 import { RFCDate } from "ynab-ts/types";
@@ -129,8 +130,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.scheduledTransactions.create({
-    budgetId: "<id>",
+  const result = await ynab.scheduledTransactions.createScheduledTransaction({
+    planId: "<id>",
     postScheduledTransactionWrapper: {
       scheduledTransaction: {
         accountId: "1cb7f54b-9ed5-48fd-8642-a56bd5ee2fca",
@@ -151,7 +152,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { scheduledTransactionsCreate } from "ynab-ts/funcs/scheduledTransactionsCreate.js";
+import { scheduledTransactionsCreateScheduledTransaction } from "ynab-ts/funcs/scheduledTransactionsCreateScheduledTransaction.js";
 import { RFCDate } from "ynab-ts/types";
 
 // Use `YnabCore` for best tree-shaking performance.
@@ -161,8 +162,8 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await scheduledTransactionsCreate(ynab, {
-    budgetId: "<id>",
+  const res = await scheduledTransactionsCreateScheduledTransaction(ynab, {
+    planId: "<id>",
     postScheduledTransactionWrapper: {
       scheduledTransaction: {
         accountId: "1cb7f54b-9ed5-48fd-8642-a56bd5ee2fca",
@@ -174,7 +175,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("scheduledTransactionsCreate failed:", res.error);
+    console.log("scheduledTransactionsCreateScheduledTransaction failed:", res.error);
   }
 }
 
@@ -194,8 +195,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useScheduledTransactionsCreateMutation
-} from "ynab-ts/react-query/scheduledTransactionsCreate.js";
+  useScheduledTransactionsCreateScheduledTransactionMutation
+} from "ynab-ts/react-query/scheduledTransactionsCreateScheduledTransaction.js";
 ```
 
 ### Parameters
@@ -218,13 +219,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## get
+## getScheduledTransactionById
 
 Returns a single scheduled transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getScheduledTransactionById" method="get" path="/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="getScheduledTransactionById" method="get" path="/plans/{plan_id}/scheduled_transactions/{scheduled_transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -233,8 +234,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.scheduledTransactions.get({
-    budgetId: "<id>",
+  const result = await ynab.scheduledTransactions.getScheduledTransactionById({
+    planId: "<id>",
     scheduledTransactionId: "<id>",
   });
 
@@ -250,7 +251,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { scheduledTransactionsGet } from "ynab-ts/funcs/scheduledTransactionsGet.js";
+import { scheduledTransactionsGetScheduledTransactionById } from "ynab-ts/funcs/scheduledTransactionsGetScheduledTransactionById.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -259,15 +260,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await scheduledTransactionsGet(ynab, {
-    budgetId: "<id>",
+  const res = await scheduledTransactionsGetScheduledTransactionById(ynab, {
+    planId: "<id>",
     scheduledTransactionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("scheduledTransactionsGet failed:", res.error);
+    console.log("scheduledTransactionsGetScheduledTransactionById failed:", res.error);
   }
 }
 
@@ -287,19 +288,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useScheduledTransactionsGet,
-  useScheduledTransactionsGetSuspense,
+  useScheduledTransactionsGetScheduledTransactionById,
+  useScheduledTransactionsGetScheduledTransactionByIdSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchScheduledTransactionsGet,
+  prefetchScheduledTransactionsGetScheduledTransactionById,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateScheduledTransactionsGet,
-  invalidateAllScheduledTransactionsGet,
-} from "ynab-ts/react-query/scheduledTransactionsGet.js";
+  invalidateScheduledTransactionsGetScheduledTransactionById,
+  invalidateAllScheduledTransactionsGetScheduledTransactionById,
+} from "ynab-ts/react-query/scheduledTransactionsGetScheduledTransactionById.js";
 ```
 
 ### Parameters
@@ -320,16 +321,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## update
+## updateScheduledTransaction
 
 Updates a single scheduled transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateScheduledTransaction" method="put" path="/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="updateScheduledTransaction" method="put" path="/plans/{plan_id}/scheduled_transactions/{scheduled_transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 import { RFCDate } from "ynab-ts/types";
@@ -339,8 +339,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.scheduledTransactions.update({
-    budgetId: "<id>",
+  const result = await ynab.scheduledTransactions.updateScheduledTransaction({
+    planId: "<id>",
     scheduledTransactionId: "<id>",
     putScheduledTransactionWrapper: {
       scheduledTransaction: {
@@ -362,7 +362,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { scheduledTransactionsUpdate } from "ynab-ts/funcs/scheduledTransactionsUpdate.js";
+import { scheduledTransactionsUpdateScheduledTransaction } from "ynab-ts/funcs/scheduledTransactionsUpdateScheduledTransaction.js";
 import { RFCDate } from "ynab-ts/types";
 
 // Use `YnabCore` for best tree-shaking performance.
@@ -372,8 +372,8 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await scheduledTransactionsUpdate(ynab, {
-    budgetId: "<id>",
+  const res = await scheduledTransactionsUpdateScheduledTransaction(ynab, {
+    planId: "<id>",
     scheduledTransactionId: "<id>",
     putScheduledTransactionWrapper: {
       scheduledTransaction: {
@@ -386,7 +386,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("scheduledTransactionsUpdate failed:", res.error);
+    console.log("scheduledTransactionsUpdateScheduledTransaction failed:", res.error);
   }
 }
 
@@ -406,8 +406,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useScheduledTransactionsUpdateMutation
-} from "ynab-ts/react-query/scheduledTransactionsUpdate.js";
+  useScheduledTransactionsUpdateScheduledTransactionMutation
+} from "ynab-ts/react-query/scheduledTransactionsUpdateScheduledTransaction.js";
 ```
 
 ### Parameters
@@ -430,13 +430,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## delete
+## deleteScheduledTransaction
 
 Deletes a scheduled transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deleteScheduledTransaction" method="delete" path="/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="deleteScheduledTransaction" method="delete" path="/plans/{plan_id}/scheduled_transactions/{scheduled_transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -445,8 +445,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.scheduledTransactions.delete({
-    budgetId: "<id>",
+  const result = await ynab.scheduledTransactions.deleteScheduledTransaction({
+    planId: "<id>",
     scheduledTransactionId: "<id>",
   });
 
@@ -462,7 +462,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { scheduledTransactionsDelete } from "ynab-ts/funcs/scheduledTransactionsDelete.js";
+import { scheduledTransactionsDeleteScheduledTransaction } from "ynab-ts/funcs/scheduledTransactionsDeleteScheduledTransaction.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -471,15 +471,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await scheduledTransactionsDelete(ynab, {
-    budgetId: "<id>",
+  const res = await scheduledTransactionsDeleteScheduledTransaction(ynab, {
+    planId: "<id>",
     scheduledTransactionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("scheduledTransactionsDelete failed:", res.error);
+    console.log("scheduledTransactionsDeleteScheduledTransaction failed:", res.error);
   }
 }
 
@@ -499,8 +499,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useScheduledTransactionsDeleteMutation
-} from "ynab-ts/react-query/scheduledTransactionsDelete.js";
+  useScheduledTransactionsDeleteScheduledTransactionMutation
+} from "ynab-ts/react-query/scheduledTransactionsDeleteScheduledTransaction.js";
 ```
 
 ### Parameters

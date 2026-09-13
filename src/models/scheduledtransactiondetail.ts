@@ -72,6 +72,14 @@ export type ScheduledTransactionDetail = {
    * Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The scheduled transaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The scheduled transaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
   accountName: string;
   payeeName?: string | null | undefined;
   /**
@@ -108,6 +116,8 @@ export const ScheduledTransactionDetail$inboundSchema: z.ZodType<
   category_id: z.nullable(z.string()).optional(),
   transfer_account_id: z.nullable(z.string()).optional(),
   deleted: z.boolean(),
+  amount_formatted: z.string().optional(),
+  amount_currency: z.number().optional(),
   account_name: z.string(),
   payee_name: z.nullable(z.string()).optional(),
   category_name: z.nullable(z.string()).optional(),
@@ -122,6 +132,8 @@ export const ScheduledTransactionDetail$inboundSchema: z.ZodType<
     "payee_id": "payeeId",
     "category_id": "categoryId",
     "transfer_account_id": "transferAccountId",
+    "amount_formatted": "amountFormatted",
+    "amount_currency": "amountCurrency",
     "account_name": "accountName",
     "payee_name": "payeeName",
     "category_name": "categoryName",

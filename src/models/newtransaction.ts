@@ -55,7 +55,7 @@ export type NewTransaction = {
    */
   flagColor?: TransactionFlagColor | null | undefined;
   /**
-   * An array of subtransactions to configure a transaction as a split. Updating `subtransactions` on an existing split transaction is not supported.
+   * An array of subtransactions to configure a transaction as a split. Updating `subtransactions` on an existing split transaction is not supported and will return an error.  Splits are not allowed on tracking accounts or on transfers between on-budget accounts; a transfer to a tracking account can be a split.
    */
   subtransactions?: Array<SaveSubTransaction> | undefined;
   /**

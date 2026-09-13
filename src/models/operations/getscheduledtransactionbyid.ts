@@ -7,9 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetScheduledTransactionByIdRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The id of the scheduled transaction
    */
@@ -18,7 +18,7 @@ export type GetScheduledTransactionByIdRequest = {
 
 /** @internal */
 export type GetScheduledTransactionByIdRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   scheduled_transaction_id: string;
 };
 
@@ -28,11 +28,11 @@ export const GetScheduledTransactionByIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetScheduledTransactionByIdRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   scheduledTransactionId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     scheduledTransactionId: "scheduled_transaction_id",
   });
 });

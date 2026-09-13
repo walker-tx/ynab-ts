@@ -1,0 +1,28 @@
+# MoneyMovement
+
+## Example Usage
+
+```typescript
+import { MoneyMovement } from "ynab-ts/models";
+
+let value: MoneyMovement = {
+  id: "0731d514-e0c1-4501-a6ba-29b7cf92f590",
+  amount: 159261,
+};
+```
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                   | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `month`                                                                                                | [RFCDate](../types/rfcdate.md)                                                                         | :heavy_minus_sign:                                                                                     | The month of the money movement in ISO format (e.g. 2024-01-01)                                        |
+| `movedAt`                                                                                              | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)          | :heavy_minus_sign:                                                                                     | The date/time the money movement was processed on the server in ISO format (e.g. 2024-01-01T12:00:00Z) |
+| `note`                                                                                                 | *string*                                                                                               | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `moneyMovementGroupId`                                                                                 | *string*                                                                                               | :heavy_minus_sign:                                                                                     | The id of the money movement group this movement belongs to                                            |
+| `performedByUserId`                                                                                    | *string*                                                                                               | :heavy_minus_sign:                                                                                     | The id of the user who performed the money movement                                                    |
+| `fromCategoryId`                                                                                       | *string*                                                                                               | :heavy_minus_sign:                                                                                     | The id of the category the money was moved from                                                        |
+| `toCategoryId`                                                                                         | *string*                                                                                               | :heavy_minus_sign:                                                                                     | The id of the category the money was moved to                                                          |
+| `amount`                                                                                               | *number*                                                                                               | :heavy_check_mark:                                                                                     | The amount of the money movement in milliunits format                                                  |
+| `amountFormatted`                                                                                      | *string*                                                                                               | :heavy_minus_sign:                                                                                     | The money movement amount formatted in the plan's currency format                                      |
+| `amountCurrency`                                                                                       | *number*                                                                                               | :heavy_minus_sign:                                                                                     | The money movement amount as a decimal currency amount                                                 |

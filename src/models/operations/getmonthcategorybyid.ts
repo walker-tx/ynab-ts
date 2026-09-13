@@ -8,11 +8,11 @@ import { RFCDate } from "../../types/rfcdate.js";
 
 export type GetMonthCategoryByIdRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
-   * The budget month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
+   * The plan month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
    */
   month: RFCDate;
   /**
@@ -23,7 +23,7 @@ export type GetMonthCategoryByIdRequest = {
 
 /** @internal */
 export type GetMonthCategoryByIdRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   month: string;
   category_id: string;
 };
@@ -34,12 +34,12 @@ export const GetMonthCategoryByIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetMonthCategoryByIdRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   month: z.instanceof(RFCDate).transform(v => v.toString()),
   categoryId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     categoryId: "category_id",
   });
 });
