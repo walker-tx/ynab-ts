@@ -17,7 +17,7 @@ export type Account = {
    */
   type: AccountType;
   /**
-   * Whether this account is on budget or not
+   * Whether this account is "on budget" or not
    */
   onBudget: boolean;
   /**
@@ -26,7 +26,7 @@ export type Account = {
   closed: boolean;
   note?: string | null | undefined;
   /**
-   * The current balance of the account in milliunits format
+   * The current available balance of the account in milliunits format
    */
   balance: number;
   /**
@@ -64,6 +64,30 @@ export type Account = {
    * Whether or not the account has been deleted.  Deleted accounts will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The current available balance of the account formatted in the plan's currency format
+   */
+  balanceFormatted?: string | undefined;
+  /**
+   * The current available balance of the account as a decimal currency amount
+   */
+  balanceCurrency?: number | undefined;
+  /**
+   * The current cleared balance of the account formatted in the plan's currency format
+   */
+  clearedBalanceFormatted?: string | undefined;
+  /**
+   * The current cleared balance of the account as a decimal currency amount
+   */
+  clearedBalanceCurrency?: number | undefined;
+  /**
+   * The current uncleared balance of the account formatted in the plan's currency format
+   */
+  unclearedBalanceFormatted?: string | undefined;
+  /**
+   * The current uncleared balance of the account as a decimal currency amount
+   */
+  unclearedBalanceCurrency?: number | undefined;
 };
 
 /** @internal */
@@ -89,6 +113,12 @@ export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> =
     debt_minimum_payments: z.nullable(z.record(z.number().int())).optional(),
     debt_escrow_amounts: z.nullable(z.record(z.number().int())).optional(),
     deleted: z.boolean(),
+    balance_formatted: z.string().optional(),
+    balance_currency: z.number().optional(),
+    cleared_balance_formatted: z.string().optional(),
+    cleared_balance_currency: z.number().optional(),
+    uncleared_balance_formatted: z.string().optional(),
+    uncleared_balance_currency: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "on_budget": "onBudget",
@@ -102,6 +132,12 @@ export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> =
       "debt_interest_rates": "debtInterestRates",
       "debt_minimum_payments": "debtMinimumPayments",
       "debt_escrow_amounts": "debtEscrowAmounts",
+      "balance_formatted": "balanceFormatted",
+      "balance_currency": "balanceCurrency",
+      "cleared_balance_formatted": "clearedBalanceFormatted",
+      "cleared_balance_currency": "clearedBalanceCurrency",
+      "uncleared_balance_formatted": "unclearedBalanceFormatted",
+      "uncleared_balance_currency": "unclearedBalanceCurrency",
     });
   });
 

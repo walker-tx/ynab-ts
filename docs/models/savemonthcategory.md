@@ -12,6 +12,6 @@ let value: SaveMonthCategory = {
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `budgeted`                           | *number*                             | :heavy_check_mark:                   | Budgeted amount in milliunits format |
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `budgeted`                                      | *number*                                        | :heavy_check_mark:                              | Assigned (budgeted) amount in milliunits format |

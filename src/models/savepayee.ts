@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 
 export type SavePayee = {
   /**
-   * The name of the payee. The name must be a maximum of 500 characters.
+   * The name of the payee.
    */
   name?: string | undefined;
 };
