@@ -2,19 +2,21 @@
 
 ## Overview
 
+When you enter a transaction and specify a payee on the YNAB mobile apps, the GPS coordinates for that location are stored, with your permission, so that the next time you are in the same place (like the Grocery store) we can pre-populate nearby payees for you!  It’s handy and saves you time. This resource makes these locations available.  Locations will not be available for all payees.
+
 ### Available Operations
 
-* [list](#list) - List payee locations
-* [get](#get) - Single payee location
-* [listByPayee](#listbypayee) - List locations for a payee
+* [getPayeeLocations](#getpayeelocations) - Get all payee locations
+* [getPayeeLocationById](#getpayeelocationbyid) - Get a payee location
+* [getPayeeLocationsByPayee](#getpayeelocationsbypayee) - Get all locations for a payee
 
-## list
+## getPayeeLocations
 
 Returns all payee locations
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getPayeeLocations" method="get" path="/budgets/{budget_id}/payee_locations" -->
+<!-- UsageSnippet language="typescript" operationID="getPayeeLocations" method="get" path="/plans/{plan_id}/payee_locations" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -23,8 +25,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.payeeLocations.list({
-    budgetId: "<id>",
+  const result = await ynab.payeeLocations.getPayeeLocations({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -39,7 +41,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { payeeLocationsList } from "ynab-ts/funcs/payeeLocationsList.js";
+import { payeeLocationsGetPayeeLocations } from "ynab-ts/funcs/payeeLocationsGetPayeeLocations.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,14 +50,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await payeeLocationsList(ynab, {
-    budgetId: "<id>",
+  const res = await payeeLocationsGetPayeeLocations(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("payeeLocationsList failed:", res.error);
+    console.log("payeeLocationsGetPayeeLocations failed:", res.error);
   }
 }
 
@@ -75,19 +77,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePayeeLocationsList,
-  usePayeeLocationsListSuspense,
+  usePayeeLocationsGetPayeeLocations,
+  usePayeeLocationsGetPayeeLocationsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPayeeLocationsList,
+  prefetchPayeeLocationsGetPayeeLocations,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePayeeLocationsList,
-  invalidateAllPayeeLocationsList,
-} from "ynab-ts/react-query/payeeLocationsList.js";
+  invalidatePayeeLocationsGetPayeeLocations,
+  invalidateAllPayeeLocationsGetPayeeLocations,
+} from "ynab-ts/react-query/payeeLocationsGetPayeeLocations.js";
 ```
 
 ### Parameters
@@ -108,16 +110,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## get
+## getPayeeLocationById
 
 Returns a single payee location
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getPayeeLocationById" method="get" path="/budgets/{budget_id}/payee_locations/{payee_location_id}" -->
+<!-- UsageSnippet language="typescript" operationID="getPayeeLocationById" method="get" path="/plans/{plan_id}/payee_locations/{payee_location_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -126,8 +127,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.payeeLocations.get({
-    budgetId: "<id>",
+  const result = await ynab.payeeLocations.getPayeeLocationById({
+    planId: "<id>",
     payeeLocationId: "<id>",
   });
 
@@ -143,7 +144,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { payeeLocationsGet } from "ynab-ts/funcs/payeeLocationsGet.js";
+import { payeeLocationsGetPayeeLocationById } from "ynab-ts/funcs/payeeLocationsGetPayeeLocationById.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -152,15 +153,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await payeeLocationsGet(ynab, {
-    budgetId: "<id>",
+  const res = await payeeLocationsGetPayeeLocationById(ynab, {
+    planId: "<id>",
     payeeLocationId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("payeeLocationsGet failed:", res.error);
+    console.log("payeeLocationsGetPayeeLocationById failed:", res.error);
   }
 }
 
@@ -180,19 +181,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePayeeLocationsGet,
-  usePayeeLocationsGetSuspense,
+  usePayeeLocationsGetPayeeLocationById,
+  usePayeeLocationsGetPayeeLocationByIdSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPayeeLocationsGet,
+  prefetchPayeeLocationsGetPayeeLocationById,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePayeeLocationsGet,
-  invalidateAllPayeeLocationsGet,
-} from "ynab-ts/react-query/payeeLocationsGet.js";
+  invalidatePayeeLocationsGetPayeeLocationById,
+  invalidateAllPayeeLocationsGetPayeeLocationById,
+} from "ynab-ts/react-query/payeeLocationsGetPayeeLocationById.js";
 ```
 
 ### Parameters
@@ -213,16 +214,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## listByPayee
+## getPayeeLocationsByPayee
 
 Returns all payee locations for a specified payee
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getPayeeLocationsByPayee" method="get" path="/budgets/{budget_id}/payees/{payee_id}/payee_locations" -->
+<!-- UsageSnippet language="typescript" operationID="getPayeeLocationsByPayee" method="get" path="/plans/{plan_id}/payees/{payee_id}/payee_locations" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -231,8 +231,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.payeeLocations.listByPayee({
-    budgetId: "<id>",
+  const result = await ynab.payeeLocations.getPayeeLocationsByPayee({
+    planId: "<id>",
     payeeId: "<id>",
   });
 
@@ -248,7 +248,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { payeeLocationsListByPayee } from "ynab-ts/funcs/payeeLocationsListByPayee.js";
+import { payeeLocationsGetPayeeLocationsByPayee } from "ynab-ts/funcs/payeeLocationsGetPayeeLocationsByPayee.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -257,15 +257,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await payeeLocationsListByPayee(ynab, {
-    budgetId: "<id>",
+  const res = await payeeLocationsGetPayeeLocationsByPayee(ynab, {
+    planId: "<id>",
     payeeId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("payeeLocationsListByPayee failed:", res.error);
+    console.log("payeeLocationsGetPayeeLocationsByPayee failed:", res.error);
   }
 }
 
@@ -285,19 +285,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePayeeLocationsListByPayee,
-  usePayeeLocationsListByPayeeSuspense,
+  usePayeeLocationsGetPayeeLocationsByPayee,
+  usePayeeLocationsGetPayeeLocationsByPayeeSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPayeeLocationsListByPayee,
+  prefetchPayeeLocationsGetPayeeLocationsByPayee,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePayeeLocationsListByPayee,
-  invalidateAllPayeeLocationsListByPayee,
-} from "ynab-ts/react-query/payeeLocationsListByPayee.js";
+  invalidatePayeeLocationsGetPayeeLocationsByPayee,
+  invalidateAllPayeeLocationsGetPayeeLocationsByPayee,
+} from "ynab-ts/react-query/payeeLocationsGetPayeeLocationsByPayee.js";
 ```
 
 ### Parameters
@@ -318,5 +318,4 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

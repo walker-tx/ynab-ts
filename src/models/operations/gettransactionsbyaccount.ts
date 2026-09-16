@@ -23,17 +23,21 @@ export type GetTransactionsByAccountType = ClosedEnum<
 
 export type GetTransactionsByAccountRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The id of the account
    */
   accountId: string;
   /**
-   * If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).
+   * If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified.
    */
   sinceDate?: RFCDate | undefined;
+  /**
+   * If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).
+   */
+  untilDate?: RFCDate | undefined;
   /**
    * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
    */
@@ -51,9 +55,10 @@ export const GetTransactionsByAccountType$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export type GetTransactionsByAccountRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   account_id: string;
   since_date?: string | undefined;
+  until_date?: string | undefined;
   type?: string | undefined;
   last_knowledge_of_server?: number | undefined;
 };
@@ -64,16 +69,18 @@ export const GetTransactionsByAccountRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetTransactionsByAccountRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   accountId: z.string(),
   sinceDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  untilDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   type: GetTransactionsByAccountType$outboundSchema.optional(),
   lastKnowledgeOfServer: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     accountId: "account_id",
     sinceDate: "since_date",
+    untilDate: "until_date",
     lastKnowledgeOfServer: "last_knowledge_of_server",
   });
 });
