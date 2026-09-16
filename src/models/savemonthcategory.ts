@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 
 export type SaveMonthCategory = {
   /**
-   * Budgeted amount in milliunits format
+   * Assigned (budgeted) amount in milliunits format
    */
   budgeted: number;
 };

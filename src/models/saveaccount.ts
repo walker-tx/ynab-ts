@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v3";
-import { AccountType, AccountType$outboundSchema } from "./accounttype.js";
+import {
+  SaveAccountType,
+  SaveAccountType$outboundSchema,
+} from "./saveaccounttype.js";
 
 export type SaveAccount = {
   /**
@@ -11,9 +14,9 @@ export type SaveAccount = {
    */
   name: string;
   /**
-   * The type of account
+   * The type of account to create or update
    */
-  type: AccountType;
+  type: SaveAccountType;
   /**
    * The current balance of the account in milliunits format
    */
@@ -34,7 +37,7 @@ export const SaveAccount$outboundSchema: z.ZodType<
   SaveAccount
 > = z.object({
   name: z.string(),
-  type: AccountType$outboundSchema,
+  type: SaveAccountType$outboundSchema,
   balance: z.number().int(),
 });
 
