@@ -15,6 +15,10 @@ export type CategoryGroup = {
    */
   hidden: boolean;
   /**
+   * Whether or not the category group is internal
+   */
+  internal: boolean;
+  /**
    * Whether or not the category group has been deleted.  Deleted category groups will only be included in delta requests.
    */
   deleted: boolean;
@@ -29,6 +33,7 @@ export const CategoryGroup$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   hidden: z.boolean(),
+  internal: z.boolean(),
   deleted: z.boolean(),
 });
 
