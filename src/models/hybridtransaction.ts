@@ -113,6 +113,14 @@ export type HybridTransaction = {
    */
   deleted: boolean;
   /**
+   * The transaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The transaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
+  /**
    * Whether the hybrid transaction represents a regular transaction or a subtransaction
    */
   type: Type;
@@ -166,6 +174,8 @@ export const HybridTransaction$inboundSchema: z.ZodType<
     HybridTransactionDebtTransactionType$inboundSchema,
   ).optional(),
   deleted: z.boolean(),
+  amount_formatted: z.string().optional(),
+  amount_currency: z.number().optional(),
   type: Type$inboundSchema,
   parent_transaction_id: z.nullable(z.string()).optional(),
   account_name: z.string(),
@@ -185,6 +195,8 @@ export const HybridTransaction$inboundSchema: z.ZodType<
     "import_payee_name": "importPayeeName",
     "import_payee_name_original": "importPayeeNameOriginal",
     "debt_transaction_type": "debtTransactionType",
+    "amount_formatted": "amountFormatted",
+    "amount_currency": "amountCurrency",
     "parent_transaction_id": "parentTransactionId",
     "account_name": "accountName",
     "payee_name": "payeeName",
