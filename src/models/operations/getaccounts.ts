@@ -7,9 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetAccountsRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.
    */
@@ -18,7 +18,7 @@ export type GetAccountsRequest = {
 
 /** @internal */
 export type GetAccountsRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   last_knowledge_of_server?: number | undefined;
 };
 
@@ -28,11 +28,11 @@ export const GetAccountsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAccountsRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   lastKnowledgeOfServer: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     lastKnowledgeOfServer: "last_knowledge_of_server",
   });
 });
