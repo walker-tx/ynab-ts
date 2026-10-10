@@ -28,6 +28,14 @@ export type ScheduledSubTransaction = {
    * Whether or not the scheduled subtransaction has been deleted. Deleted scheduled subtransactions will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The scheduled subtransaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The scheduled subtransaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
 };
 
 /** @internal */
@@ -46,6 +54,8 @@ export const ScheduledSubTransaction$inboundSchema: z.ZodType<
   category_name: z.nullable(z.string()).optional(),
   transfer_account_id: z.nullable(z.string()).optional(),
   deleted: z.boolean(),
+  amount_formatted: z.string().optional(),
+  amount_currency: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "scheduled_transaction_id": "scheduledTransactionId",
@@ -54,6 +64,8 @@ export const ScheduledSubTransaction$inboundSchema: z.ZodType<
     "category_id": "categoryId",
     "category_name": "categoryName",
     "transfer_account_id": "transferAccountId",
+    "amount_formatted": "amountFormatted",
+    "amount_currency": "amountCurrency",
   });
 });
 

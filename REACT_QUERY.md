@@ -107,10 +107,10 @@ Query.
 [use-mutation]: https://tanstack.com/query/v5/docs/framework/react/reference/useMutation
 
 ```tsx
-import { useAccountsCreateMutation } from "ynab-ts/react-query/accountsCreate.js";
+import { useAccountsCreateAccountMutation } from "ynab-ts/react-query/accountsCreateAccount.js";
 
 export function Example() {
-  const { mutate, status } = useAccountsCreateMutation();
+  const { mutate, status } = useAccountsCreateAccountMutation();
 
   return (
     <form
@@ -120,11 +120,11 @@ export function Example() {
         // Read form data here...
 
         mutate({
-          budgetId: "<id>",
+          planId: "<id>",
           postAccountWrapper: {
             account: {
               name: "<value>",
-              type: "medicalDebt",
+              type: "otherLiability",
               balance: 127923,
             },
           },
@@ -144,10 +144,10 @@ Since the underlying SDK handles request timeouts and retries, there are a few
 more options provided by the mutation hooks to control these behaviors.
 
 ```tsx
-import { useAccountsCreateMutation } from "ynab-ts/react-query/accountsCreate.js";
+import { useAccountsCreateAccountMutation } from "ynab-ts/react-query/accountsCreateAccount.js";
 
 export function ExampleWithOptions() {
-  const { mutate, status } = useAccountsCreateMutation({
+  const { mutate, status } = useAccountsCreateAccountMutation({
     // TanStack Query options:
     networkMode: "online",
     gcTime: 5 * 60 * 1000, // 5 minutes

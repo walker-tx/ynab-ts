@@ -7,9 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteTransactionRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The id of the transaction
    */
@@ -18,7 +18,7 @@ export type DeleteTransactionRequest = {
 
 /** @internal */
 export type DeleteTransactionRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   transaction_id: string;
 };
 
@@ -28,11 +28,11 @@ export const DeleteTransactionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteTransactionRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   transactionId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     transactionId: "transaction_id",
   });
 });
