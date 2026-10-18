@@ -2,29 +2,29 @@
 
 ## Overview
 
-The transactions for a budget
+The transactions for a plan. Transaction amounts are specified in [milliunits format](https://api.ynab.com/#formats). Split transactions are represented with subtransactions, and transfers between accounts are represented with transfer payees.
 
 ### Available Operations
 
-* [list](#list) - List transactions
-* [create](#create) - Create a single transaction or multiple transactions
-* [updateMany](#updatemany) - Update multiple transactions
-* [import](#import) - Import transactions
-* [get](#get) - Single transaction
-* [updateOne](#updateone) - Updates an existing transaction
-* [delete](#delete) - Deletes an existing transaction
-* [listByAccount](#listbyaccount) - List account transactions
-* [listByCategory](#listbycategory) - List category transactions, excluding any pending transactions
-* [listByPayee](#listbypayee) - List payee transactions, excluding any pending transactions
-* [listByMonth](#listbymonth) - List transactions in month, excluding any pending transactions
+* [getTransactions](#gettransactions) - Get transactions
+* [createTransaction](#createtransaction) - Create a single transaction or multiple transactions
+* [updateTransactions](#updatetransactions) - Update multiple transactions
+* [importTransactions](#importtransactions) - Import transactions
+* [getTransactionById](#gettransactionbyid) - Get a transaction
+* [updateTransaction](#updatetransaction) - Update a transaction
+* [deleteTransaction](#deletetransaction) - Delete a transaction
+* [getTransactionsByAccount](#gettransactionsbyaccount) - Get account transactions
+* [getTransactionsByCategory](#gettransactionsbycategory) - Get category transactions
+* [getTransactionsByPayee](#gettransactionsbypayee) - Get payee transactions
+* [getTransactionsByMonth](#gettransactionsbymonth) - Get plan month transactions
 
-## list
+## getTransactions
 
-Returns budget transactions, excluding any pending transactions
+Returns plan transactions, excluding any pending transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactions" method="get" path="/budgets/{budget_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactions" method="get" path="/plans/{plan_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -33,8 +33,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.list({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactions({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -49,7 +49,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsList } from "ynab-ts/funcs/transactionsList.js";
+import { transactionsGetTransactions } from "ynab-ts/funcs/transactionsGetTransactions.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -58,14 +58,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsList(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactions(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsList failed:", res.error);
+    console.log("transactionsGetTransactions failed:", res.error);
   }
 }
 
@@ -85,19 +85,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsList,
-  useTransactionsListSuspense,
+  useTransactionsGetTransactions,
+  useTransactionsGetTransactionsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsList,
+  prefetchTransactionsGetTransactions,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsList,
-  invalidateAllTransactionsList,
-} from "ynab-ts/react-query/transactionsList.js";
+  invalidateTransactionsGetTransactions,
+  invalidateAllTransactionsGetTransactions,
+} from "ynab-ts/react-query/transactionsGetTransactions.js";
 ```
 
 ### Parameters
@@ -120,13 +120,13 @@ import {
 | errors.ErrorResponse    | 400, 404                | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## create
+## createTransaction
 
 Creates a single transaction or multiple transactions.  If you provide a body containing a `transaction` object, a single transaction will be created and if you provide a body containing a `transactions` array, multiple transactions will be created.  Scheduled transactions (transactions with a future date) cannot be created on this endpoint.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createTransaction" method="post" path="/budgets/{budget_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="createTransaction" method="post" path="/plans/{plan_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -135,8 +135,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.create({
-    budgetId: "<id>",
+  const result = await ynab.transactions.createTransaction({
+    planId: "<id>",
     postTransactionsWrapper: {},
   });
 
@@ -152,7 +152,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsCreate } from "ynab-ts/funcs/transactionsCreate.js";
+import { transactionsCreateTransaction } from "ynab-ts/funcs/transactionsCreateTransaction.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -161,15 +161,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsCreate(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsCreateTransaction(ynab, {
+    planId: "<id>",
     postTransactionsWrapper: {},
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsCreate failed:", res.error);
+    console.log("transactionsCreateTransaction failed:", res.error);
   }
 }
 
@@ -189,8 +189,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTransactionsCreateMutation
-} from "ynab-ts/react-query/transactionsCreate.js";
+  useTransactionsCreateTransactionMutation
+} from "ynab-ts/react-query/transactionsCreateTransaction.js";
 ```
 
 ### Parameters
@@ -213,13 +213,13 @@ import {
 | errors.ErrorResponse    | 400, 409                | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## updateMany
+## updateTransactions
 
 Updates multiple transactions, by `id` or `import_id`.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateTransactions" method="patch" path="/budgets/{budget_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="updateTransactions" method="patch" path="/plans/{plan_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -228,8 +228,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.updateMany({
-    budgetId: "<id>",
+  const result = await ynab.transactions.updateTransactions({
+    planId: "<id>",
     patchTransactionsWrapper: {
       transactions: [
         {},
@@ -249,7 +249,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsUpdateMany } from "ynab-ts/funcs/transactionsUpdateMany.js";
+import { transactionsUpdateTransactions } from "ynab-ts/funcs/transactionsUpdateTransactions.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -258,8 +258,8 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsUpdateMany(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsUpdateTransactions(ynab, {
+    planId: "<id>",
     patchTransactionsWrapper: {
       transactions: [
         {},
@@ -270,7 +270,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsUpdateMany failed:", res.error);
+    console.log("transactionsUpdateTransactions failed:", res.error);
   }
 }
 
@@ -290,8 +290,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTransactionsUpdateManyMutation
-} from "ynab-ts/react-query/transactionsUpdateMany.js";
+  useTransactionsUpdateTransactionsMutation
+} from "ynab-ts/react-query/transactionsUpdateTransactions.js";
 ```
 
 ### Parameters
@@ -314,13 +314,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## import
+## importTransactions
 
-Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
+Imports available transactions on all linked accounts for the given plan.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="importTransactions" method="post" path="/budgets/{budget_id}/transactions/import" -->
+<!-- UsageSnippet language="typescript" operationID="importTransactions" method="post" path="/plans/{plan_id}/transactions/import" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -329,8 +329,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.import({
-    budgetId: "<id>",
+  const result = await ynab.transactions.importTransactions({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -345,7 +345,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsImport } from "ynab-ts/funcs/transactionsImport.js";
+import { transactionsImportTransactions } from "ynab-ts/funcs/transactionsImportTransactions.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -354,14 +354,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsImport(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsImportTransactions(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsImport failed:", res.error);
+    console.log("transactionsImportTransactions failed:", res.error);
   }
 }
 
@@ -381,8 +381,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTransactionsImportMutation
-} from "ynab-ts/react-query/transactionsImport.js";
+  useTransactionsImportTransactionsMutation
+} from "ynab-ts/react-query/transactionsImportTransactions.js";
 ```
 
 ### Parameters
@@ -405,13 +405,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## get
+## getTransactionById
 
 Returns a single transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactionById" method="get" path="/budgets/{budget_id}/transactions/{transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactionById" method="get" path="/plans/{plan_id}/transactions/{transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -420,8 +420,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.get({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactionById({
+    planId: "<id>",
     transactionId: "<id>",
   });
 
@@ -437,7 +437,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsGet } from "ynab-ts/funcs/transactionsGet.js";
+import { transactionsGetTransactionById } from "ynab-ts/funcs/transactionsGetTransactionById.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -446,15 +446,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsGet(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactionById(ynab, {
+    planId: "<id>",
     transactionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsGet failed:", res.error);
+    console.log("transactionsGetTransactionById failed:", res.error);
   }
 }
 
@@ -474,19 +474,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsGet,
-  useTransactionsGetSuspense,
+  useTransactionsGetTransactionById,
+  useTransactionsGetTransactionByIdSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsGet,
+  prefetchTransactionsGetTransactionById,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsGet,
-  invalidateAllTransactionsGet,
-} from "ynab-ts/react-query/transactionsGet.js";
+  invalidateTransactionsGetTransactionById,
+  invalidateAllTransactionsGetTransactionById,
+} from "ynab-ts/react-query/transactionsGetTransactionById.js";
 ```
 
 ### Parameters
@@ -507,16 +507,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## updateOne
+## updateTransaction
 
 Updates a single transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateTransaction" method="put" path="/budgets/{budget_id}/transactions/{transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="updateTransaction" method="put" path="/plans/{plan_id}/transactions/{transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -525,8 +524,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.updateOne({
-    budgetId: "<id>",
+  const result = await ynab.transactions.updateTransaction({
+    planId: "<id>",
     transactionId: "<id>",
     putTransactionWrapper: {
       transaction: {},
@@ -545,7 +544,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsUpdateOne } from "ynab-ts/funcs/transactionsUpdateOne.js";
+import { transactionsUpdateTransaction } from "ynab-ts/funcs/transactionsUpdateTransaction.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -554,8 +553,8 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsUpdateOne(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsUpdateTransaction(ynab, {
+    planId: "<id>",
     transactionId: "<id>",
     putTransactionWrapper: {
       transaction: {},
@@ -565,7 +564,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsUpdateOne failed:", res.error);
+    console.log("transactionsUpdateTransaction failed:", res.error);
   }
 }
 
@@ -585,8 +584,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTransactionsUpdateOneMutation
-} from "ynab-ts/react-query/transactionsUpdateOne.js";
+  useTransactionsUpdateTransactionMutation
+} from "ynab-ts/react-query/transactionsUpdateTransaction.js";
 ```
 
 ### Parameters
@@ -609,13 +608,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## delete
+## deleteTransaction
 
 Deletes a transaction
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deleteTransaction" method="delete" path="/budgets/{budget_id}/transactions/{transaction_id}" -->
+<!-- UsageSnippet language="typescript" operationID="deleteTransaction" method="delete" path="/plans/{plan_id}/transactions/{transaction_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -624,8 +623,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.delete({
-    budgetId: "<id>",
+  const result = await ynab.transactions.deleteTransaction({
+    planId: "<id>",
     transactionId: "<id>",
   });
 
@@ -641,7 +640,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsDelete } from "ynab-ts/funcs/transactionsDelete.js";
+import { transactionsDeleteTransaction } from "ynab-ts/funcs/transactionsDeleteTransaction.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -650,15 +649,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsDelete(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsDeleteTransaction(ynab, {
+    planId: "<id>",
     transactionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsDelete failed:", res.error);
+    console.log("transactionsDeleteTransaction failed:", res.error);
   }
 }
 
@@ -678,8 +677,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTransactionsDeleteMutation
-} from "ynab-ts/react-query/transactionsDelete.js";
+  useTransactionsDeleteTransactionMutation
+} from "ynab-ts/react-query/transactionsDeleteTransaction.js";
 ```
 
 ### Parameters
@@ -702,13 +701,13 @@ import {
 | errors.ErrorResponse    | 404                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## listByAccount
+## getTransactionsByAccount
 
 Returns all transactions for a specified account, excluding any pending transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactionsByAccount" method="get" path="/budgets/{budget_id}/accounts/{account_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactionsByAccount" method="get" path="/plans/{plan_id}/accounts/{account_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -717,8 +716,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.listByAccount({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactionsByAccount({
+    planId: "<id>",
     accountId: "<id>",
   });
 
@@ -734,7 +733,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsListByAccount } from "ynab-ts/funcs/transactionsListByAccount.js";
+import { transactionsGetTransactionsByAccount } from "ynab-ts/funcs/transactionsGetTransactionsByAccount.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -743,15 +742,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsListByAccount(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactionsByAccount(ynab, {
+    planId: "<id>",
     accountId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsListByAccount failed:", res.error);
+    console.log("transactionsGetTransactionsByAccount failed:", res.error);
   }
 }
 
@@ -771,19 +770,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsListByAccount,
-  useTransactionsListByAccountSuspense,
+  useTransactionsGetTransactionsByAccount,
+  useTransactionsGetTransactionsByAccountSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsListByAccount,
+  prefetchTransactionsGetTransactionsByAccount,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsListByAccount,
-  invalidateAllTransactionsListByAccount,
-} from "ynab-ts/react-query/transactionsListByAccount.js";
+  invalidateTransactionsGetTransactionsByAccount,
+  invalidateAllTransactionsGetTransactionsByAccount,
+} from "ynab-ts/react-query/transactionsGetTransactionsByAccount.js";
 ```
 
 ### Parameters
@@ -804,16 +803,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## listByCategory
+## getTransactionsByCategory
 
-Returns all transactions for a specified category
+Returns all transactions for a specified category, excluding any pending transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactionsByCategory" method="get" path="/budgets/{budget_id}/categories/{category_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactionsByCategory" method="get" path="/plans/{plan_id}/categories/{category_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -822,8 +820,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.listByCategory({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactionsByCategory({
+    planId: "<id>",
     categoryId: "<id>",
   });
 
@@ -839,7 +837,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsListByCategory } from "ynab-ts/funcs/transactionsListByCategory.js";
+import { transactionsGetTransactionsByCategory } from "ynab-ts/funcs/transactionsGetTransactionsByCategory.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -848,15 +846,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsListByCategory(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactionsByCategory(ynab, {
+    planId: "<id>",
     categoryId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsListByCategory failed:", res.error);
+    console.log("transactionsGetTransactionsByCategory failed:", res.error);
   }
 }
 
@@ -876,19 +874,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsListByCategory,
-  useTransactionsListByCategorySuspense,
+  useTransactionsGetTransactionsByCategory,
+  useTransactionsGetTransactionsByCategorySuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsListByCategory,
+  prefetchTransactionsGetTransactionsByCategory,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsListByCategory,
-  invalidateAllTransactionsListByCategory,
-} from "ynab-ts/react-query/transactionsListByCategory.js";
+  invalidateTransactionsGetTransactionsByCategory,
+  invalidateAllTransactionsGetTransactionsByCategory,
+} from "ynab-ts/react-query/transactionsGetTransactionsByCategory.js";
 ```
 
 ### Parameters
@@ -909,16 +907,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## listByPayee
+## getTransactionsByPayee
 
-Returns all transactions for a specified payee
+Returns all transactions for a specified payee, excluding any pending transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactionsByPayee" method="get" path="/budgets/{budget_id}/payees/{payee_id}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactionsByPayee" method="get" path="/plans/{plan_id}/payees/{payee_id}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -927,8 +924,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.listByPayee({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactionsByPayee({
+    planId: "<id>",
     payeeId: "<id>",
   });
 
@@ -944,7 +941,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsListByPayee } from "ynab-ts/funcs/transactionsListByPayee.js";
+import { transactionsGetTransactionsByPayee } from "ynab-ts/funcs/transactionsGetTransactionsByPayee.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -953,15 +950,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsListByPayee(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactionsByPayee(ynab, {
+    planId: "<id>",
     payeeId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsListByPayee failed:", res.error);
+    console.log("transactionsGetTransactionsByPayee failed:", res.error);
   }
 }
 
@@ -981,19 +978,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsListByPayee,
-  useTransactionsListByPayeeSuspense,
+  useTransactionsGetTransactionsByPayee,
+  useTransactionsGetTransactionsByPayeeSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsListByPayee,
+  prefetchTransactionsGetTransactionsByPayee,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsListByPayee,
-  invalidateAllTransactionsListByPayee,
-} from "ynab-ts/react-query/transactionsListByPayee.js";
+  invalidateTransactionsGetTransactionsByPayee,
+  invalidateAllTransactionsGetTransactionsByPayee,
+} from "ynab-ts/react-query/transactionsGetTransactionsByPayee.js";
 ```
 
 ### Parameters
@@ -1014,16 +1011,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## listByMonth
+## getTransactionsByMonth
 
-Returns all transactions for a specified month
+Returns all transactions for a specified month, excluding any pending transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getTransactionsByMonth" method="get" path="/budgets/{budget_id}/months/{month}/transactions" -->
+<!-- UsageSnippet language="typescript" operationID="getTransactionsByMonth" method="get" path="/plans/{plan_id}/months/{month}/transactions" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -1032,8 +1028,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.transactions.listByMonth({
-    budgetId: "<id>",
+  const result = await ynab.transactions.getTransactionsByMonth({
+    planId: "<id>",
     month: "<value>",
   });
 
@@ -1049,7 +1045,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { transactionsListByMonth } from "ynab-ts/funcs/transactionsListByMonth.js";
+import { transactionsGetTransactionsByMonth } from "ynab-ts/funcs/transactionsGetTransactionsByMonth.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1058,15 +1054,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await transactionsListByMonth(ynab, {
-    budgetId: "<id>",
+  const res = await transactionsGetTransactionsByMonth(ynab, {
+    planId: "<id>",
     month: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsListByMonth failed:", res.error);
+    console.log("transactionsGetTransactionsByMonth failed:", res.error);
   }
 }
 
@@ -1086,19 +1082,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTransactionsListByMonth,
-  useTransactionsListByMonthSuspense,
+  useTransactionsGetTransactionsByMonth,
+  useTransactionsGetTransactionsByMonthSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTransactionsListByMonth,
+  prefetchTransactionsGetTransactionsByMonth,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTransactionsListByMonth,
-  invalidateAllTransactionsListByMonth,
-} from "ynab-ts/react-query/transactionsListByMonth.js";
+  invalidateTransactionsGetTransactionsByMonth,
+  invalidateAllTransactionsGetTransactionsByMonth,
+} from "ynab-ts/react-query/transactionsGetTransactionsByMonth.js";
 ```
 
 ### Parameters
@@ -1119,5 +1115,4 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

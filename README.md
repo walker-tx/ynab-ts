@@ -17,7 +17,9 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-YNAB API Endpoints: Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.  API Documentation is at https://api.ynab.com
+YNAB API Endpoints: Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.
+
+Read the [API Documentation](https://api.ynab.com) for more information about the API, including how to obtain an access token and how to use it to make requests.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -150,66 +152,77 @@ run();
 
 ### [Accounts](docs/sdks/accounts/README.md)
 
-* [list](docs/sdks/accounts/README.md#list) - Account list
-* [create](docs/sdks/accounts/README.md#create) - Create a new account
-* [get](docs/sdks/accounts/README.md#get) - Single account
-
-### [Budgets](docs/sdks/budgets/README.md)
-
-* [list](docs/sdks/budgets/README.md#list) - List budgets
-* [get](docs/sdks/budgets/README.md#get) - Single budget
-* [getSettings](docs/sdks/budgets/README.md#getsettings) - Budget Settings
+* [getAccounts](docs/sdks/accounts/README.md#getaccounts) - Get all accounts
+* [createAccount](docs/sdks/accounts/README.md#createaccount) - Create an account
+* [getAccountById](docs/sdks/accounts/README.md#getaccountbyid) - Get an account
 
 ### [Categories](docs/sdks/categories/README.md)
 
-* [list](docs/sdks/categories/README.md#list) - List categories
-* [get](docs/sdks/categories/README.md#get) - Single category
-* [update](docs/sdks/categories/README.md#update) - Update a category
-* [getByMonth](docs/sdks/categories/README.md#getbymonth) - Single category for a specific budget month
-* [updateMonth](docs/sdks/categories/README.md#updatemonth) - Update a category for a specific month
+* [getCategories](docs/sdks/categories/README.md#getcategories) - Get all categories
+* [createCategory](docs/sdks/categories/README.md#createcategory) - Create a category
+* [getCategoryById](docs/sdks/categories/README.md#getcategorybyid) - Get a category
+* [updateCategory](docs/sdks/categories/README.md#updatecategory) - Update a category
+* [getMonthCategoryById](docs/sdks/categories/README.md#getmonthcategorybyid) - Get a category for a specific plan month
+* [updateMonthCategory](docs/sdks/categories/README.md#updatemonthcategory) - Update a category for a specific month
+* [createCategoryGroup](docs/sdks/categories/README.md#createcategorygroup) - Create a category group
+* [updateCategoryGroup](docs/sdks/categories/README.md#updatecategorygroup) - Update a category group
+
+### [MoneyMovements](docs/sdks/moneymovements/README.md)
+
+* [getMoneyMovements](docs/sdks/moneymovements/README.md#getmoneymovements) - Get all money movements
+* [getMoneyMovementsByMonth](docs/sdks/moneymovements/README.md#getmoneymovementsbymonth) - Get money movements for a plan month
+* [getMoneyMovementGroups](docs/sdks/moneymovements/README.md#getmoneymovementgroups) - Get all money movement groups
+* [getMoneyMovementGroupsByMonth](docs/sdks/moneymovements/README.md#getmoneymovementgroupsbymonth) - Get money movement groups for a plan month
 
 ### [Months](docs/sdks/months/README.md)
 
-* [list](docs/sdks/months/README.md#list) - List budget months
-* [get](docs/sdks/months/README.md#get) - Single budget month
+* [getPlanMonths](docs/sdks/months/README.md#getplanmonths) - Get all plan months
+* [getPlanMonth](docs/sdks/months/README.md#getplanmonth) - Get a plan month
 
 ### [PayeeLocations](docs/sdks/payeelocations/README.md)
 
-* [list](docs/sdks/payeelocations/README.md#list) - List payee locations
-* [get](docs/sdks/payeelocations/README.md#get) - Single payee location
-* [listByPayee](docs/sdks/payeelocations/README.md#listbypayee) - List locations for a payee
+* [getPayeeLocations](docs/sdks/payeelocations/README.md#getpayeelocations) - Get all payee locations
+* [getPayeeLocationById](docs/sdks/payeelocations/README.md#getpayeelocationbyid) - Get a payee location
+* [getPayeeLocationsByPayee](docs/sdks/payeelocations/README.md#getpayeelocationsbypayee) - Get all locations for a payee
 
 ### [Payees](docs/sdks/payees/README.md)
 
-* [list](docs/sdks/payees/README.md#list) - List payees
-* [get](docs/sdks/payees/README.md#get) - Single payee
-* [update](docs/sdks/payees/README.md#update) - Update a payee
+* [getPayees](docs/sdks/payees/README.md#getpayees) - Get all payees
+* [createPayee](docs/sdks/payees/README.md#createpayee) - Create a payee
+* [getPayeeById](docs/sdks/payees/README.md#getpayeebyid) - Get a payee
+* [updatePayee](docs/sdks/payees/README.md#updatepayee) - Update a payee
+
+### [Plans](docs/sdks/plans/README.md)
+
+* [getPlans](docs/sdks/plans/README.md#getplans) - Get all plans
+* [getPlanById](docs/sdks/plans/README.md#getplanbyid) - Get a plan
+* [getPlanSettingsById](docs/sdks/plans/README.md#getplansettingsbyid) - Get plan settings
 
 ### [ScheduledTransactions](docs/sdks/scheduledtransactions/README.md)
 
-* [list](docs/sdks/scheduledtransactions/README.md#list) - List scheduled transactions
-* [create](docs/sdks/scheduledtransactions/README.md#create) - Create a single scheduled transaction
-* [get](docs/sdks/scheduledtransactions/README.md#get) - Single scheduled transaction
-* [update](docs/sdks/scheduledtransactions/README.md#update) - Updates an existing scheduled transaction
-* [delete](docs/sdks/scheduledtransactions/README.md#delete) - Deletes an existing scheduled transaction
+* [getScheduledTransactions](docs/sdks/scheduledtransactions/README.md#getscheduledtransactions) - Get all scheduled transactions
+* [createScheduledTransaction](docs/sdks/scheduledtransactions/README.md#createscheduledtransaction) - Create a scheduled transaction
+* [getScheduledTransactionById](docs/sdks/scheduledtransactions/README.md#getscheduledtransactionbyid) - Get a scheduled transaction
+* [updateScheduledTransaction](docs/sdks/scheduledtransactions/README.md#updatescheduledtransaction) - Update a scheduled transaction
+* [deleteScheduledTransaction](docs/sdks/scheduledtransactions/README.md#deletescheduledtransaction) - Delete a scheduled transaction
 
 ### [Transactions](docs/sdks/transactions/README.md)
 
-* [list](docs/sdks/transactions/README.md#list) - List transactions
-* [create](docs/sdks/transactions/README.md#create) - Create a single transaction or multiple transactions
-* [updateMany](docs/sdks/transactions/README.md#updatemany) - Update multiple transactions
-* [import](docs/sdks/transactions/README.md#import) - Import transactions
-* [get](docs/sdks/transactions/README.md#get) - Single transaction
-* [updateOne](docs/sdks/transactions/README.md#updateone) - Updates an existing transaction
-* [delete](docs/sdks/transactions/README.md#delete) - Deletes an existing transaction
-* [listByAccount](docs/sdks/transactions/README.md#listbyaccount) - List account transactions
-* [listByCategory](docs/sdks/transactions/README.md#listbycategory) - List category transactions, excluding any pending transactions
-* [listByPayee](docs/sdks/transactions/README.md#listbypayee) - List payee transactions, excluding any pending transactions
-* [listByMonth](docs/sdks/transactions/README.md#listbymonth) - List transactions in month, excluding any pending transactions
+* [getTransactions](docs/sdks/transactions/README.md#gettransactions) - Get transactions
+* [createTransaction](docs/sdks/transactions/README.md#createtransaction) - Create a single transaction or multiple transactions
+* [updateTransactions](docs/sdks/transactions/README.md#updatetransactions) - Update multiple transactions
+* [importTransactions](docs/sdks/transactions/README.md#importtransactions) - Import transactions
+* [getTransactionById](docs/sdks/transactions/README.md#gettransactionbyid) - Get a transaction
+* [updateTransaction](docs/sdks/transactions/README.md#updatetransaction) - Update a transaction
+* [deleteTransaction](docs/sdks/transactions/README.md#deletetransaction) - Delete a transaction
+* [getTransactionsByAccount](docs/sdks/transactions/README.md#gettransactionsbyaccount) - Get account transactions
+* [getTransactionsByCategory](docs/sdks/transactions/README.md#gettransactionsbycategory) - Get category transactions
+* [getTransactionsByPayee](docs/sdks/transactions/README.md#gettransactionsbypayee) - Get payee transactions
+* [getTransactionsByMonth](docs/sdks/transactions/README.md#gettransactionsbymonth) - Get plan month transactions
 
 ### [User](docs/sdks/user/README.md)
 
-* [get](docs/sdks/user/README.md#get) - User info
+* [get](docs/sdks/user/README.md#get) - Get user
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -229,42 +242,50 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`accountsCreate`](docs/sdks/accounts/README.md#create) - Create a new account
-- [`accountsGet`](docs/sdks/accounts/README.md#get) - Single account
-- [`accountsList`](docs/sdks/accounts/README.md#list) - Account list
-- [`budgetsGet`](docs/sdks/budgets/README.md#get) - Single budget
-- [`budgetsGetSettings`](docs/sdks/budgets/README.md#getsettings) - Budget Settings
-- [`budgetsList`](docs/sdks/budgets/README.md#list) - List budgets
-- [`categoriesGet`](docs/sdks/categories/README.md#get) - Single category
-- [`categoriesGetByMonth`](docs/sdks/categories/README.md#getbymonth) - Single category for a specific budget month
-- [`categoriesList`](docs/sdks/categories/README.md#list) - List categories
-- [`categoriesUpdate`](docs/sdks/categories/README.md#update) - Update a category
-- [`categoriesUpdateMonth`](docs/sdks/categories/README.md#updatemonth) - Update a category for a specific month
-- [`monthsGet`](docs/sdks/months/README.md#get) - Single budget month
-- [`monthsList`](docs/sdks/months/README.md#list) - List budget months
-- [`payeeLocationsGet`](docs/sdks/payeelocations/README.md#get) - Single payee location
-- [`payeeLocationsList`](docs/sdks/payeelocations/README.md#list) - List payee locations
-- [`payeeLocationsListByPayee`](docs/sdks/payeelocations/README.md#listbypayee) - List locations for a payee
-- [`payeesGet`](docs/sdks/payees/README.md#get) - Single payee
-- [`payeesList`](docs/sdks/payees/README.md#list) - List payees
-- [`payeesUpdate`](docs/sdks/payees/README.md#update) - Update a payee
-- [`scheduledTransactionsCreate`](docs/sdks/scheduledtransactions/README.md#create) - Create a single scheduled transaction
-- [`scheduledTransactionsDelete`](docs/sdks/scheduledtransactions/README.md#delete) - Deletes an existing scheduled transaction
-- [`scheduledTransactionsGet`](docs/sdks/scheduledtransactions/README.md#get) - Single scheduled transaction
-- [`scheduledTransactionsList`](docs/sdks/scheduledtransactions/README.md#list) - List scheduled transactions
-- [`scheduledTransactionsUpdate`](docs/sdks/scheduledtransactions/README.md#update) - Updates an existing scheduled transaction
-- [`transactionsCreate`](docs/sdks/transactions/README.md#create) - Create a single transaction or multiple transactions
-- [`transactionsDelete`](docs/sdks/transactions/README.md#delete) - Deletes an existing transaction
-- [`transactionsGet`](docs/sdks/transactions/README.md#get) - Single transaction
-- [`transactionsImport`](docs/sdks/transactions/README.md#import) - Import transactions
-- [`transactionsList`](docs/sdks/transactions/README.md#list) - List transactions
-- [`transactionsListByAccount`](docs/sdks/transactions/README.md#listbyaccount) - List account transactions
-- [`transactionsListByCategory`](docs/sdks/transactions/README.md#listbycategory) - List category transactions, excluding any pending transactions
-- [`transactionsListByMonth`](docs/sdks/transactions/README.md#listbymonth) - List transactions in month, excluding any pending transactions
-- [`transactionsListByPayee`](docs/sdks/transactions/README.md#listbypayee) - List payee transactions, excluding any pending transactions
-- [`transactionsUpdateMany`](docs/sdks/transactions/README.md#updatemany) - Update multiple transactions
-- [`transactionsUpdateOne`](docs/sdks/transactions/README.md#updateone) - Updates an existing transaction
-- [`userGet`](docs/sdks/user/README.md#get) - User info
+- [`accountsCreateAccount`](docs/sdks/accounts/README.md#createaccount) - Create an account
+- [`accountsGetAccountById`](docs/sdks/accounts/README.md#getaccountbyid) - Get an account
+- [`accountsGetAccounts`](docs/sdks/accounts/README.md#getaccounts) - Get all accounts
+- [`categoriesCreateCategory`](docs/sdks/categories/README.md#createcategory) - Create a category
+- [`categoriesCreateCategoryGroup`](docs/sdks/categories/README.md#createcategorygroup) - Create a category group
+- [`categoriesGetCategories`](docs/sdks/categories/README.md#getcategories) - Get all categories
+- [`categoriesGetCategoryById`](docs/sdks/categories/README.md#getcategorybyid) - Get a category
+- [`categoriesGetMonthCategoryById`](docs/sdks/categories/README.md#getmonthcategorybyid) - Get a category for a specific plan month
+- [`categoriesUpdateCategory`](docs/sdks/categories/README.md#updatecategory) - Update a category
+- [`categoriesUpdateCategoryGroup`](docs/sdks/categories/README.md#updatecategorygroup) - Update a category group
+- [`categoriesUpdateMonthCategory`](docs/sdks/categories/README.md#updatemonthcategory) - Update a category for a specific month
+- [`moneyMovementsGetMoneyMovementGroups`](docs/sdks/moneymovements/README.md#getmoneymovementgroups) - Get all money movement groups
+- [`moneyMovementsGetMoneyMovementGroupsByMonth`](docs/sdks/moneymovements/README.md#getmoneymovementgroupsbymonth) - Get money movement groups for a plan month
+- [`moneyMovementsGetMoneyMovements`](docs/sdks/moneymovements/README.md#getmoneymovements) - Get all money movements
+- [`moneyMovementsGetMoneyMovementsByMonth`](docs/sdks/moneymovements/README.md#getmoneymovementsbymonth) - Get money movements for a plan month
+- [`monthsGetPlanMonth`](docs/sdks/months/README.md#getplanmonth) - Get a plan month
+- [`monthsGetPlanMonths`](docs/sdks/months/README.md#getplanmonths) - Get all plan months
+- [`payeeLocationsGetPayeeLocationById`](docs/sdks/payeelocations/README.md#getpayeelocationbyid) - Get a payee location
+- [`payeeLocationsGetPayeeLocations`](docs/sdks/payeelocations/README.md#getpayeelocations) - Get all payee locations
+- [`payeeLocationsGetPayeeLocationsByPayee`](docs/sdks/payeelocations/README.md#getpayeelocationsbypayee) - Get all locations for a payee
+- [`payeesCreatePayee`](docs/sdks/payees/README.md#createpayee) - Create a payee
+- [`payeesGetPayeeById`](docs/sdks/payees/README.md#getpayeebyid) - Get a payee
+- [`payeesGetPayees`](docs/sdks/payees/README.md#getpayees) - Get all payees
+- [`payeesUpdatePayee`](docs/sdks/payees/README.md#updatepayee) - Update a payee
+- [`plansGetPlanById`](docs/sdks/plans/README.md#getplanbyid) - Get a plan
+- [`plansGetPlans`](docs/sdks/plans/README.md#getplans) - Get all plans
+- [`plansGetPlanSettingsById`](docs/sdks/plans/README.md#getplansettingsbyid) - Get plan settings
+- [`scheduledTransactionsCreateScheduledTransaction`](docs/sdks/scheduledtransactions/README.md#createscheduledtransaction) - Create a scheduled transaction
+- [`scheduledTransactionsDeleteScheduledTransaction`](docs/sdks/scheduledtransactions/README.md#deletescheduledtransaction) - Delete a scheduled transaction
+- [`scheduledTransactionsGetScheduledTransactionById`](docs/sdks/scheduledtransactions/README.md#getscheduledtransactionbyid) - Get a scheduled transaction
+- [`scheduledTransactionsGetScheduledTransactions`](docs/sdks/scheduledtransactions/README.md#getscheduledtransactions) - Get all scheduled transactions
+- [`scheduledTransactionsUpdateScheduledTransaction`](docs/sdks/scheduledtransactions/README.md#updatescheduledtransaction) - Update a scheduled transaction
+- [`transactionsCreateTransaction`](docs/sdks/transactions/README.md#createtransaction) - Create a single transaction or multiple transactions
+- [`transactionsDeleteTransaction`](docs/sdks/transactions/README.md#deletetransaction) - Delete a transaction
+- [`transactionsGetTransactionById`](docs/sdks/transactions/README.md#gettransactionbyid) - Get a transaction
+- [`transactionsGetTransactions`](docs/sdks/transactions/README.md#gettransactions) - Get transactions
+- [`transactionsGetTransactionsByAccount`](docs/sdks/transactions/README.md#gettransactionsbyaccount) - Get account transactions
+- [`transactionsGetTransactionsByCategory`](docs/sdks/transactions/README.md#gettransactionsbycategory) - Get category transactions
+- [`transactionsGetTransactionsByMonth`](docs/sdks/transactions/README.md#gettransactionsbymonth) - Get plan month transactions
+- [`transactionsGetTransactionsByPayee`](docs/sdks/transactions/README.md#gettransactionsbypayee) - Get payee transactions
+- [`transactionsImportTransactions`](docs/sdks/transactions/README.md#importtransactions) - Import transactions
+- [`transactionsUpdateTransaction`](docs/sdks/transactions/README.md#updatetransaction) - Update a transaction
+- [`transactionsUpdateTransactions`](docs/sdks/transactions/README.md#updatetransactions) - Update multiple transactions
+- [`userGet`](docs/sdks/user/README.md#get) - Get user
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -291,42 +312,50 @@ To learn about this feature and how to get started, check
 
 <summary>Available React hooks</summary>
 
-- [`useAccountsCreateMutation`](docs/sdks/accounts/README.md#create) - Create a new account
-- [`useAccountsGet`](docs/sdks/accounts/README.md#get) - Single account
-- [`useAccountsList`](docs/sdks/accounts/README.md#list) - Account list
-- [`useBudgetsGet`](docs/sdks/budgets/README.md#get) - Single budget
-- [`useBudgetsGetSettings`](docs/sdks/budgets/README.md#getsettings) - Budget Settings
-- [`useBudgetsList`](docs/sdks/budgets/README.md#list) - List budgets
-- [`useCategoriesGet`](docs/sdks/categories/README.md#get) - Single category
-- [`useCategoriesGetByMonth`](docs/sdks/categories/README.md#getbymonth) - Single category for a specific budget month
-- [`useCategoriesList`](docs/sdks/categories/README.md#list) - List categories
-- [`useCategoriesUpdateMonthMutation`](docs/sdks/categories/README.md#updatemonth) - Update a category for a specific month
-- [`useCategoriesUpdateMutation`](docs/sdks/categories/README.md#update) - Update a category
-- [`useMonthsGet`](docs/sdks/months/README.md#get) - Single budget month
-- [`useMonthsList`](docs/sdks/months/README.md#list) - List budget months
-- [`usePayeeLocationsGet`](docs/sdks/payeelocations/README.md#get) - Single payee location
-- [`usePayeeLocationsList`](docs/sdks/payeelocations/README.md#list) - List payee locations
-- [`usePayeeLocationsListByPayee`](docs/sdks/payeelocations/README.md#listbypayee) - List locations for a payee
-- [`usePayeesGet`](docs/sdks/payees/README.md#get) - Single payee
-- [`usePayeesList`](docs/sdks/payees/README.md#list) - List payees
-- [`usePayeesUpdateMutation`](docs/sdks/payees/README.md#update) - Update a payee
-- [`useScheduledTransactionsCreateMutation`](docs/sdks/scheduledtransactions/README.md#create) - Create a single scheduled transaction
-- [`useScheduledTransactionsDeleteMutation`](docs/sdks/scheduledtransactions/README.md#delete) - Deletes an existing scheduled transaction
-- [`useScheduledTransactionsGet`](docs/sdks/scheduledtransactions/README.md#get) - Single scheduled transaction
-- [`useScheduledTransactionsList`](docs/sdks/scheduledtransactions/README.md#list) - List scheduled transactions
-- [`useScheduledTransactionsUpdateMutation`](docs/sdks/scheduledtransactions/README.md#update) - Updates an existing scheduled transaction
-- [`useTransactionsCreateMutation`](docs/sdks/transactions/README.md#create) - Create a single transaction or multiple transactions
-- [`useTransactionsDeleteMutation`](docs/sdks/transactions/README.md#delete) - Deletes an existing transaction
-- [`useTransactionsGet`](docs/sdks/transactions/README.md#get) - Single transaction
-- [`useTransactionsImportMutation`](docs/sdks/transactions/README.md#import) - Import transactions
-- [`useTransactionsList`](docs/sdks/transactions/README.md#list) - List transactions
-- [`useTransactionsListByAccount`](docs/sdks/transactions/README.md#listbyaccount) - List account transactions
-- [`useTransactionsListByCategory`](docs/sdks/transactions/README.md#listbycategory) - List category transactions, excluding any pending transactions
-- [`useTransactionsListByMonth`](docs/sdks/transactions/README.md#listbymonth) - List transactions in month, excluding any pending transactions
-- [`useTransactionsListByPayee`](docs/sdks/transactions/README.md#listbypayee) - List payee transactions, excluding any pending transactions
-- [`useTransactionsUpdateManyMutation`](docs/sdks/transactions/README.md#updatemany) - Update multiple transactions
-- [`useTransactionsUpdateOneMutation`](docs/sdks/transactions/README.md#updateone) - Updates an existing transaction
-- [`useUserGet`](docs/sdks/user/README.md#get) - User info
+- [`useAccountsCreateAccountMutation`](docs/sdks/accounts/README.md#createaccount) - Create an account
+- [`useAccountsGetAccountById`](docs/sdks/accounts/README.md#getaccountbyid) - Get an account
+- [`useAccountsGetAccounts`](docs/sdks/accounts/README.md#getaccounts) - Get all accounts
+- [`useCategoriesCreateCategoryGroupMutation`](docs/sdks/categories/README.md#createcategorygroup) - Create a category group
+- [`useCategoriesCreateCategoryMutation`](docs/sdks/categories/README.md#createcategory) - Create a category
+- [`useCategoriesGetCategories`](docs/sdks/categories/README.md#getcategories) - Get all categories
+- [`useCategoriesGetCategoryById`](docs/sdks/categories/README.md#getcategorybyid) - Get a category
+- [`useCategoriesGetMonthCategoryById`](docs/sdks/categories/README.md#getmonthcategorybyid) - Get a category for a specific plan month
+- [`useCategoriesUpdateCategoryGroupMutation`](docs/sdks/categories/README.md#updatecategorygroup) - Update a category group
+- [`useCategoriesUpdateCategoryMutation`](docs/sdks/categories/README.md#updatecategory) - Update a category
+- [`useCategoriesUpdateMonthCategoryMutation`](docs/sdks/categories/README.md#updatemonthcategory) - Update a category for a specific month
+- [`useMoneyMovementsGetMoneyMovementGroups`](docs/sdks/moneymovements/README.md#getmoneymovementgroups) - Get all money movement groups
+- [`useMoneyMovementsGetMoneyMovementGroupsByMonth`](docs/sdks/moneymovements/README.md#getmoneymovementgroupsbymonth) - Get money movement groups for a plan month
+- [`useMoneyMovementsGetMoneyMovements`](docs/sdks/moneymovements/README.md#getmoneymovements) - Get all money movements
+- [`useMoneyMovementsGetMoneyMovementsByMonth`](docs/sdks/moneymovements/README.md#getmoneymovementsbymonth) - Get money movements for a plan month
+- [`useMonthsGetPlanMonth`](docs/sdks/months/README.md#getplanmonth) - Get a plan month
+- [`useMonthsGetPlanMonths`](docs/sdks/months/README.md#getplanmonths) - Get all plan months
+- [`usePayeeLocationsGetPayeeLocationById`](docs/sdks/payeelocations/README.md#getpayeelocationbyid) - Get a payee location
+- [`usePayeeLocationsGetPayeeLocations`](docs/sdks/payeelocations/README.md#getpayeelocations) - Get all payee locations
+- [`usePayeeLocationsGetPayeeLocationsByPayee`](docs/sdks/payeelocations/README.md#getpayeelocationsbypayee) - Get all locations for a payee
+- [`usePayeesCreatePayeeMutation`](docs/sdks/payees/README.md#createpayee) - Create a payee
+- [`usePayeesGetPayeeById`](docs/sdks/payees/README.md#getpayeebyid) - Get a payee
+- [`usePayeesGetPayees`](docs/sdks/payees/README.md#getpayees) - Get all payees
+- [`usePayeesUpdatePayeeMutation`](docs/sdks/payees/README.md#updatepayee) - Update a payee
+- [`usePlansGetPlanById`](docs/sdks/plans/README.md#getplanbyid) - Get a plan
+- [`usePlansGetPlans`](docs/sdks/plans/README.md#getplans) - Get all plans
+- [`usePlansGetPlanSettingsById`](docs/sdks/plans/README.md#getplansettingsbyid) - Get plan settings
+- [`useScheduledTransactionsCreateScheduledTransactionMutation`](docs/sdks/scheduledtransactions/README.md#createscheduledtransaction) - Create a scheduled transaction
+- [`useScheduledTransactionsDeleteScheduledTransactionMutation`](docs/sdks/scheduledtransactions/README.md#deletescheduledtransaction) - Delete a scheduled transaction
+- [`useScheduledTransactionsGetScheduledTransactionById`](docs/sdks/scheduledtransactions/README.md#getscheduledtransactionbyid) - Get a scheduled transaction
+- [`useScheduledTransactionsGetScheduledTransactions`](docs/sdks/scheduledtransactions/README.md#getscheduledtransactions) - Get all scheduled transactions
+- [`useScheduledTransactionsUpdateScheduledTransactionMutation`](docs/sdks/scheduledtransactions/README.md#updatescheduledtransaction) - Update a scheduled transaction
+- [`useTransactionsCreateTransactionMutation`](docs/sdks/transactions/README.md#createtransaction) - Create a single transaction or multiple transactions
+- [`useTransactionsDeleteTransactionMutation`](docs/sdks/transactions/README.md#deletetransaction) - Delete a transaction
+- [`useTransactionsGetTransactionById`](docs/sdks/transactions/README.md#gettransactionbyid) - Get a transaction
+- [`useTransactionsGetTransactions`](docs/sdks/transactions/README.md#gettransactions) - Get transactions
+- [`useTransactionsGetTransactionsByAccount`](docs/sdks/transactions/README.md#gettransactionsbyaccount) - Get account transactions
+- [`useTransactionsGetTransactionsByCategory`](docs/sdks/transactions/README.md#gettransactionsbycategory) - Get category transactions
+- [`useTransactionsGetTransactionsByMonth`](docs/sdks/transactions/README.md#gettransactionsbymonth) - Get plan month transactions
+- [`useTransactionsGetTransactionsByPayee`](docs/sdks/transactions/README.md#gettransactionsbypayee) - Get payee transactions
+- [`useTransactionsImportTransactionsMutation`](docs/sdks/transactions/README.md#importtransactions) - Import transactions
+- [`useTransactionsUpdateTransactionMutation`](docs/sdks/transactions/README.md#updatetransaction) - Update a transaction
+- [`useTransactionsUpdateTransactionsMutation`](docs/sdks/transactions/README.md#updatetransactions) - Update multiple transactions
+- [`useUserGet`](docs/sdks/user/README.md#get) - Get user
 
 </details>
 <!-- End React hooks with TanStack Query [react-query] -->
@@ -419,7 +448,7 @@ const ynab = new Ynab({
 
 async function run() {
   try {
-    const result = await ynab.user.get();
+    const result = await ynab.plans.getPlans();
 
     console.log(result);
   } catch (error) {
@@ -445,7 +474,7 @@ run();
 ### Error Classes
 **Primary errors:**
 * [`YnabError`](./src/models/errors/ynaberror.ts): The base class for HTTP error responses.
-  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Generic error.
+  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): *
 
 <details><summary>Less common errors (6)</summary>
 
@@ -463,6 +492,8 @@ run();
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
