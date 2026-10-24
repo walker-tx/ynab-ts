@@ -4,11 +4,12 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Accounts } from "./accounts.js";
-import { Budgets } from "./budgets.js";
 import { Categories } from "./categories.js";
+import { MoneyMovements } from "./moneymovements.js";
 import { Months } from "./months.js";
 import { PayeeLocations } from "./payeelocations.js";
 import { Payees } from "./payees.js";
+import { Plans } from "./plans.js";
 import { ScheduledTransactions } from "./scheduledtransactions.js";
 import { Transactions } from "./transactions.js";
 import { User } from "./user.js";
@@ -19,9 +20,9 @@ export class Ynab extends ClientSDK {
     return (this._user ??= new User(this._options));
   }
 
-  private _budgets?: Budgets;
-  get budgets(): Budgets {
-    return (this._budgets ??= new Budgets(this._options));
+  private _plans?: Plans;
+  get plans(): Plans {
+    return (this._plans ??= new Plans(this._options));
   }
 
   private _accounts?: Accounts;
@@ -47,6 +48,11 @@ export class Ynab extends ClientSDK {
   private _months?: Months;
   get months(): Months {
     return (this._months ??= new Months(this._options));
+  }
+
+  private _moneyMovements?: MoneyMovements;
+  get moneyMovements(): MoneyMovements {
+    return (this._moneyMovements ??= new MoneyMovements(this._options));
   }
 
   private _transactions?: Transactions;

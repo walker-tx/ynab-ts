@@ -13,7 +13,7 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 /**
  * The type of goal, if the category has a goal (TB='Target Category Balance', TBD='Target Category Balance by Date', MF='Monthly Funding', NEED='Plan Your Spending')
  */
-export const GoalType = {
+export const CategoryGoalType = {
   Tb: "TB",
   Tbd: "TBD",
   Mf: "MF",
@@ -23,7 +23,7 @@ export const GoalType = {
 /**
  * The type of goal, if the category has a goal (TB='Target Category Balance', TBD='Target Category Balance by Date', MF='Monthly Funding', NEED='Plan Your Spending')
  */
-export type GoalType = ClosedEnum<typeof GoalType>;
+export type CategoryGoalType = ClosedEnum<typeof CategoryGoalType>;
 
 export type Category = {
   id: string;
@@ -35,12 +35,16 @@ export type Category = {
    */
   hidden: boolean;
   /**
+   * Whether or not the category is internal
+   */
+  internal: boolean;
+  /**
    * DEPRECATED: No longer used.  Value will always be null.
    */
   originalCategoryGroupId?: string | null | undefined;
   note?: string | null | undefined;
   /**
-   * Budgeted amount in milliunits format
+   * Assigned (budgeted) amount in milliunits format
    */
   budgeted: number;
   /**
@@ -48,13 +52,13 @@ export type Category = {
    */
   activity: number;
   /**
-   * Balance in milliunits format
+   * Available balance in milliunits format
    */
   balance: number;
   /**
    * The type of goal, if the category has a goal (TB='Target Category Balance', TBD='Target Category Balance by Date', MF='Monthly Funding', NEED='Plan Your Spending')
    */
-  goalType?: GoalType | null | undefined;
+  goalType?: CategoryGoalType | null | undefined;
   /**
    * Indicates the monthly rollover behavior for "NEED"-type goals. When "true", the goal will always ask for the target amount in the new month ("Set Aside"). When "false", previous month category funding is used ("Refill"). For other goal types, this field will be null.
    */
@@ -80,9 +84,13 @@ export type Category = {
    */
   goalTarget?: number | null | undefined;
   /**
-   * The original target month for the goal to be completed.  Only some goal types specify this date.
+   * DEPRECATED: No longer used.  Use `goal_target_date` instead.
    */
   goalTargetMonth?: RFCDate | null | undefined;
+  /**
+   * The target date for the goal to be completed.  Only some goal types specify this date.
+   */
+  goalTargetDate?: RFCDate | null | undefined;
   /**
    * The percentage completion of the goal
    */
@@ -111,11 +119,68 @@ export type Category = {
    * Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * Available balance of the category formatted in the plan's currency format
+   */
+  balanceFormatted?: string | undefined;
+  /**
+   * Available balance of the category as a decimal currency amount
+   */
+  balanceCurrency?: number | undefined;
+  /**
+   * Activity of the category formatted in the plan's currency format
+   */
+  activityFormatted?: string | undefined;
+  /**
+   * Activity of the category as a decimal currency amount
+   */
+  activityCurrency?: number | undefined;
+  /**
+   * Assigned (budgeted) amount of the category formatted in the plan's currency format
+   */
+  budgetedFormatted?: string | undefined;
+  /**
+   * Assigned (budgeted) amount of the category as a decimal currency amount
+   */
+  budgetedCurrency?: number | undefined;
+  /**
+   * The goal target amount formatted in the plan's currency format
+   */
+  goalTargetFormatted?: string | null | undefined;
+  /**
+   * The goal target amount as a decimal currency amount
+   */
+  goalTargetCurrency?: number | null | undefined;
+  /**
+   * The goal underfunded amount formatted in the plan's currency format
+   */
+  goalUnderFundedFormatted?: string | null | undefined;
+  /**
+   * The goal underfunded amount as a decimal currency amount
+   */
+  goalUnderFundedCurrency?: number | null | undefined;
+  /**
+   * The total amount funded towards the goal formatted in the plan's currency format
+   */
+  goalOverallFundedFormatted?: string | null | undefined;
+  /**
+   * The total amount funded towards the goal as a decimal currency amount
+   */
+  goalOverallFundedCurrency?: number | null | undefined;
+  /**
+   * The amount of funding still needed to complete the goal formatted in the plan's currency format
+   */
+  goalOverallLeftFormatted?: string | null | undefined;
+  /**
+   * The amount of funding still needed to complete the goal as a decimal currency amount
+   */
+  goalOverallLeftCurrency?: number | null | undefined;
 };
 
 /** @internal */
-export const GoalType$inboundSchema: z.ZodNativeEnum<typeof GoalType> = z
-  .nativeEnum(GoalType);
+export const CategoryGoalType$inboundSchema: z.ZodNativeEnum<
+  typeof CategoryGoalType
+> = z.nativeEnum(CategoryGoalType);
 
 /** @internal */
 export const Category$inboundSchema: z.ZodType<
@@ -128,12 +193,13 @@ export const Category$inboundSchema: z.ZodType<
   category_group_name: z.string().optional(),
   name: z.string(),
   hidden: z.boolean(),
+  internal: z.boolean(),
   original_category_group_id: z.nullable(z.string()).optional(),
   note: z.nullable(z.string()).optional(),
   budgeted: z.number().int(),
   activity: z.number().int(),
   balance: z.number().int(),
-  goal_type: z.nullable(GoalType$inboundSchema).optional(),
+  goal_type: z.nullable(CategoryGoalType$inboundSchema).optional(),
   goal_needs_whole_amount: z.nullable(z.boolean()).default(null),
   goal_day: z.nullable(z.number().int()).optional(),
   goal_cadence: z.nullable(z.number().int()).optional(),
@@ -142,6 +208,8 @@ export const Category$inboundSchema: z.ZodType<
     .optional(),
   goal_target: z.nullable(z.number().int()).optional(),
   goal_target_month: z.nullable(z.string().transform(v => new RFCDate(v)))
+    .optional(),
+  goal_target_date: z.nullable(z.string().transform(v => new RFCDate(v)))
     .optional(),
   goal_percentage_complete: z.nullable(z.number().int()).optional(),
   goal_months_to_budget: z.nullable(z.number().int()).optional(),
@@ -152,6 +220,20 @@ export const Category$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deleted: z.boolean(),
+  balance_formatted: z.string().optional(),
+  balance_currency: z.number().optional(),
+  activity_formatted: z.string().optional(),
+  activity_currency: z.number().optional(),
+  budgeted_formatted: z.string().optional(),
+  budgeted_currency: z.number().optional(),
+  goal_target_formatted: z.nullable(z.string()).optional(),
+  goal_target_currency: z.nullable(z.number()).optional(),
+  goal_under_funded_formatted: z.nullable(z.string()).optional(),
+  goal_under_funded_currency: z.nullable(z.number()).optional(),
+  goal_overall_funded_formatted: z.nullable(z.string()).optional(),
+  goal_overall_funded_currency: z.nullable(z.number()).optional(),
+  goal_overall_left_formatted: z.nullable(z.string()).optional(),
+  goal_overall_left_currency: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "category_group_id": "categoryGroupId",
@@ -165,12 +247,27 @@ export const Category$inboundSchema: z.ZodType<
     "goal_creation_month": "goalCreationMonth",
     "goal_target": "goalTarget",
     "goal_target_month": "goalTargetMonth",
+    "goal_target_date": "goalTargetDate",
     "goal_percentage_complete": "goalPercentageComplete",
     "goal_months_to_budget": "goalMonthsToBudget",
     "goal_under_funded": "goalUnderFunded",
     "goal_overall_funded": "goalOverallFunded",
     "goal_overall_left": "goalOverallLeft",
     "goal_snoozed_at": "goalSnoozedAt",
+    "balance_formatted": "balanceFormatted",
+    "balance_currency": "balanceCurrency",
+    "activity_formatted": "activityFormatted",
+    "activity_currency": "activityCurrency",
+    "budgeted_formatted": "budgetedFormatted",
+    "budgeted_currency": "budgetedCurrency",
+    "goal_target_formatted": "goalTargetFormatted",
+    "goal_target_currency": "goalTargetCurrency",
+    "goal_under_funded_formatted": "goalUnderFundedFormatted",
+    "goal_under_funded_currency": "goalUnderFundedCurrency",
+    "goal_overall_funded_formatted": "goalOverallFundedFormatted",
+    "goal_overall_funded_currency": "goalOverallFundedCurrency",
+    "goal_overall_left_formatted": "goalOverallLeftFormatted",
+    "goal_overall_left_currency": "goalOverallLeftCurrency",
   });
 });
 
