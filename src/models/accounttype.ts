@@ -31,6 +31,3 @@ export type AccountType = ClosedEnum<typeof AccountType>;
 /** @internal */
 export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
   .nativeEnum(AccountType);
-/** @internal */
-export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> =
-  AccountType$inboundSchema;
