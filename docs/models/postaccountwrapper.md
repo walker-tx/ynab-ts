@@ -8,7 +8,7 @@ import { PostAccountWrapper } from "ynab-ts/models";
 let value: PostAccountWrapper = {
   account: {
     name: "<value>",
-    type: "cash",
+    type: "savings",
     balance: 828776,
   },
 };

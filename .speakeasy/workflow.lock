@@ -1,4 +1,4 @@
-speakeasyVersion: 1.728.0
+speakeasyVersion: 1.805.0
 sources:
     YNAB API Endpoints:
         sourceNamespace: ynab-api-endpoints
@@ -9,20 +9,19 @@ sources:
             - 1.75.0
     YNAB OpenAPI:
         sourceNamespace: ynab-api
-        sourceRevisionDigest: sha256:32c7b33f1406969c58b011136b8860a8fd38eebf66e9a1b2096a0ac0925b2b3c
-        sourceBlobDigest: sha256:1db8ad2eed5f52a9a39e837dbe7bac9e705197c002800a0d15682d59648bb92b
+        sourceRevisionDigest: sha256:bca54c1686470572903acb6791c102e84a9c09172f871dbb495a1e160e6b54d8
+        sourceBlobDigest: sha256:068a356aeb691e2e1e529c214799474dfd1d3ef1c7025015d7fa493410c7e73b
         tags:
             - latest
-            - speakeasy-sdk-regen-1771979158
-            - 1.77.0
+            - 1.88.0
 targets:
     ynab:
         source: YNAB OpenAPI
         sourceNamespace: ynab-api
-        sourceRevisionDigest: sha256:32c7b33f1406969c58b011136b8860a8fd38eebf66e9a1b2096a0ac0925b2b3c
-        sourceBlobDigest: sha256:1db8ad2eed5f52a9a39e837dbe7bac9e705197c002800a0d15682d59648bb92b
+        sourceRevisionDigest: sha256:bca54c1686470572903acb6791c102e84a9c09172f871dbb495a1e160e6b54d8
+        sourceBlobDigest: sha256:068a356aeb691e2e1e529c214799474dfd1d3ef1c7025015d7fa493410c7e73b
         codeSamplesNamespace: ynab-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:72446a684f322bb2038e36fc0dbab718c109aa30813544361013e23f21c72264
+        codeSamplesRevisionDigest: sha256:c3227c99273484e4bb9a5351b809dfdf8605149074d0f89c3486c0417f3021ce
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
