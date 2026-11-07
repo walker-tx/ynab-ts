@@ -17,7 +17,7 @@ export type MonthSummary = {
    */
   income: number;
   /**
-   * The total amount budgeted in the month
+   * The total amount assigned (budgeted) in the month
    */
   budgeted: number;
   /**
@@ -36,6 +36,38 @@ export type MonthSummary = {
    * Whether or not the month has been deleted.  Deleted months will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The total income formatted in the plan's currency format
+   */
+  incomeFormatted?: string | undefined;
+  /**
+   * The total income as a decimal currency amount
+   */
+  incomeCurrency?: number | undefined;
+  /**
+   * The total amount assigned formatted in the plan's currency format
+   */
+  budgetedFormatted?: string | undefined;
+  /**
+   * The total amount assigned as a decimal currency amount
+   */
+  budgetedCurrency?: number | undefined;
+  /**
+   * The total activity amount formatted in the plan's currency format
+   */
+  activityFormatted?: string | undefined;
+  /**
+   * The total activity amount as a decimal currency amount
+   */
+  activityCurrency?: number | undefined;
+  /**
+   * The available amount for 'Ready to Assign' formatted in the plan's currency format
+   */
+  toBeBudgetedFormatted?: string | undefined;
+  /**
+   * The available amount for 'Ready to Assign' as a decimal currency amount
+   */
+  toBeBudgetedCurrency?: number | undefined;
 };
 
 /** @internal */
@@ -52,10 +84,26 @@ export const MonthSummary$inboundSchema: z.ZodType<
   to_be_budgeted: z.number().int(),
   age_of_money: z.nullable(z.number().int()).optional(),
   deleted: z.boolean(),
+  income_formatted: z.string().optional(),
+  income_currency: z.number().optional(),
+  budgeted_formatted: z.string().optional(),
+  budgeted_currency: z.number().optional(),
+  activity_formatted: z.string().optional(),
+  activity_currency: z.number().optional(),
+  to_be_budgeted_formatted: z.string().optional(),
+  to_be_budgeted_currency: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "to_be_budgeted": "toBeBudgeted",
     "age_of_money": "ageOfMoney",
+    "income_formatted": "incomeFormatted",
+    "income_currency": "incomeCurrency",
+    "budgeted_formatted": "budgetedFormatted",
+    "budgeted_currency": "budgetedCurrency",
+    "activity_formatted": "activityFormatted",
+    "activity_currency": "activityCurrency",
+    "to_be_budgeted_formatted": "toBeBudgetedFormatted",
+    "to_be_budgeted_currency": "toBeBudgetedCurrency",
   });
 });
 

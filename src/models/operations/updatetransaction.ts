@@ -8,9 +8,9 @@ import * as models from "../index.js";
 
 export type UpdateTransactionRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The id of the transaction
    */
@@ -23,7 +23,7 @@ export type UpdateTransactionRequest = {
 
 /** @internal */
 export type UpdateTransactionRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   transaction_id: string;
   PutTransactionWrapper: models.PutTransactionWrapper$Outbound;
 };
@@ -34,12 +34,12 @@ export const UpdateTransactionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateTransactionRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   transactionId: z.string(),
   putTransactionWrapper: models.PutTransactionWrapper$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     transactionId: "transaction_id",
     putTransactionWrapper: "PutTransactionWrapper",
   });
