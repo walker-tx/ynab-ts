@@ -16,11 +16,15 @@ export type CategoryGroupWithCategories = {
    */
   hidden: boolean;
   /**
+   * Whether or not the category group is internal
+   */
+  internal: boolean;
+  /**
    * Whether or not the category group has been deleted.  Deleted category groups will only be included in delta requests.
    */
   deleted: boolean;
   /**
-   * Category group categories.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+   * Category group categories.  Amounts (assigned, activity, available, etc.) are specific to the current plan month (UTC).
    */
   categories: Array<Category>;
 };
@@ -34,6 +38,7 @@ export const CategoryGroupWithCategories$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   hidden: z.boolean(),
+  internal: z.boolean(),
   deleted: z.boolean(),
   categories: z.array(Category$inboundSchema),
 });

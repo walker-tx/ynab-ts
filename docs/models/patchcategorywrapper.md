@@ -12,6 +12,6 @@ let value: PatchCategoryWrapper = {
 
 ## Fields
 
-| Field                                            | Type                                             | Required                                         | Description                                      |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `category`                                       | [models.SaveCategory](../models/savecategory.md) | :heavy_check_mark:                               | N/A                                              |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `category`                                               | [models.ExistingCategory](../models/existingcategory.md) | :heavy_check_mark:                                       | N/A                                                      |

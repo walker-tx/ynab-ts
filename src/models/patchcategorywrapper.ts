@@ -4,18 +4,18 @@
 
 import * as z from "zod/v3";
 import {
-  SaveCategory,
-  SaveCategory$Outbound,
-  SaveCategory$outboundSchema,
-} from "./savecategory.js";
+  ExistingCategory,
+  ExistingCategory$Outbound,
+  ExistingCategory$outboundSchema,
+} from "./existingcategory.js";
 
 export type PatchCategoryWrapper = {
-  category: SaveCategory;
+  category: ExistingCategory;
 };
 
 /** @internal */
 export type PatchCategoryWrapper$Outbound = {
-  category: SaveCategory$Outbound;
+  category: ExistingCategory$Outbound;
 };
 
 /** @internal */
@@ -24,7 +24,7 @@ export const PatchCategoryWrapper$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PatchCategoryWrapper
 > = z.object({
-  category: SaveCategory$outboundSchema,
+  category: ExistingCategory$outboundSchema,
 });
 
 export function patchCategoryWrapperToJSON(
