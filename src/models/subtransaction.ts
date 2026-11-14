@@ -32,6 +32,14 @@ export type SubTransaction = {
    * Whether or not the subtransaction has been deleted.  Deleted subtransactions will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The subtransaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The subtransaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
 };
 
 /** @internal */
@@ -51,6 +59,8 @@ export const SubTransaction$inboundSchema: z.ZodType<
   transfer_account_id: z.nullable(z.string()).optional(),
   transfer_transaction_id: z.nullable(z.string()).optional(),
   deleted: z.boolean(),
+  amount_formatted: z.string().optional(),
+  amount_currency: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "transaction_id": "transactionId",
@@ -60,6 +70,8 @@ export const SubTransaction$inboundSchema: z.ZodType<
     "category_name": "categoryName",
     "transfer_account_id": "transferAccountId",
     "transfer_transaction_id": "transferTransactionId",
+    "amount_formatted": "amountFormatted",
+    "amount_currency": "amountCurrency",
   });
 });
 

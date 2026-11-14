@@ -9,7 +9,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class User extends ClientSDK {
   /**
-   * User info
+   * Get user
    *
    * @remarks
    * Returns authenticated user information
