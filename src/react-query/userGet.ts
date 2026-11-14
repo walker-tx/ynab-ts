@@ -17,7 +17,6 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { YnabError } from "../models/errors/ynaberror.js";
@@ -37,7 +36,6 @@ export {
 };
 
 export type UserGetQueryError =
-  | errors.ErrorResponse
   | YnabError
   | ResponseValidationError
   | ConnectionError
@@ -48,7 +46,7 @@ export type UserGetQueryError =
   | SDKValidationError;
 
 /**
- * User info
+ * Get user
  *
  * @remarks
  * Returns authenticated user information
@@ -67,7 +65,7 @@ export function useUserGet(
 }
 
 /**
- * User info
+ * Get user
  *
  * @remarks
  * Returns authenticated user information

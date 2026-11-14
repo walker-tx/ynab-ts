@@ -2,20 +2,20 @@
 
 ## Overview
 
-Each budget contains one or more months, which is where Ready to Assign, Age of Money and category (budgeted / activity / balances) amounts are available.
+Each plan contains one or more months, which is where Ready to Assign, Age of Money and category (assigned / activity / available) amounts are available.
 
 ### Available Operations
 
-* [list](#list) - List budget months
-* [get](#get) - Single budget month
+* [getPlanMonths](#getplanmonths) - Get all plan months
+* [getPlanMonth](#getplanmonth) - Get a plan month
 
-## list
+## getPlanMonths
 
-Returns all budget months
+Returns all plan months
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getBudgetMonths" method="get" path="/budgets/{budget_id}/months" -->
+<!-- UsageSnippet language="typescript" operationID="getPlanMonths" method="get" path="/plans/{plan_id}/months" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -24,8 +24,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.months.list({
-    budgetId: "<id>",
+  const result = await ynab.months.getPlanMonths({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -40,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { monthsList } from "ynab-ts/funcs/monthsList.js";
+import { monthsGetPlanMonths } from "ynab-ts/funcs/monthsGetPlanMonths.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -49,14 +49,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await monthsList(ynab, {
-    budgetId: "<id>",
+  const res = await monthsGetPlanMonths(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("monthsList failed:", res.error);
+    console.log("monthsGetPlanMonths failed:", res.error);
   }
 }
 
@@ -76,26 +76,26 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useMonthsList,
-  useMonthsListSuspense,
+  useMonthsGetPlanMonths,
+  useMonthsGetPlanMonthsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchMonthsList,
+  prefetchMonthsGetPlanMonths,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateMonthsList,
-  invalidateAllMonthsList,
-} from "ynab-ts/react-query/monthsList.js";
+  invalidateMonthsGetPlanMonths,
+  invalidateAllMonthsGetPlanMonths,
+} from "ynab-ts/react-query/monthsGetPlanMonths.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetBudgetMonthsRequest](../../models/operations/getbudgetmonthsrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetPlanMonthsRequest](../../models/operations/getplanmonthsrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -109,16 +109,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## get
+## getPlanMonth
 
-Returns a single budget month
+Returns a single plan month
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getBudgetMonth" method="get" path="/budgets/{budget_id}/months/{month}" -->
+<!-- UsageSnippet language="typescript" operationID="getPlanMonth" method="get" path="/plans/{plan_id}/months/{month}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 import { RFCDate } from "ynab-ts/types";
@@ -128,9 +127,9 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.months.get({
-    budgetId: "<id>",
-    month: new RFCDate("2025-03-18"),
+  const result = await ynab.months.getPlanMonth({
+    planId: "<id>",
+    month: new RFCDate("2026-09-05"),
   });
 
   console.log(result);
@@ -145,7 +144,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { monthsGet } from "ynab-ts/funcs/monthsGet.js";
+import { monthsGetPlanMonth } from "ynab-ts/funcs/monthsGetPlanMonth.js";
 import { RFCDate } from "ynab-ts/types";
 
 // Use `YnabCore` for best tree-shaking performance.
@@ -155,15 +154,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await monthsGet(ynab, {
-    budgetId: "<id>",
-    month: new RFCDate("2025-03-18"),
+  const res = await monthsGetPlanMonth(ynab, {
+    planId: "<id>",
+    month: new RFCDate("2026-09-05"),
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("monthsGet failed:", res.error);
+    console.log("monthsGetPlanMonth failed:", res.error);
   }
 }
 
@@ -183,26 +182,26 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useMonthsGet,
-  useMonthsGetSuspense,
+  useMonthsGetPlanMonth,
+  useMonthsGetPlanMonthSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchMonthsGet,
+  prefetchMonthsGetPlanMonth,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateMonthsGet,
-  invalidateAllMonthsGet,
-} from "ynab-ts/react-query/monthsGet.js";
+  invalidateMonthsGetPlanMonth,
+  invalidateAllMonthsGetPlanMonth,
+} from "ynab-ts/react-query/monthsGetPlanMonth.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetBudgetMonthRequest](../../models/operations/getbudgetmonthrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetPlanMonthRequest](../../models/operations/getplanmonthrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -216,5 +215,4 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

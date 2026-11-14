@@ -104,6 +104,14 @@ export type TransactionDetail = {
    * Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The transaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The transaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
   accountName: string;
   payeeName?: string | null | undefined;
   /**
@@ -149,6 +157,8 @@ export const TransactionDetail$inboundSchema: z.ZodType<
     TransactionDetailDebtTransactionType$inboundSchema,
   ).optional(),
   deleted: z.boolean(),
+  amount_formatted: z.string().optional(),
+  amount_currency: z.number().optional(),
   account_name: z.string(),
   payee_name: z.nullable(z.string()).optional(),
   category_name: z.nullable(z.string()).optional(),
@@ -167,6 +177,8 @@ export const TransactionDetail$inboundSchema: z.ZodType<
     "import_payee_name": "importPayeeName",
     "import_payee_name_original": "importPayeeNameOriginal",
     "debt_transaction_type": "debtTransactionType",
+    "amount_formatted": "amountFormatted",
+    "amount_currency": "amountCurrency",
     "account_name": "accountName",
     "payee_name": "payeeName",
     "category_name": "categoryName",

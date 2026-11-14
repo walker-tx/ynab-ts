@@ -8,9 +8,9 @@ import * as models from "../index.js";
 
 export type CreateScheduledTransactionRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The scheduled transaction to create
    */
@@ -19,7 +19,7 @@ export type CreateScheduledTransactionRequest = {
 
 /** @internal */
 export type CreateScheduledTransactionRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   PostScheduledTransactionWrapper:
     models.PostScheduledTransactionWrapper$Outbound;
 };
@@ -30,12 +30,12 @@ export const CreateScheduledTransactionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateScheduledTransactionRequest
 > = z.object({
-  budgetId: z.string(),
+  planId: z.string(),
   postScheduledTransactionWrapper:
     models.PostScheduledTransactionWrapper$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    budgetId: "budget_id",
+    planId: "plan_id",
     postScheduledTransactionWrapper: "PostScheduledTransactionWrapper",
   });
 });
