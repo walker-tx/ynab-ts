@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import { RFCDate } from "../types/rfcdate.js";
 import {
   SaveSubTransaction,
@@ -55,7 +56,7 @@ export type ExistingTransaction = {
    */
   flagColor?: TransactionFlagColor | null | undefined;
   /**
-   * An array of subtransactions to configure a transaction as a split. Updating `subtransactions` on an existing split transaction is not supported.
+   * An array of subtransactions to configure a transaction as a split. Updating `subtransactions` on an existing split transaction is not supported and will return an error.  Splits are not allowed on tracking accounts or on transfers between on-budget accounts; a transfer to a tracking account can be a split.
    */
   subtransactions?: Array<SaveSubTransaction> | undefined;
 };
@@ -80,27 +81,29 @@ export const ExistingTransaction$outboundSchema: z.ZodType<
   ExistingTransaction$Outbound,
   z.ZodTypeDef,
   ExistingTransaction
-> = z.object({
-  accountId: z.string().optional(),
-  date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  amount: z.number().int().optional(),
-  payeeId: z.nullable(z.string()).optional(),
-  payeeName: z.nullable(z.string()).optional(),
-  categoryId: z.nullable(z.string()).optional(),
-  memo: z.nullable(z.string()).optional(),
-  cleared: TransactionClearedStatus$outboundSchema.optional(),
-  approved: z.boolean().optional(),
-  flagColor: z.nullable(TransactionFlagColor$outboundSchema).optional(),
-  subtransactions: z.array(SaveSubTransaction$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accountId: "account_id",
-    payeeId: "payee_id",
-    payeeName: "payee_name",
-    categoryId: "category_id",
-    flagColor: "flag_color",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountId: z.string().optional(),
+    date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    amount: z.number().int().optional(),
+    payeeId: z.nullable(z.string()).optional(),
+    payeeName: z.nullable(z.string()).optional(),
+    categoryId: z.nullable(z.string()).optional(),
+    memo: z.nullable(z.string()).optional(),
+    cleared: TransactionClearedStatus$outboundSchema.optional(),
+    approved: z.boolean().optional(),
+    flagColor: z.nullable(TransactionFlagColor$outboundSchema).optional(),
+    subtransactions: z.array(SaveSubTransaction$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accountId: "account_id",
+      payeeId: "payee_id",
+      payeeName: "payee_name",
+      categoryId: "category_id",
+      flagColor: "flag_color",
+    });
+  })
+);
 
 export function existingTransactionToJSON(
   existingTransaction: ExistingTransaction,

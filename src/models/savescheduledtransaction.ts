@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import { RFCDate } from "../types/rfcdate.js";
 import {
   ScheduledTransactionFrequency,
@@ -65,25 +66,27 @@ export const SaveScheduledTransaction$outboundSchema: z.ZodType<
   SaveScheduledTransaction$Outbound,
   z.ZodTypeDef,
   SaveScheduledTransaction
-> = z.object({
-  accountId: z.string(),
-  date: z.instanceof(RFCDate).transform(v => v.toString()),
-  amount: z.number().int().optional(),
-  payeeId: z.nullable(z.string()).optional(),
-  payeeName: z.nullable(z.string()).optional(),
-  categoryId: z.nullable(z.string()).optional(),
-  memo: z.nullable(z.string()).optional(),
-  flagColor: z.nullable(TransactionFlagColor$outboundSchema).optional(),
-  frequency: ScheduledTransactionFrequency$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accountId: "account_id",
-    payeeId: "payee_id",
-    payeeName: "payee_name",
-    categoryId: "category_id",
-    flagColor: "flag_color",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountId: z.string(),
+    date: z.instanceof(RFCDate).transform(v => v.toString()),
+    amount: z.number().int().optional(),
+    payeeId: z.nullable(z.string()).optional(),
+    payeeName: z.nullable(z.string()).optional(),
+    categoryId: z.nullable(z.string()).optional(),
+    memo: z.nullable(z.string()).optional(),
+    flagColor: z.nullable(TransactionFlagColor$outboundSchema).optional(),
+    frequency: ScheduledTransactionFrequency$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accountId: "account_id",
+      payeeId: "payee_id",
+      payeeName: "payee_name",
+      categoryId: "category_id",
+      flagColor: "flag_color",
+    });
+  })
+);
 
 export function saveScheduledTransactionToJSON(
   saveScheduledTransaction: SaveScheduledTransaction,

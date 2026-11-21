@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { Category, Category$inboundSchema } from "./category.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -26,14 +26,16 @@ export const SaveCategoryResponseData$inboundSchema: z.ZodType<
   SaveCategoryResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  category: Category$inboundSchema,
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: Category$inboundSchema,
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function saveCategoryResponseDataFromJSON(
   jsonString: string,
@@ -50,9 +52,11 @@ export const SaveCategoryResponse$inboundSchema: z.ZodType<
   SaveCategoryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => SaveCategoryResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SaveCategoryResponseData$inboundSchema),
+  })
+);
 
 export function saveCategoryResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import { Payee, Payee$inboundSchema } from "./payee.js";
@@ -26,14 +26,16 @@ export const PayeesResponseData$inboundSchema: z.ZodType<
   PayeesResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  payees: z.array(Payee$inboundSchema),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    payees: z.array(Payee$inboundSchema),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function payeesResponseDataFromJSON(
   jsonString: string,
@@ -50,9 +52,11 @@ export const PayeesResponse$inboundSchema: z.ZodType<
   PayeesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PayeesResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PayeesResponseData$inboundSchema),
+  })
+);
 
 export function payeesResponseFromJSON(
   jsonString: string,

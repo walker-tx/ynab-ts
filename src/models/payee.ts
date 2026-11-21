@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export type Payee = {
 };
 
 /** @internal */
-export const Payee$inboundSchema: z.ZodType<Payee, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    transfer_account_id: z.nullable(z.string()).optional(),
-    deleted: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "transfer_account_id": "transferAccountId",
-    });
-  });
+export const Payee$inboundSchema: z.ZodType<Payee, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      transfer_account_id: z.nullable(z.string()).optional(),
+      deleted: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "transfer_account_id": "transferAccountId",
+      });
+    })
+  );
 
 export function payeeFromJSON(
   jsonString: string,

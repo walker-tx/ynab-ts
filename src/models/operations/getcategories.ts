@@ -4,12 +4,13 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetCategoriesRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.
    */
@@ -18,7 +19,7 @@ export type GetCategoriesRequest = {
 
 /** @internal */
 export type GetCategoriesRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   last_knowledge_of_server?: number | undefined;
 };
 
@@ -27,15 +28,17 @@ export const GetCategoriesRequest$outboundSchema: z.ZodType<
   GetCategoriesRequest$Outbound,
   z.ZodTypeDef,
   GetCategoriesRequest
-> = z.object({
-  budgetId: z.string(),
-  lastKnowledgeOfServer: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    lastKnowledgeOfServer: "last_knowledge_of_server",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    lastKnowledgeOfServer: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      lastKnowledgeOfServer: "last_knowledge_of_server",
+    });
+  })
+);
 
 export function getCategoriesRequestToJSON(
   getCategoriesRequest: GetCategoriesRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   ExistingTransaction,
   ExistingTransaction$Outbound,
@@ -23,9 +24,11 @@ export const PutTransactionWrapper$outboundSchema: z.ZodType<
   PutTransactionWrapper$Outbound,
   z.ZodTypeDef,
   PutTransactionWrapper
-> = z.object({
-  transaction: ExistingTransaction$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transaction: ExistingTransaction$outboundSchema,
+  })
+);
 
 export function putTransactionWrapperToJSON(
   putTransactionWrapper: PutTransactionWrapper,
