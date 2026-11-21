@@ -4,13 +4,14 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as models from "../index.js";
 
 export type CreateAccountRequest = {
   /**
-   * The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget)
+   * The id of the plan ("last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan)
    */
-  budgetId: string;
+  planId: string;
   /**
    * The account to create.
    */
@@ -19,7 +20,7 @@ export type CreateAccountRequest = {
 
 /** @internal */
 export type CreateAccountRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   PostAccountWrapper: models.PostAccountWrapper$Outbound;
 };
 
@@ -28,15 +29,17 @@ export const CreateAccountRequest$outboundSchema: z.ZodType<
   CreateAccountRequest$Outbound,
   z.ZodTypeDef,
   CreateAccountRequest
-> = z.object({
-  budgetId: z.string(),
-  postAccountWrapper: models.PostAccountWrapper$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    postAccountWrapper: "PostAccountWrapper",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    postAccountWrapper: models.PostAccountWrapper$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      postAccountWrapper: "PostAccountWrapper",
+    });
+  })
+);
 
 export function createAccountRequestToJSON(
   createAccountRequest: CreateAccountRequest,

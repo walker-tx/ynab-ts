@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,14 +29,16 @@ export const HybridTransactionsResponseData$inboundSchema: z.ZodType<
   HybridTransactionsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  transactions: z.array(HybridTransaction$inboundSchema),
-  server_knowledge: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transactions: z.array(HybridTransaction$inboundSchema),
+    server_knowledge: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function hybridTransactionsResponseDataFromJSON(
   jsonString: string,
@@ -53,9 +55,11 @@ export const HybridTransactionsResponse$inboundSchema: z.ZodType<
   HybridTransactionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => HybridTransactionsResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => HybridTransactionsResponseData$inboundSchema),
+  })
+);
 
 export function hybridTransactionsResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -41,19 +41,21 @@ export const SaveTransactionsResponseData$inboundSchema: z.ZodType<
   SaveTransactionsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  transaction_ids: z.array(z.string()),
-  transaction: TransactionDetail$inboundSchema.optional(),
-  transactions: z.array(TransactionDetail$inboundSchema).optional(),
-  duplicate_import_ids: z.array(z.string()).optional(),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "transaction_ids": "transactionIds",
-    "duplicate_import_ids": "duplicateImportIds",
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transaction_ids: z.array(z.string()),
+    transaction: TransactionDetail$inboundSchema.optional(),
+    transactions: z.array(TransactionDetail$inboundSchema).optional(),
+    duplicate_import_ids: z.array(z.string()).optional(),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "transaction_ids": "transactionIds",
+      "duplicate_import_ids": "duplicateImportIds",
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function saveTransactionsResponseDataFromJSON(
   jsonString: string,
@@ -70,9 +72,11 @@ export const SaveTransactionsResponse$inboundSchema: z.ZodType<
   SaveTransactionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => SaveTransactionsResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SaveTransactionsResponseData$inboundSchema),
+  })
+);
 
 export function saveTransactionsResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import { MonthSummary, MonthSummary$inboundSchema } from "./monthsummary.js";
@@ -26,14 +26,16 @@ export const MonthSummariesResponseData$inboundSchema: z.ZodType<
   MonthSummariesResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  months: z.array(MonthSummary$inboundSchema),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    months: z.array(MonthSummary$inboundSchema),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function monthSummariesResponseDataFromJSON(
   jsonString: string,
@@ -50,9 +52,11 @@ export const MonthSummariesResponse$inboundSchema: z.ZodType<
   MonthSummariesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => MonthSummariesResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MonthSummariesResponseData$inboundSchema),
+  })
+);
 
 export function monthSummariesResponseFromJSON(
   jsonString: string,

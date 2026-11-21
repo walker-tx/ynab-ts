@@ -4,15 +4,16 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { RFCDate } from "../../types/rfcdate.js";
 
 export type GetMonthCategoryByIdRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
-   * The budget month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
+   * The plan month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
    */
   month: RFCDate;
   /**
@@ -23,7 +24,7 @@ export type GetMonthCategoryByIdRequest = {
 
 /** @internal */
 export type GetMonthCategoryByIdRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   month: string;
   category_id: string;
 };
@@ -33,16 +34,18 @@ export const GetMonthCategoryByIdRequest$outboundSchema: z.ZodType<
   GetMonthCategoryByIdRequest$Outbound,
   z.ZodTypeDef,
   GetMonthCategoryByIdRequest
-> = z.object({
-  budgetId: z.string(),
-  month: z.instanceof(RFCDate).transform(v => v.toString()),
-  categoryId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    categoryId: "category_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    month: z.instanceof(RFCDate).transform(v => v.toString()),
+    categoryId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      categoryId: "category_id",
+    });
+  })
+);
 
 export function getMonthCategoryByIdRequestToJSON(
   getMonthCategoryByIdRequest: GetMonthCategoryByIdRequest,

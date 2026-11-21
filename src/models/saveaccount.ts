@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { AccountType, AccountType$outboundSchema } from "./accounttype.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
+import {
+  SaveAccountType,
+  SaveAccountType$outboundSchema,
+} from "./saveaccounttype.js";
 
 export type SaveAccount = {
   /**
@@ -11,9 +15,9 @@ export type SaveAccount = {
    */
   name: string;
   /**
-   * The type of account
+   * The type of account to create or update
    */
-  type: AccountType;
+  type: SaveAccountType;
   /**
    * The current balance of the account in milliunits format
    */
@@ -32,11 +36,13 @@ export const SaveAccount$outboundSchema: z.ZodType<
   SaveAccount$Outbound,
   z.ZodTypeDef,
   SaveAccount
-> = z.object({
-  name: z.string(),
-  type: AccountType$outboundSchema,
-  balance: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    type: SaveAccountType$outboundSchema,
+    balance: z.number().int(),
+  })
+);
 
 export function saveAccountToJSON(saveAccount: SaveAccount): string {
   return JSON.stringify(SaveAccount$outboundSchema.parse(saveAccount));

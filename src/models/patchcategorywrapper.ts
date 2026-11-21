@@ -3,19 +3,20 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
-  SaveCategory,
-  SaveCategory$Outbound,
-  SaveCategory$outboundSchema,
-} from "./savecategory.js";
+  ExistingCategory,
+  ExistingCategory$Outbound,
+  ExistingCategory$outboundSchema,
+} from "./existingcategory.js";
 
 export type PatchCategoryWrapper = {
-  category: SaveCategory;
+  category: ExistingCategory;
 };
 
 /** @internal */
 export type PatchCategoryWrapper$Outbound = {
-  category: SaveCategory$Outbound;
+  category: ExistingCategory$Outbound;
 };
 
 /** @internal */
@@ -23,9 +24,11 @@ export const PatchCategoryWrapper$outboundSchema: z.ZodType<
   PatchCategoryWrapper$Outbound,
   z.ZodTypeDef,
   PatchCategoryWrapper
-> = z.object({
-  category: SaveCategory$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: ExistingCategory$outboundSchema,
+  })
+);
 
 export function patchCategoryWrapperToJSON(
   patchCategoryWrapper: PatchCategoryWrapper,
