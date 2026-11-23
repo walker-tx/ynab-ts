@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 
 /**
@@ -25,7 +26,7 @@ export type TransactionFlagColor = ClosedEnum<typeof TransactionFlagColor>;
 /** @internal */
 export const TransactionFlagColor$inboundSchema: z.ZodNativeEnum<
   typeof TransactionFlagColor
-> = z.nativeEnum(TransactionFlagColor);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TransactionFlagColor));
 /** @internal */
 export const TransactionFlagColor$outboundSchema: z.ZodNativeEnum<
   typeof TransactionFlagColor

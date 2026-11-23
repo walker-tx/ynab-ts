@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 
 export type SaveSubTransaction = {
   /**
@@ -39,19 +40,21 @@ export const SaveSubTransaction$outboundSchema: z.ZodType<
   SaveSubTransaction$Outbound,
   z.ZodTypeDef,
   SaveSubTransaction
-> = z.object({
-  amount: z.number().int(),
-  payeeId: z.nullable(z.string()).optional(),
-  payeeName: z.nullable(z.string()).optional(),
-  categoryId: z.nullable(z.string()).optional(),
-  memo: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payeeId: "payee_id",
-    payeeName: "payee_name",
-    categoryId: "category_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int(),
+    payeeId: z.nullable(z.string()).optional(),
+    payeeName: z.nullable(z.string()).optional(),
+    categoryId: z.nullable(z.string()).optional(),
+    memo: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      payeeId: "payee_id",
+      payeeName: "payee_name",
+      categoryId: "category_id",
+    });
+  })
+);
 
 export function saveSubTransactionToJSON(
   saveSubTransaction: SaveSubTransaction,

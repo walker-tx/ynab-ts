@@ -2,9 +2,11 @@
 
 ## Overview
 
+The currently authenticated user
+
 ### Available Operations
 
-* [get](#get) - User info
+* [get](#get) - Get user
 
 ## get
 
@@ -99,5 +101,4 @@ import {
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

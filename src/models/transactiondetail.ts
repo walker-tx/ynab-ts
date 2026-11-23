@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
@@ -104,6 +104,14 @@ export type TransactionDetail = {
    * Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests.
    */
   deleted: boolean;
+  /**
+   * The transaction amount formatted in the plan's currency format
+   */
+  amountFormatted?: string | undefined;
+  /**
+   * The transaction amount as a decimal currency amount
+   */
+  amountCurrency?: number | undefined;
   accountName: string;
   payeeName?: string | null | undefined;
   /**
@@ -118,60 +126,67 @@ export type TransactionDetail = {
 
 /** @internal */
 export const TransactionDetailDebtTransactionType$inboundSchema:
-  z.ZodNativeEnum<typeof TransactionDetailDebtTransactionType> = z.nativeEnum(
-    TransactionDetailDebtTransactionType,
-  );
+  z.ZodNativeEnum<typeof TransactionDetailDebtTransactionType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(TransactionDetailDebtTransactionType)
+    );
 
 /** @internal */
 export const TransactionDetail$inboundSchema: z.ZodType<
   TransactionDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  date: z.string().transform(v => new RFCDate(v)),
-  amount: z.number().int(),
-  memo: z.nullable(z.string()).optional(),
-  cleared: TransactionClearedStatus$inboundSchema,
-  approved: z.boolean(),
-  flag_color: z.nullable(TransactionFlagColor$inboundSchema).optional(),
-  flag_name: z.nullable(z.string()).optional(),
-  account_id: z.string(),
-  payee_id: z.nullable(z.string()).optional(),
-  category_id: z.nullable(z.string()).optional(),
-  transfer_account_id: z.nullable(z.string()).optional(),
-  transfer_transaction_id: z.nullable(z.string()).optional(),
-  matched_transaction_id: z.nullable(z.string()).optional(),
-  import_id: z.nullable(z.string()).optional(),
-  import_payee_name: z.nullable(z.string()).optional(),
-  import_payee_name_original: z.nullable(z.string()).optional(),
-  debt_transaction_type: z.nullable(
-    TransactionDetailDebtTransactionType$inboundSchema,
-  ).optional(),
-  deleted: z.boolean(),
-  account_name: z.string(),
-  payee_name: z.nullable(z.string()).optional(),
-  category_name: z.nullable(z.string()).optional(),
-  subtransactions: z.array(SubTransaction$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "flag_color": "flagColor",
-    "flag_name": "flagName",
-    "account_id": "accountId",
-    "payee_id": "payeeId",
-    "category_id": "categoryId",
-    "transfer_account_id": "transferAccountId",
-    "transfer_transaction_id": "transferTransactionId",
-    "matched_transaction_id": "matchedTransactionId",
-    "import_id": "importId",
-    "import_payee_name": "importPayeeName",
-    "import_payee_name_original": "importPayeeNameOriginal",
-    "debt_transaction_type": "debtTransactionType",
-    "account_name": "accountName",
-    "payee_name": "payeeName",
-    "category_name": "categoryName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    date: z.string().transform(v => new RFCDate(v)),
+    amount: z.number().int(),
+    memo: z.nullable(z.string()).optional(),
+    cleared: TransactionClearedStatus$inboundSchema,
+    approved: z.boolean(),
+    flag_color: z.nullable(TransactionFlagColor$inboundSchema).optional(),
+    flag_name: z.nullable(z.string()).optional(),
+    account_id: z.string(),
+    payee_id: z.nullable(z.string()).optional(),
+    category_id: z.nullable(z.string()).optional(),
+    transfer_account_id: z.nullable(z.string()).optional(),
+    transfer_transaction_id: z.nullable(z.string()).optional(),
+    matched_transaction_id: z.nullable(z.string()).optional(),
+    import_id: z.nullable(z.string()).optional(),
+    import_payee_name: z.nullable(z.string()).optional(),
+    import_payee_name_original: z.nullable(z.string()).optional(),
+    debt_transaction_type: z.nullable(
+      TransactionDetailDebtTransactionType$inboundSchema,
+    ).optional(),
+    deleted: z.boolean(),
+    amount_formatted: z.string().optional(),
+    amount_currency: z.number().optional(),
+    account_name: z.string(),
+    payee_name: z.nullable(z.string()).optional(),
+    category_name: z.nullable(z.string()).optional(),
+    subtransactions: z.array(SubTransaction$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "flag_color": "flagColor",
+      "flag_name": "flagName",
+      "account_id": "accountId",
+      "payee_id": "payeeId",
+      "category_id": "categoryId",
+      "transfer_account_id": "transferAccountId",
+      "transfer_transaction_id": "transferTransactionId",
+      "matched_transaction_id": "matchedTransactionId",
+      "import_id": "importId",
+      "import_payee_name": "importPayeeName",
+      "import_payee_name_original": "importPayeeNameOriginal",
+      "debt_transaction_type": "debtTransactionType",
+      "amount_formatted": "amountFormatted",
+      "amount_currency": "amountCurrency",
+      "account_name": "accountName",
+      "payee_name": "payeeName",
+      "category_name": "categoryName",
+    });
+  })
+);
 
 export function transactionDetailFromJSON(
   jsonString: string,

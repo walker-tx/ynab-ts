@@ -4,16 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import * as models from "../index.js";
 
 export type UpdateMonthCategoryRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
-   * The budget month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
+   * The plan month in ISO format (e.g. 2016-12-01) ("current" can also be used to specify the current calendar month (UTC))
    */
   month: RFCDate;
   /**
@@ -21,14 +22,14 @@ export type UpdateMonthCategoryRequest = {
    */
   categoryId: string;
   /**
-   * The category to update.  Only `budgeted` amount can be updated and any other fields specified will be ignored.
+   * The category to update.  Only `budgeted` (assigned) amount can be updated and any other fields specified will be ignored.
    */
   patchMonthCategoryWrapper: models.PatchMonthCategoryWrapper;
 };
 
 /** @internal */
 export type UpdateMonthCategoryRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   month: string;
   category_id: string;
   PatchMonthCategoryWrapper: models.PatchMonthCategoryWrapper$Outbound;
@@ -39,18 +40,20 @@ export const UpdateMonthCategoryRequest$outboundSchema: z.ZodType<
   UpdateMonthCategoryRequest$Outbound,
   z.ZodTypeDef,
   UpdateMonthCategoryRequest
-> = z.object({
-  budgetId: z.string(),
-  month: z.instanceof(RFCDate).transform(v => v.toString()),
-  categoryId: z.string(),
-  patchMonthCategoryWrapper: models.PatchMonthCategoryWrapper$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    categoryId: "category_id",
-    patchMonthCategoryWrapper: "PatchMonthCategoryWrapper",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    month: z.instanceof(RFCDate).transform(v => v.toString()),
+    categoryId: z.string(),
+    patchMonthCategoryWrapper: models.PatchMonthCategoryWrapper$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      categoryId: "category_id",
+      patchMonthCategoryWrapper: "PatchMonthCategoryWrapper",
+    });
+  })
+);
 
 export function updateMonthCategoryRequestToJSON(
   updateMonthCategoryRequest: UpdateMonthCategoryRequest,

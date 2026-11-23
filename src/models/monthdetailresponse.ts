@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import { MonthDetail, MonthDetail$inboundSchema } from "./monthdetail.js";
@@ -21,9 +21,11 @@ export const MonthDetailResponseData$inboundSchema: z.ZodType<
   MonthDetailResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  month: MonthDetail$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    month: MonthDetail$inboundSchema,
+  })
+);
 
 export function monthDetailResponseDataFromJSON(
   jsonString: string,
@@ -40,9 +42,11 @@ export const MonthDetailResponse$inboundSchema: z.ZodType<
   MonthDetailResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => MonthDetailResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MonthDetailResponseData$inboundSchema),
+  })
+);
 
 export function monthDetailResponseFromJSON(
   jsonString: string,

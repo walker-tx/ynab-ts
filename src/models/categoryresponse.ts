@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { Category, Category$inboundSchema } from "./category.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -21,9 +21,11 @@ export const CategoryResponseData$inboundSchema: z.ZodType<
   CategoryResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  category: Category$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: Category$inboundSchema,
+  })
+);
 
 export function categoryResponseDataFromJSON(
   jsonString: string,
@@ -40,9 +42,11 @@ export const CategoryResponse$inboundSchema: z.ZodType<
   CategoryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CategoryResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CategoryResponseData$inboundSchema),
+  })
+);
 
 export function categoryResponseFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { RFCDate } from "../../types/rfcdate.js";
 
@@ -21,13 +22,17 @@ export type GetTransactionsType = ClosedEnum<typeof GetTransactionsType>;
 
 export type GetTransactionsRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
-   * If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).
+   * If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified.
    */
   sinceDate?: RFCDate | undefined;
+  /**
+   * If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).
+   */
+  untilDate?: RFCDate | undefined;
   /**
    * If specified, only transactions of the specified type will be included. "uncategorized" and "unapproved" are currently supported.
    */
@@ -41,12 +46,13 @@ export type GetTransactionsRequest = {
 /** @internal */
 export const GetTransactionsType$outboundSchema: z.ZodNativeEnum<
   typeof GetTransactionsType
-> = z.nativeEnum(GetTransactionsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTransactionsType));
 
 /** @internal */
 export type GetTransactionsRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   since_date?: string | undefined;
+  until_date?: string | undefined;
   type?: string | undefined;
   last_knowledge_of_server?: number | undefined;
 };
@@ -56,18 +62,22 @@ export const GetTransactionsRequest$outboundSchema: z.ZodType<
   GetTransactionsRequest$Outbound,
   z.ZodTypeDef,
   GetTransactionsRequest
-> = z.object({
-  budgetId: z.string(),
-  sinceDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  type: GetTransactionsType$outboundSchema.optional(),
-  lastKnowledgeOfServer: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    sinceDate: "since_date",
-    lastKnowledgeOfServer: "last_knowledge_of_server",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    sinceDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    untilDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    type: GetTransactionsType$outboundSchema.optional(),
+    lastKnowledgeOfServer: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      sinceDate: "since_date",
+      untilDate: "until_date",
+      lastKnowledgeOfServer: "last_knowledge_of_server",
+    });
+  })
+);
 
 export function getTransactionsRequestToJSON(
   getTransactionsRequest: GetTransactionsRequest,

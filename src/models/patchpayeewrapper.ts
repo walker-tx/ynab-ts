@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   SavePayee,
   SavePayee$Outbound,
@@ -23,9 +24,11 @@ export const PatchPayeeWrapper$outboundSchema: z.ZodType<
   PatchPayeeWrapper$Outbound,
   z.ZodTypeDef,
   PatchPayeeWrapper
-> = z.object({
-  payee: SavePayee$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    payee: SavePayee$outboundSchema,
+  })
+);
 
 export function patchPayeeWrapperToJSON(
   patchPayeeWrapper: PatchPayeeWrapper,

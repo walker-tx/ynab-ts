@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -12,10 +12,12 @@ export type User = {
 };
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-  });
+export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function userFromJSON(
   jsonString: string,

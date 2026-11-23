@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   SaveTransactionWithIdOrImportId,
   SaveTransactionWithIdOrImportId$Outbound,
@@ -23,9 +24,11 @@ export const PatchTransactionsWrapper$outboundSchema: z.ZodType<
   PatchTransactionsWrapper$Outbound,
   z.ZodTypeDef,
   PatchTransactionsWrapper
-> = z.object({
-  transactions: z.array(SaveTransactionWithIdOrImportId$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transactions: z.array(SaveTransactionWithIdOrImportId$outboundSchema),
+  })
+);
 
 export function patchTransactionsWrapperToJSON(
   patchTransactionsWrapper: PatchTransactionsWrapper,

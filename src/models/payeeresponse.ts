@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import { Payee, Payee$inboundSchema } from "./payee.js";
@@ -21,9 +21,11 @@ export const PayeeResponseData$inboundSchema: z.ZodType<
   PayeeResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  payee: Payee$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    payee: Payee$inboundSchema,
+  })
+);
 
 export function payeeResponseDataFromJSON(
   jsonString: string,
@@ -40,9 +42,11 @@ export const PayeeResponse$inboundSchema: z.ZodType<
   PayeeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PayeeResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PayeeResponseData$inboundSchema),
+  })
+);
 
 export function payeeResponseFromJSON(
   jsonString: string,
