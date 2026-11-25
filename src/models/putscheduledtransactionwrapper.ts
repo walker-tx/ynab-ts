@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   SaveScheduledTransaction,
   SaveScheduledTransaction$Outbound,
@@ -24,13 +25,15 @@ export const PutScheduledTransactionWrapper$outboundSchema: z.ZodType<
   PutScheduledTransactionWrapper$Outbound,
   z.ZodTypeDef,
   PutScheduledTransactionWrapper
-> = z.object({
-  scheduledTransaction: SaveScheduledTransaction$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    scheduledTransaction: "scheduled_transaction",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheduledTransaction: SaveScheduledTransaction$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      scheduledTransaction: "scheduled_transaction",
+    });
+  })
+);
 
 export function putScheduledTransactionWrapperToJSON(
   putScheduledTransactionWrapper: PutScheduledTransactionWrapper,

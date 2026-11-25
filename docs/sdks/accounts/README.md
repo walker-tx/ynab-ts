@@ -2,21 +2,21 @@
 
 ## Overview
 
-The accounts for a budget
+The accounts for a plan. Every transaction belongs to an account, and an account is either "on budget", where its activity is categorized and planned, or a tracking account, where only its balance is tracked (see the on_budget flag).
 
 ### Available Operations
 
-* [list](#list) - Account list
-* [create](#create) - Create a new account
-* [get](#get) - Single account
+* [getAccounts](#getaccounts) - Get all accounts
+* [createAccount](#createaccount) - Create an account
+* [getAccountById](#getaccountbyid) - Get an account
 
-## list
+## getAccounts
 
 Returns all accounts
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getAccounts" method="get" path="/budgets/{budget_id}/accounts" -->
+<!-- UsageSnippet language="typescript" operationID="getAccounts" method="get" path="/plans/{plan_id}/accounts" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -25,8 +25,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.accounts.list({
-    budgetId: "<id>",
+  const result = await ynab.accounts.getAccounts({
+    planId: "<id>",
   });
 
   console.log(result);
@@ -41,7 +41,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { accountsList } from "ynab-ts/funcs/accountsList.js";
+import { accountsGetAccounts } from "ynab-ts/funcs/accountsGetAccounts.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -50,14 +50,14 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await accountsList(ynab, {
-    budgetId: "<id>",
+  const res = await accountsGetAccounts(ynab, {
+    planId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accountsList failed:", res.error);
+    console.log("accountsGetAccounts failed:", res.error);
   }
 }
 
@@ -77,19 +77,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useAccountsList,
-  useAccountsListSuspense,
+  useAccountsGetAccounts,
+  useAccountsGetAccountsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchAccountsList,
+  prefetchAccountsGetAccounts,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateAccountsList,
-  invalidateAllAccountsList,
-} from "ynab-ts/react-query/accountsList.js";
+  invalidateAccountsGetAccounts,
+  invalidateAllAccountsGetAccounts,
+} from "ynab-ts/react-query/accountsGetAccounts.js";
 ```
 
 ### Parameters
@@ -110,16 +110,15 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## create
+## createAccount
 
 Creates a new account
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createAccount" method="post" path="/budgets/{budget_id}/accounts" -->
+<!-- UsageSnippet language="typescript" operationID="createAccount" method="post" path="/plans/{plan_id}/accounts" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -128,12 +127,12 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.accounts.create({
-    budgetId: "<id>",
+  const result = await ynab.accounts.createAccount({
+    planId: "<id>",
     postAccountWrapper: {
       account: {
         name: "<value>",
-        type: "medicalDebt",
+        type: "otherLiability",
         balance: 127923,
       },
     },
@@ -151,7 +150,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { accountsCreate } from "ynab-ts/funcs/accountsCreate.js";
+import { accountsCreateAccount } from "ynab-ts/funcs/accountsCreateAccount.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -160,12 +159,12 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await accountsCreate(ynab, {
-    budgetId: "<id>",
+  const res = await accountsCreateAccount(ynab, {
+    planId: "<id>",
     postAccountWrapper: {
       account: {
         name: "<value>",
-        type: "medicalDebt",
+        type: "otherLiability",
         balance: 127923,
       },
     },
@@ -174,7 +173,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accountsCreate failed:", res.error);
+    console.log("accountsCreateAccount failed:", res.error);
   }
 }
 
@@ -194,8 +193,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useAccountsCreateMutation
-} from "ynab-ts/react-query/accountsCreate.js";
+  useAccountsCreateAccountMutation
+} from "ynab-ts/react-query/accountsCreateAccount.js";
 ```
 
 ### Parameters
@@ -218,13 +217,13 @@ import {
 | errors.ErrorResponse    | 400                     | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |
 
-## get
+## getAccountById
 
 Returns a single account
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getAccountById" method="get" path="/budgets/{budget_id}/accounts/{account_id}" -->
+<!-- UsageSnippet language="typescript" operationID="getAccountById" method="get" path="/plans/{plan_id}/accounts/{account_id}" -->
 ```typescript
 import { Ynab } from "ynab-ts";
 
@@ -233,8 +232,8 @@ const ynab = new Ynab({
 });
 
 async function run() {
-  const result = await ynab.accounts.get({
-    budgetId: "<id>",
+  const result = await ynab.accounts.getAccountById({
+    planId: "<id>",
     accountId: "d9448c33-e069-48c3-b1ac-8a31e11b2cd5",
   });
 
@@ -250,7 +249,7 @@ The standalone function version of this method:
 
 ```typescript
 import { YnabCore } from "ynab-ts/core.js";
-import { accountsGet } from "ynab-ts/funcs/accountsGet.js";
+import { accountsGetAccountById } from "ynab-ts/funcs/accountsGetAccountById.js";
 
 // Use `YnabCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -259,15 +258,15 @@ const ynab = new YnabCore({
 });
 
 async function run() {
-  const res = await accountsGet(ynab, {
-    budgetId: "<id>",
+  const res = await accountsGetAccountById(ynab, {
+    planId: "<id>",
     accountId: "d9448c33-e069-48c3-b1ac-8a31e11b2cd5",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accountsGet failed:", res.error);
+    console.log("accountsGetAccountById failed:", res.error);
   }
 }
 
@@ -287,19 +286,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useAccountsGet,
-  useAccountsGetSuspense,
+  useAccountsGetAccountById,
+  useAccountsGetAccountByIdSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchAccountsGet,
+  prefetchAccountsGetAccountById,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateAccountsGet,
-  invalidateAllAccountsGet,
-} from "ynab-ts/react-query/accountsGet.js";
+  invalidateAccountsGetAccountById,
+  invalidateAllAccountsGetAccountById,
+} from "ynab-ts/react-query/accountsGetAccountById.js";
 ```
 
 ### Parameters
@@ -320,5 +319,4 @@ import {
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.ErrorResponse    | 404                     | application/json        |
-| errors.ErrorResponse    | default                 | application/json        |
 | errors.YnabDefaultError | 4XX, 5XX                | \*/\*                   |

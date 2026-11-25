@@ -3,10 +3,11 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 
 export type SavePayee = {
   /**
-   * The name of the payee. The name must be a maximum of 500 characters.
+   * The name of the payee.
    */
   name?: string | undefined;
 };
@@ -21,9 +22,11 @@ export const SavePayee$outboundSchema: z.ZodType<
   SavePayee$Outbound,
   z.ZodTypeDef,
   SavePayee
-> = z.object({
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+  })
+);
 
 export function savePayeeToJSON(savePayee: SavePayee): string {
   return JSON.stringify(SavePayee$outboundSchema.parse(savePayee));

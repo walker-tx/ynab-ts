@@ -4,13 +4,14 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as models from "../index.js";
 
 export type UpdateTransactionsRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The transactions to update. Each transaction must have either an `id` or `import_id` specified. If `id` is specified as null an `import_id` value can be provided which will allow transaction(s) to be updated by its `import_id`. If an `id` is specified, it will always be used for lookup.  You should not specify both `id` and `import_id`.  Updating an `import_id` on an existing transaction is not allowed; if an `import_id` is specified, it will only be used to lookup the transaction.
    */
@@ -19,7 +20,7 @@ export type UpdateTransactionsRequest = {
 
 /** @internal */
 export type UpdateTransactionsRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   PatchTransactionsWrapper: models.PatchTransactionsWrapper$Outbound;
 };
 
@@ -28,15 +29,17 @@ export const UpdateTransactionsRequest$outboundSchema: z.ZodType<
   UpdateTransactionsRequest$Outbound,
   z.ZodTypeDef,
   UpdateTransactionsRequest
-> = z.object({
-  budgetId: z.string(),
-  patchTransactionsWrapper: models.PatchTransactionsWrapper$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    patchTransactionsWrapper: "PatchTransactionsWrapper",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    patchTransactionsWrapper: models.PatchTransactionsWrapper$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      patchTransactionsWrapper: "PatchTransactionsWrapper",
+    });
+  })
+);
 
 export function updateTransactionsRequestToJSON(
   updateTransactionsRequest: UpdateTransactionsRequest,

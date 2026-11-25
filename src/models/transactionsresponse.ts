@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,14 +29,16 @@ export const TransactionsResponseData$inboundSchema: z.ZodType<
   TransactionsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  transactions: z.array(TransactionDetail$inboundSchema),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transactions: z.array(TransactionDetail$inboundSchema),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function transactionsResponseDataFromJSON(
   jsonString: string,
@@ -53,9 +55,11 @@ export const TransactionsResponse$inboundSchema: z.ZodType<
   TransactionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => TransactionsResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => TransactionsResponseData$inboundSchema),
+  })
+);
 
 export function transactionsResponseFromJSON(
   jsonString: string,

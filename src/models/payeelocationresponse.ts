@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import { PayeeLocation, PayeeLocation$inboundSchema } from "./payeelocation.js";
@@ -22,13 +22,15 @@ export const PayeeLocationResponseData$inboundSchema: z.ZodType<
   PayeeLocationResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  payee_location: PayeeLocation$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "payee_location": "payeeLocation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    payee_location: PayeeLocation$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "payee_location": "payeeLocation",
+    });
+  })
+);
 
 export function payeeLocationResponseDataFromJSON(
   jsonString: string,
@@ -45,9 +47,11 @@ export const PayeeLocationResponse$inboundSchema: z.ZodType<
   PayeeLocationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PayeeLocationResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PayeeLocationResponseData$inboundSchema),
+  })
+);
 
 export function payeeLocationResponseFromJSON(
   jsonString: string,

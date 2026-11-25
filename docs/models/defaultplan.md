@@ -1,0 +1,25 @@
+# DefaultPlan
+
+## Example Usage
+
+```typescript
+import { DefaultPlan } from "ynab-ts/models";
+
+let value: DefaultPlan = {
+  id: "09537473-64d6-43fe-9078-4f2766d7d59c",
+  name: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                     | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `name`                                                                                                                   | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `lastModifiedOn`                                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                            | :heavy_minus_sign:                                                                                                       | The last time any changes were made to the plan from either a web or mobile client                                       |
+| `firstMonth`                                                                                                             | [RFCDate](../types/rfcdate.md)                                                                                           | :heavy_minus_sign:                                                                                                       | The earliest plan month                                                                                                  |
+| `lastMonth`                                                                                                              | [RFCDate](../types/rfcdate.md)                                                                                           | :heavy_minus_sign:                                                                                                       | The latest plan month                                                                                                    |
+| `dateFormat`                                                                                                             | [models.DateFormat](../models/dateformat.md)                                                                             | :heavy_minus_sign:                                                                                                       | The date format setting for the plan.  In some cases the format will not be available and will be specified as null.     |
+| `currencyFormat`                                                                                                         | [models.CurrencyFormat](../models/currencyformat.md)                                                                     | :heavy_minus_sign:                                                                                                       | The currency format setting for the plan.  In some cases the format will not be available and will be specified as null. |
+| `accounts`                                                                                                               | [models.Account](../models/account.md)[]                                                                                 | :heavy_minus_sign:                                                                                                       | The plan accounts (only included if `include_accounts=true` specified as query parameter)                                |

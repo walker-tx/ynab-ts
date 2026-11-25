@@ -4,13 +4,14 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as models from "../index.js";
 
 export type CreateTransactionRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The transaction or transactions to create.  To create a single transaction you can specify a value for the `transaction` object and to create multiple transactions you can specify an array of `transactions`.  It is expected that you will only provide a value for one of these objects.
    */
@@ -19,7 +20,7 @@ export type CreateTransactionRequest = {
 
 /** @internal */
 export type CreateTransactionRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   PostTransactionsWrapper: models.PostTransactionsWrapper$Outbound;
 };
 
@@ -28,15 +29,17 @@ export const CreateTransactionRequest$outboundSchema: z.ZodType<
   CreateTransactionRequest$Outbound,
   z.ZodTypeDef,
   CreateTransactionRequest
-> = z.object({
-  budgetId: z.string(),
-  postTransactionsWrapper: models.PostTransactionsWrapper$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    postTransactionsWrapper: "PostTransactionsWrapper",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    postTransactionsWrapper: models.PostTransactionsWrapper$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      postTransactionsWrapper: "PostTransactionsWrapper",
+    });
+  })
+);
 
 export function createTransactionRequestToJSON(
   createTransactionRequest: CreateTransactionRequest,
