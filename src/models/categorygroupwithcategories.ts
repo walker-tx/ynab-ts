@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { Category, Category$inboundSchema } from "./category.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -16,11 +16,15 @@ export type CategoryGroupWithCategories = {
    */
   hidden: boolean;
   /**
+   * Whether or not the category group is internal
+   */
+  internal: boolean;
+  /**
    * Whether or not the category group has been deleted.  Deleted category groups will only be included in delta requests.
    */
   deleted: boolean;
   /**
-   * Category group categories.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+   * Category group categories.  Amounts (assigned, activity, available, etc.) are specific to the current plan month (UTC).
    */
   categories: Array<Category>;
 };
@@ -30,13 +34,16 @@ export const CategoryGroupWithCategories$inboundSchema: z.ZodType<
   CategoryGroupWithCategories,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  hidden: z.boolean(),
-  deleted: z.boolean(),
-  categories: z.array(Category$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    hidden: z.boolean(),
+    internal: z.boolean(),
+    deleted: z.boolean(),
+    categories: z.array(Category$inboundSchema),
+  })
+);
 
 export function categoryGroupWithCategoriesFromJSON(
   jsonString: string,

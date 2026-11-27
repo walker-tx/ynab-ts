@@ -7,11 +7,11 @@ import { SavePayeeResponseData } from "ynab-ts/models";
 
 let value: SavePayeeResponseData = {
   payee: {
-    id: "72c83b58-6a5c-4474-931d-93a26344e3ae",
+    id: "8eee0446-116d-4b1f-96f3-a15dbc3e4095",
     name: "<value>",
     deleted: true,
   },
-  serverKnowledge: 501080,
+  serverKnowledge: 16971,
 };
 ```
 

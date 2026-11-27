@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   CategoryGroupWithCategories,
@@ -29,15 +29,17 @@ export const CategoriesResponseData$inboundSchema: z.ZodType<
   CategoriesResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  category_groups: z.array(CategoryGroupWithCategories$inboundSchema),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "category_groups": "categoryGroups",
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category_groups: z.array(CategoryGroupWithCategories$inboundSchema),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "category_groups": "categoryGroups",
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function categoriesResponseDataFromJSON(
   jsonString: string,
@@ -54,9 +56,11 @@ export const CategoriesResponse$inboundSchema: z.ZodType<
   CategoriesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CategoriesResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CategoriesResponseData$inboundSchema),
+  })
+);
 
 export function categoriesResponseFromJSON(
   jsonString: string,

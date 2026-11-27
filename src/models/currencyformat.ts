@@ -4,12 +4,12 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 /**
- * The currency format setting for the budget.  In some cases the format will not be available and will be specified as null.
+ * The currency format setting for the plan.  In some cases the format will not be available and will be specified as null.
  */
 export type CurrencyFormat = {
   isoCode: string;
@@ -27,27 +27,29 @@ export const CurrencyFormat$inboundSchema: z.ZodType<
   CurrencyFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  iso_code: z.string(),
-  example_format: z.string(),
-  decimal_digits: z.number().int(),
-  decimal_separator: z.string(),
-  symbol_first: z.boolean(),
-  group_separator: z.string(),
-  currency_symbol: z.string(),
-  display_symbol: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "iso_code": "isoCode",
-    "example_format": "exampleFormat",
-    "decimal_digits": "decimalDigits",
-    "decimal_separator": "decimalSeparator",
-    "symbol_first": "symbolFirst",
-    "group_separator": "groupSeparator",
-    "currency_symbol": "currencySymbol",
-    "display_symbol": "displaySymbol",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    iso_code: z.string(),
+    example_format: z.string(),
+    decimal_digits: z.number().int(),
+    decimal_separator: z.string(),
+    symbol_first: z.boolean(),
+    group_separator: z.string(),
+    currency_symbol: z.string(),
+    display_symbol: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "iso_code": "isoCode",
+      "example_format": "exampleFormat",
+      "decimal_digits": "decimalDigits",
+      "decimal_separator": "decimalSeparator",
+      "symbol_first": "symbolFirst",
+      "group_separator": "groupSeparator",
+      "currency_symbol": "currencySymbol",
+      "display_symbol": "displaySymbol",
+    });
+  })
+);
 
 export function currencyFormatFromJSON(
   jsonString: string,

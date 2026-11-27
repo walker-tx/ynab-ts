@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   SaveMonthCategory,
   SaveMonthCategory$Outbound,
@@ -23,9 +24,11 @@ export const PatchMonthCategoryWrapper$outboundSchema: z.ZodType<
   PatchMonthCategoryWrapper$Outbound,
   z.ZodTypeDef,
   PatchMonthCategoryWrapper
-> = z.object({
-  category: SaveMonthCategory$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: SaveMonthCategory$outboundSchema,
+  })
+);
 
 export function patchMonthCategoryWrapperToJSON(
   patchMonthCategoryWrapper: PatchMonthCategoryWrapper,

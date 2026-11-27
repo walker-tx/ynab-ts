@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { Account, Account$inboundSchema } from "./account.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -26,14 +26,16 @@ export const AccountsResponseData$inboundSchema: z.ZodType<
   AccountsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accounts: z.array(Account$inboundSchema),
-  server_knowledge: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_knowledge": "serverKnowledge",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accounts: z.array(Account$inboundSchema),
+    server_knowledge: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_knowledge": "serverKnowledge",
+    });
+  })
+);
 
 export function accountsResponseDataFromJSON(
   jsonString: string,
@@ -50,9 +52,11 @@ export const AccountsResponse$inboundSchema: z.ZodType<
   AccountsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => AccountsResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => AccountsResponseData$inboundSchema),
+  })
+);
 
 export function accountsResponseFromJSON(
   jsonString: string,

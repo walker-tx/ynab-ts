@@ -3,12 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 /**
- * The date format setting for the budget.  In some cases the format will not be available and will be specified as null.
+ * The date format setting for the plan.  In some cases the format will not be available and will be specified as null.
  */
 export type DateFormat = {
   format: string;
@@ -19,9 +19,11 @@ export const DateFormat$inboundSchema: z.ZodType<
   DateFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: z.string(),
+  })
+);
 
 export function dateFormatFromJSON(
   jsonString: string,

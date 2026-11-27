@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import {
   SaveAccount,
   SaveAccount$Outbound,
@@ -23,9 +24,11 @@ export const PostAccountWrapper$outboundSchema: z.ZodType<
   PostAccountWrapper$Outbound,
   z.ZodTypeDef,
   PostAccountWrapper
-> = z.object({
-  account: SaveAccount$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account: SaveAccount$outboundSchema,
+  })
+);
 
 export function postAccountWrapperToJSON(
   postAccountWrapper: PostAccountWrapper,

@@ -3,10 +3,11 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 
 export type SaveMonthCategory = {
   /**
-   * Budgeted amount in milliunits format
+   * Assigned (budgeted) amount in milliunits format
    */
   budgeted: number;
 };
@@ -21,9 +22,11 @@ export const SaveMonthCategory$outboundSchema: z.ZodType<
   SaveMonthCategory$Outbound,
   z.ZodTypeDef,
   SaveMonthCategory
-> = z.object({
-  budgeted: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgeted: z.number().int(),
+  })
+);
 
 export function saveMonthCategoryToJSON(
   saveMonthCategory: SaveMonthCategory,

@@ -4,17 +4,18 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetPayeeLocationsRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
 };
 
 /** @internal */
 export type GetPayeeLocationsRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
 };
 
 /** @internal */
@@ -22,13 +23,15 @@ export const GetPayeeLocationsRequest$outboundSchema: z.ZodType<
   GetPayeeLocationsRequest$Outbound,
   z.ZodTypeDef,
   GetPayeeLocationsRequest
-> = z.object({
-  budgetId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+    });
+  })
+);
 
 export function getPayeeLocationsRequestToJSON(
   getPayeeLocationsRequest: GetPayeeLocationsRequest,

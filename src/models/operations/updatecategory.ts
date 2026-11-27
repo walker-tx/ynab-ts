@@ -4,13 +4,14 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as models from "../index.js";
 
 export type UpdateCategoryRequest = {
   /**
-   * The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+   * The id of the plan. "last-used" can be used to specify the last used plan and "default" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
    */
-  budgetId: string;
+  planId: string;
   /**
    * The id of the category
    */
@@ -23,7 +24,7 @@ export type UpdateCategoryRequest = {
 
 /** @internal */
 export type UpdateCategoryRequest$Outbound = {
-  budget_id: string;
+  plan_id: string;
   category_id: string;
   PatchCategoryWrapper: models.PatchCategoryWrapper$Outbound;
 };
@@ -33,17 +34,19 @@ export const UpdateCategoryRequest$outboundSchema: z.ZodType<
   UpdateCategoryRequest$Outbound,
   z.ZodTypeDef,
   UpdateCategoryRequest
-> = z.object({
-  budgetId: z.string(),
-  categoryId: z.string(),
-  patchCategoryWrapper: models.PatchCategoryWrapper$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    categoryId: "category_id",
-    patchCategoryWrapper: "PatchCategoryWrapper",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+    categoryId: z.string(),
+    patchCategoryWrapper: models.PatchCategoryWrapper$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+      categoryId: "category_id",
+      patchCategoryWrapper: "PatchCategoryWrapper",
+    });
+  })
+);
 
 export function updateCategoryRequestToJSON(
   updateCategoryRequest: UpdateCategoryRequest,
